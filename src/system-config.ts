@@ -9,10 +9,18 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'mongoose': 'vendor/mongoose/mongoose.js',
+  'moment': 'vendor/moment/moment.js'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  'mongoose':{
+    format: 'cjs'
+  },
+  'moment': {
+    format: 'cjs'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,6 +44,8 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/filters',
+  'app/new-campaign',
   /** @cli-barrel */
 ];
 

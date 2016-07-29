@@ -1,0 +1,24 @@
+{
+  "name": "auto-appeal",
+  "description": "Automatically generate eAppeals",
+  "main": "index.html",
+  "authors": [
+    "Frank <frank.mccready@ifcj.org>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "/src/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "bootstrap": "^3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.37"
+  }
+}
