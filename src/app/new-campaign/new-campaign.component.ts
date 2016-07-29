@@ -7,14 +7,17 @@ import {
   Validators,
   AbstractControl
 } from '@angular/forms';
+import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
+import {NKDatetime} from 'ng2-datetime/ng2-datetime';
 
 @Component({
   moduleId: module.id,
   selector: 'app-new-campaign',
   templateUrl: 'new-campaign.component.html',
   styleUrls: ['new-campaign.component.css'],
-  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, NKDatetime ],
+  pipes: [DatePipe]
 })
 export class NewCampaignComponent implements OnInit {
   newCampaignForm: FormGroup;

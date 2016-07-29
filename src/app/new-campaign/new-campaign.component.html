@@ -11,12 +11,7 @@
       </div>
       <div class="form-group">
         <label for="campaign-date">Start date</label>
-        <div class='input-group date' id='campaign-date'>
-          <input [formControl]="startDate" type='text' class="form-control" />
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
+        <datetime [(ngModel)]="startDate" name="startDate"></datetime>
       </div>
       <div class="form-group text-center">
         <button type="submit" class="btn btn-lg btn-primary">Create Campaign</button>

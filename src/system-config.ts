@@ -10,7 +10,9 @@
 /** Map relative paths to URLs. */
 const map: any = {
   'mongoose': 'vendor/mongoose/mongoose.js',
-  'moment': 'vendor/moment/moment.js'
+  'moment': 'vendor/moment/moment.js',
+  'ng2-datetime': 'vendor/ng2-datetime',
+  'ng2-bootstrap': 'vendor/ng2-bootstrap'
 };
 
 /** User packages configuration. */
@@ -20,6 +22,16 @@ const packages: any = {
   },
   'moment': {
     format: 'cjs'
+  },
+  'ng2-datetime': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'ng2-datetime.js'
+  },
+  'ng2-bootstrap': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'ng2-bootstrap.js'
   }
 };
 

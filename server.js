@@ -32,7 +32,7 @@ db.once('open', function(){
   console.log('Connected to MongoDB');
 
   // REST API for mongoose
-  app.get('/campaigns', function(req, res){
+  app.get('/api/campaigns', function(req, res){
     Campaign.find({}, function(err, docs){
       if (err) {
         return console.error(err);
@@ -40,7 +40,7 @@ db.once('open', function(){
       res.json(docs);
     });
   });
-  app.post('/campaigns', function(req, res){
+  app.post('/api/campaigns', function(req, res){
     var obj = new Campaign(req.body);
     obj.save(function(err, obj){
       if (err){
