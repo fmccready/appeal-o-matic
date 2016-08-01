@@ -7,5 +7,4 @@ export class DataService {
 
   constructor(private http: Http) {  }
 
-  private
 }

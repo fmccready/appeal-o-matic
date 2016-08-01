@@ -8,3 +8,8 @@ utm_content=cal-august- && (-rs || -reg) (-sus) (-d || -nd  || -md) && (html-tex
 
 Links
 BN - button | TL - text link | PH - phot link | VID - video link | AUD - audio link
+
+
+
+Helpful links
+https://nkalinov.github.io/ng2-datetime/

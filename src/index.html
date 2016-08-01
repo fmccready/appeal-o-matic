@@ -23,6 +23,17 @@
     <script src="{{.}}"></script>
     {{/each}}
     <script>
+      System.config({
+        paths: {
+          'app/*': './dist/*'
+        },
+        packages: {
+          app: {
+            format: 'cjs',
+            defaultExtension: 'js'
+          }
+        }
+      });
       System.import('./system-config.js').then(function() {
         System.import('main');
       }).catch(console.error.bind(console));
