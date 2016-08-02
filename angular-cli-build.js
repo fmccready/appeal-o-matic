@@ -16,10 +16,14 @@ module.exports = function(defaults) {
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
-      'mongoose/mongoose.js',
-      'moment/moment.js',
-      'ng2-bootstrap/**/*.js',
-      'ng2-datetime/**/*.js'
-    ]
+      'mongoose/**/*.+(js|ts|js.map)',
+      'moment/**/*.(js|ts|js.map)',
+      'ng2-bootstrap/**/*.+(js|ts|js.map)',
+      'ng2-datetime/**/*.+(js|ts|js.map)',
+      'immutable/**/*.+(js|ts|js.map)'
+    ],
+    preLoaders: [{
+      loader: 'source-map-loader'
+    }]
   });
 };

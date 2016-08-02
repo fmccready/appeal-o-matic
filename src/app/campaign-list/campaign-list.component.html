@@ -1,0 +1,7 @@
+<table class="table table-striped">
+  <tr *ngFor="let campaign of campaigns$ | async">
+    <td>{{ campaign.name }}</td>
+    <td>{{ campaign.utm_campaign }}</td>
+    <td>{{ campaign.startDate }}</td>
+  </tr>
+</table>

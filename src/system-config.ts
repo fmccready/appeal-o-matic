@@ -9,29 +9,34 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'mongoose': 'vendor/mongoose/mongoose.js',
-  'moment': 'vendor/moment/moment.js',
+  'mongoose': 'vendor/mongoose',
+  'moment': 'vendor/moment',
   'ng2-datetime': 'vendor/ng2-datetime',
-  'ng2-bootstrap': 'vendor/ng2-bootstrap'
+  'ng2-bootstrap': 'vendor/ng2-bootstrap',
+  'immutable': 'vendor/immutable/dist'
 };
 
 /** User packages configuration. */
 const packages: any = {
   'mongoose':{
+    main: 'index.js',
     format: 'cjs'
   },
   'moment': {
+    main: 'moment.js',
     format: 'cjs'
   },
   'ng2-datetime': {
-    format: 'cjs',
-    defaultExtension: 'js',
-    main: 'ng2-datetime.js'
+    main: 'ng2-datetime.js',
+    format: 'cjs'
   },
   'ng2-bootstrap': {
-    format: 'cjs',
-    defaultExtension: 'js',
-    main: 'ng2-bootstrap.js'
+    main: 'ng2-bootstrap.js',
+    format: 'cjs'
+  },
+  'immutable': {
+    main: 'immutable.js',
+    format: 'cjs'
   }
 };
 
@@ -58,6 +63,7 @@ const barrels: string[] = [
   'app/shared',
   'app/filters',
   'app/new-campaign',
+  'app/campaign-list',
   /** @cli-barrel */
 ];
 

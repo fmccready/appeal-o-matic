@@ -1,7 +1,6 @@
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
-var morgan = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -15,9 +14,9 @@ app.use('/app/lib', express.static(__dirname + '/dist/lib'));
 app.use('/', express.static(__dirname + '/dist/'));
 //app.use('/public/scripts', express.static(__dirname + '/node_modules'));
 app.use('/app', express.static(__dirname + '/dist/app'));
+//app.use('/tmp', express.static(path.join(__dirname + '/tmp')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(morgan('dev'));
 
 // Mongoose Connection
 mongoose.connect('mongodb://localhost:27017');

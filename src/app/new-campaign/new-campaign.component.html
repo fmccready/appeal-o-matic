@@ -6,12 +6,12 @@
         <input [formControl]="name" class="form-control" id="campaign-name">
       </div>
       <div class="form-group" [class.has-error]="!utm_campaign.valid && utm_campaign.touched">
-        <label for="campaign-utm">UTM code</label>
-        <input [formControl]="utm_campaign" class="form-control" id="campaign-utm">
+        <label for="utm_campaign">UTM code</label>
+        <input [formControl]="utm_campaign" class="form-control" id="utm_campaign">
       </div>
-      <div class="form-group" [class.has-error]="!startDate.valid && startDate.touched">
-        <label for="campaign-date">Start date</label>
-        <datetime [(ngModel)]="startDate" [timepicker]="false" name="startDate"></datetime>
+      <div class="form-group">
+        <label for="startDate">Start date</label>
+        <datetime [(ngModel)]="startDate" [timepicker]="false" name="startDate" id="startDate"></datetime>
       </div>
       <div class="form-group text-center">
         <button type="submit" class="btn btn-lg btn-primary" [class.disabled]="!newCampaignForm.valid">Create Campaign</button>
@@ -19,12 +19,6 @@
     </form>
   </div>
   <div class="col-xs-12 col-sm-4 col-md-2">
-    <table class="table table-striped">
-      <tr *ngFor="let campaign of campaigns | async">
-        <td>{{ campaign.name }}</td>
-        <td>{{ campaign.utm_campaign }}</td>
-        <td>{{ campaign.startDate }}</td>
-      </tr>
-    </table>
+    <campaign-list-component></campaign-list-component>
   </div>
 </div>

@@ -12,8 +12,9 @@ import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
 import {NKDatetime} from 'ng2-datetime/ng2-datetime';
 
-import {Campaign} from './campaign';
-import {CampaignService} from './campaign.service';
+import {CampaignListComponent} from '../campaign-list';
+import {Campaign} from '../campaign';
+import {CampaignService} from '../campaign.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -21,7 +22,7 @@ import { Observable } from 'rxjs/Observable';
   selector: 'app-new-campaign',
   templateUrl: 'new-campaign.component.html',
   styleUrls: ['new-campaign.component.css'],
-  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, NKDatetime],
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, NKDatetime, CampaignListComponent],
   pipes: [DatePipe],
   providers: [Campaign, CampaignService]
 })
@@ -41,10 +42,6 @@ export class NewCampaignComponent implements OnInit {
       'utm_campaign': ['', Validators.required],
       'startDate': ['', Validators.required]
     });
-
-    this.name = this.newCampaignForm.controls['name'];
-    this.utm_campaign = this.newCampaignForm.controls['utm_campaign'];
-    this.startDate = this.newCampaignForm.controls['startDate'];
   }
   createCampaign(values) {
     if (this.newCampaignForm.valid){
@@ -66,10 +63,14 @@ export class NewCampaignComponent implements OnInit {
     this.startDate = this.newCampaignForm.controls['startDate'];
   }
   ngOnInit() {
+    this.name = this.newCampaignForm.controls['name'];
+    this.utm_campaign = this.newCampaignForm.controls['utm_campaign'];
+    this.startDate = this.newCampaignForm.controls['startDate'];
+    /*
     this.campaignService.existingCampaigns
       .subscribe((existingCampaigns) => {
         this.campaignList = existingCampaigns;
       });
-    console.dir(this.campaignList);
+      */
   }
 }
