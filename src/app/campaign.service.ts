@@ -6,10 +6,19 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { Campaign } from './campaign';
 
+let initialCampaigns: Campaign[] = [];
+
+interface ICampaignsOperation extends Function {
+  (campaigns: Campaign[]): Campaign[];
+}
+
 @Injectable()
 export class CampaignService {
-  private _campaigns: BehaviorSubject<List<Campaign>> = new BehaviorSubject(List([]));
+  //private _campaigns: BehaviorSubject<List<Campaign>> = new BehaviorSubject(List([]));
   private _campaignUrl = '/api/campaigns';
+  newCampaigns: Subject<Campaign>;
+  campaigns: Observable<Campaign[]>;
+  create: Subject<Campaign> = new Subject<Campaign>();
   //existingCampaigns: Subject<Campaign[]> = new BehaviorSubject<Campaign[]>(null);
   /*
   public getCampaigns(): void {
@@ -19,35 +28,22 @@ export class CampaignService {
   }
   */
   constructor(private http: Http) {
-    this.loadCampaigns();
+    this.create
+      .map( function(campaign: Campaign): ICampaignsOperation {
+        
+      });
   }
-  public loadCampaigns(){
+  getCampaigns(): Observable<Campaign[]> {
     return this.http.get(this._campaignUrl)
-      .map(res => res.json())
-      .subscribe(
-        data => this._campaigns = data,
-        err => this.logError(err),
-        () => console.log('Campaign loading complete')
-      );
+      .map(this.extractData)
+      .catch(this.handleError);
   }
-  logError(err){
-    console.error('Something went wrong: ' + err);
-  }
-
-
-
-
-
-
-
-
-
-
 
   private extractData(res: Response){
     let body = res.json();
-    return body.data || {};
+    return body || {};
   }
+
   private handleError(error: any){
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
@@ -65,4 +61,5 @@ export class CampaignService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+
 }

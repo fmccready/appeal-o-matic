@@ -1,7 +1,12 @@
+<h2>Campaign List</h2>
 <table class="table table-striped">
-  <tr *ngFor="let campaign of campaigns$ | async">
+  <th>Campaign Name</th><th>UTM Code</th>
+  <tr *ngFor="let campaign of campaigns">
     <td>{{ campaign.name }}</td>
     <td>{{ campaign.utm_campaign }}</td>
-    <td>{{ campaign.startDate }}</td>
   </tr>
 </table>
+<div *ngIf="errors">
+  <h2>errors</h2>
+  <pre>{{ errors }}</pre>
+</div>
