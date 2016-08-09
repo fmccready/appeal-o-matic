@@ -64,6 +64,7 @@ const barrels: string[] = [
   'app/filters',
   'app/new-campaign',
   'app/campaign-list',
+  'app/new-appeal',
   /** @cli-barrel */
 ];
 

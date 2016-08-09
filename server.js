@@ -21,9 +21,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 // Mongoose Connection
 mongoose.connect('mongodb://localhost:27017');
 var db = mongoose.connection;
-var Campaign = require('./dist/app/models/campaign');
-var Eappeal = require('./dist/app/models/eappeal');
-var Element = require('./dist/app/models/element');
+var Campaign = require('./dist/app/schemas/campaign');
+var Eappeal = require('./dist/app/schemas/eappeal');
+var Element = require('./dist/app/schemas/element');
 
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -31,6 +31,8 @@ db.once('open', function(){
   console.log('Connected to MongoDB');
 
   // REST API for mongoose
+
+
   app.get('/api/campaigns', function(req, res){
     Campaign.find({}, function(err, docs){
       if (err) {
@@ -48,7 +50,10 @@ db.once('open', function(){
       res.status(200).json(obj);
     });
   });
-
+  app.delete('/api/campaigns/:id', function(req, res){
+    Campaign.find({ _id: req.params.id }).remove().exec();
+    res.status(200).send(req.params.id + ' deleted');
+  });
   // All other routes
   app.get('/', function(req, res){
     console.log(__dirname);

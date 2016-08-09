@@ -4,6 +4,7 @@
   <tr *ngFor="let campaign of campaigns">
     <td>{{ campaign.name }}</td>
     <td>{{ campaign.utm_campaign }}</td>
+    <td><button (click)="deleteCampaign(campaign._id)" class="btn btn-danger">Delete</button>
   </tr>
 </table>
 <div *ngIf="errors">

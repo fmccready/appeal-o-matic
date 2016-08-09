@@ -7,6 +7,9 @@ import {
   Validators,
   AbstractControl
 } from '@angular/forms';
+import { CampaignService } from '../campaign.service';
+import { Campaign } from '../models/campaign';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   moduleId: module.id,
@@ -17,14 +20,16 @@ import {
 })
 export class FiltersComponent implements OnInit {
   filtersForm: FormGroup;
-  campaign: AbstractControl;
+  campaigns: Observable<Campaign[]>;
+  selectedCampaign: AbstractControl;
 
-  constructor(fb: FormBuilder) {
+  constructor(fb: FormBuilder, private campaignService: CampaignService) {
+    this.campaigns = campaignService.getCampaigns();
     this.filtersForm = fb.group({
-      'campaign': ['']
+      'selectedCampaign': ['']
     });
 
-    this.campaign = this.filtersForm.controls['campaign'];
+    this.selectedCampaign = this.filtersForm.controls['selectedCampaign'];
   }
 
   onSubmit(value: string):void{

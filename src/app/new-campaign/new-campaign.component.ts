@@ -5,16 +5,16 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  AbstractControl
+  AbstractControl,
 } from '@angular/forms';
 import '../rxjs-operators';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
-import {NKDatetime} from 'ng2-datetime/ng2-datetime';
+import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 
-import {CampaignListComponent} from '../campaign-list/campaign-list.component';
-import {Campaign} from '../campaign';
-import {CampaignService} from '../campaign.service';
+import { CampaignListComponent } from '../campaign-list/campaign-list.component';
+import { Campaign } from '../models/campaign';
+import { CampaignService } from '../campaign.service';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -24,18 +24,13 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['new-campaign.component.css'],
   directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, NKDatetime, CampaignListComponent],
   pipes: [DatePipe],
-  providers: [Campaign, CampaignService]
+  providers: [Campaign]
 })
 export class NewCampaignComponent implements OnInit {
-  campaignList: Campaign[];
   newCampaignForm: FormGroup;
   name: AbstractControl;
   utm_campaign: AbstractControl;
   startDate: AbstractControl;
-
-  mode = 'Observable';
-  errorMessage: String;
-
   constructor(fb: FormBuilder, public campaignService:CampaignService) {
     this.newCampaignForm = fb.group({
       'name': ['', Validators.required],
@@ -44,14 +39,22 @@ export class NewCampaignComponent implements OnInit {
     });
   }
 
-  createCampaign(values) {
+  createCampaign(campaign) {
     if (this.newCampaignForm.valid){
-      this.campaignService.addCampaign(values)
-        .subscribe(
-          campaign => console.dir(campaign),
-          error => this.errorMessage = <any>error);
-      console.dir(values);
+      this.campaignService.addCampaign(campaign).subscribe(
+        data => {
+          console.log('success');
+          console.dir(data);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log('createCampaign complete');
+        }
+      );
       this.resetForm();
+      this.campaignService.loadCampaigns();
     }
   }
 

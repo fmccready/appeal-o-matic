@@ -14,29 +14,49 @@ interface ICampaignsOperation extends Function {
 
 @Injectable()
 export class CampaignService {
-  //private _campaigns: BehaviorSubject<List<Campaign>> = new BehaviorSubject(List([]));
-  private _campaignUrl = '/api/campaigns';
-  newCampaigns: Subject<Campaign>;
-  campaigns: Observable<Campaign[]>;
-  create: Subject<Campaign> = new Subject<Campaign>();
-  //existingCampaigns: Subject<Campaign[]> = new BehaviorSubject<Campaign[]>(null);
+  private _campaignUrl = '/api/campaigns/';
+  private _campaigns$: BehaviorSubject<Campaign[]>;
+
+  constructor(private http: Http) {
+    this._campaigns$ = <BehaviorSubject<Campaign[]>>new BehaviorSubject([]);
+    this.loadCampaigns();
+  }
+
+  loadCampaigns() {
+    this.http.get(this._campaignUrl).map(this.extractData).subscribe(
+      data => {
+        this._campaigns$.next(data);
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        console.log('loadCampaigns (campaign.service) - complete');
+      }
+    )
+  }
+
+  addCampaign(campaign: Campaign) {
+    let body = JSON.stringify(campaign);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post(this._campaignUrl, body, options);
+  }
+
+  removeCampaign(id: String): Observable<Response> {
+    return this.http.delete(this._campaignUrl + id);
+  }
+
   /*
-  public getCampaigns(): void {
-    this.existingCampaigns.next(this.http.get(this.campaignUrl)
-      .map(this.extractData)
-      .catch(this.handleError));
+  loadCampaigns() {
+    return this.http.get(this._campaignUrl).map(this.extractData);
   }
   */
-  constructor(private http: Http) {
-    this.create
-      .map( function(campaign: Campaign): ICampaignsOperation {
-        
-      });
-  }
+
   getCampaigns(): Observable<Campaign[]> {
-    return this.http.get(this._campaignUrl)
-      .map(this.extractData)
-      .catch(this.handleError);
+    return this._campaigns$.asObservable();
   }
 
   private extractData(res: Response){
@@ -50,16 +70,4 @@ export class CampaignService {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
-
-  addCampaign(newCampaign: Campaign): Observable<Campaign> {
-    let body = JSON.stringify(newCampaign);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({
-      headers: headers
-    });
-    return this.http.post(this._campaignUrl, body, options)
-      .map(this.extractData)
-      .catch(this.handleError);
-  }
-
 }

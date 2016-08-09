@@ -3,7 +3,10 @@
     <form [formGroup]="filtersForm" (ngSubmit)="onSubmit(filtersForm.value)">
       <div class="form-group">
         <label for="campaign-select">Campaign</label>
-        <select [formControl]="campaign" class="form-control" id="campaign-select"></select>
+        <select [formControl]="selectedCampaign" class="form-control" id="campaign-select">
+          <option selected disabled value="">Select campaign</option>
+          <option *ngFor="let campaign of campaigns | async" value="{{campaign._id}}">{{campaign.name}}</option>
+        </select>
       </div>
       <div class="form-group text-center">
         <button class="btn btn-lg btn-primary">Search</button>

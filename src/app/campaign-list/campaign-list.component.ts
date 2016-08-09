@@ -1,29 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import {CampaignService} from '../campaign.service';
 //import '../rxjs-operators';
 import 'rxjs/Rx';
-import {Campaign} from '../campaign';
+import { Campaign } from '../models/campaign';
 import { Observable } from 'rxjs/Observable';
+
 @Component({
   moduleId: module.id,
   selector: 'campaign-list-component',
   templateUrl: 'campaign-list.component.html',
   styleUrls: ['campaign-list.component.css'],
-  providers: [CampaignService, Campaign]
 })
 export class CampaignListComponent implements OnInit {
   campaigns: Campaign[];
-  errors: any;
   constructor(private campaignService: CampaignService) {
+
   }
-  getCampaigns() {
-    this.campaignService.getCampaigns()
-      .subscribe(
-        campaigns => this.campaigns = campaigns,
-        error => this.errors = <any>error);
+
+  getCampaigns(){
+    this.campaignService.getCampaigns().subscribe(
+      data => { this.campaigns = data },
+      error => { console.log(error) },
+      () => { console.log('loadCampaigns complete') }
+    );
+  }
+
+  deleteCampaign(id) {
+    this.campaignService.removeCampaign(id).subscribe(
+      success => {
+        console.log(success);
+        this.campaignService.loadCampaigns();
+      },
+      error => {
+        console.log('somethin bad happened in deleteCampaign');
+      },
+      () => {
+        console.log('deleteCampaign complete');
+      }
+    );
   }
   ngOnInit() {
     this.getCampaigns();
   }
-
 }
