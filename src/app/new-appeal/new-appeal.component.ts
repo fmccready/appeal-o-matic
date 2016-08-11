@@ -26,7 +26,7 @@ import { AppealListComponent } from '../appeal-list/appeal-list.component';
 })
 export class NewAppealComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
-  appeal: Appeal;
+  //appeal: Appeal;
   appealForm: FormGroup;
 
   name: FormControl = new FormControl("", Validators.required);
@@ -47,21 +47,15 @@ export class NewAppealComponent implements OnInit {
       "sendDate": ['']
     });
   }
-
+  convertToAppeal(formValues){
+    var appeal = new Appeal();
+    appeal.info = formValues;
+    return appeal;
+  }
   appealSubmit(formValues){
     if (this.appealForm.valid){
-      this.appealService.addAppeal(formValues).subscribe(
-        data => {
-          console.log('success');
-          console.dir(data);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          console.log('addAppeal complete');
-        }
-      );
+      var appeal = this.convertToAppeal(formValues);
+      this.appealService.addAppeal(appeal);
       this.campaignService.loadCampaigns();
     }
   }

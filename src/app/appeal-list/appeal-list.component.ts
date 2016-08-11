@@ -1,7 +1,9 @@
 import { Component, OnInit, Pipe } from '@angular/core';
 import { AppealService } from '../appeal.service';
+import { CampaignService } from '../campaign.service';
 import 'rxjs/Rx';
 import { Appeal } from '../models/appeal';
+import { Campaign } from '../models/campaign';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -12,8 +14,9 @@ import { Observable } from 'rxjs/Observable';
 })
 export class AppealListComponent implements OnInit {
   appeals: Appeal[];
+  private campaigns: Campaign[];
 
-  constructor(private appealService: AppealService) { }
+  constructor(private appealService: AppealService, private campaignService: CampaignService) { }
 
   getAppeals(){
     this.appealService.getAppeals().subscribe(
@@ -21,6 +24,13 @@ export class AppealListComponent implements OnInit {
       error => { console.log(error) },
       () => { console.log('loadAppeals complete') }
     );
+    this.campaignService.getCampaigns().subscribe(
+      data => this.campaigns = data,
+      error => console.log(error)
+    );
+    for (var i=0; i<= this.appeals.length; i++){
+      //START HERE TOMORRRRRRRRRRRRRRRRRRRRRRRROW!!!!!
+    }
   }
 
   deleteAppeal(id) {

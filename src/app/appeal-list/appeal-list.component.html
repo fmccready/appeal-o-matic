@@ -2,8 +2,8 @@
 <table class="table table-striped">
   <th>Appeal name</th><th>Campaign</th>
   <tr *ngFor="let appeal of appeals">
-    <td>{{ appeal.name }}</td>
-    <td>{{ appeal.campaign.name }}</td>
+    <td>{{ appeal.info.name }}</td>
+    <td>{{ appeal.info.campaign }}</td>
     <td><button (click)="deleteAppeal(appeal._id)" class="btn btn-danger">Delete</button>
   </tr>
 </table>

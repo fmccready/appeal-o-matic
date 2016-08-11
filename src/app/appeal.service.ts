@@ -15,7 +15,7 @@ interface IAppealsOperation extends Function {
 
 @Injectable()
 export class AppealService {
-  private _appealUrl = '/api/appeals/';
+  private _appealUrl = '/api/v1/appeal/';
   private _appeals$: BehaviorSubject<Appeal[]>;
 
   constructor(private http: Http) {
@@ -44,7 +44,10 @@ export class AppealService {
     let options = new RequestOptions({
       headers: headers
     });
-    return this.http.post(this._appealUrl, body, options);
+    this.http.post(this._appealUrl, body, options).subscribe(
+      success => {this.loadAppeals();},
+      error => {console.log(error);}
+    );
   }
 
   removeAppeal(id: String): Observable<Response> {

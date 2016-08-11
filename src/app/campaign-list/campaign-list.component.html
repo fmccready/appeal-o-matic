@@ -1,7 +1,7 @@
 <h2>Campaign List</h2>
 <table class="table table-striped">
   <th>Campaign name</th><th>UTM code</th>
-  <tr *ngFor="let campaign of campaigns | async">
+  <tr *ngFor="let campaign of campaigns">
     <td>{{ campaign.name }}</td>
     <td>{{ campaign.utm_campaign }}</td>
     <td><button (click)="deleteCampaign(campaign._id)" class="btn btn-danger">Delete</button>

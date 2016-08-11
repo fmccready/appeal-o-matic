@@ -4,16 +4,21 @@ var fs = require('fs');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var restify = require('express-restify-mongoose');
+var router = express.Router();
+var methodOverride = require('method-override');
 
 //Express Setup
 var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(methodOverride());
 app.use('/public', express.static(__dirname + '/dist/public'));
 app.use('/vendor', express.static(__dirname + '/dist/vendor'));
 app.use('/app/lib', express.static(__dirname + '/dist/lib'));
 app.use('/', express.static(__dirname + '/dist/'));
 app.use('/app', express.static(__dirname + '/dist/app'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+
 
 // Mongoose Connection
 mongoose.connect('mongodb://localhost:27017');
@@ -22,15 +27,25 @@ var Campaign = require('./dist/app/schemas/campaign');
 var Appeal = require('./dist/app/schemas/appeal');
 var Element = require('./dist/app/schemas/element');
 
-
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){
   console.log('Connected to MongoDB');
-
+  restify.serve(router, Campaign);
+  restify.serve(router, Appeal);
+  app.use(router);
+/*
   // REST API for mongoose
   // Campaigns
   app.get('/api/campaigns', function(req, res){
     Campaign.find({}, function(err, docs){
+      if (err) {
+        return console.error(err);
+      }
+      res.json(docs);
+    });
+  });
+  app.get('/api/campaigns/:id', function(req, res){
+    Campaign.find({ _id: req.params.id }, function(err, docs){
       if (err) {
         return console.error(err);
       }
@@ -72,7 +87,7 @@ db.once('open', function(){
     Appeal.find({ _id: req.params.id }).remove().exec();
     res.status(200).send(req.params.id + ' deleted');
   });
-  
+  */
   // All other routes
   app.get('/', function(req, res){
     console.log(__dirname);

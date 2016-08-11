@@ -41,20 +41,8 @@ export class NewCampaignComponent implements OnInit {
 
   createCampaign(campaign) {
     if (this.newCampaignForm.valid){
-      this.campaignService.addCampaign(campaign).subscribe(
-        data => {
-          console.log('success');
-          console.dir(data);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          console.log('createCampaign complete');
-        }
-      );
+      this.campaignService.addCampaign(campaign);
       this.resetForm();
-      this.campaignService.loadCampaigns();
     }
   }
 

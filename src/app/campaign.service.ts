@@ -14,7 +14,7 @@ interface ICampaignsOperation extends Function {
 
 @Injectable()
 export class CampaignService {
-  private _campaignUrl = '/api/campaigns/';
+  private _campaignUrl = '/api/v1/campaign/';
   private _campaigns$: BehaviorSubject<Campaign[]>;
 
   constructor(private http: Http) {
@@ -42,7 +42,10 @@ export class CampaignService {
     let options = new RequestOptions({
       headers: headers
     });
-    return this.http.post(this._campaignUrl, body, options);
+    this.http.post(this._campaignUrl, body, options).subscribe(
+      success => {this.loadCampaigns();},
+      error => {console.log(error);}
+    );
   }
 
   removeCampaign(id: String): Observable<Response> {
@@ -51,6 +54,9 @@ export class CampaignService {
 
   getCampaigns(): Observable<Campaign[]> {
     return this._campaigns$.asObservable();
+  }
+  getCampaign(id): Observable<Response> {
+    return this.http.get(this._campaignUrl + id);
   }
 
   private extractData(res: Response){
