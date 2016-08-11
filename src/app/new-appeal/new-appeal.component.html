@@ -1,17 +1,39 @@
 <div class="row">
   <div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-4">
-    <form [formGroup]="newAppealForm" (ngSubmit)="createAppeal(newAppealForm.value);" novalidate>
+    <form [formGroup]="appealForm" (ngSubmit)="appealSubmit(appealForm.value)" novalidate>
       <div class="form-group" [class.has-error]="!name.valid && name.touched">
         <label for="appeal-name">eAppeal name</label>
-        <input [formControl]="name" class="form-control" id="appeal-name">
+        <input type="text" class="form-control" formControlName="name" id="appeal-name" placeholder="required">
       </div>
-      <div class="form-group" [class.has-error]="!utm_source.valid && utm_source.touched">
-        <label for="utm_source">UTM source</label>
-        <input [formControl]="utm_source" class="form-control" id="utm_source">
+      <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
+        <label for="campaign-name">Campaign name</label>
+        <select class="form-control" formControlName="campaign" id="campaign-name">
+          <option selected disabled value="">required</option>
+          <option *ngFor=" let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
+        </select>
+      </div>
+      <div class="form-group" [class.has-error]="!sender.valid && sender.touched">
+        <label for="sender-name">Sender name</label>
+        <input type="text" class="form-control" fromControlName="sender" id="sender-name" placeholder="optional">
+      </div>
+      <div class="form-group" [class.has-error]="!senderAddress.valid && senderAddress.touched">
+        <label for="sender-email">Sender email address</label>
+        <input type="email" class="form-control" formControlName="senderAddress" id="sender-email" placeholder="optional">
+      </div>
+      <div class="form-group" [class.has-error]="!subjectLine.valid && subjectLine.touched">
+        <label for="subject-line">Subject line</label>
+        <input type="text" class="form-control" formControlName="subjectLine" id="subject-line" placeholder="optional">
+      </div>
+      <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
+        <label for="send-date">Send date & time (optional)</label>
+        <datetime [(ngModel)]="sendDate" name="sendDate" id="sendDate"></datetime>
       </div>
       <div class="form-group text-center">
-        <button type="submit" class="btn btn-lg btn-primary" [class.disabled]="!newAppealForm.valid">Create eAppeal</button>
+        <button type="submit" class="btn btn-lg btn-primary" [class.disabled]="!appealForm.valid">Create eAppeal</button>
       </div>
     </form>
+  </div>
+  <div class="col-xs-12 col-sm-4">
+    <appeal-list-component></appeal-list-component>
   </div>
 </div>

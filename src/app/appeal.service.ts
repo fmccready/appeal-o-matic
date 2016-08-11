@@ -4,53 +4,55 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { List } from 'immutable';
 import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 
-import { Campaign } from './models/campaign';
+import { Appeal } from './models/appeal';
 
-let initialCampaigns: Campaign[] = [];
+let initialAppeals: Appeal[] = [];
 
-interface ICampaignsOperation extends Function {
-  (campaigns: Campaign[]): Campaign[];
+interface IAppealsOperation extends Function {
+  (appeals: Appeal[]): Appeal[];
 }
 
+
 @Injectable()
-export class CampaignService {
-  private _campaignUrl = '/api/campaigns/';
-  private _campaigns$: BehaviorSubject<Campaign[]>;
+export class AppealService {
+  private _appealUrl = '/api/appeals/';
+  private _appeals$: BehaviorSubject<Appeal[]>;
 
   constructor(private http: Http) {
-    this._campaigns$ = <BehaviorSubject<Campaign[]>>new BehaviorSubject([]);
-    this.loadCampaigns();
+    this._appeals$ = <BehaviorSubject<Appeal[]>>new BehaviorSubject([]);
+    this.loadAppeals();
   }
 
-  loadCampaigns() {
-    this.http.get(this._campaignUrl).map(this.extractData).subscribe(
+  loadAppeals(){
+    this.http.get(this._appealUrl).map(this.extractData).subscribe(
       data => {
-        this._campaigns$.next(data);
+        console.log('data from appealService');
+        console.dir(data);
+        this._appeals$.next(data);
       },
       error => {
         console.log(error);
       },
       () => {
-        console.log('loadCampaigns (campaign.service) - complete');
+        console.log('loadAppeals (appeal.service) - complete');
       }
     )
   }
-
-  addCampaign(campaign: Campaign) {
+  addAppeal(campaign: Appeal) {
     let body = JSON.stringify(campaign);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({
       headers: headers
     });
-    return this.http.post(this._campaignUrl, body, options);
+    return this.http.post(this._appealUrl, body, options);
   }
 
-  removeCampaign(id: String): Observable<Response> {
-    return this.http.delete(this._campaignUrl + id);
+  removeAppeal(id: String): Observable<Response> {
+    return this.http.delete(this._appealUrl + id);
   }
 
-  getCampaigns(): Observable<Campaign[]> {
-    return this._campaigns$.asObservable();
+  getAppeals(): Observable<Appeal[]> {
+    return this._appeals$.asObservable();
   }
 
   private extractData(res: Response){
@@ -64,4 +66,5 @@ export class CampaignService {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
+
 }

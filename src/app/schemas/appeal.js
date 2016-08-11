@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var eappealSchema = new Schema({
+var appealSchema = new Schema({
   info: {
     name: String,
     sender: String,
@@ -11,11 +11,11 @@ var eappealSchema = new Schema({
     sendDate: Date,
     scheduled: Boolean
   },
-  content: {
+  emailContent: {
     headline: String,
     url: String,
     body: [{
-      contnet: {
+      content: {
         type: Schema.Types.ObjectId,
         ref: 'Element'
       }
@@ -36,4 +36,4 @@ var eappealSchema = new Schema({
     department: String
   }]
 });
-module.exports = mongoose.model('Eappeal', eappealSchema);
+module.exports = mongoose.model('Appeal', appealSchema);

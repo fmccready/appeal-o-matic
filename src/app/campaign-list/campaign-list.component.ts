@@ -1,6 +1,5 @@
 import { Component, OnInit, Pipe } from '@angular/core';
-import {CampaignService} from '../campaign.service';
-//import '../rxjs-operators';
+import { CampaignService } from '../campaign.service';
 import 'rxjs/Rx';
 import { Campaign } from '../models/campaign';
 import { Observable } from 'rxjs/Observable';

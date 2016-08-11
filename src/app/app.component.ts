@@ -10,5 +10,5 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   directives: [ROUTER_DIRECTIVES, FiltersComponent]
 })
 export class AppComponent {
-  title = 'Auto eAppeal';
+  title = 'Appeal-o-matic';
 }
