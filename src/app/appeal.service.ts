@@ -16,6 +16,7 @@ interface IAppealsOperation extends Function {
 @Injectable()
 export class AppealService {
   private _appealUrl = '/api/v1/appeal/';
+  private _populateCampaign = 'populate=info.campaign';
   private _appeals$: BehaviorSubject<Appeal[]>;
 
   constructor(private http: Http) {
@@ -24,17 +25,12 @@ export class AppealService {
   }
 
   loadAppeals(){
-    this.http.get(this._appealUrl).map(this.extractData).subscribe(
+    this.http.get(this._appealUrl + '?' + this._populateCampaign).map(this.extractData).subscribe(
       data => {
-        console.log('data from appealService');
-        console.dir(data);
         this._appeals$.next(data);
       },
       error => {
         console.log(error);
-      },
-      () => {
-        console.log('loadAppeals (appeal.service) - complete');
       }
     )
   }
@@ -53,7 +49,26 @@ export class AppealService {
   removeAppeal(id: String): Observable<Response> {
     return this.http.delete(this._appealUrl + id);
   }
+  filterAppeals(filters) {
+    if (filters.campaign) {
+      var url = this._appealUrl + '?' + this._populateCampaign + '&query={"info.campaign":"'+ filters.campaign._id + '"}';
+      console.log(url);
+      this.http.get(url).map(this.extractData).subscribe(
+        data => {
+          console.log('DATA');
+          console.dir(data);
+          this._appeals$.next(data);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log('filter appeals complete');
+        }
+      );
+    }
 
+  }
   getAppeals(): Observable<Appeal[]> {
     return this._appeals$.asObservable();
   }

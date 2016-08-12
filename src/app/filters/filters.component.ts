@@ -9,31 +9,31 @@ import {
 } from '@angular/forms';
 import { CampaignService } from '../campaign.service';
 import { Campaign } from '../models/campaign';
-import { Observable } from 'rxjs/Observable';
+import { AppealListComponent } from '../appeal-list/appeal-list.component';
+import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 
 @Component({
   moduleId: module.id,
   selector: 'app-filters',
   templateUrl: 'filters.component.html',
   styleUrls: ['filters.component.css'],
-  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES]
+  directives: [FORM_DIRECTIVES, REACTIVE_FORM_DIRECTIVES, AppealListComponent]
 })
 export class FiltersComponent implements OnInit {
   filtersForm: FormGroup;
   campaigns: Observable<Campaign[]>;
-  selectedCampaign: AbstractControl;
-
+  campaign: AbstractControl;
+  filterList: BehaviorSubject<Object> = new BehaviorSubject({});
   constructor(fb: FormBuilder, private campaignService: CampaignService) {
     this.campaigns = campaignService.getCampaigns();
     this.filtersForm = fb.group({
-      'selectedCampaign': ['']
+      'campaign': ['']
     });
-
-    this.selectedCampaign = this.filtersForm.controls['selectedCampaign'];
+    this.campaign = this.filtersForm.controls['campaign'];
   }
 
-  onSubmit(value: string):void{
-    console.log(value);
+  onSubmit(filters):void{
+    this.filterList.next(filters);
   }
 
   ngOnInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit, Pipe, Input } from '@angular/core';
 import { AppealService } from '../appeal.service';
 import { CampaignService } from '../campaign.service';
 import 'rxjs/Rx';
@@ -10,27 +10,25 @@ import { Observable } from 'rxjs/Observable';
   moduleId: module.id,
   selector: 'appeal-list-component',
   templateUrl: 'appeal-list.component.html',
-  styleUrls: ['appeal-list.component.css']
+  styleUrls: ['appeal-list.component.css'],
+  inputs: ['filters']
 })
 export class AppealListComponent implements OnInit {
   appeals: Appeal[];
   private campaigns: Campaign[];
-
+  public filters: Observable<Object>;
   constructor(private appealService: AppealService, private campaignService: CampaignService) { }
-
   getAppeals(){
     this.appealService.getAppeals().subscribe(
-      data => { this.appeals = data; console.dir(data); },
-      error => { console.log(error) },
-      () => { console.log('loadAppeals complete') }
+      data => { this.appeals = data; },
+      error => { console.log(error) }
     );
+    /*
     this.campaignService.getCampaigns().subscribe(
       data => this.campaigns = data,
       error => console.log(error)
     );
-    for (var i=0; i<= this.appeals.length; i++){
-      //START HERE TOMORRRRRRRRRRRRRRRRRRRRRRRROW!!!!!
-    }
+    */
   }
 
   deleteAppeal(id) {
@@ -39,13 +37,20 @@ export class AppealListComponent implements OnInit {
         console.log(success);
         this.appealService.loadAppeals();
       },
-      error => { console.log('something bad happened in deleteAppeal') },
-      () => { console.log('deleteAppeal complete') }
+      error => { console.log(error) }
     );
   }
+  goTo(id){
 
+  }
   ngOnInit() {
     this.getAppeals();
+    if (this.filters){
+      this.filters.subscribe(
+        data => { this.appealService.filterAppeals(data);console.log(data) },
+        error => { console.log(error) },
+        () => { console.log('filters complete') }
+      );
+    }
   }
-
 }

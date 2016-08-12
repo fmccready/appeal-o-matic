@@ -3,8 +3,9 @@
   <th>Appeal name</th><th>Campaign</th>
   <tr *ngFor="let appeal of appeals">
     <td>{{ appeal.info.name }}</td>
-    <td>{{ appeal.info.campaign }}</td>
-    <td><button (click)="deleteAppeal(appeal._id)" class="btn btn-danger">Delete</button>
+    <td>{{ appeal.info.campaign.name }}</td>
+    <td><button (click)="goTo(appeal._id)" class="btn btn-primary">Go!</button></td>
+    <td><button (click)="deleteAppeal(appeal._id)" class="btn btn-danger">Delete</button></td>
   </tr>
 </table>
 <div *ngIf="errors">

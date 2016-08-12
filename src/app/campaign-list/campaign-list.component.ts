@@ -19,8 +19,7 @@ export class CampaignListComponent implements OnInit {
   getCampaigns(){
     this.campaignService.getCampaigns().subscribe(
       data => { this.campaigns = data },
-      error => { console.log(error) },
-      () => { console.log('loadCampaigns complete') }
+      error => { console.log(error) }
     );
   }
 
@@ -31,10 +30,7 @@ export class CampaignListComponent implements OnInit {
         this.campaignService.loadCampaigns();
       },
       error => {
-        console.log('somethin bad happened in deleteCampaign');
-      },
-      () => {
-        console.log('deleteCampaign complete');
+        console.log(error);
       }
     );
   }

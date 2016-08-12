@@ -29,9 +29,6 @@ export class CampaignService {
       },
       error => {
         console.log(error);
-      },
-      () => {
-        console.log('loadCampaigns (campaign.service) - complete');
       }
     )
   }

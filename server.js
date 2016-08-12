@@ -32,6 +32,7 @@ db.once('open', function(){
   console.log('Connected to MongoDB');
   restify.serve(router, Campaign);
   restify.serve(router, Appeal);
+
   app.use(router);
 /*
   // REST API for mongoose

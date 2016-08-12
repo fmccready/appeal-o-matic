@@ -7,7 +7,10 @@ var appealSchema = new Schema({
     sender: String,
     senderAddress: String,
     subjectLine: String,
-    campaign: String,
+    campaign: {
+      type: Schema.Types.ObjectId,
+      ref: 'Campaign'
+    },
     sendDate: Date,
     scheduled: Boolean
   },
