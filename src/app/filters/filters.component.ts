@@ -23,13 +23,16 @@ export class FiltersComponent implements OnInit {
   filtersForm: FormGroup;
   campaigns: Observable<Campaign[]>;
   campaign: AbstractControl;
+  appealId: AbstractControl;
   filterList: BehaviorSubject<Object> = new BehaviorSubject({});
   constructor(fb: FormBuilder, private campaignService: CampaignService) {
     this.campaigns = campaignService.getCampaigns();
     this.filtersForm = fb.group({
-      'campaign': ['']
+      'campaign': [''],
+      'appealId': ['']
     });
     this.campaign = this.filtersForm.controls['campaign'];
+    this.appealId = this.filtersForm.controls['appealId'];
   }
 
   onSubmit(filters):void{

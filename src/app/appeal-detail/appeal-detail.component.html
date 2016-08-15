@@ -1,3 +1,10 @@
-<p>
-  appeal-detail works!
-</p>
+<div class="row">
+  <div class="col-xs-12 col-sm-4 col-md-2">
+    <form [formGroup]="appealDetailForm" (ngSubmit)="saveAppeal(appealDetailForm.value)" novalidate>
+      <div class="form-group" [class.has-error]="!name.valid && name.touched">
+        <label for="appeal-name">eAppeal name</label>
+        <input type="text" class="form-control" formControlName="name">
+      </div>
+    </form>
+  </div>
+</div>

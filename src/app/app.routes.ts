@@ -1,4 +1,5 @@
 import {ROUTER_DIRECTIVES, provideRouter, RouterConfig} from '@angular/router';
+import {BrowserModule} from '@angular/platform-browser';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {AppComponent} from './app.component';
 import {FiltersComponent} from './filters/filters.component';
@@ -12,7 +13,7 @@ const routes: RouterConfig = [
   { path: 'filters', component: FiltersComponent },
   { path: 'new-campaign', component: NewCampaignComponent},
   { path: 'new-appeal', component: NewAppealComponent },
-  { path: 'appeal/:id', component: AppealDetailComponent }
+  { path: 'appeal/:appealId', component: AppealDetailComponent }
 ];
 
 

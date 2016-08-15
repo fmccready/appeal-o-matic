@@ -26,7 +26,7 @@
       </div>
       <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
         <label for="send-date">Send date & time (optional)</label>
-        <datetime [(ngModel)]="sendDate" name="sendDate" id="sendDate"></datetime>
+        <datetime formControlName="sendDate" name="sendDate" id="sendDate"></datetime>
       </div>
       <div class="form-group text-center">
         <button type="submit" class="btn btn-lg btn-primary" [class.disabled]="!appealForm.valid">Create eAppeal</button>

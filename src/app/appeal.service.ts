@@ -52,11 +52,8 @@ export class AppealService {
   filterAppeals(filters) {
     if (filters.campaign) {
       var url = this._appealUrl + '?' + this._populateCampaign + '&query={"info.campaign":"'+ filters.campaign._id + '"}';
-      console.log(url);
       this.http.get(url).map(this.extractData).subscribe(
         data => {
-          console.log('DATA');
-          console.dir(data);
           this._appeals$.next(data);
         },
         error => {
@@ -66,6 +63,20 @@ export class AppealService {
           console.log('filter appeals complete');
         }
       );
+    }
+    if (filters.appealId) {
+      var url = this._appealUrl + filters.appealId + '?' + this._populateCampaign + '&query={"_id":"' + filters.appealId + '"}';
+      this.http.get(url).map(this.extractData).subscribe(
+        data => {
+          this._appeals$.next([data]);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log('filter appeals complete');
+        }
+      )
     }
 
   }

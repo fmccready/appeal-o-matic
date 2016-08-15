@@ -8,6 +8,10 @@
           <option *ngFor="let campaign of campaigns | async" [ngValue]="campaign">{{campaign.name}}</option>
         </select>
       </div>
+      <div class="form-group">
+        <label for="appeal-id">Appeal ID</label>
+        <input id="appeal-id" [formControl]="appealId" class="form-control">
+      </div>
       <div class="form-group text-center">
         <button class="btn btn-lg btn-primary">Search</button>
       </div>
