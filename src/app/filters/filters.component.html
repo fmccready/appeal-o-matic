@@ -1,16 +1,16 @@
 <div class="row">
   <div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-4">
-    <form [formGroup]="filtersForm" (ngSubmit)="onSubmit(filtersForm.value)">
+    <form #filtersForm="ngForm" (ngSubmit)="onSubmit(filtersForm.value)">
       <div class="form-group">
         <label for="campaign-select">Campaign</label>
-        <select [formControl]="campaign" class="form-control" id="campaign-select">
+        <select [(ngModel)]="filters.campaign" name="campaign" class="form-control" id="campaign-select">
           <option selected disabled value="">Select campaign</option>
-          <option *ngFor="let campaign of campaigns | async" [ngValue]="campaign">{{campaign.name}}</option>
+          <option *ngFor="let c of campaigns | async" [ngValue]="c">{{c.name}}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="appeal-id">Appeal ID</label>
-        <input id="appeal-id" [formControl]="appealId" class="form-control">
+        <input id="appeal-id" [(ngModel)]="filters.appealId" name="appealId" class="form-control">
       </div>
       <div class="form-group text-center">
         <button class="btn btn-lg btn-primary">Search</button>

@@ -1,4 +1,11 @@
 import { Campaign } from './campaign';
+
+export interface IAppeal {
+  info: AppealInfo;
+  emailContent: AppealContent;
+  codes: AppealCode;
+  signoffs: AppealSignoff[];
+}
 export class Appeal {
     info: AppealInfo;
     emailContent: AppealContent;

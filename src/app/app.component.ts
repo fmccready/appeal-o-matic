@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { FiltersComponent } from './filters/filters.component';
-import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
-  directives: [ROUTER_DIRECTIVES, FiltersComponent]
+  templateUrl: 'app/app.component.html',
+  styleUrls: ['app/app.component.css']
 })
 export class AppComponent {
   title = 'Appeal-o-matic';

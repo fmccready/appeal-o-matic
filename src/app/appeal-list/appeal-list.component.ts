@@ -5,21 +5,19 @@ import 'rxjs/Rx';
 import { Appeal } from '../models/appeal';
 import { Campaign } from '../models/campaign';
 import { Observable } from 'rxjs/Observable';
-import { ActivatedRoute, Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  moduleId: module.id,
   selector: 'appeal-list-component',
-  templateUrl: 'appeal-list.component.html',
-  styleUrls: ['appeal-list.component.css'],
-  inputs: ['filters'],
-  directives: [ROUTER_DIRECTIVES]
+  templateUrl: 'app/appeal-list/appeal-list.component.html',
+  styleUrls: ['app/appeal-list/appeal-list.component.css'],
+  inputs: ['filters']
 })
 export class AppealListComponent implements OnInit {
   appeals: Appeal[];
   private campaigns: Campaign[];
   public filters: Observable<Object>;
-  constructor(private appealService: AppealService, private campaignService: CampaignService, private router: Router) {
+  constructor(private appealService: AppealService, private campaignService: CampaignService) {
     appealService.loadAppeals();
   }
   getAppeals(){
@@ -45,7 +43,7 @@ export class AppealListComponent implements OnInit {
     );
   }
   goTo(id){
-    this.router.navigate(['appeal', id]);
+    //this.router.navigate(['appeal', id]);
   }
   ngOnInit() {
     this.getAppeals();
