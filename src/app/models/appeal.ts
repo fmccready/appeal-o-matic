@@ -1,16 +1,11 @@
 import { Campaign } from './campaign';
 
-export interface IAppeal {
-  info: AppealInfo;
-  emailContent: AppealContent;
-  codes: AppealCode;
-  signoffs: AppealSignoff[];
-}
 export class Appeal {
-    info: AppealInfo;
-    emailContent: AppealContent;
-    codes: AppealCode;
-    signoffs: AppealSignoff[];
+  _id: string;
+  info: AppealInfo = new AppealInfo();
+  codes: AppealCode = new AppealCode();
+  signoffs: AppealSignoff[] = new Array<AppealSignoff>();
+  emailContent: AppealContent = new AppealContent();
 }
 class AppealInfo {
   name: string;

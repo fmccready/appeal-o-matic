@@ -17,7 +17,7 @@ export class AppealListComponent implements OnInit {
   appeals: Appeal[];
   private campaigns: Campaign[];
   public filters: Observable<Object>;
-  constructor(private appealService: AppealService, private campaignService: CampaignService) {
+  constructor(private appealService: AppealService, private campaignService: CampaignService, private route: ActivatedRoute) {
     appealService.loadAppeals();
   }
   getAppeals(){
@@ -42,14 +42,12 @@ export class AppealListComponent implements OnInit {
       error => { console.log(error) }
     );
   }
-  goTo(id){
-    //this.router.navigate(['appeal', id]);
-  }
+
   ngOnInit() {
     this.getAppeals();
     if (this.filters){
       this.filters.subscribe(
-        data => { this.appealService.filterAppeals(data);console.log(data) },
+        data => { this.appealService.filterAppeals(data) },
         error => { console.log(error) },
         () => { console.log('filters complete') }
       );

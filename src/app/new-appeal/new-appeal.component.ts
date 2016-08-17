@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 
 import { Campaign } from '../models/campaign';
-import { IAppeal, Appeal } from '../models/appeal';
+import { Appeal } from '../models/appeal';
 import { CampaignService } from '../campaign.service';
 import { AppealService } from '../appeal.service';
 import { AppealListComponent } from '../appeal-list/appeal-list.component';
@@ -20,11 +20,11 @@ import { AppealListComponent } from '../appeal-list/appeal-list.component';
   styleUrls: ['app/new-appeal/new-appeal.component.css'],
   directives: [NKDatetime, AppealListComponent],
   pipes: [DatePipe],
-  providers: [IAppeal]
+  providers: [Appeal]
 })
 export class NewAppealComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
-  appeal: IAppeal = new Appeal();
+  appeal: Appeal = new Appeal();
 
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = this.campaignService.getCampaigns();

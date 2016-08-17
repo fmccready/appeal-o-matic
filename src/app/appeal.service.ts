@@ -34,8 +34,8 @@ export class AppealService {
       }
     )
   }
-  addAppeal(campaign: Appeal) {
-    let body = JSON.stringify(campaign);
+  addAppeal(appeal: Appeal) {
+    let body = JSON.stringify(appeal);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({
       headers: headers
@@ -49,37 +49,32 @@ export class AppealService {
   removeAppeal(id: String): Observable<Response> {
     return this.http.delete(this._appealUrl + id);
   }
+  makeGetRequest(url){
+    this.http.get(url).map(this.extractData).subscribe(
+      data => {
+        if (data instanceof Array){
+          this._appeals$.next(data);
+        }
+        else {
+          this._appeals$.next([data]);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
   filterAppeals(filters) {
     if (filters.campaign) {
       var url = this._appealUrl + '?' + this._populateCampaign + '&query={"info.campaign":"'+ filters.campaign._id + '"}';
-      this.http.get(url).map(this.extractData).subscribe(
-        data => {
-          this._appeals$.next(data);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          console.log('filter appeals complete');
-        }
-      );
+      this.makeGetRequest(url);
     }
     if (filters.appealId) {
-      var url = this._appealUrl + filters.appealId + '?' + this._populateCampaign + '&query={"_id":"' + filters.appealId + '"}';
-      this.http.get(url).map(this.extractData).subscribe(
-        data => {
-          this._appeals$.next([data]);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          console.log('filter appeals complete');
-        }
-      )
+      var url = this._appealUrl + filters.appealId + '?' + this._populateCampaign;
+      this.makeGetRequest(url);
     }
-
   }
+
   getAppeals(): Observable<Appeal[]> {
     return this._appeals$.asObservable();
   }
