@@ -1,0 +1,16 @@
+<div class="panel panel-primary">
+  <div class="panel-heading text-center" data-toggle="collapse" data-parent="#controls" data-target="#signoffsPanel">
+    <h2 class="panel-title">Signoff&nbsp;&nbsp;<span class="glyphicon glyphicon-list-alt"></span></h2>
+  </div>
+  <div class="panel-body" id="signoffsPanel" class="collapse">
+    <div class="well">
+      <form #signoffForm="ngForm" (ngSubmit)="saveSignoffs()" novalidate>
+        <div class="form-group" [class.has-error]="!signoff.valid && signoff.touched" *ngFor="let s of signoffs">
+          <label for="signoff-$s.department">{{s.department}}</label>
+          <input id="signoff-$s.department" type="text" class="form-control" [(ngModel)]="s.name" #signoff="ngModel" name="signoff">
+        </div>
+        <button click="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

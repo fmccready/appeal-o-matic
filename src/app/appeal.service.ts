@@ -45,8 +45,19 @@ export class AppealService {
       error => {console.log(error);}
     );
   }
+  updateAppeal(appeal: Appeal) {
+    let body = JSON.stringify(appeal);
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({
+      headers: headers
+    });
+    this.http.post(this._appealUrl + appeal._id, body, options).subscribe(
+      data => console.log(data),
+      error => console.log(error)
+    );
+  }
 
-  removeAppeal(id: String): Observable<Response> {
+  removeAppeal(id: string): Observable<Response> {
     return this.http.delete(this._appealUrl + id);
   }
   makeGetRequest(url){

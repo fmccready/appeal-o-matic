@@ -1,0 +1,42 @@
+<div class="panel panel-primary">
+  <div class="panel-heading text-center" data-toggle="collapse" data-parent="#controls" data-target="#infoPanel">
+    <h2 class="panel-title">eAppeal Info&nbsp;&nbsp;<span class="glyphicon glyphicon-envelope"></span></h2>
+  </div>
+  <div class="panel-body" id="infoPanel" class="collapse">
+    <div class="well">
+      <form #infoForm="ngForm" novalidate>
+        <div class="form-group" [class.has-error]="!name.valid && name.touched">
+          <label for="appeal-name">eAppeal name</label>
+          <input id="appeal-name" type="text" class="form-control" [(ngModel)]="appealInfo.name" #name="ngModel" name="name">
+        </div>
+        <div class="form-group" [class.has-error]="!sender.valid && sender.touched">
+          <label for="sender">Sender</label>
+          <input id="sender" type="text" class="form-control" [(ngModel)]="appealInfo.sender" #sender="ngModel" name="sender">
+        </div>
+        <div class="form-group" [class.has-error]="!senderAddress.valid && senderAddress.touched">
+          <label for="sender-address">Sender email address</label>
+          <input id="sender-address" type="text" class="form-control" [(ngModel)]="appealInfo.senderAddress" #senderAddress="ngModel" name="senderAddress">
+        </div>
+        <div class="form-group" [class.has-error]="!subjectLine.valid && subjectLine.touched">
+          <label for="subject-line">Subject line</label>
+          <input id="subject-line" type="text" class="form-control" [(ngModel)]="appealInfo.subjectLine" #subjectLine="ngModel" name="subjectLine">
+        </div>
+        <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
+          <label for="campaign">Campaign</label>
+          <select id="campaign" type="text" class="form-control" [(ngModel)]="appealInfo.campaign" #campaign="ngModel" name="campaign">
+            <option *ngFor="let c of campaigns" [ngValue]="c._id" [selected]="appealInfo.campaign == c">{{c.name}}</option>
+          </select>
+        </div>
+        <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
+          <label for="send-date">Send date & time</label>
+          <datetime [(ngModel)]="appealInfo.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datetime>
+        </div>
+        <div class="form-group" [class.has-error]="!scheduled.valid && scheduled.touched">
+          <label for="send-date">Scheduled</label>
+          <input type="checkbox" [(ngModel)]="appealInfo.scheduled" #scheduled="ngModel" name="scheduled" id="scheduled">
+        </div>
+        <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

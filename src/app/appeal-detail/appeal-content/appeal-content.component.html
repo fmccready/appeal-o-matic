@@ -1,0 +1,28 @@
+<div class="panel panel-primary">
+  <div class="panel-heading text-center" data-toggle="collapse" data-parent="#controls" data-target="#contentPanel">
+    <h2 class="panel-title">eAppeal Content&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span></h2>
+  </div>
+  <div class="panel-body" id="contentPanel" class="collapse">
+    <div class="well">
+      <form #contentForm="ngForm" (ngSubmit)="saveAppeal()" novalidate>
+        <div class="form-group" [class.has-error]="!headline.valid && headline.touched">
+          <label for="headline">Headline</label>
+          <textarea id="headline" class="form-control" [(ngModel)]="emailContent.headline" #headline="ngModel" name="headline"></textarea>
+        </div>
+        <div class="form-group" [class.has-error]="!body.valid && body.touched">
+          <label for="appeal-body">Body</label>
+          <textarea id="appeal-body" class="form-control" [(ngModel)]="emailContent.body" #body="ngModel" name="body"></textarea>
+        </div>
+        <div class="form-group" [class.has-error]="!url.valid && url.touched">
+          <label for="url">Default donation form link</label>
+          <input type="text" id="url" class="form-control" [(ngModel)]="emailContent.url" #url="ngModel" name="url">
+        </div>
+        <div class="form-group" [class.has-error]="!image.valid && image.touched">
+          <label for="image">Image URL</label>
+          <input type="text" id="image" class="form-control" [(ngModel)]="emailContent.image" #image="ngModel" name="image">
+        </div>
+        <button click="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>

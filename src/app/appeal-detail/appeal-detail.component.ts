@@ -7,24 +7,27 @@ import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 
 import { AppealService } from '../appeal.service';
 import { Appeal } from '../models/appeal';
-import { CampaignService } from '../campaign.service';
-import { Campaign } from '../models/campaign';
+
+import { AppealInfoComponent } from './appeal-info/appeal-info.component';
+import { AppealContentComponent } from './appeal-content/appeal-content.component';
+import { AppealCodesComponent } from './appeal-codes/appeal-codes.component';
+import { AppealSignoffsComponent } from './appeal-signoffs/appeal-signoffs.component';
+
 
 import { Subject, BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 @Component({
   selector: 'app-appeal-detail',
   templateUrl: 'app/appeal-detail/appeal-detail.component.html',
   styleUrls: ['app/appeal-detail/appeal-detail.component.css'],
-  directives: [NKDatetime],
+  directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent],
   pipes: [DatePipe],
   providers: [Appeal]
 })
 export class AppealDetailComponent implements OnInit {
   appeal$: Observable<Appeal[]>;
   appeal: Appeal = new Appeal();
-  private campaigns: Campaign[];
-  constructor(private appealService: AppealService, private campaignService: CampaignService, private route: ActivatedRoute) {
 
+  constructor(private appealService: AppealService, private route: ActivatedRoute) {
 
     this.route.params
       .subscribe(data => {
@@ -32,10 +35,7 @@ export class AppealDetailComponent implements OnInit {
         this.subscribeToAppeal(data);
       });
 
-    this.campaignService.getCampaigns().subscribe(
-        data => {this.campaigns = data},
-        error => {console.log(error)}
-      );
+
   }
   subscribeToAppeal(appeal) {
     this.appealService.getAppeals().subscribe(
@@ -46,6 +46,11 @@ export class AppealDetailComponent implements OnInit {
       },
       error => {console.log(error)}
     );
+  }
+
+  onSaved(appealInfo) {
+    this.appeal.info = appealInfo;
+    this.appealService.updateAppeal(this.appeal);
   }
 
   ngOnInit() {
