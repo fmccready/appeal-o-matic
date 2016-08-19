@@ -47,11 +47,12 @@ export class AppealService {
   }
   updateAppeal(appeal: Appeal) {
     let body = JSON.stringify(appeal);
+    console.dir(body);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
       headers: headers
     });
-    this.http.post(this._appealUrl + appeal._id, body, options).subscribe(
+    this.http.patch(this._appealUrl + appeal._id, body, options).subscribe(
       data => console.log(data),
       error => console.log(error)
     );
@@ -63,6 +64,7 @@ export class AppealService {
   makeGetRequest(url){
     this.http.get(url).map(this.extractData).subscribe(
       data => {
+        console.dir(data);
         if (data instanceof Array){
           this._appeals$.next(data);
         }

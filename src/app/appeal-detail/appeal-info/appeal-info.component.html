@@ -24,12 +24,12 @@
         <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
           <label for="campaign">Campaign</label>
           <select id="campaign" type="text" class="form-control" [(ngModel)]="appealInfo.campaign" #campaign="ngModel" name="campaign">
-            <option *ngFor="let c of campaigns" [ngValue]="c._id" [selected]="appealInfo.campaign == c">{{c.name}}</option>
+            <option *ngFor="let c of campaigns | async" [value]="c._id">{{c.name}}</option>
           </select>
         </div>
-        <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
+        <div class="form-group">
           <label for="send-date">Send date & time</label>
-          <datetime [(ngModel)]="appealInfo.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datetime>
+          <datetime [(ngModel)]="appealInfo.sendDate" name="sendDate"></datetime>
         </div>
         <div class="form-group" [class.has-error]="!scheduled.valid && scheduled.touched">
           <label for="send-date">Scheduled</label>

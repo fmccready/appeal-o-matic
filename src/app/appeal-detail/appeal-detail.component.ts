@@ -28,15 +28,13 @@ export class AppealDetailComponent implements OnInit {
   appeal: Appeal = new Appeal();
 
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
-
     this.route.params
       .subscribe(data => {
         this.appealService.filterAppeals(data);
         this.subscribeToAppeal(data);
       });
-
-
   }
+
   subscribeToAppeal(appeal) {
     this.appealService.getAppeals().subscribe(
       data => {
@@ -49,8 +47,9 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onSaved(appealInfo) {
-    this.appeal.info = appealInfo;
-    this.appealService.updateAppeal(this.appeal);
+    var appeal = this.appeal;
+    appeal.info = appealInfo;
+    this.appealService.updateAppeal(appeal);
   }
 
   ngOnInit() {

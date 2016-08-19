@@ -13,29 +13,32 @@ import { Campaign } from '../../models/campaign';
   templateUrl: 'appeal-info.component.html',
   styleUrls: ['appeal-info.component.css'],
   directives: [NKDatetime],
-  providers: [AppealInfo, RestoreService]
+  providers: [AppealInfo, RestoreService, CampaignService]
 })
 export class AppealInfoComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealInfo>();
   @Output() canceled = new EventEmitter<AppealInfo>();
-  private campaigns: Campaign[];
+
+  //private campaigns: Campaign[];
+  private campaigns = new EventEmitter<Campaign[]>();
+  private currentCampaign = new EventEmitter<Campaign>();
+
   constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService) {
     this.campaignService.getCampaigns().subscribe(
-        data => {this.campaigns = data},
+        data => {this.campaigns.next(data)},
         error => {console.log(error)}
       );
-    }
+  }
 
   @Input()
   set appealInfo(appealInfo: AppealInfo){
     this.restoreService.setItem(appealInfo);
+    this.currentCampaign.next(this.appealInfo.campaign);
   }
   get appealInfo(): AppealInfo {
     return this.restoreService.getItem();
   }
   save() {
-    var appeal = this.restoreService.getItem();
-    appeal.campaign = appeal.campaign._id;
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {
@@ -44,6 +47,13 @@ export class AppealInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
+    this.currentCampaign.combineLatest(this.campaigns, function(current, campaigns){
+      return current;
+    }).first().subscribe(
+      data => {
+        this.appealInfo.campaign = data._id;
+      }
+    );
 
+  }
 }
