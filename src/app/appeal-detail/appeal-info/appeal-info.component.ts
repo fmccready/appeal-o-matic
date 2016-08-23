@@ -1,18 +1,17 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
-import { NKDatetime } from 'ng2-datetime/ng2-datetime';
+import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap-rc5/ng2-bootstrap';
 import { AppealInfo } from '../../models/appeal';
 import { RestoreService } from '../../restore.service';
 import { CampaignService } from '../../campaign.service';
 import { Campaign } from '../../models/campaign';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-appeal-info',
   templateUrl: 'appeal-info.component.html',
   styleUrls: ['appeal-info.component.css'],
-  directives: [NKDatetime],
+  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES],
   providers: [AppealInfo, RestoreService, CampaignService]
 })
 export class AppealInfoComponent implements OnInit {

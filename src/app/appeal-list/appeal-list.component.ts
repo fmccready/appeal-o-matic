@@ -9,8 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'appeal-list-component',
-  templateUrl: 'app/appeal-list/appeal-list.component.html',
-  styleUrls: ['app/appeal-list/appeal-list.component.css'],
+  templateUrl: 'appeal-list.component.html',
+  styleUrls: ['appeal-list.component.css'],
   inputs: ['filters']
 })
 export class AppealListComponent implements OnInit {

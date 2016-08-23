@@ -13,19 +13,22 @@ var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride());
-app.use('/public', express.static(__dirname + '/dist/public'));
-app.use('/vendor', express.static(__dirname + '/dist/vendor'));
-app.use('/app/lib', express.static(__dirname + '/dist/lib'));
-app.use('/', express.static(__dirname + '/dist/'));
-app.use('/app', express.static(__dirname + '/dist/app'));
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+app.use(allowCrossDomain);
 
 
 // Mongoose Connection
 mongoose.connect('mongodb://localhost:27017');
 var db = mongoose.connection;
-var Campaign = require('./dist/app/schemas/campaign');
-var Appeal = require('./dist/app/schemas/appeal');
-var Element = require('./dist/app/schemas/element');
+var Campaign = require('./src/app/schemas/campaign');
+var Appeal = require('./src/app/schemas/appeal');
+var Element = require('./src/app/schemas/element');
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){

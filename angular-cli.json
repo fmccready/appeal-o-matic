@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.10",
+    "version": "1.0.0-beta.11-webpack.2",
     "name": "auto-appeal"
   },
   "apps": [
@@ -28,5 +28,6 @@
     "styleExt": "css",
     "prefixInterfaces": false,
     "lazyRoutePrefix": "+"
-  }
+  },
+  "proxy": "http://localhost:3000"
 }

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-4">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3">
     <form #appealForm="ngForm" (ngSubmit)="appealSubmit()" novalidate>
       <div class="form-group" [class.has-error]="!name.valid && name.touched">
         <label for="appeal-name">eAppeal name</label>
@@ -26,7 +26,7 @@
       </div>
       <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
         <label for="send-date">Send date & time (optional)</label>
-        <datetime [(ngModel)]="appeal.info.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datetime>
+        <datepicker [(ngModel)]="appeal.info.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datepicker>
       </div>
       <div class="form-group text-center">
         <button type="submit" class="btn btn-lg btn-primary" [class.disabled]="!appealForm.valid">Create eAppeal</button>

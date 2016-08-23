@@ -3,7 +3,6 @@ import { AppealCode } from '../../models/appeal';
 import { RestoreService } from '../../restore.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-appeal-codes',
   templateUrl: 'appeal-codes.component.html',
   styleUrls: ['appeal-codes.component.css'],

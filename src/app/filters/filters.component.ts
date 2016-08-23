@@ -7,8 +7,8 @@ import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-filters',
-  templateUrl: 'app/filters/filters.component.html',
-  styleUrls: ['app/filters/filters.component.css'],
+  templateUrl: 'filters.component.html',
+  styleUrls: ['filters.component.css'],
   directives: [AppealListComponent]
 })
 export class FiltersComponent implements OnInit {

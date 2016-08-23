@@ -14,7 +14,7 @@ interface ICampaignsOperation extends Function {
 
 @Injectable()
 export class CampaignService {
-  private _campaignUrl = '/api/v1/campaign/';
+  private _campaignUrl = 'http://localhost:3000/api/v1/campaign/';
   private _campaigns$: BehaviorSubject<Campaign[]>;
 
   constructor(private http: Http) {
@@ -34,12 +34,12 @@ export class CampaignService {
   }
 
   addCampaign(campaign: Campaign) {
-    let body = JSON.stringify(campaign);
+    let ebody = JSON.stringify(campaign || null);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({
       headers: headers
     });
-    this.http.post(this._campaignUrl, body, options).subscribe(
+    this.http.post(this._campaignUrl, ebody, options).subscribe(
       success => {this.loadCampaigns();},
       error => {console.log(error);}
     );

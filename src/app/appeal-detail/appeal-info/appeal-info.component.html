@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
           <label for="send-date">Send date & time</label>
-          <datetime [(ngModel)]="appealInfo.sendDate" name="sendDate"></datetime>
+          <datepicker [(ngModel)]="appealInfo.sendDate" name="sendDate"></datepicker>
         </div>
         <div class="form-group" [class.has-error]="!scheduled.valid && scheduled.touched">
           <label for="send-date">Scheduled</label>

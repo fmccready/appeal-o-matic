@@ -5,7 +5,7 @@ import '../rxjs-operators';
 import { Observable } from 'rxjs/Observable';
 
 import * as moment from 'moment';
-import { NKDatetime } from 'ng2-datetime/ng2-datetime';
+import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap-rc5/ng2-bootstrap';
 
 import { Campaign } from '../models/campaign';
 import { Appeal } from '../models/appeal';
@@ -16,9 +16,9 @@ import { AppealListComponent } from '../appeal-list/appeal-list.component';
 
 @Component({
   selector: 'app-new-appeal',
-  templateUrl: 'app/new-appeal/new-appeal.component.html',
-  styleUrls: ['app/new-appeal/new-appeal.component.css'],
-  directives: [NKDatetime, AppealListComponent],
+  templateUrl: 'new-appeal.component.html',
+  styleUrls: ['new-appeal.component.css'],
+  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES, AppealListComponent],
   pipes: [DatePipe],
   providers: [Appeal]
 })

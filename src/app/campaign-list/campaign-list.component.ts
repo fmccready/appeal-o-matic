@@ -5,7 +5,6 @@ import { Campaign } from '../models/campaign';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  moduleId: module.id,
   selector: 'campaign-list-component',
   templateUrl: 'campaign-list.component.html',
   styleUrls: ['campaign-list.component.css'],

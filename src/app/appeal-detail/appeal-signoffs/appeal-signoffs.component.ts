@@ -3,7 +3,6 @@ import { AppealSignoff } from '../../models/appeal';
 import { RestoreService } from '../../restore.service';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-appeal-signoffs',
   templateUrl: 'appeal-signoffs.component.html',
   styleUrls: ['appeal-signoffs.component.css'],

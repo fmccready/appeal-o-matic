@@ -2,5 +2,8 @@
 // https://github.com/typings/typings
 // https://www.typescriptlang.org/docs/handbook/writing-declaration-files.html
 
-/// <reference path="../typings/index.d.ts" />
+declare var System: any;
 declare var module: { id: string };
+declare var require: any;
+declare var $: any;
+declare var jQuery: any;

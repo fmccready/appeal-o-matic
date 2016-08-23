@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
-import { NKDatetime } from 'ng2-datetime/ng2-datetime';
+
 
 import { AppealService } from '../appeal.service';
 import { Appeal } from '../models/appeal';
@@ -17,8 +17,8 @@ import { AppealSignoffsComponent } from './appeal-signoffs/appeal-signoffs.compo
 import { Subject, BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 @Component({
   selector: 'app-appeal-detail',
-  templateUrl: 'app/appeal-detail/appeal-detail.component.html',
-  styleUrls: ['app/appeal-detail/appeal-detail.component.css'],
+  templateUrl: 'appeal-detail.component.html',
+  styleUrls: ['appeal-detail.component.css'],
   directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent],
   pipes: [DatePipe],
   providers: [Appeal]

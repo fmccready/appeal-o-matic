@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import '../rxjs-operators';
+import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap-rc5/ng2-bootstrap';
 import { DatePipe } from '@angular/common';
 import * as moment from 'moment';
-import { NKDatetime } from 'ng2-datetime/ng2-datetime';
 
 import { CampaignListComponent } from '../campaign-list/campaign-list.component';
 import { Campaign } from '../models/campaign';
@@ -12,9 +12,9 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-new-campaign',
-  templateUrl: 'app/new-campaign/new-campaign.component.html',
-  styleUrls: ['app/new-campaign/new-campaign.component.css'],
-  directives: [NKDatetime, CampaignListComponent],
+  templateUrl: 'new-campaign.component.html',
+  styleUrls: ['new-campaign.component.css'],
+  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES, CampaignListComponent],
   pipes: [DatePipe],
   providers: [Campaign]
 })

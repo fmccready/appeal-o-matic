@@ -15,7 +15,7 @@ interface IAppealsOperation extends Function {
 
 @Injectable()
 export class AppealService {
-  private _appealUrl = '/api/v1/appeal/';
+  private _appealUrl = 'http://localhost:3000/api/v1/appeal/';
   private _populateCampaign = 'populate=info.campaign';
   private _appeals$: BehaviorSubject<Appeal[]>;
 
@@ -27,6 +27,11 @@ export class AppealService {
   loadAppeals(){
     this.http.get(this._appealUrl + '?' + this._populateCampaign).map(this.extractData).subscribe(
       data => {
+        for (var i=0; i<data.length; i++){
+          if (data[i].info && data[i].info.sendDate){
+            data[i].info.sendDate = new Date (data[i].info.sendDate);
+          }
+        }
         this._appeals$.next(data);
       },
       error => {
@@ -47,7 +52,6 @@ export class AppealService {
   }
   updateAppeal(appeal: Appeal) {
     let body = JSON.stringify(appeal);
-    console.dir(body);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
       headers: headers
@@ -64,7 +68,6 @@ export class AppealService {
   makeGetRequest(url){
     this.http.get(url).map(this.extractData).subscribe(
       data => {
-        console.dir(data);
         if (data instanceof Array){
           this._appeals$.next(data);
         }
