@@ -1,18 +1,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
-import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap-rc5/ng2-bootstrap';
-import { AppealInfo } from '../../models/appeal';
-import { RestoreService } from '../../restore.service';
-import { CampaignService } from '../../campaign.service';
-import { Campaign } from '../../models/campaign';
+
+import { Campaign } from '../../../models/campaign';
+import { CampaignService } from '../../../campaign.service';
+import { AppealInfo } from '../../../models/appeal';
+import { RestoreService } from '../../../restore.service';
 
 @Component({
   selector: 'app-appeal-info',
   templateUrl: 'appeal-info.component.html',
-  styleUrls: ['appeal-info.component.css'],
-  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES],
-  providers: [AppealInfo, RestoreService, CampaignService]
+  styleUrls: ['appeal-info.component.css']
 })
 export class AppealInfoComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealInfo>();
@@ -24,7 +20,7 @@ export class AppealInfoComponent implements OnInit {
 
   constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService) {
     this.campaignService.getCampaigns().subscribe(
-        data => {this.campaigns.next(data)},
+        data => {this.campaigns.next(data); console.log('next called on campaigns'); console.dir(data)},
         error => {console.log(error)}
       );
   }
@@ -33,6 +29,8 @@ export class AppealInfoComponent implements OnInit {
   set appealInfo(appealInfo: AppealInfo){
     this.restoreService.setItem(appealInfo);
     this.currentCampaign.next(this.appealInfo.campaign);
+    console.log('next called on current campaign');
+    console.dir(this.appealInfo.campaign);
   }
   get appealInfo(): AppealInfo {
     return this.restoreService.getItem();
@@ -47,12 +45,12 @@ export class AppealInfoComponent implements OnInit {
 
   ngOnInit() {
     this.currentCampaign.combineLatest(this.campaigns, function(current, campaigns){
+      console.log('combine latest called');
       return current;
-    }).first().subscribe(
+    }).subscribe(
       data => {
         this.appealInfo.campaign = data._id;
       }
     );
-
   }
 }

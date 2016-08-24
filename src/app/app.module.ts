@@ -1,9 +1,20 @@
 import { NgModule } from '@angular/core' ;
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
-import { SharedModule } from './shared/shared.module';
+import { TimepickerComponent, DATEPICKER_DIRECTIVES } from 'ng2-bootstrap-rc5/ng2-bootstrap';
+import * as moment from 'moment';
+
+import { AppComponent } from './app.component';
+import { FiltersComponent } from './appeal/filters/filters.component';
+import { AppealListComponent } from './appeal/appeal-list/appeal-list.component';
+import { NewCampaignComponent } from './campaign/new-campaign/new-campaign.component';
+import { CampaignListComponent } from './campaign/campaign-list/campaign-list.component';
+import { AppealDetailComponent } from './appeal/appeal-detail/appeal-detail.component';
+import { NewAppealComponent } from './appeal/new-appeal/new-appeal.component';
+import { CampaignService } from './campaign.service';
+import { AppealService } from './appeal.service';
 
 import { routing, appRoutingProviders } from './app.routes';
 
@@ -11,14 +22,25 @@ import { routing, appRoutingProviders } from './app.routes';
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
     routing,
-    SharedModule.forRoot()
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    FiltersComponent,
+    AppealListComponent,
+    NewCampaignComponent,
+    CampaignListComponent,
+    TimepickerComponent,
+    DATEPICKER_DIRECTIVES,
+    AppealDetailComponent,
+    NewAppealComponent
   ],
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    CampaignService,
+    AppealService,
+    moment
   ],
   bootstrap: [AppComponent],
 })

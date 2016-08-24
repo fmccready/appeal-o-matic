@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AppealCode } from '../../models/appeal';
-import { RestoreService } from '../../restore.service';
+
+import { RestoreService } from '../../../restore.service';
+import { AppealCode } from '../../../models/appeal';
 
 @Component({
   selector: 'app-appeal-codes',
   templateUrl: 'appeal-codes.component.html',
-  styleUrls: ['appeal-codes.component.css'],
-  providers: [ AppealCode, RestoreService ]
+  styleUrls: ['appeal-codes.component.css']
 })
 export class AppealCodesComponent implements OnInit {
   @Input() codes: AppealCode;

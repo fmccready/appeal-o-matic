@@ -1,26 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
 
-import '../rxjs-operators';
 import { Observable } from 'rxjs/Observable';
 
-import * as moment from 'moment';
-import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap-rc5/ng2-bootstrap';
-
-import { Campaign } from '../models/campaign';
-import { Appeal } from '../models/appeal';
-import { CampaignService } from '../campaign.service';
-import { AppealService } from '../appeal.service';
-import { AppealListComponent } from '../appeal-list/appeal-list.component';
-
+import { Appeal } from '../../models/appeal';
+import { Campaign } from '../../models/campaign';
+import { CampaignService } from '../../campaign.service';
+import { AppealService } from '../../appeal.service';
 
 @Component({
   selector: 'app-new-appeal',
   templateUrl: 'new-appeal.component.html',
   styleUrls: ['new-appeal.component.css'],
-  directives: [TimepickerComponent, DATEPICKER_DIRECTIVES, AppealListComponent],
-  pipes: [DatePipe],
-  providers: [Appeal]
 })
 export class NewAppealComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
@@ -34,7 +24,6 @@ export class NewAppealComponent implements OnInit {
     this.campaignService.loadCampaigns();
   }
   ngOnInit() {
-    console.dir(this.appeal);
   }
 
 }

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CampaignService } from '../campaign.service';
-import { Campaign } from '../models/campaign';
-import { AppealListComponent } from '../appeal-list/appeal-list.component';
-import { Subject, BehaviorSubject, Observable } from 'rxjs/Rx';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
+
+import { Campaign } from '../../models/campaign';
+import { CampaignService } from '../../campaign.service';
 
 @Component({
   selector: 'app-filters',
   templateUrl: 'filters.component.html',
-  styleUrls: ['filters.component.css'],
-  directives: [AppealListComponent]
+  styleUrls: ['filters.component.css']
 })
 export class FiltersComponent implements OnInit {
   campaigns: Observable<Campaign[]>;

@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AppealSignoff } from '../../models/appeal';
-import { RestoreService } from '../../restore.service';
+
+import { RestoreService } from '../../../restore.service';
+import { AppealSignoff } from '../../../models/appeal';
 
 @Component({
   selector: 'app-appeal-signoffs',
   templateUrl: 'appeal-signoffs.component.html',
-  styleUrls: ['appeal-signoffs.component.css'],
-  providers: [ AppealSignoff, RestoreService ]
+  styleUrls: ['appeal-signoffs.component.css']
 })
 export class AppealSignoffsComponent implements OnInit {
   @Input() signoffs: AppealSignoff;

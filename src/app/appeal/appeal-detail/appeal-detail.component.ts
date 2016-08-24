@@ -1,27 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
+import { Observable } from 'rxjs/Rx';
 
-
-import { AppealService } from '../appeal.service';
-import { Appeal } from '../models/appeal';
-
-import { AppealInfoComponent } from './appeal-info/appeal-info.component';
-import { AppealContentComponent } from './appeal-content/appeal-content.component';
 import { AppealCodesComponent } from './appeal-codes/appeal-codes.component';
+import { AppealContentComponent } from './appeal-content/appeal-content.component';
+import { AppealInfoComponent } from './appeal-info/appeal-info.component';
 import { AppealSignoffsComponent } from './appeal-signoffs/appeal-signoffs.component';
 
+import { RestoreService } from '../../restore.service';
+import { AppealService } from '../../appeal.service';
+import { Appeal } from '../../models/appeal';
+import { AppealCode } from '../../models/appeal';
+import { AppealContent } from '../../models/appeal';
+import { AppealInfo } from '../../models/appeal';
+import { AppealSignoff } from '../../models/appeal';
 
-import { Subject, BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 @Component({
   selector: 'app-appeal-detail',
   templateUrl: 'appeal-detail.component.html',
   styleUrls: ['appeal-detail.component.css'],
   directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent],
-  pipes: [DatePipe],
-  providers: [Appeal]
+  providers: [RestoreService]
 })
 export class AppealDetailComponent implements OnInit {
   appeal$: Observable<Appeal[]>;
@@ -49,6 +49,7 @@ export class AppealDetailComponent implements OnInit {
   onSaved(appealInfo) {
     var appeal = this.appeal;
     appeal.info = appealInfo;
+    console.dir(appeal);
     this.appealService.updateAppeal(appeal);
   }
 

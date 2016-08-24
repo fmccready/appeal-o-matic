@@ -2,7 +2,6 @@ import { NgModule , ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
 import { CampaignService } from '../campaign.service';
 import { AppealService } from '../appeal.service';
 

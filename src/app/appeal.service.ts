@@ -51,6 +51,9 @@ export class AppealService {
     );
   }
   updateAppeal(appeal: Appeal) {
+    if (appeal.info.campaign.hasOwnProperty('_id')){
+      appeal.info.campaign = appeal.info.campaign._id;
+    }
     let body = JSON.stringify(appeal);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
