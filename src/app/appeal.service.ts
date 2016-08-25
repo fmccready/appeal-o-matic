@@ -68,7 +68,8 @@ export class AppealService {
   removeAppeal(id: string): Observable<Response> {
     return this.http.delete(this._appealUrl + id);
   }
-  makeGetRequest(url){
+  
+  _makeGetRequest(url){
     this.http.get(url).map(this.extractData).subscribe(
       data => {
         if (data instanceof Array){
@@ -86,14 +87,16 @@ export class AppealService {
   filterAppeals(filters) {
     if (filters.campaign) {
       var url = this._appealUrl + '?' + this._populateCampaign + '&query={"info.campaign":"'+ filters.campaign._id + '"}';
-      this.makeGetRequest(url);
+      this._makeGetRequest(url);
     }
     if (filters.appealId) {
       var url = this._appealUrl + filters.appealId + '?' + this._populateCampaign;
-      this.makeGetRequest(url);
+      this._makeGetRequest(url);
     }
   }
-
+  getAppeal(id){
+    return this.http.get(this._appealUrl + id);
+  }
   getAppeals(): Observable<Appeal[]> {
     return this._appeals$.asObservable();
   }

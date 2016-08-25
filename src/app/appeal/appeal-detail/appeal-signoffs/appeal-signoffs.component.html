@@ -4,12 +4,15 @@
   </div>
   <div class="panel-body" id="signoffsPanel" class="collapse">
     <div class="well">
-      <form #signoffForm="ngForm" (ngSubmit)="saveSignoffs()" novalidate>
-        <div class="form-group" [class.has-error]="!signoff.valid && signoff.touched" *ngFor="let s of signoffs">
-          <label for="signoff-$s.department">{{s.department}}</label>
-          <input id="signoff-$s.department" type="text" class="form-control" [(ngModel)]="s.name" #signoff="ngModel" name="signoff">
+      <form #signoffForm="ngForm" novalidate>
+        <div class="form-group" [class.has-error]="!signoff.valid && signoff.touched" *ngFor="let s of appealSignoffs; let i = index">
+          <label [attr.for]="'signoff-' + s.department">{{s.department}}</label>
+          <input [attr.id]="'signoff-' + s.department" type="text" class="form-control" [(ngModel)]="s.name" #signoff="ngModel" name="signoff">
+          <pre>
+            {{s.name | json}}
+          </pre>
         </div>
-        <button click="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
+        <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>
     </div>
   </div>

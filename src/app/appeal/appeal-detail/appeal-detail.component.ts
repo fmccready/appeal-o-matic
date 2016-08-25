@@ -8,7 +8,6 @@ import { AppealContentComponent } from './appeal-content/appeal-content.componen
 import { AppealInfoComponent } from './appeal-info/appeal-info.component';
 import { AppealSignoffsComponent } from './appeal-signoffs/appeal-signoffs.component';
 
-import { RestoreService } from '../../restore.service';
 import { AppealService } from '../../appeal.service';
 import { Appeal } from '../../models/appeal';
 import { AppealCode } from '../../models/appeal';
@@ -20,8 +19,7 @@ import { AppealSignoff } from '../../models/appeal';
   selector: 'app-appeal-detail',
   templateUrl: 'appeal-detail.component.html',
   styleUrls: ['appeal-detail.component.css'],
-  directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent],
-  providers: [RestoreService]
+  directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent]
 })
 export class AppealDetailComponent implements OnInit {
   appeal$: Observable<Appeal[]>;
@@ -36,27 +34,34 @@ export class AppealDetailComponent implements OnInit {
   }
 
   subscribeToAppeal(appeal) {
-    this.appealService.getAppeals().subscribe(
+    this.appealService.getAppeal(appeal.appealId).subscribe(
       data => {
-        if (data.length && (data[0]._id == appeal.appealId)){
-            this.appeal = data[0];
-        }
+        this.appeal = data.json();
       },
       error => {console.log(error)}
     );
   }
 
-  onSaved(appealInfo) {
-    var appeal = this.appeal;
-    appeal.info = appealInfo;
-    console.dir(appeal);
-    this.appealService.updateAppeal(appeal);
+  onInfoSaved(appealInfo) {
+    console.dir(appealInfo);
+    this.appeal.info = appealInfo;
+    this.appealService.updateAppeal(this.appeal);
+  }
+  onContentSaved(appealContent){
+    console.dir(appealContent);
+    this.appeal.emailContent = appealContent;
+    this.appealService.updateAppeal(this.appeal);
+  }
+  onCodesSaved(appealCodes){
+    this.appeal.codes = appealCodes;
+    this.appealService.updateAppeal(this.appeal);
+  }
+  onSignoffsSaved(appealSignoffs){
+    this.appeal.signoffs = appealSignoffs;
+    this.appealService.updateAppeal(this.appeal);
   }
 
   ngOnInit() {
   }
 
-  saveAppeal(){
-
-  }
 }

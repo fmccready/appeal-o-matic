@@ -4,33 +4,33 @@
   </div>
   <div class="panel-body" id="codesPanel" class="collapse">
     <div class="well">
-      <form #codesForm="ngForm" (ngSubmit)="saveCodes()" novalidate>
+      <form #codesForm="ngForm" novalidate>
         <div class="form-group" [class.has-error]="!src.valid && src.touched">
           <label for="src">Source code</label>
-          <input id="src" type="text" class="form-control" [(ngModel)]="codes.s_src" #src="ngModel" name="src">
+          <input id="src" type="text" class="form-control" [(ngModel)]="appealCodes.s_src" #src="ngModel" name="src">
         </div>
         <div class="form-group" [class.has-error]="!subSrc.valid && subSrc.touched">
           <label for="sub-src">Subsource code</label>
-          <input id="sub-src" type="text" class="form-control" [(ngModel)]="codes.s_subsrc" #subSrc="ngModel" name="subSrc">
+          <input id="sub-src" type="text" class="form-control" [(ngModel)]="appealCodes.s_subsrc" #subSrc="ngModel" name="subSrc">
         </div>
         <div class="form-group" [class.has-error]="!utmMedium.valid && utmMedium.touched">
           <label for="utm-medium">UTM medium</label>
-          <input id="utm-medium" type="text" class="form-control" [(ngModel)]="codes.utm_medium" #utmMedium="ngModel" name="utmMedium">
+          <input id="utm-medium" type="text" class="form-control" [(ngModel)]="appealCodes.utm_medium" #utmMedium="ngModel" name="utmMedium">
         </div>
         <div class="form-group" [class.has-error]="!utmSource.valid && utmSource.touched">
           <label for="utm-source">UTM source</label>
-          <input id="utm-source" type="text" class="form-control" [(ngModel)]="codes.utm_source" #utmSource="ngModel" name="utmSource">
+          <input id="utm-source" type="text" class="form-control" [(ngModel)]="appealCodes.utm_source" #utmSource="ngModel" name="utmSource">
         </div>
         <div class="form-group" [class.has-error]="!sustainer.valid && sustainer.touched">
           <label for="sustainer">Sustainer
-            <input id="sustainer" type="checkbox" class="form-control" [(ngModel)]="codes.sustainer" #sustainer="ngModel" name="sustainer">
+            <input id="sustainer" type="checkbox" class="form-control" [(ngModel)]="appealCodes.sustainer" #sustainer="ngModel" name="sustainer">
           </label>
         </div>
         <div class="form-group" [class.has-error]="!resend.valid && resend.touched">
           <label for="resend">Resend</label>
-          <input id="resend" type="number" class="form-control" [(ngModel)]="codes.resend" #resend="ngModel" name="resend" min="0">
+          <input id="resend" type="number" class="form-control" [(ngModel)]="appealCodes.resend" #resend="ngModel" name="resend" min="0">
         </div>
-        <button click="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
+        <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>
     </div>
   </div>

@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-4" id="controls">
-    <app-appeal-info [appealInfo]="appeal.info" (saved)="onSaved($event)"></app-appeal-info>
-    <app-appeal-content [emailContent]="appeal.emailContent"></app-appeal-content>
-    <app-appeal-codes [codes]="appeal.codes"></app-appeal-codes>
-    <app-appeal-signoffs [signoffs]="appeal.signoffs"></app-appeal-signoffs>
+    <app-appeal-info [appealInfo]="appeal.info" (saved)="onInfoSaved($event)"></app-appeal-info>
+    <app-appeal-content [appealContent]="appeal.emailContent" (saved)="onContentSaved($event)"></app-appeal-content>
+    <app-appeal-codes [appealCodes]="appeal.codes" (saved)="onCodesSaved($event)"></app-appeal-codes>
+    <app-appeal-signoffs [appealSignoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-8">
   </div>
