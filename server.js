@@ -19,7 +19,7 @@ var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Headers', 'Content-Type');
 
     next();
-}
+};
 app.use(allowCrossDomain);
 
 
@@ -93,6 +93,9 @@ db.once('open', function(){
   });
   */
   // All other routes
+  app.get('/test.html', function(req, res){
+    res.sendFile(path.join(__dirname, '/dist/test.html'));
+  });
   app.get('/', function(req, res){
     console.log(__dirname);
     res.sendFile(path.join(__dirname, '/index.html'));

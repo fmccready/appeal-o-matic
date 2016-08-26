@@ -5,12 +5,17 @@
   <div class="panel-body" id="signoffsPanel" class="collapse">
     <div class="well">
       <form #signoffForm="ngForm" novalidate>
-        <div class="form-group" [class.has-error]="!signoff.valid && signoff.touched" *ngFor="let s of appealSignoffs; let i = index">
-          <label [attr.for]="'signoff-' + s.department">{{s.department}}</label>
-          <input [attr.id]="'signoff-' + s.department" type="text" class="form-control" [(ngModel)]="s.name" #signoff="ngModel" name="signoff">
-          <pre>
-            {{s.name | json}}
-          </pre>
+        <div class="form-group">
+          <label for="signoff-fundraising">Fundraising</label>
+          <input id="signoff-fundraising" type="text" class="form-control" [(ngModel)]="appealSignoffs[0].name" #signoffFundraising="ngModel" name="signoffFundraising">
+        </div>
+        <div class="form-group">
+          <label for="signoff-editorial">Editorial</label>
+          <input id="signoff-editorial" type="text" class="form-control" [(ngModel)]="appealSignoffs[1].name" #signoffEditorial="ngModel" name="signoffEditorial">
+        </div>
+        <div class="form-group">
+          <label for="signoff-web">Web</label>
+          <input id="signoff-web" type="text" class="form-control" [(ngModel)]="appealSignoffs[2].name" #signoffWeb="ngModel" name="signoffWeb">
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>

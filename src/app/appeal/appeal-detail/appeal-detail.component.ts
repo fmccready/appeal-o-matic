@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
 import { AppealCodesComponent } from './appeal-codes/appeal-codes.component';
 import { AppealContentComponent } from './appeal-content/appeal-content.component';
 import { AppealInfoComponent } from './appeal-info/appeal-info.component';
 import { AppealSignoffsComponent } from './appeal-signoffs/appeal-signoffs.component';
+import { AppealPreviewComponent } from './appeal-preview/appeal-preview.component';
 
 import { AppealService } from '../../appeal.service';
 import { Appeal } from '../../models/appeal';
@@ -19,12 +20,11 @@ import { AppealSignoff } from '../../models/appeal';
   selector: 'app-appeal-detail',
   templateUrl: 'appeal-detail.component.html',
   styleUrls: ['appeal-detail.component.css'],
-  directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent]
+  directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent, AppealPreviewComponent]
 })
 export class AppealDetailComponent implements OnInit {
   appeal$: Observable<Appeal[]>;
   appeal: Appeal = new Appeal();
-
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
     this.route.params
       .subscribe(data => {
