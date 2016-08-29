@@ -24,7 +24,7 @@ app.use(allowCrossDomain);
 
 
 // Mongoose Connection
-mongoose.connect('mongodb://localhost:27017');
+mongoose.connect('mongodb://192.168.18.82:27017');
 var db = mongoose.connection;
 var Campaign = require('./src/app/schemas/campaign');
 var Appeal = require('./src/app/schemas/appeal');
@@ -93,14 +93,12 @@ db.once('open', function(){
   });
   */
   // All other routes
-  app.get('/test.html', function(req, res){
-    res.sendFile(path.join(__dirname, '/dist/test.html'));
-  });
+  app.use('/lib', express.static(__dirname + '/src/lib'));
+  app.get('/*', express.static(__dirname + '/dist'));
   app.get('/', function(req, res){
     console.log(__dirname);
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join(__dirname, '/dist/index.html'));
   });
-
   // Set listen port
   app.listen(3000, function(){
     console.log('Listening on port 3000');

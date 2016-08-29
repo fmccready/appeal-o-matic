@@ -26,6 +26,7 @@ export class AppealContent {
   headline: string;
   url: string;
   body: AppealElement[];
+  ps: string;
   image: string[];
 }
 export class AppealCode {

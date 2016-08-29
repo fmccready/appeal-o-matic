@@ -15,7 +15,7 @@ interface IAppealsOperation extends Function {
 
 @Injectable()
 export class AppealService {
-  private _appealUrl = 'http://localhost:3000/api/v1/appeal/';
+  private _appealUrl = 'http://192.168.18.82:3000/api/v1/appeal/';
   private _populateCampaign = 'populate=info.campaign';
   private _appeals$: BehaviorSubject<Appeal[]>;
 
@@ -54,6 +54,7 @@ export class AppealService {
     if (appeal.info.campaign.hasOwnProperty('_id')){
       appeal.info.campaign = appeal.info.campaign._id;
     }
+    console.dir(appeal);
     let body = JSON.stringify(appeal);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
@@ -68,7 +69,7 @@ export class AppealService {
   removeAppeal(id: string): Observable<Response> {
     return this.http.delete(this._appealUrl + id);
   }
-  
+
   _makeGetRequest(url){
     this.http.get(url).map(this.extractData).subscribe(
       data => {

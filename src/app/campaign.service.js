@@ -15,7 +15,7 @@ var initialCampaigns = [];
 var CampaignService = (function () {
     function CampaignService(http) {
         this.http = http;
-        this._campaignUrl = 'http://localhost:3000/api/v1/campaign/';
+        this._campaignUrl = 'http://192.168.18.82:3000/api/v1/campaign/';
         this._campaigns$ = new Rx_1.BehaviorSubject([]);
         this.loadCampaigns();
     }
@@ -56,7 +56,7 @@ var CampaignService = (function () {
         return Rx_1.Observable.throw(errMsg);
     };
     CampaignService = __decorate([
-        core_1.Injectable(), 
+        core_1.Injectable(),
         __metadata('design:paramtypes', [http_1.Http])
     ], CampaignService);
     return CampaignService;

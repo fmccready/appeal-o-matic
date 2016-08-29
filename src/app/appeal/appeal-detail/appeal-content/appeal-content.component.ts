@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
+import { CKEditor } from 'ng2-ckeditor';
+
 import { AppealContent } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 
@@ -7,6 +9,7 @@ import { RestoreService } from '../../../restore.service';
   selector: 'app-appeal-content',
   templateUrl: 'appeal-content.component.html',
   styleUrls: ['appeal-content.component.css'],
+  directives: [CKEditor],
   providers: [RestoreService]
 })
 export class AppealContentComponent implements OnInit {

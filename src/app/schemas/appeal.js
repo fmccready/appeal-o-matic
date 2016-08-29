@@ -23,6 +23,7 @@ var appealSchema = new Schema({
         ref: 'Element'
       }
     }],
+    ps: String,
     image: String,
   },
   codes: {

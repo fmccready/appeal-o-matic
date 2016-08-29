@@ -15,7 +15,7 @@ var initialAppeals = [];
 var AppealService = (function () {
     function AppealService(http) {
         this.http = http;
-        this._appealUrl = 'http://localhost:3000/api/v1/appeal/';
+        this._appealUrl = 'http://192.168.18.82:3000/api/v1/appeal/';
         this._populateCampaign = 'populate=info.campaign';
         this._appeals$ = new Rx_1.BehaviorSubject([]);
         this.loadAppeals();
@@ -90,7 +90,7 @@ var AppealService = (function () {
         return Rx_1.Observable.throw(errMsg);
     };
     AppealService = __decorate([
-        core_1.Injectable(), 
+        core_1.Injectable(),
         __metadata('design:paramtypes', [http_1.Http])
     ], AppealService);
     return AppealService;

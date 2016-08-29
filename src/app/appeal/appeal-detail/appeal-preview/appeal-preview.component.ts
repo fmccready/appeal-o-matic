@@ -44,9 +44,9 @@ export class AppealPreviewComponent implements OnInit {
   addLineBreaks(obj){
     var headline = obj.headline;
     var body = obj.body;
-    var encodedBody = encodeURI(body);
-    encodedBody = this.replaceAll(encodedBody, '%0A', '&lt;br&gt;');
-    var decodedBody = decodeURI(encodedBody);
+    var encodedBody = encodeURIComponent(body);
+    encodedBody = this.replaceAll(encodedBody, '%0A', '<br>');
+    var decodedBody = decodeURIComponent(encodedBody);
     obj.body = decodedBody;
     var encodedHeadline = encodeURI(headline);
     encodedHeadline = this.replaceAll(encodedHeadline, '%0A', '<br>');
@@ -55,7 +55,7 @@ export class AppealPreviewComponent implements OnInit {
     return obj;
   }
   escapeRegExp(str) {
-      return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
   }
   replaceAll(str, find, replace) {
     return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);

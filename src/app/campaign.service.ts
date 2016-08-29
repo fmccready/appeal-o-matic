@@ -14,7 +14,7 @@ interface ICampaignsOperation extends Function {
 
 @Injectable()
 export class CampaignService {
-  private _campaignUrl = 'http://localhost:3000/api/v1/campaign/';
+  private _campaignUrl = 'http://192.168.18.82:3000/api/v1/campaign/';
   private _campaigns$: BehaviorSubject<Campaign[]>;
 
   constructor(private http: Http) {
