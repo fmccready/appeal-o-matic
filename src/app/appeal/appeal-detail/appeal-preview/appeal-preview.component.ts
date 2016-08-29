@@ -30,7 +30,10 @@ export class AppealPreviewComponent implements OnInit {
   @Input()
   set appealContent(appealContent: AppealContent){
     this.appealData = appealContent || 'Loading...';
-    console.dir(this.appealData);
+    if (this.appealData !== 'undefined'){
+      this.appealData = this.addLineBreaks(appealContent);
+      console.log(this.appealData.body);
+    }
   }
   get appealContent(): AppealContent {
     return this.appealData;
@@ -38,14 +41,37 @@ export class AppealPreviewComponent implements OnInit {
   ngOnInit() {
   }
 
+  addLineBreaks(obj){
+    var headline = obj.headline;
+    var body = obj.body;
+    var encodedBody = encodeURI(body);
+    encodedBody = this.replaceAll(encodedBody, '%0A', '&lt;br&gt;');
+    var decodedBody = decodeURI(encodedBody);
+    obj.body = decodedBody;
+    var encodedHeadline = encodeURI(headline);
+    encodedHeadline = this.replaceAll(encodedHeadline, '%0A', '<br>');
+    var decodedHeadline = decodeURI(encodedHeadline);
+    obj.headline = decodedHeadline;
+    return obj;
+  }
+  escapeRegExp(str) {
+      return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+  }
+  replaceAll(str, find, replace) {
+    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  }
 
+/*
   getPreview(){
     var previewElement = document.getElementById('preview');
     var htmlPreview = this.preview.subscribe(
-      data => {previewElement.innerHTML = data._body},
+      data => {
+        previewElement.innerHTML = data._body;
+      },
       error => {console.log(error)}
     );
   }
+  */
   private extractData(res: Response){
     let body = res.json();
     return body || {};

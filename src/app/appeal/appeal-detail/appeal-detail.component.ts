@@ -43,12 +43,10 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onInfoSaved(appealInfo) {
-    console.dir(appealInfo);
     this.appeal.info = appealInfo;
     this.appealService.updateAppeal(this.appeal);
   }
   onContentSaved(appealContent){
-    console.dir(appealContent);
     this.appeal.emailContent = appealContent;
     this.appealService.updateAppeal(this.appeal);
   }
