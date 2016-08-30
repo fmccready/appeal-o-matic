@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
-import { AppealContent } from '../../../models/appeal';
+import { AppealContent, AppealCode } from '../../../models/appeal';
 
 @Component({
   selector: 'app-appeal-preview',
@@ -12,35 +11,36 @@ import { AppealContent } from '../../../models/appeal';
 })
 export class AppealPreviewComponent implements OnInit {
   preview: any;
-  appealData: any;
-  constructor(private http: Http) {
-    /*
-    this.http.get('http://localhost:3000/test.html').subscribe(
-      data => {
-        console.dir(data);
-        this.preview = new BehaviorSubject(data);
-        this.getPreview();
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    */
+  appeal:any = {};
+  constructor() {
   }
   @Input()
   set appealContent(appealContent: AppealContent){
-    this.appealData = appealContent || 'Loading...';
-    if (this.appealData !== 'undefined'){
-      this.appealData = this.addLineBreaks(appealContent);
-      console.log(this.appealData.body);
+    this.appeal.content = appealContent || 'Loading...';
+    if (this.appeal.content !== 'undefined' && typeof appealContent.body !== 'undefined'){
+      //appealContent.body = this.replaceAll(appealContent.body, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
+      this.appeal.content = appealContent;
     }
   }
   get appealContent(): AppealContent {
-    return this.appealData;
+    return this.appeal.content;
   }
+
+  @Input()
+  set appealCodes(appealCodes: AppealCode){
+    this.appeal.codes = appealCodes || 'Loading...';
+    if (this.appeal.codes !== 'undefined'){
+      this.appeal.codes = appealCodes;
+    }
+  }
+  get appealCodes(): AppealCode {
+    return this.appeal.codes;
+  }
+
   ngOnInit() {
   }
 
+/*
   addLineBreaks(obj){
     var headline = obj.headline;
     var body = obj.body;
@@ -54,6 +54,7 @@ export class AppealPreviewComponent implements OnInit {
     obj.headline = decodedHeadline;
     return obj;
   }
+*/
   escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
   }
@@ -61,19 +62,5 @@ export class AppealPreviewComponent implements OnInit {
     return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
   }
 
-/*
-  getPreview(){
-    var previewElement = document.getElementById('preview');
-    var htmlPreview = this.preview.subscribe(
-      data => {
-        previewElement.innerHTML = data._body;
-      },
-      error => {console.log(error)}
-    );
-  }
-  */
-  private extractData(res: Response){
-    let body = res.json();
-    return body || {};
-  }
+
 }

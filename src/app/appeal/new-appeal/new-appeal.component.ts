@@ -15,15 +15,21 @@ import { AppealService } from '../../appeal.service';
 export class NewAppealComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
   appeal: Appeal = new Appeal();
-
+  sendTime: Date = new Date();
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = this.campaignService.getCampaigns();
   }
   appealSubmit(){
+    var mins = this.sendTime.getMinutes();
+    var hours = this.sendTime.getHours();
+    if (this.appeal.info.hasOwnProperty('sendDate')){
+      this.appeal.info.sendDate.setMinutes(mins);
+      this.appeal.info.sendDate.setHours(hours);
+    }
     this.appealService.addAppeal(this.appeal);
+    this.appeal = new Appeal();
     this.campaignService.loadCampaigns();
   }
   ngOnInit() {
   }
-
 }

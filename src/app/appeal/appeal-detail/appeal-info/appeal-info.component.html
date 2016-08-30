@@ -28,12 +28,17 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="send-date">Send date & time</label>
+          <label for="send-date">Send date</label>
           <datepicker [(ngModel)]="appealInfo.sendDate" name="sendDate"></datepicker>
         </div>
+        <div class="form-group">
+          <label for="send-time">Send time</label>
+          <timepicker [(ngModel)]="appealInfo.sendDate" name="sendTime"></timepicker>
+        </div>
         <div class="form-group" [class.has-error]="!scheduled.valid && scheduled.touched">
-          <label for="send-date">Scheduled</label>
-          <input type="checkbox" [(ngModel)]="appealInfo.scheduled" #scheduled="ngModel" name="scheduled" id="scheduled">
+          <label for="send-date">Scheduled
+            <input type="checkbox" class="form-control" [(ngModel)]="appealInfo.scheduled" #scheduled="ngModel" name="scheduled" id="scheduled">
+          </label>
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>
