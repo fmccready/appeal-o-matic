@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 import { TimepickerComponent, DATEPICKER_DIRECTIVES } from 'ng2-bootstrap-rc5/ng2-bootstrap';
 import * as moment from 'moment';
+import {LocalStorageService} from "angular2-localstorage/LocalStorageEmitter";
+import { AUTH_PROVIDERS } from 'angular2-jwt';
 
 import { AppComponent } from './app.component';
 import { FiltersComponent } from './appeal/filters/filters.component';
@@ -15,8 +17,10 @@ import { AppealDetailComponent } from './appeal/appeal-detail/appeal-detail.comp
 import { NewAppealComponent } from './appeal/new-appeal/new-appeal.component';
 import { CampaignService } from './campaign.service';
 import { AppealService } from './appeal.service';
+import { Auth } from './auth.service';
 
 import { routing, appRoutingProviders } from './app.routes';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -34,12 +38,16 @@ import { routing, appRoutingProviders } from './app.routes';
     TimepickerComponent,
     DATEPICKER_DIRECTIVES,
     AppealDetailComponent,
-    NewAppealComponent
+    NewAppealComponent,
+    LoginComponent
   ],
   providers: [
     appRoutingProviders,
     CampaignService,
     AppealService,
+    Auth,
+    LocalStorageService,
+    AUTH_PROVIDERS,
     moment
   ],
   bootstrap: [AppComponent],

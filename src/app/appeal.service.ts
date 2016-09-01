@@ -15,7 +15,7 @@ interface IAppealsOperation extends Function {
 
 @Injectable()
 export class AppealService {
-  private _appealUrl = 'http://192.168.18.82:3000/api/v1/appeal/';
+  private _appealUrl = 'http://' + window.location.hostname + ':3000/api/v1/appeal/';
   private _populateCampaign = 'populate=info.campaign';
   private _appeals$: BehaviorSubject<Appeal[]>;
 

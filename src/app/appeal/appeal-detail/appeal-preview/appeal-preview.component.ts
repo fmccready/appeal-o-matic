@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 
@@ -14,12 +14,20 @@ export class AppealPreviewComponent implements OnInit {
   appeal:any = {};
   constructor() {
   }
+
+  @ViewChild('appealBody') appealBody: ElementRef;
+
+  addLinkStyles(content){
+    if (content){
+      this.appealBody.nativeElement.innerHTML = this.replaceAll(content, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
+    }
+  }
+
   @Input()
   set appealContent(appealContent: AppealContent){
     this.appeal.content = appealContent || 'Loading...';
-    if (this.appeal.content !== 'undefined' && typeof appealContent.body !== 'undefined'){
-      //appealContent.body = this.replaceAll(appealContent.body, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
-      this.appeal.content = appealContent;
+    if (this.appeal.content !== 'Loading...'){
+      this.addLinkStyles(this.appeal.content.body);
     }
   }
   get appealContent(): AppealContent {
@@ -40,21 +48,6 @@ export class AppealPreviewComponent implements OnInit {
   ngOnInit() {
   }
 
-/*
-  addLineBreaks(obj){
-    var headline = obj.headline;
-    var body = obj.body;
-    var encodedBody = encodeURIComponent(body);
-    encodedBody = this.replaceAll(encodedBody, '%0A', '<br>');
-    var decodedBody = decodeURIComponent(encodedBody);
-    obj.body = decodedBody;
-    var encodedHeadline = encodeURI(headline);
-    encodedHeadline = this.replaceAll(encodedHeadline, '%0A', '<br>');
-    var decodedHeadline = decodeURI(encodedHeadline);
-    obj.headline = decodedHeadline;
-    return obj;
-  }
-*/
   escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
   }
