@@ -15,23 +15,18 @@ var appealSchema = new Schema({
     scheduled: Boolean
   },
   emailContent: {
-    headline: String,
+    headline: {type:String, default: ''},
     url: String,
-    body: [{
-      content: {
-        type: Schema.Types.ObjectId,
-        ref: 'Element'
-      }
-    }],
+    body: String,
     ps: String,
     image: String,
   },
   codes: {
     utm_medium: {type:String , default: 'email'},
     utm_source: {type:String, default: 'eappeal'},
-    sustainer: Boolean,
+    audience: String,
     resend: Number,
-    s_src: String,
+    series: Number,
     s_subsrc: String
   },
   signoffs: [{

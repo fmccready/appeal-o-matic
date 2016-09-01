@@ -56,7 +56,7 @@
     </head>
 
     <body style="width:100%; padding: 0px 2%; margin-left: auto; margin-right: auto;">
-        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{appeal.content.headline}}</span>
+        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{appeal.emailContent.headline}}</span>
         <!--[if gte mso 9]>
         <table id="tableForOutlook" width="650"><tr><td>
         <![endif]-->
@@ -73,7 +73,7 @@
 	            </td>
             </tr>
 			<tr><td bgcolor="#adcd74" style="height: 5px; padding: 0px; margin: 0px;"></td></tr>
-            <tr><td align="center" bgcolor="#00529c" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="https://secure.ifcj.org/site/Donation2?df_id=11901&mfc_pref=T&11901.donation=form1&s_src=EM2TL1&s_subsrc=EA11608XXEFXP&autologin=true&utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-text-link-1"><span [innerHTML]="appeal.content.headline" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #ffffff; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
+            <tr><td align="center" bgcolor="#00529c" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="https://secure.ifcj.org/site/Donation2?df_id=11901&mfc_pref=T&11901.donation=form1&s_src=EM2TL1&s_subsrc=EA11608XXEFXP&autologin=true&utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-text-link-1"><span [innerHTML]="appeal.emailContent.headline" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #ffffff; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
             </a>
   </td></tr></table>
 
@@ -82,7 +82,7 @@
                 <td style="padding: 20px 0px 0px 0px; margin:0;">
                     <table align="right" cellpadding="0" cellspacing="0" style="margin: 0px 0px 0px 20px; width:290px">
 					  <tr>
-						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="https://secure.ifcj.org/site/SPageNavigator/engage/2016_prayer_at_the_wall.html?s_src=EM2PH1&s_subsrc=EA11608XXEFXP&autologin=true&utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-photo-link-1"><img [src]="appeal.content.image" alt="Donate Now"></a></td>
+						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="https://secure.ifcj.org/site/SPageNavigator/engage/2016_prayer_at_the_wall.html?s_src=EM2PH1&s_subsrc=EA11608XXEFXP&autologin=true&utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-photo-link-1"><img [src]="appeal.emailContent.image" alt="Donate Now"></a></td>
 					  </tr>
 
                         <tr><td bgcolor="#ffffff" colspan="2" style="height: 20px;"></td></tr>
@@ -104,7 +104,7 @@
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align: left; margin-top:5px;line-height:20px; font-weight:normal;">
 Rabbi Yechiel Eckstein<br />Founder and President</p>
 
-<p *ngIf="appeal.content.ps" [innerHTML]="'PS&nbsp;&nbsp;' + appeal.content.ps" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
+<p #appealPS style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 
  <p align="center">
  <a href="https://secure.ifcj.org/site/Donation2?df_id=11901&mfc_pref=T&11901.donation=form1&s_src=EM2BN1&s_subsrc=EA11608XXEFXP&autologin=true&utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-bottom-donate-now-button"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg"/></a>

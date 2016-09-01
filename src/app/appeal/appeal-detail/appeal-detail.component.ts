@@ -25,6 +25,7 @@ import { AppealSignoff } from '../../models/appeal';
 export class AppealDetailComponent implements OnInit {
   appeal$: Observable<Appeal[]>;
   appeal: Appeal = new Appeal();
+  appealSubject: BehaviorSubject<Appeal> = new BehaviorSubject(this.appeal);
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
     this.route.params
       .subscribe(data => {
@@ -37,6 +38,7 @@ export class AppealDetailComponent implements OnInit {
     this.appealService.getAppeal(appeal.appealId).subscribe(
       data => {
         this.appeal = data.json();
+        this.appealSubject.next(this.appeal);
       },
       error => {console.log(error)}
     );
@@ -45,18 +47,22 @@ export class AppealDetailComponent implements OnInit {
   onInfoSaved(appealInfo) {
     this.appeal.info = appealInfo;
     this.appealService.updateAppeal(this.appeal);
+    this.appealSubject.next(this.appeal);
   }
   onContentSaved(appealContent){
     this.appeal.emailContent = appealContent;
     this.appealService.updateAppeal(this.appeal);
+    this.appealSubject.next(this.appeal);
   }
   onCodesSaved(appealCodes){
     this.appeal.codes = appealCodes;
     this.appealService.updateAppeal(this.appeal);
+    this.appealSubject.next(this.appeal);
   }
   onSignoffsSaved(appealSignoffs){
     this.appeal.signoffs = appealSignoffs;
     this.appealService.updateAppeal(this.appeal);
+    this.appealSubject.next(this.appeal);
   }
 
   ngOnInit() {

@@ -22,7 +22,6 @@ export class AppealCodesComponent implements OnInit {
     return this.restoreService.getItem();
   }
   save() {
-    console.dir(this.restoreService.getItem());
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {

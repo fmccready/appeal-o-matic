@@ -6,6 +6,6 @@
     <app-appeal-signoffs [appealSignoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-8">
-    <app-appeal-preview [appealCodes]="appeal.codes" [appealContent]="appeal.emailContent"></app-appeal-preview>
+    <app-appeal-preview [appealData]="appealSubject"></app-appeal-preview>
   </div>
 </div>

@@ -37,8 +37,9 @@ export class AppealService {
       error => {
         console.log(error);
       }
-    )
+    );
   }
+
   addAppeal(appeal: Appeal) {
     let body = JSON.stringify(appeal);
     let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -54,7 +55,6 @@ export class AppealService {
     if (appeal.info.campaign.hasOwnProperty('_id')){
       appeal.info.campaign = appeal.info.campaign._id;
     }
-    console.dir(appeal);
     let body = JSON.stringify(appeal);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
@@ -73,6 +73,7 @@ export class AppealService {
   _makeGetRequest(url){
     this.http.get(url).map(this.extractData).subscribe(
       data => {
+        console.dir(data);
         if (data instanceof Array){
           this._appeals$.next(data);
         }

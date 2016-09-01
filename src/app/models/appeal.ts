@@ -25,16 +25,16 @@ export class AppealInfo {
 export class AppealContent {
   headline: string;
   url: string;
-  body: AppealElement[];
+  body: string;
   ps: string;
   image: string[];
 }
 export class AppealCode {
   utm_medium: string;
   utm_source: string;
-  sustainer: boolean;
+  audience: string;
+  series: number;
   resend: number;
-  s_src: string;
   s_subsrc: string;
 }
 export class AppealElement {
