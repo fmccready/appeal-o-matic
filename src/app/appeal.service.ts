@@ -73,7 +73,6 @@ export class AppealService {
   _makeGetRequest(url){
     this.http.get(url).map(this.extractData).subscribe(
       data => {
-        console.dir(data);
         if (data instanceof Array){
           this._appeals$.next(data);
         }
@@ -98,6 +97,9 @@ export class AppealService {
   }
   getAppeal(id){
     return this.http.get(this._appealUrl + id);
+  }
+  getAppealWithCampaign(id){
+    return this.http.get(this._appealUrl + id + '?' + this._populateCampaign);
   }
   getAppeals(): Observable<Appeal[]> {
     return this._appeals$.asObservable();

@@ -23,19 +23,18 @@ import { AppealSignoff } from '../../models/appeal';
   directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent, AppealPreviewComponent]
 })
 export class AppealDetailComponent implements OnInit {
-  appeal$: Observable<Appeal[]>;
   appeal: Appeal = new Appeal();
   appealSubject: BehaviorSubject<Appeal> = new BehaviorSubject(this.appeal);
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
     this.route.params
       .subscribe(data => {
-        this.appealService.filterAppeals(data);
+        //this.appealService.filterAppeals(data);
         this.subscribeToAppeal(data);
       });
   }
 
   subscribeToAppeal(appeal) {
-    this.appealService.getAppeal(appeal.appealId).subscribe(
+    this.appealService.getAppealWithCampaign(appeal.appealId).subscribe(
       data => {
         this.appeal = data.json();
         this.appealSubject.next(this.appeal);

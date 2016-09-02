@@ -20,9 +20,8 @@ interface JQuery {
 export class AppealPreviewComponent implements OnInit {
   preview: any;
   appeal:Appeal = new Appeal();
-  campaign: Campaign;
-  private linkCount: number;
-  private utm_content: any;
+  private linkCount:any = {};
+  private version:any = {};
   appealSubject:BehaviorSubject<Appeal>;
   constructor(private campaignService: CampaignService) {
   }
@@ -30,83 +29,103 @@ export class AppealPreviewComponent implements OnInit {
   @ViewChild('appealBody') appealBody: ElementRef;
   @ViewChild('appealPS') appealPS: ElementRef;
   generateBody(content){
-    this.linkCount = 2;
+    this.linkCount = {buttonLink: 1, textLink: 1, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1};
     var self = this;
     if (content){
       if (this.appeal.info.campaign){
-        this.campaignService.getCampaign(this.appeal.info.campaign).subscribe(
-          data => {
-            this.campaign = data.json();
+        this.setVersion();
+        if (typeof content.body == 'string'){
+          this.appealBody.nativeElement.innerHTML = this.replaceAll(content.body, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
+          $(this.appealBody.nativeElement)
+            .find('a').each(function(){
+              var url = $(this).attr('href');
+              url = self.addCodes(url, 'TL', 'html');
+              $(this).attr('href', url);
+            });
+        }
 
-            if (typeof content.body == 'string'){
-              this.appealBody.nativeElement.innerHTML = this.replaceAll(content.body, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
-              $(this.appealBody.nativeElement)
-                .find('a').each(function(){
-                  var url = $(this).attr('href');
-                  url = self.addCodes(url);
-                  $(this).attr('href', url);
-                });
-            }
-
-            if (typeof content.ps == 'string'){
-              this.appealPS.nativeElement.innerHTML = this.replaceAll(content.ps, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
-              $(this.appealPS.nativeElement)
-                .find('a').each(function(){
-                  var url = $(this).attr('href');
-                  url = self.addCodes(url);
-                  $(this).attr('href', url);
-                });
-            }
-          },
-          error => console.log(error)
-        );
+        if (typeof content.ps == 'string'){
+          this.appealPS.nativeElement.innerHTML = this.replaceAll(content.ps, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
+          $(this.appealPS.nativeElement)
+            .find('a').each(function(){
+              var url = $(this).attr('href');
+              url = self.addCodes(url, 'TL', 'html');
+              $(this).attr('href', url);
+            });
+        }
       }
-
     }
   }
 
-  addCodes(url){
-    var hasQuestionMark = url.search('\\?');
-    if (hasQuestionMark < 0){
-      url += '?';
-    }
-    var version = {src: '', utm: this.campaign.utm_campaign + '-' + this.appeal.codes.series};
-
+  setVersion(){
+    this.version = {src: '', utm: this.appeal.info.campaign.utm_campaign + '-' + this.appeal.codes.series};
     if (this.appeal.codes.resend > 1){
-      version.utm += '-rs'
+      this.version.utm += '-rs'
     }
     else {
-      version.utm += '-reg'
+      this.version.utm += '-reg'
     }
 
     if (this.appeal.codes.audience == 'sustainer'){
-      version.src = '_S';
-      version.utm += '-sus';
+      this.version.src = '_S';
+      this.version.utm += '-sus';
     }
     else if (this.appeal.codes.audience == 'donor'){
-      version.utm += '-d';
+      this.version.utm += '-d';
     }
     else if (this.appeal.codes.audience == 'nonDonor'){
-      version.utm += '-nd';
+      this.version.utm += '-nd';
     }
     else if (this.appeal.codes.audience == 'middleDonor') {
-      version.utm += '-md';
+      this.version.utm += '-md';
     }
-
-
-    url += '&s_src=EM' + (this.appeal.codes.resend || '1') + "TL" + this.linkCount + version.src;
-    url = this.addStaticCodes(url);
-    url += '&utm_content=' + version.utm;
-    url += '&autologin=true';
-    this.linkCount++;
-    return url;
   }
 
+  addCodes(url: string, linkType: any, emailType: string): string{
+    if (url){
+      var hasQuestionMark = url.search('\\?');
+      if (hasQuestionMark < 0){
+        url += '?';
+      }
+    }
+
+    if (linkType === 'TL'){
+      linkType = {src: 'TL' + this.linkCount.textLink, utm: '-text-link-' + this.linkCount.textLink};
+      this.linkCount.textLink++;
+    }
+    else if (linkType === 'PH') {
+      linkType = {src: 'PH' + this.linkCount.photoLink, utm: '-photo-link-' + this.linkCount.photoLink};
+      this.linkCount.photoLink++;
+    }
+    else if (linkType === 'VID') {
+      linkType = {src: 'VID' + this.linkCount.videoLink, utm: '-video-link-' + this.linkCount.videoLink}
+      this.linkCount.videoLink++;
+    }
+    else if (linkType === 'AUD') {
+      linkType = {src: 'AUD' + this.linkCount.audioLink, utm: '-audio-link-' + this.linkCount.audioLink}
+      this.linkCount.audioLink++;
+    }
+    else if (linkType === 'BN') {
+      linkType = {src: 'BN' + this.linkCount.buttonLink, utm: '-button-link-' + this.linkCount.buttonLink}
+      this.linkCount.buttonLink++;
+    }
+
+    url = this.addSource(url, linkType);
+
+    url = this.addStaticCodes(url);
+    url += '&utm_content=' + this.version.utm + '-' + emailType + linkType.utm;
+    return url;
+  }
+  addSource(url, linkType){
+    url += '&s_src=EM' + (this.appeal.codes.resend || '1') + linkType.src + this.version.src;
+    return url;
+  }
   addStaticCodes(url){
     url += '&s_subsrc=' + this.appeal.codes.s_subsrc;
     url += '&utm_medium=' + this.appeal.codes.utm_medium;
     url += '&utm_source=' + this.appeal.codes.utm_source;
-    url += '&utm_campaign=' + this.campaign.utm_campaign;
+    //url += '&utm_campaign=' + this.appeal.info.campaign.utm_campaign;
+    url += '&autologin=true';
     return url;
   }
 
@@ -121,8 +140,7 @@ export class AppealPreviewComponent implements OnInit {
         }
       },
       error => console.log(error)
-    )
-
+    );
   }
   get appealData(): BehaviorSubject<Appeal> {
     return this.appealSubject;
@@ -140,6 +158,4 @@ export class AppealPreviewComponent implements OnInit {
   replaceAll(str, find, replace) {
     return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
   }
-
-
 }

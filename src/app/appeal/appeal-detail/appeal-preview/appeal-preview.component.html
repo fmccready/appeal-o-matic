@@ -73,7 +73,7 @@
 	            </td>
             </tr>
 			<tr><td bgcolor="#adcd74" style="height: 5px; padding: 0px; margin: 0px;"></td></tr>
-            <tr><td align="center" bgcolor="#00529c" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="https://secure.ifcj.org/site/Donation2?df_id=11901&mfc_pref=T&11901.donation=form1&s_src=EM2TL1&s_subsrc=EA11608XXEFXP&autologin=true&utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-text-link-1"><span [innerHTML]="appeal.emailContent.headline" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #ffffff; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
+            <tr><td align="center" bgcolor="#00529c" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="{{addCodes(appeal.emailContent.url, 'TL', 'html')}}"><span [innerHTML]="appeal.emailContent.headline" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #ffffff; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
             </a>
   </td></tr></table>
 
