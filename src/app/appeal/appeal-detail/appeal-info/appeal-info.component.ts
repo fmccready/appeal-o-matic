@@ -27,6 +27,7 @@ export class AppealInfoComponent implements OnInit {
   set appealInfo(appealInfo: AppealInfo){
     this.restoreService.setItem(appealInfo);
     this.currentCampaign = appealInfo.campaign;
+    console.dir(appealInfo.campaign);
   }
   get appealInfo(): AppealInfo {
     return this.restoreService.getItem();

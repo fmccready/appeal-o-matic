@@ -22,6 +22,7 @@ import { Auth } from './auth.service';
 import { routing, appRoutingProviders } from './app.routes';
 import { LoginComponent } from './login/login.component';
 
+
 @NgModule({
   imports: [
     BrowserModule,

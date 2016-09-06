@@ -29,11 +29,11 @@ export class AppealDetailComponent implements OnInit {
     this.route.params
       .subscribe(data => {
         //this.appealService.filterAppeals(data);
-        this.subscribeToAppeal(data);
+        this.subscribeToAppealFromQueryString(data);
       });
   }
 
-  subscribeToAppeal(appeal) {
+  subscribeToAppealFromQueryString(appeal) {
     this.appealService.getAppealWithCampaign(appeal.appealId).subscribe(
       data => {
         this.appeal = data.json();
@@ -43,25 +43,36 @@ export class AppealDetailComponent implements OnInit {
     );
   }
 
+  subscribeToAppeal(appealId) {
+    this.appealService.getAppealWithCampaign(appealId).subscribe(
+      data => {
+        this.appeal = data.json();
+        this.appealSubject.next(this.appeal);
+      },
+      error => {console.log(error)}
+    );
+  }
+
   onInfoSaved(appealInfo) {
+    console.dir(appealInfo);
     this.appeal.info = appealInfo;
     this.appealService.updateAppeal(this.appeal);
-    this.appealSubject.next(this.appeal);
+    this.subscribeToAppeal(this.appeal._id);
   }
   onContentSaved(appealContent){
     this.appeal.emailContent = appealContent;
     this.appealService.updateAppeal(this.appeal);
-    this.appealSubject.next(this.appeal);
+    this.subscribeToAppeal(this.appeal._id);
   }
   onCodesSaved(appealCodes){
     this.appeal.codes = appealCodes;
     this.appealService.updateAppeal(this.appeal);
-    this.appealSubject.next(this.appeal);
+    this.subscribeToAppeal(this.appeal._id);
   }
   onSignoffsSaved(appealSignoffs){
     this.appeal.signoffs = appealSignoffs;
     this.appealService.updateAppeal(this.appeal);
-    this.appealSubject.next(this.appeal);
+    this.subscribeToAppeal(this.appeal._id);
   }
 
   ngOnInit() {
