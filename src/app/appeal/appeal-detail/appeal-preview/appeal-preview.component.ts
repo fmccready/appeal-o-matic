@@ -20,15 +20,18 @@ interface JQuery {
 export class AppealPreviewComponent implements OnInit {
   preview: any;
   private linkCount:any = {};
+  private textLinkCount: any = {};
   private version:any = {};
   private appeal: any;
   appealSubject:BehaviorSubject<Appeal>;
   constructor(private campaignService: CampaignService) {
-    this.linkCount = {buttonLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1};
+    this.linkCount = {buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1};
+    this.textLinkCount = {buttonLink: 1, footerLink: 1, textLink: 1, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1};
   }
 
   @ViewChild('appealBody') appealBody: ElementRef;
   @ViewChild('appealPS') appealPS: ElementRef;
+  @ViewChild('plainText') plainText: ElementRef;
   generateBody(content){
     var self = this;
     if (content){
@@ -68,9 +71,12 @@ export class AppealPreviewComponent implements OnInit {
       }
     }
   }
+  generatePlainText(){
+
+  }
 
   setVersion(){
-    this.version = {src: '', utm: (this.appeal.info.campaign.utm_campaign || '') + '-' + (this.appeal.codes.series || '')};
+    this.version = {src: '', utm: (this.appeal.info.campaign.utm_campaign || '') + '-' + (this.appeal.codes.series || '1')};
     if (this.appeal.codes.resend > 1){
       this.version.utm += '-rs'
     }
@@ -98,42 +104,92 @@ export class AppealPreviewComponent implements OnInit {
       this.version.src = '';
     }
   }
-
-  addCodes(url: string, linkType: any, emailType: string): Observable<string>{
-    if (url){
+  addUtmOnly(url: string, utmContent:string, emailType: string):Observable<string>{
+    if (url && this.appeal.hasOwnProperty('_id')){
       var hasQuestionMark = url.search('\\?');
       if (hasQuestionMark < 0){
         url += '?';
       }
-
-      if (linkType === 'TL'){
-        linkType = {src: 'TL' + this.linkCount.textLink, utm: '-text-link-' + this.linkCount.textLink};
-        this.linkCount.textLink++;
-      }
-      else if (linkType === 'PH') {
-        linkType = {src: 'PH' + this.linkCount.photoLink, utm: '-photo-link-' + this.linkCount.photoLink};
-        this.linkCount.photoLink++;
-      }
-      else if (linkType === 'VID') {
-        linkType = {src: 'VID' + this.linkCount.videoLink, utm: '-video-link-' + this.linkCount.videoLink}
-        this.linkCount.videoLink++;
-      }
-      else if (linkType === 'AUD') {
-        linkType = {src: 'AUD' + this.linkCount.audioLink, utm: '-audio-link-' + this.linkCount.audioLink}
-        this.linkCount.audioLink++;
-      }
-      else if (linkType === 'BN') {
-        linkType = {src: 'BN' + this.linkCount.buttonLink, utm: '-button-link-' + this.linkCount.buttonLink}
-        this.linkCount.buttonLink++;
-      }
-      url = this.addSource(url, linkType);
-
-      url = this.addStaticCodes(url);
-      url += '&utm_content=' + (this.version.utm || '') + '-' + (emailType || '') + (linkType.utm || '');
+      url += '&utm_medium=' + (this.appeal.codes.utm_medium || '');
+      url += '&utm_source=' + (this.appeal.codes.utm_source || '');
+      url += '&utm_campaign=' + (this.appeal.info.campaign.utm_campaign || '');
+      url += '&autologin=true';
+      url += '&utm_content=' + (this.version.utm || '') + '-' + (emailType || '') + '-' + (utmContent || '');
       return Observable.of(url);
     }
     else {
-      return Observable.of('loading');
+      return Observable.of('URL not set');
+    }
+  }
+  addCodes(url: string, linkType: any, emailType: string): Observable<string>{
+    if (url && this.appeal.hasOwnProperty('_id')){
+      var hasQuestionMark = url.search('\\?');
+      if (hasQuestionMark < 0){
+        url += '?';
+      }
+      if (emailType === 'html'){
+        if (linkType === 'TL'){
+          linkType = {src: 'TL' + this.linkCount.textLink, utm: 'text-link-' + this.linkCount.textLink};
+          this.linkCount.textLink++;
+        }
+        else if (linkType === 'FT'){
+          linkType = {src: 'FT' + this.linkCount.footerLink, utm: 'footer-link-' + this.linkCount.footerLink};
+          this.linkCount.footerLink++;
+        }
+        else if (linkType === 'PH') {
+          linkType = {src: 'PH' + this.linkCount.photoLink, utm: 'photo-link-' + this.linkCount.photoLink};
+          this.linkCount.photoLink++;
+        }
+        else if (linkType === 'VID') {
+          linkType = {src: 'VID' + this.linkCount.videoLink, utm: 'video-link-' + this.linkCount.videoLink};
+          this.linkCount.videoLink++;
+        }
+        else if (linkType === 'AUD') {
+          linkType = {src: 'AUD' + this.linkCount.audioLink, utm: 'audio-link-' + this.linkCount.audioLink};
+          this.linkCount.audioLink++;
+        }
+        else if (linkType === 'BN') {
+          linkType = {src: 'BN' + this.linkCount.buttonLink, utm: 'button-link-' + this.linkCount.buttonLink};
+          this.linkCount.buttonLink++;
+        }
+        url = this.addSource(url, linkType);
+      }
+      else if (emailType === 'plain'){
+        if (linkType === 'TL'){
+          linkType = {src: 'TL' + this.textLinkCount.textLink, utm: 'text-link-' + this.textLinkCount.textLink};
+          this.textLinkCount.textLink++;
+        }
+        else if (linkType === 'FT'){
+          console.dir(this.textLinkCount);
+          linkType = {src: 'FT' + this.textLinkCount.footerLink, utm: 'footer-link-' + this.textLinkCount.footerLink};
+          this.textLinkCount.footerLink++;
+        }
+        else if (linkType === 'PH') {
+          linkType = {src: 'PH' + this.textLinkCount.photoLink, utm: 'photo-link-' + this.textLinkCount.photoLink};
+          this.textLinkCount.photoLink++;
+        }
+        else if (linkType === 'VID') {
+          linkType = {src: 'VID' + this.textLinkCount.videoLink, utm: 'video-link-' + this.textLinkCount.videoLink};
+          this.textLinkCount.videoLink++;
+        }
+        else if (linkType === 'AUD') {
+          linkType = {src: 'AUD' + this.textLinkCount.audioLink, utm: 'audio-link-' + this.textLinkCount.audioLink};
+          this.textLinkCount.audioLink++;
+        }
+        else if (linkType === 'BN') {
+          linkType = {src: 'BN' + this.textLinkCount.buttonLink, utm: 'button-link-' + this.textLinkCount.buttonLink};
+          this.textLinkCount.buttonLink++;
+        }
+        url = this.addSource(url, linkType);
+      }
+
+
+      url = this.addStaticCodes(url);
+      url += '&utm_content=' + (this.version.utm || '') + '-' + (emailType || '') + '-' + (linkType.utm || '');
+      return Observable.of(url);
+    }
+    else {
+      return Observable.of('loading or URL not set');
     }
   }
 

@@ -16,7 +16,7 @@ import { RestoreService } from '../../../restore.service';
 export class AppealInfoComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealInfo>();
   @Output() canceled = new EventEmitter<AppealInfo>();
-  private currentCampaign: Campaign;
+  private currentCampaignId: Campaign;
   private campaigns: Observable<Campaign[]>;
 
   constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService) {
@@ -26,13 +26,16 @@ export class AppealInfoComponent implements OnInit {
   @Input()
   set appealInfo(appealInfo: AppealInfo){
     this.restoreService.setItem(appealInfo);
-    this.currentCampaign = appealInfo.campaign;
-    console.dir(appealInfo.campaign);
+    if (appealInfo.campaign){
+      this.currentCampaignId = (appealInfo.campaign._id);
+    }
   }
   get appealInfo(): AppealInfo {
     return this.restoreService.getItem();
   }
   save() {
+    var data = this.restoreService.getItem();
+    data.campaign = this.currentCampaignId;
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {

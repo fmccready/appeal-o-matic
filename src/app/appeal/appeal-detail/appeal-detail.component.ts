@@ -46,6 +46,7 @@ export class AppealDetailComponent implements OnInit {
   subscribeToAppeal(appealId) {
     this.appealService.getAppealWithCampaign(appealId).subscribe(
       data => {
+        console.dir(data);
         this.appeal = data.json();
         this.appealSubject.next(this.appeal);
       },
@@ -54,7 +55,6 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onInfoSaved(appealInfo) {
-    console.dir(appealInfo);
     this.appeal.info = appealInfo;
     this.appealService.updateAppeal(this.appeal);
     this.subscribeToAppeal(this.appeal._id);

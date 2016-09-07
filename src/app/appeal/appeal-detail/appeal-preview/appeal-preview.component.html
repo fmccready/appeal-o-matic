@@ -65,7 +65,7 @@
                 <td>
                 <table cellpadding="0" cellspacing="0" border="0" width="650">
                 <tr><td width="100%">
-                <center><a href="http://www.ifcj.org/site/MessageViewer?utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-vib" style="font-family: Arial, Helvetica, sans-serif; font-size: .75em; color: #464646;">View in Browser</a><br /></center>
+                <center><a href="{{addUtmOnly('http://www.ifcj.org/site/MessageViewer', 'vib', 'html') | async}}" style="font-family: Arial, Helvetica, sans-serif; font-size: .75em; color: #464646;">View in Browser</a><br /></center>
 
                 <a href="http://www.ifcj.org/site/PageNavigator/eng/USENG_homenew?s_src=EA&s_subsrc=EA11608XXEFXP&autologin=true&utm_campaign=Prayer-At-The-Wall&utm_medium=email&utm_source=eappeal&utm_content=prayer-at-the-wall-1-reg-rs-html-logo"><img align="left" src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-header-logo-062116.jpg" id="top-logo" style="border: 0px; float:left;" /></a>
                 <br />
@@ -155,3 +155,67 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
         <![endif]-->
     </body>
 </html>
+<pre>{{appeal | json}}</pre>
+<div id="plainText">
+{{appeal.emailContent.headline}}
+<br><br>
+{{addCodes(appeal.emailContent.url, 'TL', 'plain') | async }}
+<br><br>
+Dear <convio:choose>
+<convio:when  test="nempty" selected="selected">
+<convio:op><convio:session name="1"
+param="first_name"></convio:session></convio:op>
+<convio:then><convio:session name="1"
+param="first_name"></convio:session></convio:then>
+</convio:when>
+<convio:otherwise >Friend</convio:otherwise></convio:choose>,
+<br><br>
+{{ appeal.emailContent.body }}
+<br><br>
+With prayers for shalom, peace,
+<br><br>
+Rabbi Yechiel Eckstein
+Founder and President
+<br><br>
+{{ appeal.emailContent.ps }}
+<br><br><br>
+Donate Now<br>
+{{addCodes(appeal.emailContent.url, {src: 'FT1', utm: 'footer-text-donate'}, 'plain') | async }}
+<br><br>
+About The Fellowship<br>
+{{addCodes('http://www.ifcj.org/who-we-are/about-ifcj.html', {src: 'FT2', utm: 'footer-text-about'}, 'plain') | async }}
+<br><br>
+Contact Us<br>
+{{addCodes('http://www.ifcj.org/who-we-are/contact-us.html', {src: 'FT3', utm: 'footer-text-contact'}, 'plain') | async }}
+<br><br>
+Tell a Friend<br>
+http://fellowship.ifcj.org/site/TellAFriend<br>
+<br>
+https://www.facebook.com/FellowshipFan<br>
+http://twitter.com/TheFellowship<br>
+http://www.flickr.com/photos/the-fellowship/<br>
+http://instagram.com/the_fellowship<br>
+http://pinterest.com/IFCJ/<br>
+http://www.youtube.com/user/IFCJ25<br>
+https://plus.google.com/109046585374620236691<br>
+http://feeds.feedburner.com/ifcj/thebridge<br>
+<br>
+http://charityreports.bbb.org/public/seal.aspx?ID=553312004<br>
+<br>
+https://smarticon.geotrust.com/smarticonprofile?Referer=https://secure2.convio.net<br>
+<br>
+30 North LaSalle Street, Suite 4300, Chicago, IL 60602-2584<br>
+800-486-8844<br>
+<br>
+Unsubscribe<br>
+{{addUtmOnly('http://www.ifcj.org/site/CO', 'unsubscribe', 'plain') | async }}
+<br><br>
+Privacy Policy<br>
+{{addUtmOnly('http://www.ifcj.org/privacy-policy.html', 'privacy-policy', 'plain') | async }}
+<br><br>
+The Fellowship is a 501(c)(3) tax-exempt, non-profit organization
+<br><br>
+© [[S9:pattern:yyyy]] International Fellowship of Christians and Jews(TM)
+<br><br>
+Photos and names may have been changed for personal privacy, dignity, and security reasons.
+</div>

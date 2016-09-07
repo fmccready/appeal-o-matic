@@ -21,6 +21,7 @@ import { Auth } from './auth.service';
 
 import { routing, appRoutingProviders } from './app.routes';
 import { LoginComponent } from './login/login.component';
+import { PlainTextPipe } from './plain-text.pipe';
 
 
 @NgModule({
@@ -40,7 +41,7 @@ import { LoginComponent } from './login/login.component';
     DATEPICKER_DIRECTIVES,
     AppealDetailComponent,
     NewAppealComponent,
-    LoginComponent
+    LoginComponent, PlainTextPipe
   ],
   providers: [
     appRoutingProviders,
