@@ -41,7 +41,8 @@ import { PlainTextPipe } from './plain-text.pipe';
     DATEPICKER_DIRECTIVES,
     AppealDetailComponent,
     NewAppealComponent,
-    LoginComponent, PlainTextPipe
+    LoginComponent,
+    PlainTextPipe
   ],
   providers: [
     appRoutingProviders,
