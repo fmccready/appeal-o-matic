@@ -34,8 +34,8 @@ export class AppealInfoComponent implements OnInit {
     return this.restoreService.getItem();
   }
   save() {
-    var data = this.restoreService.getItem();
-    data.campaign = this.currentCampaignId;
+    //var data = this.restoreService.getItem();
+    //data.campaign = this.currentCampaignId;
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {

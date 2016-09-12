@@ -43,7 +43,6 @@ export class AppealPreviewComponent implements OnInit {
         if (content.hasOwnProperty('body')) {
           this.appealBody.nativeElement.innerHTML = content.body;
           this.plainBody.nativeElement.innerHTML = content.body;
-          //this.appealBody.nativeElement.innerHTML = this.replaceAll(content.body, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
           $(this.appealBody.nativeElement)
             .find('a').each(function() {
               var url = $(this).attr('href');
@@ -67,7 +66,6 @@ export class AppealPreviewComponent implements OnInit {
         if (content.hasOwnProperty('ps')) {
           this.appealPS.nativeElement.innerHTML = content.ps;
           this.plainPS.nativeElement.innerHTML = content.ps;
-          //this.appealPS.nativeElement.innerHTML = this.replaceAll(content.ps, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
           $(this.appealPS.nativeElement)
             .find('a').each(function() {
               var url = $(this).attr('href');

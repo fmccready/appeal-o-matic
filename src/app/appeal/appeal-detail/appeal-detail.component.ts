@@ -28,7 +28,6 @@ export class AppealDetailComponent implements OnInit {
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
     this.route.params
       .subscribe(data => {
-        //this.appealService.filterAppeals(data);
         this.subscribeToAppealFromQueryString(data);
       });
   }
@@ -55,24 +54,22 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onInfoSaved(appealInfo) {
-    this.appeal.info = appealInfo;
-    this.appealService.updateAppeal(this.appeal);
-    this.subscribeToAppeal(this.appeal._id);
+    var temp = this.appeal;
+    //this.appeal.info = appealInfo;
+    temp.info = appealInfo;
+    this.appealService.updateAppeal(temp);
   }
   onContentSaved(appealContent){
     this.appeal.emailContent = appealContent;
     this.appealService.updateAppeal(this.appeal);
-    this.subscribeToAppeal(this.appeal._id);
   }
   onCodesSaved(appealCodes){
     this.appeal.codes = appealCodes;
     this.appealService.updateAppeal(this.appeal);
-    this.subscribeToAppeal(this.appeal._id);
   }
   onSignoffsSaved(appealSignoffs){
     this.appeal.signoffs = appealSignoffs;
     this.appealService.updateAppeal(this.appeal);
-    this.subscribeToAppeal(this.appeal._id);
   }
 
   ngOnInit() {
