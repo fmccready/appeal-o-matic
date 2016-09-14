@@ -51,13 +51,11 @@ export class AppealService {
       error => {console.log(error);}
     );
   }
-
   updateAppeal(appeal: Appeal) {
-    var temp = appeal;
     if (appeal.info.campaign.hasOwnProperty('_id')){
-      temp.info.campaign = appeal.info.campaign._id;
+      appeal.info.campaign = appeal.info.campaign._id;
     }
-    let body = JSON.stringify(temp);
+    let body = JSON.stringify(appeal);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
       headers: headers
@@ -87,7 +85,6 @@ export class AppealService {
       }
     );
   }
-
   filterAppeals(filters) {
     if (filters.campaign) {
       var url = this._appealUrl + '?' + this._populateCampaign + '&query={"info.campaign":"'+ filters.campaign._id + '"}';
@@ -98,15 +95,12 @@ export class AppealService {
       this._makeGetRequest(url);
     }
   }
-
   getAppeal(id){
     return this.http.get(this._appealUrl + id);
   }
-
   getAppealWithCampaign(id){
     return this.http.get(this._appealUrl + id + '?' + this._populateCampaign);
   }
-
   getAppeals(): Observable<Appeal[]> {
     return this._appeals$.asObservable();
   }
@@ -122,4 +116,5 @@ export class AppealService {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
+
 }
