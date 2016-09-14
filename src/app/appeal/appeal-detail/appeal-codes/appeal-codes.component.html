@@ -7,41 +7,41 @@
       <form #codesForm="ngForm" novalidate>
         <div class="form-group" [class.has-error]="!subSrc.valid && subSrc.touched">
           <label for="sub-src">Subsource code</label>
-          <input id="sub-src" type="text" class="form-control" [(ngModel)]="appealCodes.s_subsrc" #subSrc="ngModel" name="subSrc">
+          <input id="sub-src" type="text" class="form-control" [(ngModel)]="_appeal.codes.s_subsrc" #subSrc="ngModel" name="subSrc">
         </div>
         <div class="form-group" [class.has-error]="!utmMedium.valid && utmMedium.touched">
           <label for="utm-medium">UTM medium</label>
-          <input id="utm-medium" type="text" class="form-control" [(ngModel)]="appealCodes.utm_medium" #utmMedium="ngModel" name="utmMedium">
+          <input id="utm-medium" type="text" class="form-control" [(ngModel)]="_appeal.codes.utm_medium" #utmMedium="ngModel" name="utmMedium">
         </div>
         <div class="form-group" [class.has-error]="!utmSource.valid && utmSource.touched">
           <label for="utm-source">UTM source</label>
-          <input id="utm-source" type="text" class="form-control" [(ngModel)]="appealCodes.utm_source" #utmSource="ngModel" name="utmSource">
+          <input id="utm-source" type="text" class="form-control" [(ngModel)]="_appeal.codes.utm_source" #utmSource="ngModel" name="utmSource">
         </div>
         <div class="form-group">
           <label>Audience</label>
           <div class="radio">
-            <label for="na"><input id="na" type="radio" [(ngModel)]="appealCodes.audience" value="" name="version">N/A</label>
+            <label for="na"><input id="na" type="radio" [(ngModel)]="_appeal.codes.audience" value="" name="version">N/A</label>
           </div>
           <div class="radio">
-            <label for="sustainer"><input id="sustainer" type="radio" [(ngModel)]="appealCodes.audience" value="sustainer" name="audience">Sustainer</label>
+            <label for="sustainer"><input id="sustainer" type="radio" [(ngModel)]="_appeal.codes.audience" value="sustainer" name="audience">Sustainer</label>
           </div>
           <div class="radio">
-            <label for="donor"><input id="donor" type="radio" [(ngModel)]="appealCodes.audience" value="donor" name="audience">Donor</label>
+            <label for="donor"><input id="donor" type="radio" [(ngModel)]="_appeal.codes.audience" value="donor" name="audience">Donor</label>
           </div>
           <div class="radio">
-            <label for="nonDonor"><input id="nonDonor" type="radio" [(ngModel)]="appealCodes.audience" value="nonDonor"  name="audience">Non-donor</label>
+            <label for="nonDonor"><input id="nonDonor" type="radio" [(ngModel)]="_appeal.codes.audience" value="nonDonor"  name="audience">Non-donor</label>
           </div>
           <div class="radio">
-            <label for="middleDonor"><input id="middleDonor" type="radio" [(ngModel)]="appealCodes.audience" value="middleDonor"  name="audience">Middle-donor</label>
+            <label for="middleDonor"><input id="middleDonor" type="radio" [(ngModel)]="_appeal.codes.audience" value="middleDonor"  name="audience">Middle-donor</label>
           </div>
         </div>
         <div class="form-group" [class.has-error]="!resend.valid && resend.touched">
           <label for="resend">Resend</label>
-          <input id="resend" type="number" class="form-control" [(ngModel)]="appealCodes.resend" #resend="ngModel" name="resend" min="0">
+          <input id="resend" type="number" class="form-control" [(ngModel)]="_appeal.codes.resend" #resend="ngModel" name="resend" min="0">
         </div>
         <div class="form-group" [class.has-error]="!series.valid && series.touched">
           <label for="series">Series #</label>
-          <input id="series" type="number" class="form-control" [(ngModel)]="appealCodes.series" #series="ngModel" name="series" min="0">
+          <input id="series" type="number" class="form-control" [(ngModel)]="_appeal.codes.series" #series="ngModel" name="series" min="0">
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>

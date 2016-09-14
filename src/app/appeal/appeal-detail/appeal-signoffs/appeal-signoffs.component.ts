@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { RestoreService } from '../../../restore.service';
-import { AppealSignoff } from '../../../models/appeal';
+import { Appeal } from '../../../models/appeal';
 
 @Component({
   selector: 'app-appeal-signoffs',
@@ -10,23 +10,23 @@ import { AppealSignoff } from '../../../models/appeal';
   providers: [RestoreService]
 })
 export class AppealSignoffsComponent implements OnInit {
-  @Output() saved = new EventEmitter<AppealSignoff>();
-  @Output() canceled = new EventEmitter<AppealSignoff>();
-  constructor(private restoreService: RestoreService<AppealSignoff>) { }
+  private _appeal: Appeal;
+  @Output() saved = new EventEmitter<Appeal>();
+  constructor(private restoreService: RestoreService<Appeal>) { }
 
   @Input()
-  set appealSignoffs(appealSignoff: AppealSignoff){
-    this.restoreService.setItem(appealSignoff);
+  set appeal(appeal: Appeal){
+    this.restoreService.setItem(appeal);
+    this._appeal = appeal;
   }
-  get appealSignoffs(): AppealSignoff {
+  get appeal(): Appeal {
     return this.restoreService.getItem();
   }
   save() {
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {
-    this.appealSignoffs = this.restoreService.restoreItem();
-    this.canceled.next(this.appealSignoffs);
+    this._appeal = this.restoreService.restoreItem();
   }
 
   ngOnInit() {

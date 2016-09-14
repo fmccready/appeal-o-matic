@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-
-import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap-rc5/ng2-bootstrap';
-import * as moment from 'moment';
+import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
 import { AppealDetailModule } from './appeal-detail/appeal-detail.module';
@@ -13,22 +9,20 @@ import { FiltersComponent } from './filters/filters.component';
 import { AppealListComponent } from './appeal-list/appeal-list.component';
 import { NewAppealComponent } from './new-appeal/new-appeal.component';
 import { routing } from './appeal.routes';
+import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 @NgModule({
   imports: [
     SharedModule,
     AppealDetailModule,
     routing,
-    ActivatedRoute,
-    moment
+    TimepickerModule,
+    DatepickerModule
   ],
   declarations: [
     FiltersComponent,
     AppealListComponent,
-    NewAppealComponent,
-    TimepickerComponent,
-    DATEPICKER_DIRECTIVES,
-    DatePipe
+    NewAppealComponent
   ],
   providers: [
     CampaignService,
@@ -37,10 +31,7 @@ import { routing } from './appeal.routes';
   exports: [
     FiltersComponent,
     AppealListComponent,
-    NewAppealComponent,
-    TimepickerComponent,
-    DATEPICKER_DIRECTIVES,
-    DatePipe
+    NewAppealComponent
   ]
 })
 export class AppealModule {}

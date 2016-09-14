@@ -24,8 +24,8 @@ export class AppealPreviewComponent implements OnInit {
   private linkCount: any = {};
   private textLinkCount: any = {};
   private version: any = {};
-  private appeal: any;
-  appealSubject: BehaviorSubject<Appeal>;
+  private appeal: Appeal;
+
   constructor(private campaignService: CampaignService) {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
@@ -43,7 +43,6 @@ export class AppealPreviewComponent implements OnInit {
         if (content.hasOwnProperty('body')) {
           this.appealBody.nativeElement.innerHTML = content.body;
           this.plainBody.nativeElement.innerHTML = content.body;
-          //this.appealBody.nativeElement.innerHTML = this.replaceAll(content.body, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
           $(this.appealBody.nativeElement)
             .find('a').each(function() {
               var url = $(this).attr('href');
@@ -67,7 +66,6 @@ export class AppealPreviewComponent implements OnInit {
         if (content.hasOwnProperty('ps')) {
           this.appealPS.nativeElement.innerHTML = content.ps;
           this.plainPS.nativeElement.innerHTML = content.ps;
-          //this.appealPS.nativeElement.innerHTML = this.replaceAll(content.ps, '<a ', '<a style="color: #00529c; text-decoration: none; font-weight:bold;" ');
           $(this.appealPS.nativeElement)
             .find('a').each(function() {
               var url = $(this).attr('href');
@@ -224,20 +222,14 @@ export class AppealPreviewComponent implements OnInit {
   }
 
   @Input()
-  set appealData(appealSub: BehaviorSubject<Appeal>) {
-    this.appealSubject = appealSub;
-    appealSub.subscribe(
-      data => {
-        this.appeal = data;
-        if (this.appeal.hasOwnProperty('_id')) {
-          this.generateBody(this.appeal.emailContent);
-        }
-      },
-      error => console.log(error)
-    );
+  set appealPreview(appeal: Appeal) {
+    this.appeal = appeal;
+    if (appeal){
+      this.generateBody(appeal.emailContent);
+    }
   }
-  get appealData(): BehaviorSubject<Appeal> {
-    return this.appealSubject;
+  get appealPreview(): Appeal {
+    return this.appeal;
   }
 
   ngOnInit() {

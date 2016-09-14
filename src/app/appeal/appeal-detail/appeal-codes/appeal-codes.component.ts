@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AppealCode } from '../../../models/appeal';
+import { Appeal } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 
 
@@ -10,23 +10,23 @@ import { RestoreService } from '../../../restore.service';
   providers: [RestoreService]
 })
 export class AppealCodesComponent implements OnInit {
-  @Output() saved = new EventEmitter<AppealCode>();
-  @Output() canceled = new EventEmitter<AppealCode>();
-  constructor(private restoreService: RestoreService<AppealCode>) { }
+  private _appeal: Appeal;
+  @Output() saved = new EventEmitter<Appeal>();
+  constructor(private restoreService: RestoreService<Appeal>) { }
 
   @Input()
-  set appealCodes(appealCodes: AppealCode){
-    this.restoreService.setItem(appealCodes);
+  set appeal(appeal: Appeal){
+    this.restoreService.setItem(appeal);
+    this._appeal = appeal;
   }
-  get appealCodes(): AppealCode {
+  get appeal(): Appeal {
     return this.restoreService.getItem();
   }
   save() {
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {
-    this.appealCodes = this.restoreService.restoreItem();
-    this.canceled.next(this.appealCodes);
+    this._appeal = this.restoreService.restoreItem();
   }
 
   ngOnInit() {
