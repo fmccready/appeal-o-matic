@@ -16,7 +16,6 @@ export class AppealInfoComponent implements OnInit {
   @Output() saved = new EventEmitter<Appeal>();
   private currentCampaignId: Campaign;
   private campaigns: Observable<Campaign[]>;
-  private _appeal: Appeal;
 
   constructor(private restoreService: RestoreService<Appeal>, private campaignService: CampaignService) {
     this.campaigns = campaignService.getCampaigns();
@@ -25,19 +24,19 @@ export class AppealInfoComponent implements OnInit {
   @Input()
   set appeal(appeal: Appeal){
     this.restoreService.setItem(appeal);
-    this._appeal = appeal;
-    if (this._appeal.info.campaign){
-      this.currentCampaignId = this._appeal.info.campaign._id;
+    if (this.restoreService.getItem().info.campaign){
+      this.currentCampaignId = this.restoreService.getItem().info.campaign._id;
     }
   }
   get appeal(): Appeal {
     return this.restoreService.getItem();
   }
   save() {
+    console.log(this.restoreService.getItem());
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {
-    this._appeal = this.restoreService.restoreItem();
+    this.restoreService.restoreItem();
   }
 
   ngOnInit() {
