@@ -23,12 +23,12 @@
         </div>
         <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
           <label for="campaign">Campaign</label>
-          <pre>{{appeal.info.campaign | json}}</pre>
-          <select id="campaign" type="text" class="form-control" [(ngModel)]="appeal.info.campaign" #campaign="ngModel" name="campaign">
-            <option *ngFor="let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
-          </select>
-          <pre *ngFor="let c of campaigns | async">{{c | json}}</pre>
 
+          <select id="campaign" type="text" class="form-control" [(ngModel)]="appeal.info.campaign" #campaign="ngModel" name="campaign">
+            <option *ngFor="let c of campaigns | async" [ngValue]="c">{{c.name}}</option>
+          </select>
+          <hr>
+          <pre>{{appeal.info.campaign | json}}</pre>
         </div>
         <div class="form-group">
           <label for="send-date">Send date</label>
@@ -44,7 +44,6 @@
           </label>
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
-        <pre>{{appeal.info | json}}</pre>
       </form>
     </div>
   </div>

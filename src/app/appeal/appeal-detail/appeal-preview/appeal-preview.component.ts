@@ -24,8 +24,8 @@ export class AppealPreviewComponent implements OnInit {
   private linkCount: any = {};
   private textLinkCount: any = {};
   private version: any = {};
-  private appeal: Appeal;
-
+  private appeal: Appeal = new Appeal();
+  private appealSubject: BehaviorSubject<Appeal>;
   constructor(private campaignService: CampaignService) {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
@@ -35,8 +35,9 @@ export class AppealPreviewComponent implements OnInit {
   @ViewChild('appealPS') appealPS: ElementRef;
   @ViewChild('plainBody') plainBody: ElementRef;
   @ViewChild('plainPS') plainPS: ElementRef;
-  generateBody(content) {
+  generateBody(appeal) {
     var self = this;
+    var content = appeal.emailContent;
     if (content) {
       if (this.appeal.info.campaign) {
         this.setVersion();
@@ -222,14 +223,17 @@ export class AppealPreviewComponent implements OnInit {
   }
 
   @Input()
-  set appealPreview(appeal: Appeal) {
-    this.appeal = appeal;
+  set appealPreview(appeal: BehaviorSubject<Appeal>) {
+    this.appealSubject = appeal;
     if (appeal){
-      this.generateBody(appeal.emailContent);
+      appeal.subscribe(
+        data => {this.appeal = data; this.generateBody(data);},
+        error => console.log(error)
+      );
     }
   }
-  get appealPreview(): Appeal {
-    return this.appeal;
+  get appealPreview(): BehaviorSubject<Appeal> {
+    return this.appealSubject;
   }
 
   ngOnInit() {
