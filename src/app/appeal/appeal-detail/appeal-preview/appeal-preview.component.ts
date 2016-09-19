@@ -30,7 +30,45 @@ export class AppealPreviewComponent implements OnInit {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
   }
-  
+
+  copyHtml(){
+    var temp = document.createElement('input');
+    var hidden = document.querySelector('#hidden');
+    hidden.appendChild(temp);
+    
+    temp.value = this.htmlVersion.nativeElement.innerHTML.toString();
+    temp.value = temp.value.replace(/_ngcontent\S+"/g, '');
+    temp.value = temp.value.replace(/ng-reflect-href\S+\s/g, '');
+    temp.value = temp.value.replace(/ng-reflect-src\S+"/g, '');
+    temp.value = temp.value.replace(/ng-reflect-inner-h-t-m-l="[[:word:][:blank:]]+"/g, '');
+    temp.value = temp.value.replace(/&amp;/g, '&');
+    temp.value = temp.value.replace(/–/g, '&ndash;');
+    temp.select();
+    try {
+      let success = document.execCommand('copy');
+    } catch (err) {
+      console.log(err);
+    }
+    window.getSelection().removeAllRanges();
+  }
+  copyPlain(){
+    var plainTemp = document.createElement('textarea');
+    var hidden = document.querySelector('#hidden');
+    hidden.appendChild(plainTemp);
+
+    plainTemp.value = this.plainVersion.nativeElement.innerText;
+    plainTemp.value = plainTemp.value.replace(/–/g, '-');
+    plainTemp.select();
+    try {
+      let success = document.execCommand('copy');
+    } catch(err){
+      console.log(err);
+    }
+    window.getSelection().removeAllRanges();
+  }
+
+  @ViewChild('htmlVersion') htmlVersion: ElementRef;
+  @ViewChild('plainVersion') plainVersion: ElementRef;
   @ViewChild('appealBody') appealBody: ElementRef;
   @ViewChild('appealPS') appealPS: ElementRef;
   @ViewChild('plainBody') plainBody: ElementRef;
@@ -248,18 +286,5 @@ export class AppealPreviewComponent implements OnInit {
 
   replaceAll(str, find, replace) {
     return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
-  }
-  copyHtml(){
-    let html = document.querySelector('#htmlVersion');
-    let range = document.createRange();
-    range.selectNode(html);
-    window.getSelection().addRange(range);
-    try {
-      let success = document.execCommand('copy');
-      console.log(success);
-    } catch (err) {
-      console.log(err);
-    }
-    window.getSelection().removeAllRanges();
   }
 }

@@ -2,7 +2,10 @@
   <button (click)="copyHtml()">Copy HTML</button>
   <button (click)="copyPlain()">Copy Plain</button>
 </div>
-<div id="htmlVersion">
+<div id="hidden" style="position:absolute; top: -10000px; left: -10000px;">
+
+</div>
+<div #htmlVersion>
 <!doctype html>
 <html>
     <head>
@@ -161,11 +164,13 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
     </body>
 </html>
 </div>
-<div class="plainVersion">
-<hr>
+
+<div class="well">
 <h2>Plain Text Version</h2>
-<hr>
+</div>
+
 <div id="plainText" class="col-xs-12 col-md-8">
+<div #plainVersion>
 <p #plainHeadline></p>
 <br>
 {{addCodes(appeal.emailContent.url, {src:'TL1', utm:'text-link-1'}, 'plain') | async }}

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AppealPreviewComponent } from './appeal-preview.component';
 import { RestoreService } from '../../../restore.service';
 import { PlainTextPipe } from '../../../plain-text.pipe';
-
 @NgModule({
   imports: [
     CommonModule

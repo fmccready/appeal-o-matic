@@ -26,7 +26,7 @@ import { routing, appRoutingProviders } from './app.routes';
     CampaignModule
   ],
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   providers: [
     appRoutingProviders,
