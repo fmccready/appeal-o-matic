@@ -1,31 +1,41 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
-import { ActivatedRoute } from '@angular/router';
 
 import { AppealDetailComponent } from './appeal-detail.component';
 
-import { DatePipe } from '@angular/common';
-import * as moment from 'moment';
-import {TimepickerComponent, DATEPICKER_DIRECTIVES} from 'ng2-bootstrap-rc5/ng2-bootstrap';
+import { AppealContentModule } from './appeal-content/appeal-content.module';
+import { AppealCodesModule } from './appeal-codes/appeal-codes.module';
+import { AppealInfoModule } from './appeal-info/appeal-info.module';
+import { AppealSignoffsModule } from './appeal-signoffs/appeal-signoffs.module';
+import { AppealPreviewModule } from './appeal-preview/appeal-preview.module';
 
 import { CampaignService } from '../../campaign.service';
 import { AppealService } from '../../appeal.service';
 
+import { AppealCode } from '../../models/appeal';
+import { AppealContent } from '../../models/appeal';
+import { AppealInfo } from '../../models/appeal';
+import { AppealSignoff } from '../../models/appeal';
+
 @NgModule({
   imports: [
     SharedModule,
-    ActivatedRoute
+    AppealContentModule,
+    AppealCodesModule,
+    AppealInfoModule,
+    AppealSignoffsModule,
+    AppealPreviewModule
   ],
   declarations: [
-    AppealDetailComponent,
-    DatePipe,
-    TimepickerComponent,
-    DATEPICKER_DIRECTIVES,
-    moment
+    AppealDetailComponent
   ],
   providers: [
     CampaignService,
-    AppealService
+    AppealService,
+    AppealCode,
+    AppealContent,
+    AppealInfo,
+    AppealSignoff
   ]
 })
 export class AppealDetailModule {}

@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-4" id="controls">
-    <app-appeal-info [appealInfo]="appeal.info" (saved)="onInfoSaved($event)"></app-appeal-info>
-    <app-appeal-content [appealContent]="appeal.emailContent" (saved)="onContentSaved($event)"></app-appeal-content>
-    <app-appeal-codes [appealCodes]="appeal.codes" (saved)="onCodesSaved($event)"></app-appeal-codes>
-    <app-appeal-signoffs [appealSignoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
+    <app-appeal-info [appeal]="appeal" (saved)="onInfoSaved($event)"></app-appeal-info>
+    <app-appeal-content [appeal]="appeal" (saved)="onContentSaved($event)"></app-appeal-content>
+    <app-appeal-codes [appeal]="appeal" (saved)="onCodesSaved($event)"></app-appeal-codes>
+    <app-appeal-signoffs [appeal]="appeal" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-8">
-    <app-appeal-preview [appealData]="appealSubject"></app-appeal-preview>
+    <app-appeal-preview [appealPreview]="appealSubject"></app-appeal-preview>
   </div>
 </div>

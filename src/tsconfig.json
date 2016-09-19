@@ -15,7 +15,8 @@
     ],
     "types": [
       "jasmine"
-    ]
+    ],
+    "noImplicitAny": false
   },
   "files": [
     "main.ts",

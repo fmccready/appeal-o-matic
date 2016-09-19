@@ -1,75 +1,56 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
-
-import { AppealCodesComponent } from './appeal-codes/appeal-codes.component';
-import { AppealContentComponent } from './appeal-content/appeal-content.component';
-import { AppealInfoComponent } from './appeal-info/appeal-info.component';
-import { AppealSignoffsComponent } from './appeal-signoffs/appeal-signoffs.component';
-import { AppealPreviewComponent } from './appeal-preview/appeal-preview.component';
+import { BehaviorSubject } from 'rxjs/Rx';
 
 import { AppealService } from '../../appeal.service';
 import { Appeal } from '../../models/appeal';
-import { AppealCode } from '../../models/appeal';
-import { AppealContent } from '../../models/appeal';
-import { AppealInfo } from '../../models/appeal';
-import { AppealSignoff } from '../../models/appeal';
 
 @Component({
   selector: 'app-appeal-detail',
   templateUrl: 'appeal-detail.component.html',
-  styleUrls: ['appeal-detail.component.css'],
-  directives: [AppealInfoComponent, AppealContentComponent, AppealCodesComponent, AppealSignoffsComponent, AppealPreviewComponent]
+  styleUrls: ['appeal-detail.component.css']
 })
 export class AppealDetailComponent implements OnInit {
-  appeal: Appeal = new Appeal();
+  private appeal: Appeal = new Appeal();
   appealSubject: BehaviorSubject<Appeal> = new BehaviorSubject(this.appeal);
+  private qsAppealId: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
+    this.subscribeToAppealFromQueryString();
+  }
+  subscribeToAppealFromQueryString() {
     this.route.params
       .subscribe(data => {
-        this.subscribeToAppealFromQueryString(data);
+        this.qsAppealId = data;
+        if (this.qsAppealId.hasOwnProperty('appealId')){
+          this.appealService.getAppealWithCampaign(this.qsAppealId.appealId).subscribe(
+            appealData => {
+              if (appealData){
+                this.appeal = appealData.json();
+                this.appealSubject.next(this.appeal);
+              }
+            },
+            error => {console.log(error);}
+          );
+        }
       });
   }
 
-  subscribeToAppealFromQueryString(appeal) {
-    this.appealService.getAppealWithCampaign(appeal.appealId).subscribe(
-      data => {
-        this.appeal = data.json();
-        this.appealSubject.next(this.appeal);
-      },
-      error => {console.log(error)}
-    );
+  onInfoSaved(appeal) {
+    this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
-
-  subscribeToAppeal(appealId) {
-    this.appealService.getAppealWithCampaign(appealId).subscribe(
-      data => {
-        console.dir(data);
-        this.appeal = data.json();
-        this.appealSubject.next(this.appeal);
-      },
-      error => {console.log(error)}
-    );
+  onContentSaved(appeal){
+    this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
-
-  onInfoSaved(appealInfo) {
-    var temp = this.appeal;
-    //this.appeal.info = appealInfo;
-    temp.info = appealInfo;
-    this.appealService.updateAppeal(temp);
+  onCodesSaved(appeal){
+    this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
-  onContentSaved(appealContent){
-    this.appeal.emailContent = appealContent;
-    this.appealService.updateAppeal(this.appeal);
-  }
-  onCodesSaved(appealCodes){
-    this.appeal.codes = appealCodes;
-    this.appealService.updateAppeal(this.appeal);
-  }
-  onSignoffsSaved(appealSignoffs){
-    this.appeal.signoffs = appealSignoffs;
-    this.appealService.updateAppeal(this.appeal);
+  onSignoffsSaved(appeal){
+    this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
 
   ngOnInit() {

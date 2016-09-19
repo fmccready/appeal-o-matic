@@ -24,28 +24,69 @@ export class AppealPreviewComponent implements OnInit {
   private linkCount: any = {};
   private textLinkCount: any = {};
   private version: any = {};
-  private appeal: any;
-  appealSubject: BehaviorSubject<Appeal>;
+  private appeal: Appeal = new Appeal();
+  private appealSubject: BehaviorSubject<Appeal>;
   constructor(private campaignService: CampaignService) {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
   }
 
+  copyHtml(){
+    var temp = document.createElement('input');
+    var hidden = document.querySelector('#hidden');
+    hidden.appendChild(temp);
+
+    temp.value = this.htmlVersion.nativeElement.innerHTML.toString();
+    temp.value = temp.value.replace(/_ngcontent\S+"/g, '');
+    temp.value = temp.value.replace(/ng-reflect-href\S+\s/g, '');
+    temp.value = temp.value.replace(/ng-reflect-src\S+"/g, '');
+    temp.value = temp.value.replace(/ng-reflect-inner-h-t-m-l="[[:word:][:blank:]]+"/g, '');
+    temp.value = temp.value.replace(/&amp;/g, '&');
+    temp.value = temp.value.replace(/–/g, '&ndash;');
+    temp.select();
+    try {
+      let success = document.execCommand('copy');
+    } catch (err) {
+      console.log(err);
+    }
+    window.getSelection().removeAllRanges();
+  }
+  copyPlain(){
+    var plainTemp = document.createElement('textarea');
+    var hidden = document.querySelector('#hidden');
+    hidden.appendChild(plainTemp);
+
+    plainTemp.value = this.plainVersion.nativeElement.innerText;
+    plainTemp.value = plainTemp.value.replace(/–/g, '-');
+    plainTemp.select();
+    try {
+      let success = document.execCommand('copy');
+    } catch(err){
+      console.log(err);
+    }
+    window.getSelection().removeAllRanges();
+  }
+
+  @ViewChild('htmlVersion') htmlVersion: ElementRef;
+  @ViewChild('plainVersion') plainVersion: ElementRef;
   @ViewChild('appealBody') appealBody: ElementRef;
   @ViewChild('appealPS') appealPS: ElementRef;
   @ViewChild('plainBody') plainBody: ElementRef;
+  @ViewChild('plainHeadline') plainHeadline: ElementRef;
   @ViewChild('plainPS') plainPS: ElementRef;
-  generateBody(content) {
+  generateBody(appeal) {
     var self = this;
+    var content = appeal.emailContent;
     if (content) {
       if (this.appeal.info.campaign) {
         this.setVersion();
         if (content.hasOwnProperty('body')) {
           this.appealBody.nativeElement.innerHTML = content.body;
           this.plainBody.nativeElement.innerHTML = content.body;
+          this.plainHeadline.nativeElement.innerHTML = content.headline;
           $(this.appealBody.nativeElement)
             .find('a').each(function() {
-              var url = $(this).attr('href');
+              let url = $(this).attr('href');
               self.addCodes(url, 'TL', 'html').subscribe(data => url = data);
               $(this).attr('href', url);
               $(this).css({
@@ -56,7 +97,7 @@ export class AppealPreviewComponent implements OnInit {
             });
           $(this.plainBody.nativeElement)
             .find('a').each(function() {
-              var url = $(this).attr('href');
+              let url = $(this).attr('href');
               self.addCodes(url, 'TL', 'plain').subscribe(data => url = data);
               $(this).attr('href', url);
             });
@@ -79,7 +120,7 @@ export class AppealPreviewComponent implements OnInit {
             });
           $(this.plainPS.nativeElement)
             .find('a').each(function() {
-              var url = $(this).attr('href');
+              let url = $(this).attr('href');
               self.addCodes(url, 'TL', 'plain').subscribe(data => url = data);
               $(this).attr('href', url);
             });
@@ -94,17 +135,17 @@ export class AppealPreviewComponent implements OnInit {
   setVersion() {
     this.version = { src: '', utm: (this.appeal.info.campaign.utm_campaign || '') + '-' + (this.appeal.codes.series || '1') };
     if (this.appeal.codes.resend > 1) {
-      this.version.utm += '-rs'
+      this.version.utm += '-rs';
     }
     else {
-      this.version.utm += '-reg'
+      this.version.utm += '-reg';
     }
 
-    if (this.appeal.codes.audience == 'sustainer') {
+    if (this.appeal.codes.audience === 'sustainer') {
       this.version.src = '_S';
       this.version.utm += '-sus';
     }
-    else if (this.appeal.codes.audience == 'donor') {
+    else if (this.appeal.codes.audience === 'donor') {
       this.version.src = '';
       this.version.utm += '-d';
     }
@@ -112,7 +153,7 @@ export class AppealPreviewComponent implements OnInit {
       this.version.src = '_N';
       this.version.utm += '-nd';
     }
-    else if (this.appeal.codes.audience == 'middleDonor') {
+    else if (this.appeal.codes.audience === 'middleDonor') {
       this.version.src = '';
       this.version.utm += '-md';
     }
@@ -222,19 +263,16 @@ export class AppealPreviewComponent implements OnInit {
   }
 
   @Input()
-  set appealData(appealSub: BehaviorSubject<Appeal>) {
-    this.appealSubject = appealSub;
-    appealSub.subscribe(
-      data => {
-        this.appeal = data;
-        if (this.appeal.hasOwnProperty('_id')) {
-          this.generateBody(this.appeal.emailContent);
-        }
-      },
-      error => console.log(error)
-    );
+  set appealPreview(appeal: BehaviorSubject<Appeal>) {
+    this.appealSubject = appeal;
+    if (appeal){
+      appeal.subscribe(
+        data => {this.appeal = data; this.generateBody(data);},
+        error => console.log(error)
+      );
+    }
   }
-  get appealData(): BehaviorSubject<Appeal> {
+  get appealPreview(): BehaviorSubject<Appeal> {
     return this.appealSubject;
   }
 

@@ -24,7 +24,7 @@ app.use(allowCrossDomain);
 
 
 // Mongoose Connection
-mongoose.connect('mongodb://localhost:27017');
+mongoose.connect('mongodb://127.0.0.1:27017');
 var db = mongoose.connection;
 var Campaign = require('./src/app/schemas/campaign');
 var Appeal = require('./src/app/schemas/appeal');

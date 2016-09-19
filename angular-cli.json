@@ -1,13 +1,26 @@
 {
   "project": {
-    "version": "1.0.0-beta.11-webpack.2",
+    "version": "1.0.0-beta.11-webpack.8",
     "name": "auto-appeal"
   },
   "apps": [
     {
-      "main": "src/main.ts",
-      "tsconfig": "src/tsconfig.json",
-      "mobile": false
+      "root": "src",
+      "outDir": "dist",
+      "main": "main.ts",
+      "index": "index.html",
+      "tsconfig": "tsconfig.json",
+      "mobile": false,
+      "prefix": "app",
+      "scripts": [],
+      "styles": [],
+      "assets": "assets",
+      "environments": {
+        "source": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts",
+        "dev": "environments/environment.dev.ts"
+      },
+      "mangle": false
     }
   ],
   "addons": [],
@@ -23,8 +36,6 @@
     }
   },
   "defaults": {
-    "prefix": "app",
-    "sourceDir": "src",
     "styleExt": "css",
     "prefixInterfaces": false,
     "lazyRoutePrefix": "+"

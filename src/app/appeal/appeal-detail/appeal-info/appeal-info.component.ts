@@ -1,46 +1,37 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { AsyncSubject, Observer, Observable } from 'rxjs/Rx';
-import 'rxjs/Rx';
+import { AsyncSubject, Observable } from 'rxjs/Rx';
+
 import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';
-import { AppealInfo } from '../../../models/appeal';
+import { Appeal } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 
 @Component({
   selector: 'app-appeal-info',
   templateUrl: 'appeal-info.component.html',
-  styleUrls: ['appeal-info.component.css'],
-  providers: [RestoreService]
+  styleUrls: ['appeal-info.component.css']
 })
 export class AppealInfoComponent implements OnInit {
-  @Output() saved = new EventEmitter<AppealInfo>();
-  @Output() canceled = new EventEmitter<AppealInfo>();
-  private currentCampaignId: Campaign;
+  @Output() saved = new EventEmitter<Appeal>();
   private campaigns: Observable<Campaign[]>;
 
-  constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService) {
+  constructor(private restoreService: RestoreService<Appeal>, private campaignService: CampaignService) {
     this.campaigns = campaignService.getCampaigns();
   }
 
   @Input()
-  set appealInfo(appealInfo: AppealInfo){
-    this.restoreService.setItem(appealInfo);
-    if (appealInfo.campaign){
-      this.currentCampaignId = (appealInfo.campaign._id);
-    }
+  set appeal(appeal: Appeal){
+    this.restoreService.setItem(appeal);
   }
-  get appealInfo(): AppealInfo {
+  get appeal(): Appeal {
     return this.restoreService.getItem();
   }
   save() {
-    //var data = this.restoreService.getItem();
-    //data.campaign = this.currentCampaignId;
     this.saved.emit(this.restoreService.getItem());
   }
   cancel() {
-    this.appealInfo = this.restoreService.restoreItem();
-    this.canceled.next(this.appealInfo);
+    this.restoreService.restoreItem();
   }
 
   ngOnInit() {
