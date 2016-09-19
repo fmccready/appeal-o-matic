@@ -16,7 +16,7 @@ interface JQuery {
 
 @Component({
   selector: 'app-appeal-preview',
-  templateUrl: 'appeal-preview.component.html',
+  templateUrl: 'appeal-hhd-large-img.html',
   styleUrls: ['appeal-preview.component.css']
 })
 export class AppealPreviewComponent implements OnInit {
@@ -109,7 +109,7 @@ export class AppealPreviewComponent implements OnInit {
       this.version.utm += '-d';
     }
     else if (this.appeal.codes.audience == 'nonDonor') {
-      this.version.src = '';
+      this.version.src = '_N';
       this.version.utm += '-nd';
     }
     else if (this.appeal.codes.audience == 'middleDonor') {
