@@ -61,7 +61,7 @@ export class AppealService {
     let options = new RequestOptions({
       headers: headers
     });
-    this.http.patch(this._appealUrl + appeal._id, body, options).subscribe(
+    this.http.patch(this._appealUrl + appeal._id + '?' + this._populateCampaign, body, options).subscribe(
       data => console.log(data),
       error => console.log(error)
     );

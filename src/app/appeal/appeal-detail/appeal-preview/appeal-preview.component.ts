@@ -30,10 +30,11 @@ export class AppealPreviewComponent implements OnInit {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
   }
-
+  
   @ViewChild('appealBody') appealBody: ElementRef;
   @ViewChild('appealPS') appealPS: ElementRef;
   @ViewChild('plainBody') plainBody: ElementRef;
+  @ViewChild('plainHeadline') plainHeadline: ElementRef;
   @ViewChild('plainPS') plainPS: ElementRef;
   generateBody(appeal) {
     var self = this;
@@ -44,9 +45,10 @@ export class AppealPreviewComponent implements OnInit {
         if (content.hasOwnProperty('body')) {
           this.appealBody.nativeElement.innerHTML = content.body;
           this.plainBody.nativeElement.innerHTML = content.body;
+          this.plainHeadline.nativeElement.innerHTML = content.headline;
           $(this.appealBody.nativeElement)
             .find('a').each(function() {
-              var url = $(this).attr('href');
+              let url = $(this).attr('href');
               self.addCodes(url, 'TL', 'html').subscribe(data => url = data);
               $(this).attr('href', url);
               $(this).css({
@@ -57,7 +59,7 @@ export class AppealPreviewComponent implements OnInit {
             });
           $(this.plainBody.nativeElement)
             .find('a').each(function() {
-              var url = $(this).attr('href');
+              let url = $(this).attr('href');
               self.addCodes(url, 'TL', 'plain').subscribe(data => url = data);
               $(this).attr('href', url);
             });
@@ -80,7 +82,7 @@ export class AppealPreviewComponent implements OnInit {
             });
           $(this.plainPS.nativeElement)
             .find('a').each(function() {
-              var url = $(this).attr('href');
+              let url = $(this).attr('href');
               self.addCodes(url, 'TL', 'plain').subscribe(data => url = data);
               $(this).attr('href', url);
             });
@@ -95,25 +97,25 @@ export class AppealPreviewComponent implements OnInit {
   setVersion() {
     this.version = { src: '', utm: (this.appeal.info.campaign.utm_campaign || '') + '-' + (this.appeal.codes.series || '1') };
     if (this.appeal.codes.resend > 1) {
-      this.version.utm += '-rs'
-    }
+      this.version.utm += '-rs';
+    } 
     else {
-      this.version.utm += '-reg'
+      this.version.utm += '-reg';
     }
 
-    if (this.appeal.codes.audience == 'sustainer') {
+    if (this.appeal.codes.audience === 'sustainer') {
       this.version.src = '_S';
       this.version.utm += '-sus';
     }
-    else if (this.appeal.codes.audience == 'donor') {
+    else if (this.appeal.codes.audience === 'donor') {
       this.version.src = '';
       this.version.utm += '-d';
     }
-    else if (this.appeal.codes.audience == 'nonDonor') {
+    else if (this.appeal.codes.audience === 'nonDonor') {
       this.version.src = '';
       this.version.utm += '-nd';
     }
-    else if (this.appeal.codes.audience == 'middleDonor') {
+    else if (this.appeal.codes.audience === 'middleDonor') {
       this.version.src = '';
       this.version.utm += '-md';
     }
@@ -246,5 +248,18 @@ export class AppealPreviewComponent implements OnInit {
 
   replaceAll(str, find, replace) {
     return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  }
+  copyHtml(){
+    let html = document.querySelector('#htmlVersion');
+    let range = document.createRange();
+    range.selectNode(html);
+    window.getSelection().addRange(range);
+    try {
+      let success = document.execCommand('copy');
+      console.log(success);
+    } catch (err) {
+      console.log(err);
+    }
+    window.getSelection().removeAllRanges();
   }
 }

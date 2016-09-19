@@ -29,7 +29,6 @@ export class AppealInfoComponent implements OnInit {
   }
   save() {
     this.saved.emit(this.restoreService.getItem());
-    console.log(this.restoreService.getItem());
   }
   cancel() {
     this.restoreService.restoreItem();

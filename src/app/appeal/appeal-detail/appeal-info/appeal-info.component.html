@@ -23,13 +23,12 @@
         </div>
         <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
           <label for="campaign">Campaign</label>
-
           <select id="campaign" type="text" class="form-control" [(ngModel)]="appeal.info.campaign" #campaign="ngModel" name="campaign">
-            <option *ngFor="let c of campaigns | async" [ngValue]="c">{{c.name}}</option>
+            <option *ngFor="let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
           </select>
           <hr>
-          <pre>{{appeal.info.campaign | json}}</pre>
         </div>
+        <pre>{{appeal.info.campaign | json}}</pre>
         <div class="form-group">
           <label for="send-date">Send date</label>
           <datepicker [(ngModel)]="appeal.info.sendDate" name="sendDate"></datepicker>

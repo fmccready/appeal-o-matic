@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/Rx';
 
 import { AppealService } from '../../appeal.service';
 import { Appeal } from '../../models/appeal';
-
-import { AppealCode } from '../../models/appeal';
-import { AppealContent } from '../../models/appeal';
-import { AppealInfo } from '../../models/appeal';
-import { AppealSignoff } from '../../models/appeal';
 
 @Component({
   selector: 'app-appeal-detail',
@@ -43,15 +38,19 @@ export class AppealDetailComponent implements OnInit {
 
   onInfoSaved(appeal) {
     this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
   onContentSaved(appeal){
     this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
   onCodesSaved(appeal){
     this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
   onSignoffsSaved(appeal){
     this.appealService.updateAppeal(appeal);
+    this.appealSubject.next(appeal);
   }
 
   ngOnInit() {
