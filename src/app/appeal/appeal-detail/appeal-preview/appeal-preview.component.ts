@@ -16,7 +16,7 @@ interface JQuery {
 
 @Component({
   selector: 'app-appeal-preview',
-  templateUrl: 'appeal-hhd-large-img.html',
+  templateUrl: 'appeal-hhd.html',
   styleUrls: ['appeal-preview.component.css']
 })
 export class AppealPreviewComponent implements OnInit {

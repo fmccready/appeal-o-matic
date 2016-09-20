@@ -1,3 +1,11 @@
+<div class="well">
+  <button (click)="copyHtml()">Copy HTML</button>
+  <button (click)="copyPlain()">Copy Plain</button>
+</div>
+<div id="hidden" style="position:absolute; top: -10000px; left: -10000px;">
+
+</div>
+<div #htmlVersion>
 <!doctype html>
 <html>
     <head>
@@ -89,11 +97,7 @@
                         <tr><td bgcolor="#ffffff" colspan="2" style="height: 20px;"></td></tr>
 				  </table>
 
-<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:20px; margin-bottom: 1em; margin-top:0px; font-weight:normal;">Dear <convio:choose>
-  <convio:when title="First name is not empty" test="nempty" selected="selected">
-    <convio:op><convio:session name="1" param="first_name"></convio:session></convio:op>
-    <convio:then><convio:session name="1" param="first_name"></convio:session></convio:then>
-  </convio:when><convio:otherwise title="First name is empty">Friend</convio:otherwise></convio:choose>,
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:20px; margin-bottom: 1em; margin-top:0px; font-weight:normal;">Dear [[S1:first_name:Friend]],
 </p>
 
 <p #appealBody style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
@@ -156,20 +160,19 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
         <![endif]-->
     </body>
 </html>
+</div>
 
-<div id="plainText">
-{{appeal.emailContent.headline}}
+<div class="well">
+<h2>Plain Text Version</h2>
+</div>
+
+<div id="plainText" class="col-xs-12 col-md-8">
+<div #plainVersion>
+<p #plainHeadline></p>
 <br><br>
 {{addCodes(appeal.emailContent.url, {src:'TL1', utm:'text-link-1'}, 'plain') | async }}
 <br><br>
-Dear &lt;convio:choose&gt;
-&lt;convio:when  test="nempty" selected="selected"&gt;
-&lt;convio:op&gt;&lt;convio:session name="1"
-param="first_name">&lt;/convio:session>&lt;/convio:op&gt;
-&lt;convio:then&gt;&lt;convio:session name="1"
-param="first_name"&gt;&lt;/convio:session>&lt;/convio:then&gt;
-&lt;/convio:when&gt;
-&lt;convio:otherwise >Friend&lt;/convio:otherwise>&lt;/convio:choose&gt;,
+Dear [[S1:first_name:Friend]],
 <br><br>
 <p #plainBody></p>
 <br>
@@ -221,4 +224,5 @@ The Fellowship is a 501(c)(3) tax-exempt, non-profit organization
 © [[S9:pattern:yyyy]] International Fellowship of Christians and Jews(TM)
 <br><br>
 Photos and names may have been changed for personal privacy, dignity, and security reasons.
+</div>
 </div>
