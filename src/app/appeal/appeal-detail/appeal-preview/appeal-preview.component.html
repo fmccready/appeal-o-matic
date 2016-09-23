@@ -90,7 +90,7 @@
                 <td style="padding: 20px 0px 0px 0px; margin:0;">
                     <table align="right" cellpadding="0" cellspacing="0" style="margin: 0px 0px 0px 20px; width:290px">
 					  <tr>
-						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="{{addCodes(appeal.emailContent.url, {src: 'PH1', utm: 'photo-link-1'}, 'html') | async}}"><img [src]="appeal.emailContent.image" alt="Donate Now"></a></td>
+						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="{{addCodes(appeal.emailContent.url, {src: appeal.emailContent.image.code, utm: appeal.emailContent.image.utm}, 'html') | async}}"><img [src]="appeal.emailContent.image.url" alt="Donate Now"></a></td>
 					  </tr>
 
                         <tr><td bgcolor="#ffffff" colspan="2" style="height: 20px;"></td></tr>

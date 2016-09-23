@@ -10,14 +10,14 @@ import { RestoreService } from '../../../restore.service';
   providers: [RestoreService]
 })
 export class AppealCodesComponent implements OnInit {
-  @Output() saved = new EventEmitter<Appeal>();
-  constructor(private restoreService: RestoreService<Appeal>) { }
+  @Output() saved = new EventEmitter<AppealCode>();
+  constructor(private restoreService: RestoreService<AppealCode>) { }
 
   @Input()
-  set appeal(appeal: Appeal){
+  set codes(appeal: AppealCode){
     this.restoreService.setItem(appeal);
   }
-  get appeal(): Appeal {
+  get codes(): AppealCode {
     return this.restoreService.getItem();
   }
   save() {
@@ -29,5 +29,12 @@ export class AppealCodesComponent implements OnInit {
 
   ngOnInit() {
   }
-
+}
+interface AppealCode {
+  utm_medium: string;
+  utm_source: string;
+  audience: string;
+  series: number;
+  resend: number;
+  s_subsrc: string;
 }

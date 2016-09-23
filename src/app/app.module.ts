@@ -12,6 +12,7 @@ import { CampaignModule } from './campaign/campaign.module';
 
 import { CampaignService } from './campaign.service';
 import { AppealService } from './appeal.service';
+
 import { Auth } from './auth.service';
 
 import { routing, appRoutingProviders } from './app.routes';

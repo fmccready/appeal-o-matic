@@ -3,8 +3,7 @@ var Schema = mongoose.Schema;
 
 var campaignSchema = new Schema({
   name: String,
-  utm_campaign: String,
-  startDate: Date
+  utm: String,
 });
 
 module.exports = mongoose.model('Campaign', campaignSchema);

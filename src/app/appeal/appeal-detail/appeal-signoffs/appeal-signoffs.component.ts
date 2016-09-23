@@ -10,14 +10,14 @@ import { Appeal } from '../../../models/appeal';
   providers: [RestoreService]
 })
 export class AppealSignoffsComponent implements OnInit {
-  @Output() saved = new EventEmitter<Appeal>();
-  constructor(private restoreService: RestoreService<Appeal>) { }
+  @Output() saved = new EventEmitter<AppealSignoff>();
+  constructor(private restoreService: RestoreService<AppealSignoff>) { }
 
   @Input()
-  set appeal(appeal: Appeal){
+  set signoffs(appeal: AppealSignoff){
     this.restoreService.setItem(appeal);
   }
-  get appeal(): Appeal {
+  get signoffs(): AppealSignoff {
     return this.restoreService.getItem();
   }
   save() {
@@ -29,4 +29,9 @@ export class AppealSignoffsComponent implements OnInit {
 
   ngOnInit() {
   }
+}
+interface AppealSignoff {
+  editor: string;
+  funDev: string;
+  web: string;
 }

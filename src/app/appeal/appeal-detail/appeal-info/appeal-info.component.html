@@ -24,7 +24,7 @@
         <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
           <label for="campaign">Campaign</label>
           <select id="campaign" type="text" class="form-control" [(ngModel)]="appeal.info.campaign" #campaign="ngModel" name="campaign">
-            <option *ngFor="let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
+            <option *ngFor="let c of campaigns | async" [ngValue]="c.utm">{{c | json}}</option>
           </select>
           <hr>
         </div>

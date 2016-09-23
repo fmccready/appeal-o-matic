@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { BehaviorSubject } from 'rxjs/Rx';
+import { Subject, Observable } from 'rxjs/Rx';
 
 import { AppealService } from '../../appeal.service';
 import { Appeal } from '../../models/appeal';
@@ -12,18 +12,22 @@ import { Appeal } from '../../models/appeal';
   styleUrls: ['appeal-detail.component.css']
 })
 export class AppealDetailComponent implements OnInit {
-  private appeal: Appeal = new Appeal();
-  appealSubject: BehaviorSubject<Appeal> = new BehaviorSubject(this.appeal);
-  private qsAppealId: any;
+  private appeal$ = new Subject();
+  data = false;
+  
+  private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
-    this.subscribeToAppealFromQueryString();
+    this.subscribeToAppealFromQueryString();    
   }
   subscribeToAppealFromQueryString() {
     this.route.params
       .subscribe(data => {
-        this.qsAppealId = data;
-        if (this.qsAppealId.hasOwnProperty('appealId')){
-          this.appealService.getAppealWithCampaign(this.qsAppealId.appealId).subscribe(
+        this.qs = data;
+        if (this.qs.hasOwnProperty('appealId')){
+          this.appeal$.next(this.appealService.getAppealById(this.qs.appealId));
+          this.data = true;
+          /*
+          this.appealService.getAppeal(this.qsAppealId.appealId).subscribe(
             appealData => {
               if (appealData){
                 this.appeal = appealData.json();
@@ -32,25 +36,26 @@ export class AppealDetailComponent implements OnInit {
             },
             error => {console.log(error);}
           );
+          */
         }
       });
   }
 
-  onInfoSaved(appeal) {
-    this.appealService.updateAppeal(appeal);
-    this.appealSubject.next(appeal);
+  onInfoSaved(data) {
+    this.appealService.updateAppeal(data);
+    this.appeal$.next(data);
   }
-  onContentSaved(appeal){
-    this.appealService.updateAppeal(appeal);
-    this.appealSubject.next(appeal);
+  onContentSaved(data){
+    this.appealService.updateAppeal(data);
+    this.appeal$.next(data);
   }
-  onCodesSaved(appeal){
-    this.appealService.updateAppeal(appeal);
-    this.appealSubject.next(appeal);
+  onCodesSaved(data){
+    this.appealService.updateAppeal(data);
+    this.appeal$.next(data);
   }
-  onSignoffsSaved(appeal){
-    this.appealService.updateAppeal(appeal);
-    this.appealSubject.next(appeal);
+  onSignoffsSaved(data){
+    this.appealService.updateAppeal(data);
+    this.appeal$.next(data);
   }
 
   ngOnInit() {

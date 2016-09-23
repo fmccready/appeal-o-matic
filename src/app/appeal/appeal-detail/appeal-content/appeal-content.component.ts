@@ -8,15 +8,15 @@ import { RestoreService } from '../../../restore.service';
   styleUrls: ['appeal-content.component.css']
 })
 export class AppealContentComponent implements OnInit {
-  @Output() saved = new EventEmitter<Appeal>();
-  constructor(private restoreService: RestoreService<Appeal>) {
+  @Output() saved = new EventEmitter<AppealContent>();
+  constructor(private restoreService: RestoreService<AppealContent>) {
   }
 
   @Input()
-  set appeal(appeal: Appeal){
-    this.restoreService.setItem(appeal);
+  set content(appealContent: AppealContent){
+    this.restoreService.setItem(appealContent);
   }
-  get appeal(): Appeal {
+  get content(): AppealContent {
     return this.restoreService.getItem();
   }
   save() {
@@ -28,4 +28,15 @@ export class AppealContentComponent implements OnInit {
 
   ngOnInit() {
   }
+}
+interface AppealContent {
+  headline: string;
+  url: string;
+  body: string;
+  ps: string;
+  image: {
+    url: string;
+    code: string;
+    utm: string;
+  };
 }

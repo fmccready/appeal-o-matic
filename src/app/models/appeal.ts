@@ -1,35 +1,31 @@
-import { Campaign } from './campaign';
-import { Optional } from '@angular/core';
 export class Appeal {
   _id: string;
-  info: AppealInfo = new AppealInfo();
-  codes: AppealCode = new AppealCode();
-  signoffs: AppealSignoff[] = [];
-  emailContent: AppealContent = new AppealContent();
-  private departments = ['Fundraising', 'Editorial', 'Web'];
-  constructor(){
-    for (let d of this.departments){
-      this.signoffs.push(new AppealSignoff(d));
-    }
-  }
+  info: AppealInfo;
+  codes: AppealCode;
+  signoffs: AppealSignoff;
+  emailContent: AppealContent;
 }
-export class AppealInfo {
+export interface AppealInfo {
   name: string;
   sender: string;
   senderAddress: string;
   subjectLine: string;
-  campaign: any;
+  campaign: string;
   sendDate: Date;
   scheduled: boolean;
 }
-export class AppealContent {
+export interface AppealContent {
   headline: string;
   url: string;
   body: string;
   ps: string;
-  image: string[];
+  image: {
+    url: string;
+    code: string;
+    utm: string;
+  };
 }
-export class AppealCode {
+export interface AppealCode {
   utm_medium: string;
   utm_source: string;
   audience: string;
@@ -37,17 +33,14 @@ export class AppealCode {
   resend: number;
   s_subsrc: string;
 }
-export class AppealElement {
+export interface AppealElement {
   tag: string;
   text: string;
   href: string;
   src: string;
 }
-export class AppealSignoff {
-  name: string;
-  signature: boolean;
-  department: string;
-  constructor(@Optional() department: string){
-    this.department = department;
-  }
+export interface AppealSignoff {
+  editor: string;
+  funDev: string;
+  web: string;
 }

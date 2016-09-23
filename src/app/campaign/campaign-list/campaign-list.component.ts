@@ -27,7 +27,6 @@ export class CampaignListComponent implements OnInit {
   deleteCampaign(id) {
     this.campaignService.removeCampaign(id).subscribe(
       success => {
-        console.log(success);
         this.campaignService.loadCampaigns();
       },
       error => {

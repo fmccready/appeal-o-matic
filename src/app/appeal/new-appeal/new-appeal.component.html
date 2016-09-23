@@ -3,30 +3,30 @@
     <form #appealForm="ngForm" (ngSubmit)="appealSubmit()" novalidate>
       <div class="form-group" [class.has-error]="!name.valid && name.touched">
         <label for="appeal-name">eAppeal name</label>
-        <input type="text" class="form-control" [(ngModel)]="appeal.info.name" #name="ngModel" name="name" id="appeal-name" placeholder="required">
+        <input type="text" class="form-control" [(ngModel)]="appeal.name" #name="ngModel" name="name" id="appeal-name" placeholder="required">
       </div>
       <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
         <label for="campaign-name">Campaign name</label>
-        <select class="form-control" [(ngModel)]="appeal.info.campaign" #campaign="ngModel" name="campaign" id="campaign-name">
+        <select class="form-control" [(ngModel)]="appeal.campaign" #campaign="ngModel" name="campaign" id="campaign-name">
           <option selected disabled value="">required</option>
           <option *ngFor=" let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
         </select>
       </div>
       <div class="form-group" [class.has-error]="!sender.valid && sender.touched">
         <label for="sender-name">Sender name</label>
-        <input type="text" class="form-control" [(ngModel)]="appeal.info.sender" #sender="ngModel" name="sender" id="sender-name" placeholder="optional">
+        <input type="text" class="form-control" [(ngModel)]="appeal.sender" #sender="ngModel" name="sender" id="sender-name" placeholder="optional">
       </div>
       <div class="form-group" [class.has-error]="!senderAddress.valid && senderAddress.touched">
         <label for="sender-email">Sender email address</label>
-        <input type="email" class="form-control" [(ngModel)]="appeal.info.senderAddress" #senderAddress="ngModel" name="senderAddress" id="sender-email" placeholder="optional">
+        <input type="email" class="form-control" [(ngModel)]="appeal.senderAddress" #senderAddress="ngModel" name="senderAddress" id="sender-email" placeholder="optional">
       </div>
       <div class="form-group" [class.has-error]="!subjectLine.valid && subjectLine.touched">
         <label for="subject-line">Subject line</label>
-        <input type="text" class="form-control" [(ngModel)]="appeal.info.subjectLine" #subjectLine="ngModel" name="subjectLine" id="subject-line" placeholder="optional">
+        <input type="text" class="form-control" [(ngModel)]="appeal.subjectLine" #subjectLine="ngModel" name="subjectLine" id="subject-line" placeholder="optional">
       </div>
       <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
         <label for="sendDate">Send date (optional)</label>
-        <datepicker [(ngModel)]="appeal.info.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datepicker>
+        <datepicker [(ngModel)]="appeal.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datepicker>
       </div>
       <div class="form-group" [class.has-error]="!sendTime.valid && sendTime.touched">
         <label for="sendTime">Send time (optional)</label>

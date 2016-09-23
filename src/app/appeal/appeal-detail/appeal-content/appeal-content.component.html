@@ -7,23 +7,27 @@
       <form #contentForm="ngForm" novalidate>
         <div class="form-group" [class.has-error]="!headline.valid && headline.touched">
           <label for="headline">Headline</label>
-          <ckeditor id="headline" [(ngModel)]="appeal.emailContent.headline" #headline="ngModel" name="headline"></ckeditor>
+          <ckeditor id="headline" [(ngModel)]="content.headline" #headline="ngModel" name="headline"></ckeditor>
         </div>
         <div class="form-group" [class.has-error]="!body.valid && body.touched">
           <label for="appeal-body">Body</label>
-          <ckeditor id="appeal-body" [(ngModel)]="appeal.emailContent.body" #body="ngModel" name="body"></ckeditor>
+          <ckeditor id="appeal-body" [(ngModel)]="content.body" #body="ngModel" name="body"></ckeditor>
         </div>
         <div class="form-group" [class.has-error]="!ps.valid && ps.touched">
           <label for="appeal-ps">PS (optional)</label>
-          <ckeditor id="appeal-ps" [(ngModel)]="appeal.emailContent.ps" #ps="ngModel" name="ps"></ckeditor>
+          <ckeditor id="appeal-ps" [(ngModel)]="content.ps" #ps="ngModel" name="ps"></ckeditor>
         </div>
         <div class="form-group" [class.has-error]="!url.valid && url.touched">
           <label for="url">Default donation form link</label>
-          <input type="text" id="url" class="form-control" [(ngModel)]="appeal.emailContent.url" #url="ngModel" name="url">
+          <input type="text" id="url" class="form-control" [(ngModel)]="content.url" #url="ngModel" name="url">
         </div>
         <div class="form-group" [class.has-error]="!image.valid && image.touched">
-          <label for="image">Image URL</label>
-          <input type="text" id="image" class="form-control" [(ngModel)]="appeal.emailContent.image" #image="ngModel" name="image">
+          <label for="imageUrl">Image URL</label>
+          <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image.url" #image="ngModel" name="imageUrl">
+          <label for="imageCode">Image source code</label>
+          <input type="text" id="imageCode" class="form-control" [(ngModel)]="content.image.code" #image="ngModel" name="imageCode">
+          <label for="imageUtm">Image UTM code</label>
+          <input type="text" id="imageUtm" class="form-control" [(ngModel)]="content.image.utm" #image="ngModel" name="imageUtm">
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>

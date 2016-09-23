@@ -7,10 +7,7 @@ var appealSchema = new Schema({
     sender: String,
     senderAddress: String,
     subjectLine: String,
-    campaign: {
-      type: Schema.Types.ObjectId,
-      ref: 'Campaign'
-    },
+    campaign: String,
     sendDate: Date,
     scheduled: Boolean
   },
@@ -19,7 +16,11 @@ var appealSchema = new Schema({
     url: String,
     body: String,
     ps: String,
-    image: String,
+    image: {
+      url: String,
+      code: String,
+      utm: String
+    },
   },
   codes: {
     utm_medium: {type:String , default: 'email'},

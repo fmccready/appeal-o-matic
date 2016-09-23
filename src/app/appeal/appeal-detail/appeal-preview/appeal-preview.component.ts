@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
-import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
 import { AppealContent, AppealCode, Appeal } from '../../../models/appeal';
 import { Campaign } from '../../../models/campaign';
@@ -25,7 +25,7 @@ export class AppealPreviewComponent implements OnInit {
   private textLinkCount: any = {};
   private version: any = {};
   private appeal: Appeal = new Appeal();
-  private appealSubject: BehaviorSubject<Appeal>;
+  private appealSubject: Subject<Appeal>;
   constructor(private campaignService: CampaignService) {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
@@ -133,7 +133,7 @@ export class AppealPreviewComponent implements OnInit {
   }
 
   setVersion() {
-    this.version = { src: '', utm: (this.appeal.info.campaign.utm_campaign || '') + '-' + (this.appeal.codes.series || '1') };
+    this.version = { src: '', utm: (this.appeal.info.campaign || '') + '-' + (this.appeal.codes.series || '1') };
     if (this.appeal.codes.resend > 1) {
       this.version.utm += '-rs';
     }
@@ -169,7 +169,7 @@ export class AppealPreviewComponent implements OnInit {
       }
       url += '&utm_medium=' + (this.appeal.codes.utm_medium || '');
       url += '&utm_source=' + (this.appeal.codes.utm_source || '');
-      url += '&utm_campaign=' + (this.appeal.info.campaign.utm_campaign || '');
+      url += '&utm_campaign=' + (this.appeal.info.campaign || '');
       url += '&autologin=true';
       url += '&utm_content=' + (this.version.utm || '') + '-' + (emailType || '') + '-' + (utmContent || '');
       return Observable.of(url);
@@ -257,22 +257,22 @@ export class AppealPreviewComponent implements OnInit {
     url += '&s_subsrc=' + (this.appeal.codes.s_subsrc || '');
     url += '&utm_medium=' + (this.appeal.codes.utm_medium || '');
     url += '&utm_source=' + (this.appeal.codes.utm_source || '');
-    url += '&utm_campaign=' + (this.appeal.info.campaign.utm_campaign || '');
+    url += '&utm_campaign=' + (this.appeal.info.campaign || '');
     url += '&autologin=true';
     return url;
   }
 
   @Input()
-  set appealPreview(appeal: BehaviorSubject<Appeal>) {
+  set appealPreview(appeal: Subject<Appeal>) {
     this.appealSubject = appeal;
     if (appeal){
       appeal.subscribe(
-        data => {this.appeal = data; this.generateBody(data);},
+        data => {console.log(data);this.appeal = data; this.generateBody(data);},
         error => console.log(error)
       );
     }
   }
-  get appealPreview(): BehaviorSubject<Appeal> {
+  get appealPreview(): Subject<Appeal> {
     return this.appealSubject;
   }
 

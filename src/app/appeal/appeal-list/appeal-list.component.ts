@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Appeal } from '../../models/appeal';
 import { Campaign } from '../../models/campaign';
-import { CampaignService } from '../../campaign.service';
+
 import { AppealService } from '../../appeal.service';
 
 @Component({
@@ -15,25 +15,14 @@ import { AppealService } from '../../appeal.service';
   inputs: ['filters']
 })
 export class AppealListComponent implements OnInit {
-  appeals: Appeal[];
+  private appeals: Appeal[];
   private campaigns: Campaign[];
   public filters: Observable<Object>;
-  constructor(private appealService: AppealService, private campaignService: CampaignService, private route: ActivatedRoute) {
-    appealService.loadAppeals();
+  constructor(private route: ActivatedRoute, private appealService: AppealService) {
   }
-  getAppeals(){
-    this.appealService.getAppeals().subscribe(
-      data => { this.appeals = data; },
-      error => { console.log(error) }
-    );
-    /*
-    this.campaignService.getCampaigns().subscribe(
-      data => this.campaigns = data,
-      error => console.log(error)
-    );
-    */
+  setCurrentAppeal(id){
+    
   }
-
   deleteAppeal(id) {
     this.appealService.removeAppeal(id).subscribe(
       success => {
@@ -45,7 +34,8 @@ export class AppealListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAppeals();
+    this.appealService.getAppeals().subscribe(data => this.appeals = data);
+
     if (this.filters){
       this.filters.subscribe(
         data => { this.appealService.filterAppeals(data) },

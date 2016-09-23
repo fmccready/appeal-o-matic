@@ -13,9 +13,10 @@ import { CampaignService } from '../../campaign.service';
 export class FiltersComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
   filters: any = {};
-  filterList: BehaviorSubject<Object> = new BehaviorSubject({});
+  filterList: BehaviorSubject<Object>;
   constructor(private campaignService: CampaignService) {
     this.campaigns = campaignService.getCampaigns();
+    this.filterList = new BehaviorSubject(this.filters);
   }
 
   onSubmit(filters):void{

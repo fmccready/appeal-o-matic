@@ -4,6 +4,7 @@ import { AsyncSubject, Observable } from 'rxjs/Rx';
 
 import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';
+import { AppealService } from '../../../appeal.service';
 import { Appeal } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 
@@ -13,18 +14,18 @@ import { RestoreService } from '../../../restore.service';
   styleUrls: ['appeal-info.component.css']
 })
 export class AppealInfoComponent implements OnInit {
-  @Output() saved = new EventEmitter<Appeal>();
+  @Output() saved = new EventEmitter<AppealInfo>();
   private campaigns: Observable<Campaign[]>;
 
-  constructor(private restoreService: RestoreService<Appeal>, private campaignService: CampaignService) {
+  constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = campaignService.getCampaigns();
   }
 
   @Input()
-  set appeal(appeal: Appeal){
-    this.restoreService.setItem(appeal);
+  set info(appealInfo: AppealInfo) {
+    this.restoreService.setItem(appealInfo);
   }
-  get appeal(): Appeal {
+  get info(): AppealInfo {
     return this.restoreService.getItem();
   }
   save() {
@@ -36,4 +37,13 @@ export class AppealInfoComponent implements OnInit {
 
   ngOnInit() {
   }
+}
+interface AppealInfo {
+  name: string;
+  sender: string;
+  senderAddress: string;
+  subjectLine: string;
+  campaign: string;
+  sendDate: Date;
+  scheduled: boolean;
 }

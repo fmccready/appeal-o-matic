@@ -1,6 +1,5 @@
-export class Campaign {
+export interface Campaign {
   _id: String;
   name: String;
-  utm_campaign: String;
-  startDate: Date;
+  utm: String;
 }
