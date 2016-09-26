@@ -3,37 +3,37 @@ var Schema = mongoose.Schema;
 
 var appealSchema = new Schema({
   info: {
-    name: String,
-    sender: String,
-    senderAddress: String,
-    subjectLine: String,
-    campaign: String,
-    sendDate: Date,
-    scheduled: Boolean
+    name: {type: String, default: ''},
+    sender: {type: String, default: ''},
+    senderAddress: {type: String, default: ''},
+    subjectLine: {type: String, default: ''},
+    campaign: {type: String, default: ''},
+    sendDate: {type: String, default: new Date()},
+    scheduled: {type: Boolean, default: false}
   },
-  emailContent: {
+  content: {
     headline: {type:String, default: ''},
-    url: String,
-    body: String,
-    ps: String,
+    url: {type: String, default: ''},
+    body: {type: String, default: ''},
+    ps: {type: String, default: ''},
     image: {
-      url: String,
-      code: String,
-      utm: String
+      url: {type: String, default: ''},
+      code: {type: String, default: ''},
+      utm: {type: String, default: ''}
     },
   },
   codes: {
     utm_medium: {type:String , default: 'email'},
     utm_source: {type:String, default: 'eappeal'},
-    audience: String,
-    resend: Number,
-    series: Number,
-    s_subsrc: String
+    audience: {type: String, default: ''},
+    resend: {type: Number, default: 0},
+    series: {type: Number, default: 0},
+    s_subsrc: {type: String, default: ''}
   },
-  signoffs: [{
-    name: String,
-    signature: Boolean,
-    department: String
-  }]
+  signoffs: {
+    web: {type: String, default: ''},
+    funDev: {type: String, default: ''},
+    editor: {type: String, default: ''}
+  }
 });
 module.exports = mongoose.model('Appeal', appealSchema);

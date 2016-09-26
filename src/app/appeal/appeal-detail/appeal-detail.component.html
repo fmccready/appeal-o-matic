@@ -1,12 +1,12 @@
 <pre>{{appeal | json}}</pre>
 <div class="row">
   <div *ngIf="data" class="col-xs-12 col-sm-6 col-md-4" id="controls">
-    <app-appeal-info [info]="(appeal$ | async).info" (saved)="onInfoSaved($event)"></app-appeal-info>
-    <app-appeal-content [content]="(appeal$ | async).content" (saved)="onContentSaved($event)"></app-appeal-content>
-    <app-appeal-codes [codes]="(appeal$ | async).codes" (saved)="onCodesSaved($event)"></app-appeal-codes>
-    <app-appeal-signoffs [signoffs]="(appeal$ | async).signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
+    <app-appeal-info [info]="appeal.info" (saved)="onInfoSaved($event)"></app-appeal-info>
+    <app-appeal-content [content]="appeal.content" (saved)="onContentSaved($event)"></app-appeal-content>
+    <app-appeal-codes [codes]="appeal.codes" (saved)="onCodesSaved($event)"></app-appeal-codes>
+    <app-appeal-signoffs [signoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
   </div>
   <div *ngIf="data" class="col-xs-12 col-sm-6 col-md-8">
-    <app-appeal-preview [appealPreview]="(appeal$ | async)"></app-appeal-preview>
+    <app-appeal-preview [appealPreview]="appeal"></app-appeal-preview>
   </div>
 </div>

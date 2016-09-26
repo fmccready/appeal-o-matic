@@ -7,38 +7,38 @@
       <form #infoForm="ngForm" novalidate>
         <div class="form-group" [class.has-error]="!name.valid && name.touched">
           <label for="appeal-name">eAppeal name</label>
-          <input id="appeal-name" type="text" class="form-control" [(ngModel)]="appeal.info.name" #name="ngModel" name="name">
+          <input id="appeal-name" type="text" class="form-control" [(ngModel)]="info.name" #name="ngModel" name="name">
         </div>
         <div class="form-group" [class.has-error]="!sender.valid && sender.touched">
           <label for="sender">Sender</label>
-          <input id="sender" type="text" class="form-control" [(ngModel)]="appeal.info.sender" #sender="ngModel" name="sender">
+          <input id="sender" type="text" class="form-control" [(ngModel)]="info.sender" #sender="ngModel" name="sender">
         </div>
         <div class="form-group" [class.has-error]="!senderAddress.valid && senderAddress.touched">
           <label for="sender-address">Sender email address</label>
-          <input id="sender-address" type="text" class="form-control" [(ngModel)]="appeal.info.senderAddress" #senderAddress="ngModel" name="senderAddress">
+          <input id="sender-address" type="text" class="form-control" [(ngModel)]="info.senderAddress" #senderAddress="ngModel" name="senderAddress">
         </div>
         <div class="form-group" [class.has-error]="!subjectLine.valid && subjectLine.touched">
           <label for="subject-line">Subject line</label>
-          <input id="subject-line" type="text" class="form-control" [(ngModel)]="appeal.info.subjectLine" #subjectLine="ngModel" name="subjectLine">
+          <input id="subject-line" type="text" class="form-control" [(ngModel)]="info.subjectLine" #subjectLine="ngModel" name="subjectLine">
         </div>
         <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
           <label for="campaign">Campaign</label>
-          <select id="campaign" type="text" class="form-control" [(ngModel)]="appeal.info.campaign" #campaign="ngModel" name="campaign">
+          <select id="campaign" type="text" class="form-control" [(ngModel)]="info.campaign" #campaign="ngModel" name="campaign">
             <option *ngFor="let c of campaigns | async" [ngValue]="c.utm">{{c | json}}</option>
           </select>
           <hr>
         </div>
         <div class="form-group">
           <label for="send-date">Send date</label>
-          <datepicker [(ngModel)]="appeal.info.sendDate" name="sendDate"></datepicker>
+          <datepicker [(ngModel)]="info.sendDate" name="sendDate"></datepicker>
         </div>
         <div class="form-group">
           <label for="send-time">Send time</label>
-          <timepicker [(ngModel)]="appeal.info.sendDate" name="sendTime"></timepicker>
+          <timepicker [(ngModel)]="info.sendDate" name="sendTime"></timepicker>
         </div>
         <div class="form-group" [class.has-error]="!scheduled.valid && scheduled.touched">
           <label for="send-date">Scheduled
-            <input type="checkbox" class="form-control" [(ngModel)]="appeal.info.scheduled" #scheduled="ngModel" name="scheduled" id="scheduled">
+            <input type="checkbox" class="form-control" [(ngModel)]="info.scheduled" #scheduled="ngModel" name="scheduled" id="scheduled">
           </label>
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>

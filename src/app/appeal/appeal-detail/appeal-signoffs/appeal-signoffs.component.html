@@ -7,15 +7,15 @@
       <form #signoffForm="ngForm" novalidate>
         <div class="form-group">
           <label for="signoff-fundraising">Fundraising</label>
-          <input id="signoff-fundraising" type="text" class="form-control" [(ngModel)]="appeal.signoffs[0].name" #signoffFundraising="ngModel" name="signoffFundraising">
+          <input id="signoff-fundraising" type="text" class="form-control" [(ngModel)]="signoffs.funDev" #signoffFundraising="ngModel" name="signoffFundraising">
         </div>
         <div class="form-group">
           <label for="signoff-editorial">Editorial</label>
-          <input id="signoff-editorial" type="text" class="form-control" [(ngModel)]="appeal.signoffs[1].name" #signoffEditorial="ngModel" name="signoffEditorial">
+          <input id="signoff-editorial" type="text" class="form-control" [(ngModel)]="signoffs.editor" #signoffEditorial="ngModel" name="signoffEditorial">
         </div>
         <div class="form-group">
           <label for="signoff-web">Web</label>
-          <input id="signoff-web" type="text" class="form-control" [(ngModel)]="appeal.signoffs[2].name" #signoffWeb="ngModel" name="signoffWeb">
+          <input id="signoff-web" type="text" class="form-control" [(ngModel)]="signoffs.web" #signoffWeb="ngModel" name="signoffWeb">
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>

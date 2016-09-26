@@ -16,12 +16,8 @@ import { AppealService } from '../../appeal.service';
 })
 export class AppealListComponent implements OnInit {
   private appeals: Appeal[];
-  private campaigns: Campaign[];
   public filters: Observable<Object>;
   constructor(private route: ActivatedRoute, private appealService: AppealService) {
-  }
-  setCurrentAppeal(id){
-    
   }
   deleteAppeal(id) {
     this.appealService.removeAppeal(id).subscribe(
@@ -29,18 +25,18 @@ export class AppealListComponent implements OnInit {
         console.log(success);
         this.appealService.loadAppeals();
       },
-      error => { console.log(error) }
+      error => { console.log(error); }
     );
   }
 
   ngOnInit() {
-    this.appealService.getAppeals().subscribe(data => this.appeals = data);
+    this.appealService.getAppeals().subscribe(data => { console.log(data); this.appeals = data; });
 
-    if (this.filters){
+    if (this.filters) {
       this.filters.subscribe(
-        data => { this.appealService.filterAppeals(data) },
-        error => { console.log(error) },
-        () => { console.log('filters complete') }
+        data => { this.appealService.filterAppeals(data); },
+        error => { console.log(error); },
+        () => { console.log('filters complete'); }
       );
     }
   }

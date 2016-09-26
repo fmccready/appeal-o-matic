@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
+import { Subject, Observable } from 'rxjs/Rx';
 
 import { Campaign } from '../../models/campaign';
 import { CampaignService } from '../../campaign.service';
@@ -13,13 +13,13 @@ import { CampaignService } from '../../campaign.service';
 export class FiltersComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
   filters: any = {};
-  filterList: BehaviorSubject<Object>;
+  filterList: Subject<Object>;
   constructor(private campaignService: CampaignService) {
     this.campaigns = campaignService.getCampaigns();
-    this.filterList = new BehaviorSubject(this.filters);
+    this.filterList = new Subject(this.filters);
   }
 
-  onSubmit(filters):void{
+  onSubmit(filters): void {
     this.filterList.next(filters);
   }
 

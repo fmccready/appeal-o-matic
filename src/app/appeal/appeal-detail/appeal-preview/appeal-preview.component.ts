@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs/Rx';
 
@@ -16,19 +16,23 @@ interface JQuery {
 
 @Component({
   selector: 'app-appeal-preview',
-  templateUrl: 'appeal-hhd.html',
+  templateUrl: 'appeal-preview.component.html',
   styleUrls: ['appeal-preview.component.css']
 })
-export class AppealPreviewComponent implements OnInit {
+export class AppealPreviewComponent implements OnChanges {
   preview: any;
   private linkCount: any = {};
   private textLinkCount: any = {};
   private version: any = {};
   private appeal: Appeal = new Appeal();
-  private appealSubject: Subject<Appeal>;
   constructor(private campaignService: CampaignService) {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
+    this.appeal.content = new AppealContent();
+    this.appeal.codes = new AppealCode();
+    this.appeal.content.image.code = '';
+    this.appeal.content.image.url = '';
+    this.appeal.content.image.utm = '';
   }
 
   copyHtml(){
@@ -76,7 +80,7 @@ export class AppealPreviewComponent implements OnInit {
   @ViewChild('plainPS') plainPS: ElementRef;
   generateBody(appeal) {
     var self = this;
-    var content = appeal.emailContent;
+    var content = appeal.content;
     if (content) {
       if (this.appeal.info.campaign) {
         this.setVersion();
@@ -263,21 +267,20 @@ export class AppealPreviewComponent implements OnInit {
   }
 
   @Input()
-  set appealPreview(appeal: Subject<Appeal>) {
-    this.appealSubject = appeal;
-    if (appeal){
-      appeal.subscribe(
-        data => {console.log(data);this.appeal = data; this.generateBody(data);},
-        error => console.log(error)
-      );
+  set appealPreview(appeal: Appeal) {
+    console.log(appeal);
+    if (appeal) {
+      this.appeal = appeal;
     }
   }
-  get appealPreview(): Subject<Appeal> {
-    return this.appealSubject;
+  get appealPreview(): Appeal {
+    return this.appeal;
   }
 
-  ngOnInit() {
+  ngOnChanges(changes) {
+    this.appeal = changes.appealPreview.currentValue;
 
+    console.log(this.appeal);
   }
 
   escapeRegExp(str) {

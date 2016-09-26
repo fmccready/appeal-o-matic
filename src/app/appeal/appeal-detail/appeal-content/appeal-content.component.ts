@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Appeal } from '../../../models/appeal';
+import { AppealContent } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 
 @Component({
@@ -28,15 +28,4 @@ export class AppealContentComponent implements OnInit {
 
   ngOnInit() {
   }
-}
-interface AppealContent {
-  headline: string;
-  url: string;
-  body: string;
-  ps: string;
-  image: {
-    url: string;
-    code: string;
-    utm: string;
-  };
 }

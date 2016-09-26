@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { AsyncSubject, Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';

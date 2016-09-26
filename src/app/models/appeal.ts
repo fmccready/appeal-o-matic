@@ -1,31 +1,27 @@
 export class Appeal {
   _id: string;
-  info: AppealInfo;
-  codes: AppealCode;
-  signoffs: AppealSignoff;
-  emailContent: AppealContent;
+  info: AppealInfo = new AppealInfo();
+  codes: AppealCode = new AppealCode();
+  signoffs: AppealSignoff = new AppealSignoff;
+  content: AppealContent = new AppealContent;
 }
-export interface AppealInfo {
-  name: string;
-  sender: string;
-  senderAddress: string;
-  subjectLine: string;
-  campaign: string;
-  sendDate: Date;
-  scheduled: boolean;
+export class AppealInfo {
+  name: string = '';
+  sender: string = '';
+  senderAddress: string = '';
+  subjectLine: string = '';
+  campaign: Campaign = new Campaign();
+  sendDate: Date = new Date();
+  scheduled: boolean = false;
 }
-export interface AppealContent {
-  headline: string;
-  url: string;
-  body: string;
-  ps: string;
-  image: {
-    url: string;
-    code: string;
-    utm: string;
-  };
+export class AppealContent {
+  headline: string = '';
+  url: string = '';
+  body: string = '';
+  ps: string = '';
+  image: Image = new Image();
 }
-export interface AppealCode {
+export class AppealCode {
   utm_medium: string;
   utm_source: string;
   audience: string;
@@ -33,14 +29,26 @@ export interface AppealCode {
   resend: number;
   s_subsrc: string;
 }
-export interface AppealElement {
+export class AppealElement {
   tag: string;
   text: string;
   href: string;
   src: string;
 }
-export interface AppealSignoff {
+export class AppealSignoff {
   editor: string;
   funDev: string;
   web: string;
+}
+
+
+class Campaign {
+  _id: string;
+  name: string;
+  utm: string;
+}
+class Image {
+  url: string = '';
+  code: string = '';
+  utm: string = '';
 }

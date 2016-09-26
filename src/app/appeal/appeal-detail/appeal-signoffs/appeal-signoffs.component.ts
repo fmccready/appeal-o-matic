@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { RestoreService } from '../../../restore.service';
-import { Appeal } from '../../../models/appeal';
+import { AppealSignoff } from '../../../models/appeal';
 
 @Component({
   selector: 'app-appeal-signoffs',
@@ -29,9 +29,4 @@ export class AppealSignoffsComponent implements OnInit {
 
   ngOnInit() {
   }
-}
-interface AppealSignoff {
-  editor: string;
-  funDev: string;
-  web: string;
 }
