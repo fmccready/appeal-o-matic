@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Subject, Observable } from 'rxjs/Rx';
+import { BehaviorSubject, Observable } from 'rxjs/Rx';
 
 import { Appeal, AppealInfo } from './models/appeal';
 
@@ -11,8 +11,8 @@ interface IAppealsOperation extends Function {
 @Injectable()
 export class AppealService {
   private _appealUrl = 'http://' + window.location.hostname + ':3000/api/v1/appeal/';
-  private _appeals$: Subject<Appeal[]>;
-  public currentAppeal$: Subject<Appeal>;
+  private _appeals$: BehaviorSubject<Appeal[]> = new BehaviorSubject([]);
+  public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject({});
 
   constructor(private http: Http) {
     this.loadAppeals();
@@ -21,7 +21,6 @@ export class AppealService {
   loadAppeals() {
     this.http.get(this._appealUrl).map(this.extractData).subscribe(
       data => {
-        console.log(data);
         this._appeals$.next(data);
       },
       error => {
@@ -35,6 +34,7 @@ export class AppealService {
       data => {
         for (let i = 0; i < data.length; i++) {
           if (data[i]._id === appealId) {
+            console.log(data[i]);
             this.currentAppeal$.next(data[i]);
           }
         }
@@ -86,19 +86,21 @@ export class AppealService {
   }
 
   filterAppeals(filters) {
+    let url = this._appealUrl;
     if (filters.campaign) {
-      let url = this._appealUrl + '?query={"info.campaign":"' + filters.campaign.utm + '"}';
-      this._makeGetRequest(url);
+      url += '?query={"info.campaign":"' + filters.campaign.utm + '"}';
     }
     if (filters.appealId) {
-      let url = this._appealUrl + filters.appealId;
-      this._makeGetRequest(url);
+      url = this._appealUrl + filters.appealId;
     }
+    this._makeGetRequest(url);
+    return this._appeals$;
   }
 
 
   getAppeals(): Observable<Appeal[]> {
-    return Observable.from(this._appeals$);
+    console.log(this._appeals$);
+    return this._appeals$;
   }
 
   private extractData(res: Response) {

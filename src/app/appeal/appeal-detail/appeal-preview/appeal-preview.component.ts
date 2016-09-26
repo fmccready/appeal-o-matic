@@ -279,8 +279,6 @@ export class AppealPreviewComponent implements OnChanges {
 
   ngOnChanges(changes) {
     this.appeal = changes.appealPreview.currentValue;
-
-    console.log(this.appeal);
   }
 
   escapeRegExp(str) {

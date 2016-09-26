@@ -9,7 +9,7 @@
         <label for="campaign-name">Campaign name</label>
         <select class="form-control" [(ngModel)]="appeal.campaign" #campaign="ngModel" name="campaign" id="campaign-name">
           <option selected disabled value="">required</option>
-          <option *ngFor=" let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
+          <option *ngFor=" let c of campaigns | async" [ngValue]="c">{{c.name}}</option>
         </select>
       </div>
       <div class="form-group" [class.has-error]="!sender.valid && sender.touched">
@@ -38,6 +38,6 @@
     </form>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <appeal-list-component></appeal-list-component>
+    <appeal-list-component [appeals]="appeals"></appeal-list-component>
   </div>
 </div>

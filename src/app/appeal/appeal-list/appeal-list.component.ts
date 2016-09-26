@@ -1,43 +1,37 @@
-import { Component, OnInit, Pipe, Input } from '@angular/core';
+import { Component, OnChanges, Pipe, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs';
 
 import { Appeal } from '../../models/appeal';
 import { Campaign } from '../../models/campaign';
 
 import { AppealService } from '../../appeal.service';
+import { RestoreService } from '../../restore.service';
 
 @Component({
   selector: 'appeal-list-component',
   templateUrl: 'appeal-list.component.html',
-  styleUrls: ['appeal-list.component.css'],
-  inputs: ['filters']
+  styleUrls: ['appeal-list.component.css']
 })
-export class AppealListComponent implements OnInit {
-  private appeals: Appeal[];
-  public filters: Observable<Object>;
-  constructor(private route: ActivatedRoute, private appealService: AppealService) {
+export class AppealListComponent implements OnChanges {
+  constructor(private route: ActivatedRoute, private appealService: AppealService, private restoreService: RestoreService<Appeal[]>) {
   }
   deleteAppeal(id) {
     this.appealService.removeAppeal(id).subscribe(
-      success => {
-        console.log(success);
-        this.appealService.loadAppeals();
-      },
+      success => { console.log(success); },
       error => { console.log(error); }
     );
   }
+  @Input()
+  set appeals(appeals: Appeal[]){
+    this.restoreService.setItem(appeals);
+  }
+  get appeals(): Appeal[]{
+    return this.restoreService.getItem();
+  }
 
-  ngOnInit() {
-    this.appealService.getAppeals().subscribe(data => { console.log(data); this.appeals = data; });
-
-    if (this.filters) {
-      this.filters.subscribe(
-        data => { this.appealService.filterAppeals(data); },
-        error => { console.log(error); },
-        () => { console.log('filters complete'); }
-      );
-    }
+  ngOnChanges(changes) {
+    this.restoreService.setItem(changes.appeals.currentValue);
   }
 }

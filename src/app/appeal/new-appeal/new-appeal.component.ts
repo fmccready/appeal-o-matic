@@ -17,8 +17,12 @@ export class NewAppealComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
   appeal = <AppealInfo>{};
   sendTime: Date = new Date();
+  appeals: Appeal[];
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = this.campaignService.getCampaigns();
+    this.appealService.getAppeals().subscribe(
+      data => {this.appeals = data; }
+    );
   }
   
   appealSubmit(){

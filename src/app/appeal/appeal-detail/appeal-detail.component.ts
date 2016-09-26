@@ -12,8 +12,7 @@ import { Appeal } from '../../models/appeal';
   styleUrls: ['appeal-detail.component.css']
 })
 export class AppealDetailComponent implements OnInit {
-  private appealObs: Observable<Appeal>;
-  private appeal: Appeal = new Appeal();
+  private appeal: Appeal;
   data = false;
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
@@ -24,8 +23,7 @@ export class AppealDetailComponent implements OnInit {
       .subscribe(queryString => {
         this.qs = queryString;
         if (this.qs.hasOwnProperty('appealId')) {
-          this.appealObs = this.appealService.getAppealById(this.qs.appealId);
-          this.appealObs.subscribe(data => this.appeal = data);
+          this.appealService.getAppealById(this.qs.appealId).subscribe(data => {this.appeal = data; if (data.hasOwnProperty('_id')){ this.data = true; }});
         }
       });
   }

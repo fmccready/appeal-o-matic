@@ -7,7 +7,10 @@ var appealSchema = new Schema({
     sender: {type: String, default: ''},
     senderAddress: {type: String, default: ''},
     subjectLine: {type: String, default: ''},
-    campaign: {type: String, default: ''},
+    campaign: {
+      name: { type: String, default: ''},
+      utm: { type: String, default: ''}
+    },
     sendDate: {type: String, default: new Date()},
     scheduled: {type: Boolean, default: false}
   },

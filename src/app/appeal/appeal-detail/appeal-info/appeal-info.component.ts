@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Rx';
 import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';
 import { AppealService } from '../../../appeal.service';
-import { Appeal } from '../../../models/appeal';
+import { AppealInfo } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 
 @Component({
@@ -37,13 +37,4 @@ export class AppealInfoComponent implements OnInit {
 
   ngOnInit() {
   }
-}
-interface AppealInfo {
-  name: string;
-  sender: string;
-  senderAddress: string;
-  subjectLine: string;
-  campaign: string;
-  sendDate: Date;
-  scheduled: boolean;
 }

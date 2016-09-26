@@ -4,6 +4,9 @@ import { Subject, Observable } from 'rxjs/Rx';
 
 import { Campaign } from '../../models/campaign';
 import { CampaignService } from '../../campaign.service';
+import { AppealService } from '../../appeal.service';
+
+import { Appeal } from '../../models/appeal';
 
 @Component({
   selector: 'app-filters',
@@ -12,15 +15,19 @@ import { CampaignService } from '../../campaign.service';
 })
 export class FiltersComponent implements OnInit {
   campaigns: Observable<Campaign[]>;
-  filters: any = {};
-  filterList: Subject<Object>;
-  constructor(private campaignService: CampaignService) {
+  appeals: Appeal[] = [];
+  filters: Object = {};
+  constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = campaignService.getCampaigns();
-    this.filterList = new Subject(this.filters);
+    this.appealService.getAppeals().subscribe(
+      data => {this.appeals = data; console.log(this.appeals); }
+    );
   }
 
   onSubmit(filters): void {
-    this.filterList.next(filters);
+    this.appealService.filterAppeals(this.filters).subscribe(
+      data => {this.appeals = data;}
+    );
   }
 
   ngOnInit() {
