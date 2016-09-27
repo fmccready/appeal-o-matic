@@ -7,6 +7,7 @@ import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';
 
 import { PlainTextPipe } from '../../../plain-text.pipe';
+import { RemoveHtmlPipe } from '../../../remove-html.pipe';
 
 declare var $: any;
 
@@ -78,9 +79,13 @@ export class AppealPreviewComponent implements OnChanges {
   @ViewChild('plainBody') plainBody: ElementRef;
   @ViewChild('plainHeadline') plainHeadline: ElementRef;
   @ViewChild('plainPS') plainPS: ElementRef;
-  generateBody(appeal) {
+  generateBody() {
+    this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
+    this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
+    this.version = {};
+
     var self = this;
-    var content = appeal.content;
+    var content = this.appeal.content;
     if (content) {
       if (this.appeal.info.campaign) {
         this.setVersion();
@@ -91,7 +96,7 @@ export class AppealPreviewComponent implements OnChanges {
           $(this.appealBody.nativeElement)
             .find('a').each(function() {
               let url = $(this).attr('href');
-              self.addCodes(url, 'TL', 'html').subscribe(data => url = data);
+              url = self.addCodes(url, 'TL', 'html');
               $(this).attr('href', url);
               $(this).css({
                 'color': '#00529c',
@@ -102,7 +107,7 @@ export class AppealPreviewComponent implements OnChanges {
           $(this.plainBody.nativeElement)
             .find('a').each(function() {
               let url = $(this).attr('href');
-              self.addCodes(url, 'TL', 'plain').subscribe(data => url = data);
+              url = self.addCodes(url, 'TL', 'plain');
               $(this).attr('href', url);
             });
           this.plainBody.nativeElement.innerHTML = new PlainTextPipe().transform(this.plainBody.nativeElement.innerHTML);
@@ -114,7 +119,7 @@ export class AppealPreviewComponent implements OnChanges {
           $(this.appealPS.nativeElement)
             .find('a').each(function() {
               var url = $(this).attr('href');
-              self.addCodes(url, 'TL', 'html').subscribe(data => url = data);
+              url = self.addCodes(url, 'TL', 'html');
               $(this).attr('href', url);
               $(this).css({
                 'color': '#00529c',
@@ -125,7 +130,7 @@ export class AppealPreviewComponent implements OnChanges {
           $(this.plainPS.nativeElement)
             .find('a').each(function() {
               let url = $(this).attr('href');
-              self.addCodes(url, 'TL', 'plain').subscribe(data => url = data);
+              url = self.addCodes(url, 'TL', 'plain');
               $(this).attr('href', url);
             });
           this.plainPS.nativeElement.innerHTML = new PlainTextPipe().transform(this.plainPS.nativeElement.innerHTML);
@@ -141,9 +146,7 @@ export class AppealPreviewComponent implements OnChanges {
     if (this.appeal.codes.resend > 1) {
       this.version.utm += '-rs';
     }
-    else {
-      this.version.utm += '-reg';
-    }
+
 
     if (this.appeal.codes.audience === 'sustainer') {
       this.version.src = '_S';
@@ -153,7 +156,7 @@ export class AppealPreviewComponent implements OnChanges {
       this.version.src = '';
       this.version.utm += '-d';
     }
-    else if (this.appeal.codes.audience == 'nonDonor') {
+    else if (this.appeal.codes.audience === 'nonDonor') {
       this.version.src = '_N';
       this.version.utm += '-nd';
     }
@@ -162,10 +165,10 @@ export class AppealPreviewComponent implements OnChanges {
       this.version.utm += '-md';
     }
     else {
-      this.version.src = '';
+      this.version.src = '-reg';
     }
   }
-  addUtmOnly(url: string, utmContent: string, emailType: string): Observable<string> {
+  addUtmOnly(url: string, utmContent: string, emailType: string): string {
     if (url && this.appeal.hasOwnProperty('_id')) {
       var hasQuestionMark = url.search('\\?');
       if (hasQuestionMark < 0) {
@@ -176,13 +179,13 @@ export class AppealPreviewComponent implements OnChanges {
       url += '&utm_campaign=' + (this.appeal.info.campaign || '');
       url += '&autologin=true';
       url += '&utm_content=' + (this.version.utm || '') + '-' + (emailType || '') + '-' + (utmContent || '');
-      return Observable.of(url);
+      return url;
     }
     else {
-      return Observable.of('URL not set');
+      return 'URL not set';
     }
   }
-  addCodes(url: string, linkType: any, emailType: string): Observable<string> {
+  addCodes(url: string, linkType: any, emailType: string): string {
     if (url && this.appeal.hasOwnProperty('_id')) {
       var hasQuestionMark = url.search('\\?');
       if (hasQuestionMark < 0) {
@@ -245,10 +248,10 @@ export class AppealPreviewComponent implements OnChanges {
 
       url = this.addStaticCodes(url);
       url += '&utm_content=' + (this.version.utm || '') + '-' + (emailType || '') + '-' + (linkType.utm || '');
-      return Observable.of(url);
+      return url;
     }
     else {
-      return Observable.of('loading or URL not set');
+      return 'loading or URL not set';
     }
   }
 
@@ -268,10 +271,8 @@ export class AppealPreviewComponent implements OnChanges {
 
   @Input()
   set appealPreview(appeal: Appeal) {
-    console.log(appeal);
-    if (appeal) {
-      this.appeal = appeal;
-    }
+    this.appeal = appeal;
+    this.generateBody();
   }
   get appealPreview(): Appeal {
     return this.appeal;

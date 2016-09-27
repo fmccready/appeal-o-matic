@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../shared/shared.module';
-
+import { CommonModule } from '@angular/common';
 import { AppealDetailComponent } from './appeal-detail.component';
 
 import { AppealContentModule } from './appeal-content/appeal-content.module';
@@ -11,12 +10,12 @@ import { AppealPreviewModule } from './appeal-preview/appeal-preview.module';
 
 @NgModule({
   imports: [
-    SharedModule,
     AppealContentModule,
     AppealCodesModule,
     AppealInfoModule,
     AppealSignoffsModule,
-    AppealPreviewModule
+    AppealPreviewModule,
+    CommonModule
   ],
   declarations: [
     AppealDetailComponent

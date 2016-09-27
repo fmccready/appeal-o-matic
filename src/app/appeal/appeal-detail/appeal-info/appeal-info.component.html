@@ -1,4 +1,3 @@
-<pre>{{ info | json }}</pre>
 <div class="panel panel-primary">
   <div class="panel-heading text-center" data-toggle="collapse" data-parent="#controls" data-target="#infoPanel">
     <h2 class="panel-title">eAppeal Info&nbsp;&nbsp;<span class="glyphicon glyphicon-envelope"></span></h2>
@@ -25,7 +24,7 @@
         <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
           <label for="campaign">Campaign</label>
           <select id="campaign" type="text" class="form-control" [(ngModel)]="info.campaign" #campaign="ngModel" name="campaign">
-            <option *ngFor="let c of campaigns | async" [ngValue]="c.utm">{{c | json}}</option>
+            <option *ngFor="let c of campaigns | async" [ngValue]="c.utm">{{c.name}}</option>
           </select>
           <hr>
         </div>

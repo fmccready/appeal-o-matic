@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SharedModule } from '../shared/shared.module';
 import { AppealDetailModule } from './appeal-detail/appeal-detail.module';
 import { FiltersComponent } from './filters/filters.component';
 import { AppealListComponent } from './appeal-list/appeal-list.component';
@@ -11,11 +10,11 @@ import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap'
 
 @NgModule({
   imports: [
-    SharedModule,
     AppealDetailModule,
     routing,
     TimepickerModule,
-    DatepickerModule
+    DatepickerModule,
+    CommonModule
   ],
   declarations: [
     FiltersComponent,

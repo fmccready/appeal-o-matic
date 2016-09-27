@@ -8,9 +8,9 @@ import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap'
 @NgModule({
   imports: [
     FormsModule,
-    CommonModule,
     DatepickerModule,
-    TimepickerModule
+    TimepickerModule,
+    CommonModule
   ],
   declarations: [
     AppealInfoComponent

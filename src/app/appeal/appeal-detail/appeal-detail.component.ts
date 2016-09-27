@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
@@ -18,6 +18,7 @@ export class AppealDetailComponent implements OnInit {
   constructor(private appealService: AppealService, private route: ActivatedRoute) {
     this.getAppealFromQueryString();
   }
+  @ViewChild('preview') preview;
   getAppealFromQueryString() {
     this.route.params
       .subscribe(queryString => {
@@ -31,18 +32,22 @@ export class AppealDetailComponent implements OnInit {
   onInfoSaved(data) {
     this.appeal.info = data;
     this.appealService.updateAppeal(this.appeal);
+    this.preview.generateBody();
   }
   onContentSaved(data) {
     this.appeal.content = data;
     this.appealService.updateAppeal(this.appeal);
+    this.preview.generateBody();
   }
   onCodesSaved(data) {
     this.appeal.codes = data;
     this.appealService.updateAppeal(this.appeal);
+    this.preview.generateBody();
   }
   onSignoffsSaved(data) {
     this.appeal.signoffs = data;
     this.appealService.updateAppeal(this.appeal);
+    this.preview.generateBody();
   }
 
   ngOnInit() {

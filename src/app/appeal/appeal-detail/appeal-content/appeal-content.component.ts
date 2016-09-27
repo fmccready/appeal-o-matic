@@ -5,7 +5,8 @@ import { RestoreService } from '../../../restore.service';
 @Component({
   selector: 'app-appeal-content',
   templateUrl: 'appeal-content.component.html',
-  styleUrls: ['appeal-content.component.css']
+  styleUrls: ['appeal-content.component.css'],
+  providers: [RestoreService]
 })
 export class AppealContentComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealContent>();

@@ -11,9 +11,7 @@ import { RestoreService } from '../../../restore.service';
 })
 export class AppealCodesComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealCode>();
-  private appealCodes = new AppealCode();
   constructor(private restoreService: RestoreService<AppealCode>) {
-    this.restoreService.setItem(this.appealCodes);
   }
 
   @Input()
