@@ -5,6 +5,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { AppealContent, AppealCode, Appeal } from '../../../models/appeal';
 import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';
+import { PreviewService } from '../../../preview.service';
 
 import { PlainTextPipe } from '../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../remove-html.pipe';
@@ -26,7 +27,7 @@ export class AppealPreviewComponent implements OnChanges {
   private textLinkCount: any = {};
   private version: any = {};
   private appeal: Appeal = new Appeal();
-  constructor(private campaignService: CampaignService) {
+  constructor(private campaignService: CampaignService, private previewService: PreviewService) {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.appeal.content = new AppealContent();
@@ -165,7 +166,7 @@ export class AppealPreviewComponent implements OnChanges {
       this.version.utm += '-md';
     }
     else {
-      this.version.src = '-reg';
+      this.version.utm += '-reg';
     }
   }
   addUtmOnly(url: string, utmContent: string, emailType: string): string {
@@ -277,7 +278,9 @@ export class AppealPreviewComponent implements OnChanges {
   get appealPreview(): Appeal {
     return this.appeal;
   }
-
+  ngOnInit(){
+    this.previewService.appeal.subscribe(data => {this.appeal = data;this.generateBody();});
+  }
   ngOnChanges(changes) {
     this.appeal = changes.appealPreview.currentValue;
   }

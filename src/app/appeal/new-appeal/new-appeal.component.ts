@@ -21,7 +21,7 @@ export class NewAppealComponent implements OnInit {
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = this.campaignService.getCampaigns();
     this.appealService.getAppeals().subscribe(
-      data => {this.appeals = data; }
+      data => { this.appeals = data; }
     );
   }
   
@@ -32,8 +32,9 @@ export class NewAppealComponent implements OnInit {
       this.appeal.sendDate.setMinutes(mins);
       this.appeal.sendDate.setHours(hours);
     }
+    console.log(this.appeal);
     this.appealService.addAppeal(this.appeal);
-    this.campaignService.loadCampaigns();
+    //this.campaignService.loadCampaigns();
   }
   ngOnInit() {
   }

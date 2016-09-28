@@ -45,9 +45,11 @@ export class AppealService {
   }
 
   addAppeal(newAppealInfo: AppealInfo) {
+    console.log(newAppealInfo);
     let newAppeal = new Appeal();
     newAppeal.info = newAppealInfo;
     let body = JSON.stringify(newAppeal);
+    console.log(body);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({
       headers: headers
@@ -99,7 +101,6 @@ export class AppealService {
 
 
   getAppeals(): Observable<Appeal[]> {
-    console.log(this._appeals$);
     return this._appeals$;
   }
 

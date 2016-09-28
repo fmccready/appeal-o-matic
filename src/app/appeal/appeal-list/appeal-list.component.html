@@ -3,7 +3,7 @@
   <th>Appeal name</th><th>Campaign</th>
   <tr *ngFor="let appeal of appeals">
     <td>{{ appeal.info.name }}</td>
-    <td>{{ appeal.info.campaign.name }}</td>
+    <td>{{ appeal.info.campaign }}</td>
     <td><button [routerLink]="['/appeal', appeal._id]" class="btn btn-primary">Edit</button></td>
     <td><button (click)="deleteAppeal(appeal._id)" class="btn btn-danger">Delete</button></td>
   </tr>

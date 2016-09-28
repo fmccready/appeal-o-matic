@@ -19,7 +19,7 @@ export class AppealListComponent implements OnChanges {
   }
   deleteAppeal(id) {
     this.appealService.removeAppeal(id).subscribe(
-      success => { console.log(success); },
+      success => { console.log(success); this.appealService.loadAppeals(); },
       error => { console.log(error); }
     );
   }

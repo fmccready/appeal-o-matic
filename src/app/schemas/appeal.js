@@ -4,13 +4,11 @@ var Schema = mongoose.Schema;
 var appealSchema = new Schema({
   info: {
     name: {type: String, default: ''},
+    template: {type: String, default: ''},
     sender: {type: String, default: ''},
     senderAddress: {type: String, default: ''},
     subjectLine: {type: String, default: ''},
-    campaign: {
-      name: { type: String, default: ''},
-      utm: { type: String, default: ''}
-    },
+    campaign: { type: String, default: ''},
     sendDate: {type: String, default: new Date()},
     scheduled: {type: Boolean, default: false}
   },

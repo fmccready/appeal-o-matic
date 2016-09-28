@@ -11,5 +11,4 @@ export class RemoveHtmlPipe implements PipeTransform {
     }
     return value;
   }
-
 }

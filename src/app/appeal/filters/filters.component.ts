@@ -20,7 +20,7 @@ export class FiltersComponent implements OnInit {
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = campaignService.getCampaigns();
     this.appealService.getAppeals().subscribe(
-      data => {this.appeals = data; console.log(this.appeals); }
+      data => { this.appeals = data; }
     );
   }
 

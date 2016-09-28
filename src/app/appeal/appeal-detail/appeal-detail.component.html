@@ -6,6 +6,6 @@
     <app-appeal-signoffs [signoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
   </div>
   <div *ngIf="data" class="col-xs-12 col-sm-6 col-md-8">
-    <app-appeal-preview #preview [appealPreview]="appeal"></app-appeal-preview>
+    <router-outlet></router-outlet>
   </div>
 </div>

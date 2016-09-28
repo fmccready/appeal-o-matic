@@ -36,7 +36,7 @@
           </div>
         </div>
         <div class="form-group" [class.has-error]="!resend.valid && resend.touched">
-          <label for="resend">Resend</label>
+          <label for="resend">Send #</label>
           <input id="resend" type="number" class="form-control" [(ngModel)]="codes.resend" #resend="ngModel" name="resend" min="0">
         </div>
         <div class="form-group" [class.has-error]="!series.valid && series.touched">

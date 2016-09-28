@@ -7,10 +7,11 @@ export class Appeal {
 }
 export class AppealInfo {
   name: string = '';
+  template: string = '';
   sender: string = '';
   senderAddress: string = '';
   subjectLine: string = '';
-  campaign: Campaign = new Campaign();
+  campaign: string = '';
   sendDate: Date = new Date();
   scheduled: boolean = false;
 }
@@ -41,9 +42,7 @@ export class AppealSignoff {
   web: string;
 }
 
-
 class Campaign {
-  _id: string;
   name: string;
   utm: string;
 }
