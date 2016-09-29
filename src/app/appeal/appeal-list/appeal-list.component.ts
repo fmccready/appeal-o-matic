@@ -24,10 +24,10 @@ export class AppealListComponent implements OnChanges {
     );
   }
   @Input()
-  set appeals(appeals: Appeal[]){
+  set appeals(appeals: Appeal[]) {
     this.restoreService.setItem(appeals);
   }
-  get appeals(): Appeal[]{
+  get appeals(): Appeal[] {
     return this.restoreService.getItem();
   }
 

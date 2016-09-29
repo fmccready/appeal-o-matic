@@ -21,6 +21,7 @@ export class AppealService {
   loadAppeals() {
     this.http.get(this._appealUrl).map(this.extractData).subscribe(
       data => {
+        console.log(data);
         this._appeals$.next(data);
       },
       error => {

@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AppealPreviewComponent } from './appeal-preview.component';
+import { OtherAppealComponent } from './other-appeal/other-appeal.component';
+import { StandardAppealComponent } from './standard-appeal/standard-appeal.component';
 import { PlainTextPipe } from '../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../remove-html.pipe';
 @NgModule({
@@ -8,15 +9,16 @@ import { RemoveHtmlPipe } from '../../../remove-html.pipe';
     CommonModule
   ],
   declarations: [
-    AppealPreviewComponent,
+    OtherAppealComponent,
+    StandardAppealComponent,
     PlainTextPipe,
     RemoveHtmlPipe
   ],
   exports: [
-    AppealPreviewComponent
+    OtherAppealComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA
   ]
 })
-export class AppealPreviewModule {}
+export class AppealTemplateModule {}

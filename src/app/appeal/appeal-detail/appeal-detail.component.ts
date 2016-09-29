@@ -20,6 +20,7 @@ export class AppealDetailComponent implements OnInit {
     this.getAppealFromRoute();
     console.log(route);
   }
+  
   getAppealFromRoute() {
     this.route.params
       .subscribe(queryString => {
@@ -31,28 +32,28 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onInfoSaved(data) {
+    let template = this.appeal.info.template;
     this.appeal.info = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
-    //this.preview.generateBody();
+    if (template !== data.template){
+      this.router.navigate(['/appeal', this.appeal._id, data.template]);
+    }
   }
   onContentSaved(data) {
     this.appeal.content = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
-    //this.preview.generateBody();
   }
   onCodesSaved(data) {
     this.appeal.codes = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
-    //this.preview.generateBody();
   }
   onSignoffsSaved(data) {
     this.appeal.signoffs = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
-    //this.preview.generateBody();
   }
 
   ngOnInit() {

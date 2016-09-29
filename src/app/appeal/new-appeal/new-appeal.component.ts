@@ -7,6 +7,8 @@ import { Campaign } from '../../models/campaign';
 import { CampaignService } from '../../campaign.service';
 import { AppealService } from '../../appeal.service';
 
+import { PreviewService, Template } from '../../preview.service';
+
 
 @Component({
   selector: 'app-new-appeal',
@@ -18,11 +20,13 @@ export class NewAppealComponent implements OnInit {
   appeal = <AppealInfo>{};
   sendTime: Date = new Date();
   appeals: Appeal[];
-  constructor(private campaignService: CampaignService, private appealService: AppealService) {
+  private templates: Array<Template>;
+  constructor(private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService) {
     this.campaigns = this.campaignService.getCampaigns();
     this.appealService.getAppeals().subscribe(
       data => { this.appeals = data; }
     );
+    this.templates = previewService.templates;
   }
   
   appealSubmit(){

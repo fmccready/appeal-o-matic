@@ -6,10 +6,17 @@
         <input type="text" class="form-control" [(ngModel)]="appeal.name" #name="ngModel" name="name" id="appeal-name" placeholder="required">
       </div>
       <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched">
-        <label for="campaign-name">Campaign name</label>
+        <label for="campaign-name">Campaign</label>
         <select class="form-control" [(ngModel)]="appeal.campaign" #campaign="ngModel" name="campaign" id="campaign-name">
           <option selected disabled value="">required</option>
           <option *ngFor=" let c of campaigns | async" [ngValue]="c.utm">{{c.name}}</option>
+        </select>
+      </div>
+      <div class="form-group" [class.has-error]="!template.valid && template.touched">
+        <label for="template">Template</label>
+        <select class="form-control" [(ngModel)]="appeal.template" #template="ngModel" name="template" id="template">
+          <option selected disabled value="">required</option>
+          <option *ngFor=" let t of templates" [ngValue]="t.id">{{t.name}}</option>
         </select>
       </div>
       <div class="form-group" [class.has-error]="!sender.valid && sender.touched">

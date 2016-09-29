@@ -12,7 +12,7 @@
         <div class="form-group" [class.has-error]="!template.valid && template.touched">
           <label for="template">Template</label>
           <select id="template" type="text" class="form-control" [(ngModel)]="info.template" #template="ngModel" name="template">
-            <!-- Start here tomorrow -->
+            <option *ngFor="let template of templates" [ngValue]='template.id'>{{template.name}}</option>
           </select>
         </div>
         <div class="form-group" [class.has-error]="!sender.valid && sender.touched">

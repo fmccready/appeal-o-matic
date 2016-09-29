@@ -2,13 +2,13 @@ import { Component, OnChanges, Input, ViewChild, ElementRef } from '@angular/cor
 
 import { Observable, Subject } from 'rxjs/Rx';
 
-import { AppealContent, AppealCode, Appeal } from '../../../models/appeal';
-import { Campaign } from '../../../models/campaign';
-import { CampaignService } from '../../../campaign.service';
-import { PreviewService } from '../../../preview.service';
+import { AppealContent, AppealCode, Appeal } from '../../../../models/appeal';
+import { Campaign } from '../../../../models/campaign';
+import { CampaignService } from '../../../../campaign.service';
+import { PreviewService } from '../../../../preview.service';
 
-import { PlainTextPipe } from '../../../plain-text.pipe';
-import { RemoveHtmlPipe } from '../../../remove-html.pipe';
+import { PlainTextPipe } from '../../../../plain-text.pipe';
+import { RemoveHtmlPipe } from '../../../../remove-html.pipe';
 
 declare var $: any;
 
@@ -17,11 +17,11 @@ interface JQuery {
 }
 
 @Component({
-  selector: 'app-appeal-preview',
-  templateUrl: 'appeal-preview.component.html',
-  styleUrls: ['appeal-preview.component.css']
+  selector: 'app-other-appeal',
+  templateUrl: 'other-appeal.component.html',
+  styleUrls: ['other-appeal.component.css']
 })
-export class AppealPreviewComponent implements OnChanges {
+export class OtherAppealComponent implements OnChanges {
   preview: any;
   private linkCount: any = {};
   private textLinkCount: any = {};
@@ -57,6 +57,7 @@ export class AppealPreviewComponent implements OnChanges {
     }
     window.getSelection().removeAllRanges();
   }
+
   copyPlain(){
     var plainTemp = document.createElement('textarea');
     var hidden = document.querySelector('#hidden');
@@ -147,7 +148,6 @@ export class AppealPreviewComponent implements OnChanges {
     if (this.appeal.codes.resend > 1) {
       this.version.utm += '-rs';
     }
-
 
     if (this.appeal.codes.audience === 'sustainer') {
       this.version.src = '_S';

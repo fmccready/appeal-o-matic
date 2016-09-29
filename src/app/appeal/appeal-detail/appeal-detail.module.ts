@@ -7,7 +7,7 @@ import { AppealContentModule } from './appeal-content/appeal-content.module';
 import { AppealCodesModule } from './appeal-codes/appeal-codes.module';
 import { AppealInfoModule } from './appeal-info/appeal-info.module';
 import { AppealSignoffsModule } from './appeal-signoffs/appeal-signoffs.module';
-import { AppealPreviewModule } from './appeal-preview/appeal-preview.module';
+import { AppealTemplateModule } from './appeal-templates/appeal-template.module';
 
 import { PreviewService } from './../../preview.service';
 
@@ -17,7 +17,7 @@ import { PreviewService } from './../../preview.service';
     AppealCodesModule,
     AppealInfoModule,
     AppealSignoffsModule,
-    AppealPreviewModule,
+    AppealTemplateModule,
     RouterModule,
     CommonModule
   ],

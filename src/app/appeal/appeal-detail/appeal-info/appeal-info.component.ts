@@ -6,6 +6,8 @@ import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';
 import { AppealService } from '../../../appeal.service';
 import { AppealInfo } from '../../../models/appeal';
+
+import { PreviewService, Template } from '../../../preview.service';
 import { RestoreService } from '../../../restore.service';
 
 @Component({
@@ -17,9 +19,10 @@ import { RestoreService } from '../../../restore.service';
 export class AppealInfoComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealInfo>();
   private campaigns: Observable<Campaign[]>;
-
-  constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService, private appealService: AppealService) {
+  private templates: Array<Template>;
+  constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService) {
     this.campaigns = campaignService.getCampaigns();
+    this.templates = previewService.templates;
   }
 
   @Input()
