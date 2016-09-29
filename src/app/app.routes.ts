@@ -8,7 +8,10 @@ import { FiltersComponent } from './appeal/filters/filters.component';
 import { NewAppealComponent } from './appeal/new-appeal/new-appeal.component';
 import { NewCampaignComponent } from './campaign/new-campaign/new-campaign.component';
 
-import { StandardAppealComponent } from './appeal/appeal-detail/appeal-templates/standard-appeal/standard-appeal.component';
+import { StandardAppealComponent } from './appeal/appeal-detail/appeal-templates/us-appeals/standard-appeal/standard-appeal.component';
+import { HHDAppealComponent } from './appeal/appeal-detail/appeal-templates/us-appeals/hhd-appeal/appeal-hhd.component';
+import { HHDLargeAppealComponent } from './appeal/appeal-detail/appeal-templates/us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
+import { CANHHDAppealComponent } from './appeal/appeal-detail/appeal-templates/can-appeals/can-hhd-appeal/can-appeal-hhd.component';
 import { OtherAppealComponent } from './appeal/appeal-detail/appeal-templates/other-appeal/other-appeal.component';
 
 const routes: Routes = [
@@ -30,9 +33,17 @@ const routes: Routes = [
         component: StandardAppealComponent
       },
       {
-        path: 'otherAppeal',
-        component: OtherAppealComponent
-      }
+        path: 'hhdAppeal',
+        component: HHDAppealComponent
+      },
+      {
+        path: 'hhdLargeAppeal',
+        component: HHDLargeAppealComponent
+      },
+      {
+        path: 'canhhdAppeal',
+        component: CANHHDAppealComponent
+      },
     ]
   },
   { path: 'filters', component: FiltersComponent },

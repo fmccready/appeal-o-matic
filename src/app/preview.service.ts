@@ -10,9 +10,17 @@ export class PreviewService {
       name: 'Standard'
     },
     {
-      id:'otherAppeal',
-      name: 'Other'
-    }
+      id:'hhdAppeal',
+      name: 'US High Holy Days'
+    },
+    {
+      id:'hhdLargeAppeal',
+      name: 'US High Holy Days - Large Image'
+    },
+    {
+      id:'canhhdAppeal',
+      name: 'CAN High Holy Days'
+    },
   ];
   constructor() { }
 }

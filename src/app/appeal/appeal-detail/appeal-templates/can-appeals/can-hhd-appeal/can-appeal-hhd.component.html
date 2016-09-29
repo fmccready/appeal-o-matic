@@ -64,7 +64,7 @@
     </head>
 
     <body style="width:100%; padding: 0px 2%; margin-left: auto; margin-right: auto;">
-        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{appeal.emailContent.headline}}</span>
+        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{appeal.content.headline}}</span>
         <!--[if gte mso 9]>
         <table id="tableForOutlook" width="650"><tr><td>
         <![endif]-->
@@ -73,16 +73,16 @@
                 <td>
                 <table cellpadding="0" cellspacing="0" border="0" width="650">
                 <tr><td width="100%">
-                <center><a href="{{addUtmOnly('http://www.ifcj.ca/site/MessageViewer', 'vib', 'html') | async}}" style="font-family: Arial, Helvetica, sans-serif; font-size: .75em; color: #464646;">View in Browser</a><br /></center>
+                <center><a href="{{addUtmOnly('http://www.ifcj.ca/site/MessageViewer', 'vib', 'html')}}" style="font-family: Arial, Helvetica, sans-serif; font-size: .75em; color: #464646;">View in Browser</a><br /></center>
 
-                <a href="{{addCodes('http://www.ifcj.ca/site/PageServer', {src: 'EA', utm: 'logo'}, 'html') | async}}"><img align="left" src="http://www.ifcj.ca/images/content/pagebuilder/ifcj-ea-logo-tm-newer.jpg" id="top-logo" style="border: 0px; float:left;" /></a>
+                <a href="{{addCodes('http://www.ifcj.ca/site/PageServer', {src: 'EA', utm: 'logo'}, 'html')}}"><img align="left" src="http://www.ifcj.ca/images/content/pagebuilder/ifcj-ea-logo-tm-newer.jpg" id="top-logo" style="border: 0px; float:left;" /></a>
                 <br />
-                <a href="{{addCodes(appeal.emailContent.url, {src: 'HL1', utm: 'top-donate-now-button'}, 'html') | async}}"><img src="http://www.ifcj.ca/images/content/pagebuilder/ea-hhd-top-donate-offset.jpg" align="right" style="float: right;" /></a><br /><br />
+                <a href="{{addCodes(appeal.content.url, {src: 'HL1', utm: 'top-donate-now-button'}, 'html')}}"><img src="http://www.ifcj.ca/images/content/pagebuilder/ea-hhd-top-donate-offset.jpg" align="right" style="float: right;" /></a><br /><br />
 	            </td>
             </tr>
             <tr><td bgcolor="#00529c" style="height: 5px; padding: 0px; margin: 0px;"></td></tr>
             <tr><td bgcolor="#adcd74" style="height: 3px; padding: 0px; margin: 0px;"></td></tr>
-            <tr><td align="center" bgcolor="#fff" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="{{addCodes(appeal.emailContent.url, {src: 'TL1', utm: 'text-link-1'}, 'html') | async}}"><span [innerHTML]="appeal.emailContent.headline" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #BB0609; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
+            <tr><td align="center" bgcolor="#fff" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="{{addCodes(appeal.content.url, {src: 'TL1', utm: 'text-link-1'}, 'html')}}"><span [innerHTML]="appeal.content.headline" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #BB0609; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
             </a>
   </td></tr></table>
 
@@ -91,7 +91,7 @@
                 <td style="padding: 20px 0px 0px 0px; margin:0;">
                     <table align="right" cellpadding="0" cellspacing="0" style="margin: 0px 0px 0px 20px; width:290px">
 					  <tr>
-						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="{{addCodes(appeal.emailContent.url, {src: 'PH1', utm: 'photo-link-1'}, 'html') | async}}"><img [src]="appeal.emailContent.image" alt="Donate Now"></a></td>
+						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="{{addCodes(appeal.content.url, {src: 'PH1', utm: 'photo-link-1'}, 'html')}}"><img [src]="appeal.content.image" alt="Donate Now"></a></td>
 					  </tr>
 
                         <tr><td bgcolor="#ffffff" colspan="2" style="height: 20px;"></td></tr>
@@ -112,7 +112,7 @@ Rabbi Yechiel Eckstein<br />President and Founder</p>
 <p #appealPS style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 
  <p align="center">
- <a href="{{addCodes(appeal.emailContent.url, {src: 'BN1', utm: 'button-link-1'}, 'html') | async}}"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg"/></a>
+ <a href="{{addCodes(appeal.content.url, {src: 'BN1', utm: 'button-link-1'}, 'html')}}"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg"/></a>
                 </p>
               </td>
             </tr>
@@ -125,18 +125,18 @@ Rabbi Yechiel Eckstein<br />President and Founder</p>
                 <td style="color: #00529c;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif; padding-top: 20px;">
                     <center>
                         <p>
-                          <a href="{{addCodes(appeal.emailContent.url, {src: 'FT1', utm: 'footer-text-donate'}, 'html') | async }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Donate&nbsp;Now</a> |
-                          <a href="{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_about_ifcj', {src: 'FT2', utm: 'footer-text-about'}, 'html') | async }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">About&nbsp;<i>The&nbsp;Fellowship</i></a> |
-                          <a href="{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_contact_us', {src: 'FT3', utm: 'footer-text-contact'}, 'html') | async }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Contact&nbsp;Us</a> |
+                          <a href="{{addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'html') }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Donate&nbsp;Now</a> |
+                          <a href="{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_about_ifcj', {src: 'FT2', utm: 'footer-text-about'}, 'html') }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">About&nbsp;<i>The&nbsp;Fellowship</i></a> |
+                          <a href="{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_contact_us', {src: 'FT3', utm: 'footer-text-contact'}, 'html') }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Contact&nbsp;Us</a> |
                             <a href="http://www.ifcj.ca/site/TellAFriend" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Tell&nbsp;a&nbsp;Friend</a><br /><br /></p>
                             <a href="https://www.facebook.com/IFCJCanada/"><img src="http://www.ifcj.org/ifcj-11/images/2013-newsletter/fb-page-lg.png" id="social-icons-footer" style="border: 0px;" /></a><br>
                             <br>
                             <a href="https://smarticon.geotrust.com/smarticonprofile?Referer=https://secure2.convio.net"><img src="http://www.ifcj.ca/images/content/pagebuilder/logo-ssl-geotrust-footer.jpg" id="social-icons-footer" style="border: 0px;"></a>
                             <p style="color: #464646; font-size: 0.7em; font-family: Arial,Helvetica,sans-serif;">Charitable Registration Number: 86941 1587 RR0001<br />
                             P.O. Box 670, Station K, Toronto, ON M4P 2H1<br />
-                            <a href="{{addUtmOnly('http://www.ifcj.ca/site/ConsProfileUser', 'manage-profile', 'html') | async }}" style="color: #00529c; text-decoration: none;">Manage Preferences</a> |
-                            <a href="{{addUtmOnly('http://www.ifcj.ca/site/ConsInterestsUser', 'update-profile', 'html') | async }}" style="color: #00529c; text-decoration: none;">Update Profile</a> |
-                            <a href="{{addUtmOnly('http://www.ifcj.ca/site/CO', 'unsubscribe', 'html') | async }}" style="color: #00529c; text-decoration: none;">Unsubscribe</a><br>888-988-4325 | <a href="{{addUtmOnly('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_privacy_policy', 'privacy-policy', 'html') | async }}" style="color: #00529c; text-decoration: none;">Privacy Policy</a><br /><br />
+                            <a href="{{addUtmOnly('http://www.ifcj.ca/site/ConsProfileUser', 'manage-profile', 'html') }}" style="color: #00529c; text-decoration: none;">Manage Preferences</a> |
+                            <a href="{{addUtmOnly('http://www.ifcj.ca/site/ConsInterestsUser', 'update-profile', 'html') }}" style="color: #00529c; text-decoration: none;">Update Profile</a> |
+                            <a href="{{addUtmOnly('http://www.ifcj.ca/site/CO', 'unsubscribe', 'html') }}" style="color: #00529c; text-decoration: none;">Unsubscribe</a><br>888-988-4325 | <a href="{{addUtmOnly('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_privacy_policy', 'privacy-policy', 'html') }}" style="color: #00529c; text-decoration: none;">Privacy Policy</a><br /><br />
                             [[S51:reus_email_disclaimer]]<br><br>
                         </p>
                     </center>
@@ -161,7 +161,7 @@ Rabbi Yechiel Eckstein<br />President and Founder</p>
 <div #plainVersion>
 <p #plainHeadline></p>
 <br><br>
-{{addCodes(appeal.emailContent.url, {src:'TL1', utm:'text-link-1'}, 'plain') | async }}
+{{addCodes(appeal.content.url, {src:'TL1', utm:'text-link-1'}, 'plain') }}
 <br><br>
 Dear [[S1:first_name:Friend]],
 <br><br>
@@ -177,13 +177,13 @@ President and Founder
 </p>
 <br><br><br>
 Donate Now<br>
-{{addCodes(appeal.emailContent.url, {src: 'FT1', utm: 'footer-text-donate'}, 'plain') | async }}
+{{addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'plain') }}
 <br><br>
 About The Fellowship<br>
-{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_about_ifcj', {src: 'FT2', utm: 'footer-text-about'}, 'plain') | async }}
+{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_about_ifcj', {src: 'FT2', utm: 'footer-text-about'}, 'plain') }}
 <br><br>
 Contact Us<br>
-{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_contact_us', {src: 'FT3', utm: 'footer-text-contact'}, 'plain') | async }}
+{{addCodes('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_contact_us', {src: 'FT3', utm: 'footer-text-contact'}, 'plain') }}
 <br><br>
 Tell a Friend<br>
 http://www.ifcj.ca/site/TellAFriend<br>
@@ -197,10 +197,10 @@ P.O. Box 670, Station K, Toronto, ON M4P 2H1<br />
 888.988.4325<br>
 <br>
 Unsubscribe<br>
-{{addUtmOnly('http://www.ifcj.ca/site/CO', 'unsubscribe', 'plain') | async }}
+{{addUtmOnly('http://www.ifcj.ca/site/CO', 'unsubscribe', 'plain') }}
 <br><br>
 Privacy Policy<br>
-{{addUtmOnly('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_privacy_policy', 'privacy-policy', 'plain') | async }}
+{{addUtmOnly('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_privacy_policy', 'privacy-policy', 'plain') }}
 <br><br>
 © [[S9:pattern:yyyy]] International Fellowship of Christians and Jews® of Canada
 <br><br>

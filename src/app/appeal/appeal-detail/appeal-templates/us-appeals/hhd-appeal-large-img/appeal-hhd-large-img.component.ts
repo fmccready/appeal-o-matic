@@ -2,13 +2,13 @@ import { Component, OnChanges, Input, ViewChild, ElementRef } from '@angular/cor
 
 import { Observable, Subject } from 'rxjs/Rx';
 
-import { AppealContent, AppealCode, Appeal } from '../../../../models/appeal';
-import { Campaign } from '../../../../models/campaign';
-import { CampaignService } from '../../../../campaign.service';
-import { PreviewService } from '../../../../preview.service';
+import { AppealContent, AppealCode, Appeal } from '../../../../../models/appeal';
+import { Campaign } from '../../../../../models/campaign';
+import { CampaignService } from '../../../../../campaign.service';
+import { PreviewService } from '../../../../../preview.service';
 
-import { PlainTextPipe } from '../../../../plain-text.pipe';
-import { RemoveHtmlPipe } from '../../../../remove-html.pipe';
+import { PlainTextPipe } from '../../../../../plain-text.pipe';
+import { RemoveHtmlPipe } from '../../../../../remove-html.pipe';
 
 declare var $: any;
 
@@ -17,11 +17,11 @@ interface JQuery {
 }
 
 @Component({
-  selector: 'app-standard-appeal',
-  templateUrl: 'standard-appeal.component.html',
-  styleUrls: ['standard-appeal.component.css']
+  selector: 'app-hhd-large-img-appeal',
+  templateUrl: 'appeal-hhd-large-img.component.html',
+  styleUrls: ['appeal-hhd-large-img.component.css']
 })
-export class StandardAppealComponent implements OnChanges {
+export class HHDLargeAppealComponent implements OnChanges {
   preview: any;
   private linkCount: any = {};
   private textLinkCount: any = {};
