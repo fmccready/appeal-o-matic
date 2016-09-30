@@ -54,6 +54,11 @@ export class AppealDetailComponent implements OnInit {
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
   }
+  onNotesSaved(data) {
+    this.appeal.notes = data;
+    this.appealService.updateAppeal(this.appeal);
+    this.previewService.appeal.next(this.appeal);
+  }
 
   ngOnInit() {
   }

@@ -20,7 +20,9 @@ var appealSchema = new Schema({
     image: {
       url: {type: String, default: ''},
       code: {type: String, default: ''},
-      utm: {type: String, default: ''}
+      utm: {type: String, default: ''},
+      merlinId: {type: String, default: ''},
+      brightcoveId: {type: String, default: ''}
     },
   },
   codes: {
@@ -35,6 +37,7 @@ var appealSchema = new Schema({
     web: {type: String, default: ''},
     funDev: {type: String, default: ''},
     editor: {type: String, default: ''}
-  }
+  },
+  notes: { type: String, default: ''}
 });
 module.exports = mongoose.model('Appeal', appealSchema);

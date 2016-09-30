@@ -4,6 +4,7 @@ export class Appeal {
   codes: AppealCode = new AppealCode();
   signoffs: AppealSignoff = new AppealSignoff;
   content: AppealContent = new AppealContent;
+  notes: string = '';
 }
 export class AppealInfo {
   name: string = '';
@@ -50,4 +51,6 @@ class Image {
   url: string = '';
   code: string = '';
   utm: string = '';
+  merlinId: string = '';
+  brightcoveId: string = '';
 }

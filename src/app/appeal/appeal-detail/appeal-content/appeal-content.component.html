@@ -24,6 +24,14 @@
         <div class="form-group" [class.has-error]="!image.valid && image.touched">
           <label for="imageUrl">Image URL</label>
           <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image.url" #image="ngModel" name="imageUrl">
+          <div class="col-xs-6">
+            <label for="merlinId">Merlin ID</label>
+            <input type="text" id="merlinId" class="form-control" [(ngModel)]="content.image.merlinId" #image="ngModel" name="merlinId">
+          </div>
+          <div class="col-xs-6">
+            <label for="brightcoveId">Brightcove ID</label>
+            <input type="text" id="brightcoveId" class="form-control" [(ngModel)]="content.image.brightcoveId" #image="ngModel" name="brightcoveId">
+          </div>
           <label for="imageCode">Image source code</label>
           <input type="text" id="imageCode" class="form-control" [(ngModel)]="content.image.code" #image="ngModel" name="imageCode">
           <label for="imageUtm">Image UTM code</label>

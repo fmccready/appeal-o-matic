@@ -4,6 +4,7 @@
     <app-appeal-content [content]="appeal.content" (saved)="onContentSaved($event)"></app-appeal-content>
     <app-appeal-codes [codes]="appeal.codes" (saved)="onCodesSaved($event)"></app-appeal-codes>
     <app-appeal-signoffs [signoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
+    <app-appeal-notes [notes]="appeal.notes" (saved)="onNotesSaved($event)"></app-appeal-notes>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-8">
     <router-outlet></router-outlet>
