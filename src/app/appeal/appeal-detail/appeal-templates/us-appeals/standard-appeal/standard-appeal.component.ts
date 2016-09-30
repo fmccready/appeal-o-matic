@@ -279,7 +279,7 @@ export class StandardAppealComponent implements OnChanges {
     return this.appeal;
   }
   ngOnInit(){
-    this.previewService.appeal.subscribe(data => {this.appeal = data;this.generateBody();});
+    this.previewService.appeal.subscribe(data => { this.appeal = data;this.generateBody();});
   }
   ngOnChanges(changes) {
     this.appeal = changes.appealPreview.currentValue;

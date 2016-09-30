@@ -7,6 +7,8 @@ import { AppealListComponent } from './appeal-list/appeal-list.component';
 import { NewAppealComponent } from './new-appeal/new-appeal.component';
 import { routing } from './appeal.routes';
 import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { PreviewService } from './../preview.service';
+
 
 @NgModule({
   imports: [
@@ -25,6 +27,10 @@ import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap'
     FiltersComponent,
     AppealListComponent,
     NewAppealComponent
-  ]
+  ],
+  providers: [
+    PreviewService
+  ],
+
 })
 export class AppealModule {}

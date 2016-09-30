@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { AppealDetailComponent } from './appeal-detail.component';
 
 import { AppealContentModule } from './appeal-content/appeal-content.module';
@@ -9,7 +8,8 @@ import { AppealInfoModule } from './appeal-info/appeal-info.module';
 import { AppealSignoffsModule } from './appeal-signoffs/appeal-signoffs.module';
 import { AppealTemplateModule } from './appeal-templates/appeal-template.module';
 
-import { PreviewService } from './../../preview.service';
+
+import { appealDetailRouting } from './appeal-detail.routes';
 
 @NgModule({
   imports: [
@@ -18,14 +18,11 @@ import { PreviewService } from './../../preview.service';
     AppealInfoModule,
     AppealSignoffsModule,
     AppealTemplateModule,
-    RouterModule,
-    CommonModule
+    CommonModule,
+    appealDetailRouting
   ],
   declarations: [
     AppealDetailComponent
   ],
-  providers: [
-    PreviewService
-  ]
 })
 export class AppealDetailModule {}

@@ -5,7 +5,7 @@
     <app-appeal-codes [codes]="appeal.codes" (saved)="onCodesSaved($event)"></app-appeal-codes>
     <app-appeal-signoffs [signoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
   </div>
-  <div *ngIf="data" class="col-xs-12 col-sm-6 col-md-8">
+  <div class="col-xs-12 col-sm-6 col-md-8">
     <router-outlet></router-outlet>
   </div>
 </div>

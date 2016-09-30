@@ -10,7 +10,7 @@ import { Appeal } from '../../models/appeal';
 @Component({
   selector: 'app-appeal-detail',
   templateUrl: 'appeal-detail.component.html',
-  styleUrls: ['appeal-detail.component.css']
+  styleUrls: ['appeal-detail.component.css'],
 })
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;
@@ -18,7 +18,6 @@ export class AppealDetailComponent implements OnInit {
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     this.getAppealFromRoute();
-    console.log(route);
   }
   
   getAppealFromRoute() {
@@ -26,7 +25,7 @@ export class AppealDetailComponent implements OnInit {
       .subscribe(queryString => {
         this.qs = queryString;
         if (this.qs.hasOwnProperty('appealId')) {
-          this.appealService.getAppealById(this.qs.appealId).subscribe(data => {this.appeal = data; if (data.hasOwnProperty('_id')){ this.data = true; this.previewService.appeal.next(data); }});
+          this.appealService.getAppealById(this.qs.appealId).subscribe(data => {this.appeal = data; if (data.hasOwnProperty('_id')){ this.data = true; this.previewService.appeal.next(data); console.log(data); }});
         }
       });
   }
