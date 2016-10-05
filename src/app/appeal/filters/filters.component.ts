@@ -25,9 +25,31 @@ export class FiltersComponent implements OnInit {
   }
 
   onSubmit(filters): void {
+    this.appealService.getAppeals().flatMap(data => {return data;}).filter(function(appeal: Appeal, index: Number){
+      if (filters.campaign){
+        if (appeal.info.campaign === filters.campaign){
+          console.log('returning true because campaign matches');
+          return true;
+        }
+      }
+      if (filters.scheduled){
+        if (filters.scheduled === 'yes'){
+          if(appeal.info.scheduled === true){
+            return true;
+          }
+        }
+        if (filters.scheduled === 'no'){
+          if(appeal.info.scheduled === false){
+            return true;
+          }
+        }
+      }
+    });
+    /*
     this.appealService.filterAppeals(this.filters).subscribe(
       data => {this.appeals = data;}
     );
+    */
   }
 
   ngOnInit() {

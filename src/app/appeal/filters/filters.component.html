@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-4">
+  <div class="col-xs-12 col-sm-8 col-md-9">
     <form #filtersForm="ngForm" (ngSubmit)="onSubmit(filtersForm.value)">
       <div class="form-group">
         <label for="campaign-select">Campaign</label>
@@ -8,9 +8,17 @@
           <option *ngFor="let c of campaigns | async" [ngValue]="c">{{c.name}}</option>
         </select>
       </div>
+      <h4>Appeal scheduled status</h4>
       <div class="form-group">
-        <label for="appeal-id">Appeal ID</label>
-        <input id="appeal-id" [(ngModel)]="filters.appealId" name="appealId" class="form-control">
+        <label for="scheduled-any">
+          <input type="radio" checked value="" id="scheduled-any" [(ngModel)]="filters.scheduled" name="appealScheduled" class="form-control">Any status
+        </label>
+        <label for="scheduled-yes">
+          <input type="radio" value="yes" id="scheduled-yes" [(ngModel)]="filters.scheduled" name="appealScheduled" class="form-control">Scheduled
+        </label>
+        <label for="scheduled-no">
+          <input type="radio" value="no" id="scheduled-no" [(ngModel)]="filters.scheduled" name="appealScheduled" class="form-control">Not scheduled          
+        </label>
       </div>
       <div class="form-group text-center">
         <button class="btn btn-lg btn-primary">Search</button>

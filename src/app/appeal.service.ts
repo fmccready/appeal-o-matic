@@ -87,7 +87,7 @@ export class AppealService {
       }
     );
   }
-
+  
   filterAppeals(filters) {
     let url = this._appealUrl;
     if (filters.campaign) {
