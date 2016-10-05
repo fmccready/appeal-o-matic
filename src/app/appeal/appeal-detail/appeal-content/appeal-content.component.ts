@@ -37,8 +37,5 @@ export class AppealContentComponent implements OnInit {
     $(function () {
       $('[data-toggle="popover"]').popover({trigger: 'hover', container: 'body', html: true});
     });
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
   }
 }
