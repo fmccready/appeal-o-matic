@@ -29,6 +29,9 @@ export class AppealCodesComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(function () {
+      $('[data-toggle="popover"]').popover({trigger: 'hover', container: 'body', html: true});
+    });
   }
 }
 
