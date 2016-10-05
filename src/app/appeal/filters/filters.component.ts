@@ -25,26 +25,31 @@ export class FiltersComponent implements OnInit {
   }
 
   onSubmit(filters): void {
+    event.preventDefault();
+    this.appeals = [];
     this.appealService.getAppeals().flatMap(data => {return data;}).filter(function(appeal: Appeal, index: Number){
+      let match = true;
       if (filters.campaign){
-        if (appeal.info.campaign === filters.campaign){
-          console.log('returning true because campaign matches');
-          return true;
+        if (appeal.info.campaign !== filters.campaign.utm){
+          match = false;
         }
       }
       if (filters.scheduled){
         if (filters.scheduled === 'yes'){
-          if(appeal.info.scheduled === true){
-            return true;
+          if(appeal.info.scheduled !== true){
+            match = false;
           }
         }
-        if (filters.scheduled === 'no'){
-          if(appeal.info.scheduled === false){
-            return true;
+        else if (filters.scheduled === 'no'){
+          if(appeal.info.scheduled !== false){
+            match = false;
           }
         }
       }
-    });
+      return match;
+    }).subscribe(
+      data => this.appeals.push(data)
+    );
     /*
     this.appealService.filterAppeals(this.filters).subscribe(
       data => {this.appeals = data;}

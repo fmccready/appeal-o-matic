@@ -1,9 +1,12 @@
 <h2>eAppeal List</h2>
 <table class="table table-striped">
-  <th>Appeal name</th><th>Campaign</th>
+  <th>Appeal name</th><th>Campaign</th><th>Date</th><th>Audience</th><th>Scheduled</th>
   <tr *ngFor="let appeal of appeals">
     <td>{{ appeal.info.name }}</td>
     <td>{{ appeal.info.campaign }}</td>
+    <td>{{ appeal.info.sendDate | date }}</td>
+    <td>{{ appeal.codes.audience }}</td>
+    <td>{{ appeal.info.scheduled }}</td>
     <td><button [routerLink]="['/appeal', appeal._id, appeal.info.template]" class="btn btn-primary">Edit</button></td>
     <td><button (click)="deleteAppeal(appeal._id)" class="btn btn-danger">Delete</button></td>
   </tr>
