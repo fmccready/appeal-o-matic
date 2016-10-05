@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppealNotesComponent } from './appeal-notes.component';
 import { RestoreService } from '../../../restore.service';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    CKEditorModule
   ],
   declarations: [
     AppealNotesComponent

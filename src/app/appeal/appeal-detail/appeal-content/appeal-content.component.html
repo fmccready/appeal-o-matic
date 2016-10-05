@@ -5,11 +5,11 @@
   <div class="panel-body" id="contentPanel" class="collapse">
     <div class="well">
       <form #contentForm="ngForm" novalidate>
-        <div class="form-group" [class.has-error]="!headline.valid && headline.touched">
+        <div class="form-group" [class.has-error]="!headline.valid && headline.touched" data-toggle="popover" data-placement="right" title="Headline" data-content="Tooooool tip!">
           <label for="headline">Headline</label>
           <ckeditor id="headline" [(ngModel)]="content.headline" #headline="ngModel" name="headline"></ckeditor>
         </div>
-        <div class="form-group" [class.has-error]="!body.valid && body.touched">
+        <div class="form-group" [class.has-error]="!body.valid && body.touched" data-toggle="popover" data-placement="right" title="Another tooltip!" data-content="here is a tip,<br> use your brain">
           <label for="appeal-body">Body</label>
           <ckeditor id="appeal-body" [(ngModel)]="content.body" #body="ngModel" name="body"></ckeditor>
         </div>
@@ -21,14 +21,19 @@
           <label for="url">Default donation form link</label>
           <input type="text" id="url" class="form-control" [(ngModel)]="content.url" #url="ngModel" name="url">
         </div>
+        <hr>
+        <h2>Image Info</h2>
         <div class="form-group" [class.has-error]="!image.valid && image.touched">
           <label for="imageUrl">Image URL</label>
           <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image.url" #image="ngModel" name="imageUrl">
-          <div class="col-xs-6">
+          <div class="col-xs-5">
             <label for="merlinId">Merlin ID</label>
             <input type="text" id="merlinId" class="form-control" [(ngModel)]="content.image.merlinId" #image="ngModel" name="merlinId">
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-2 text-center">
+            <label><br>or</label>
+          </div>
+          <div class="col-xs-5">
             <label for="brightcoveId">Brightcove ID</label>
             <input type="text" id="brightcoveId" class="form-control" [(ngModel)]="content.image.brightcoveId" #image="ngModel" name="brightcoveId">
           </div>

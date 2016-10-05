@@ -2,12 +2,12 @@
   <div class="panel-heading text-center" data-toggle="collapse" data-parent="#controls" data-target="#notesPanel">
     <h2 class="panel-title">Notes&nbsp;&nbsp;<span class="glyphicon glyphicon-plus-sign"></span></h2>
   </div>
-  <div class="panel-body" id="notesPanel" class="collapse">
+  <div class="panel-body" id="notesPanel" class="collapse in">
     <div class="well">
       <form #notesForm="ngForm" novalidate>
         <div class="form-group">
           <label for="notes">Notes/Special Instructions</label>
-          <input id="notes" type="text" class="form-control" [(ngModel)]="notes" name="notes">
+          <ckeditor id="notes" [(ngModel)]="notes" name="notes"></ckeditor>
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>

@@ -2,6 +2,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AppealContent } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 
+declare var $: any;
+
+interface JQuery {
+  chosen(options?: any): JQuery;
+}
+
 @Component({
   selector: 'app-appeal-content',
   templateUrl: 'appeal-content.component.html',
@@ -28,5 +34,11 @@ export class AppealContentComponent implements OnInit {
   }
 
   ngOnInit() {
+    $(function () {
+      $('[data-toggle="popover"]').popover({trigger: 'hover', container: 'body', html: true});
+    });
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   }
 }
