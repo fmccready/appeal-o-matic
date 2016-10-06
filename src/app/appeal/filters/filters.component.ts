@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject, Observable } from 'rxjs/Rx';
 
@@ -14,20 +14,20 @@ import { Appeal } from '../../models/appeal';
   styleUrls: ['filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  campaigns: Observable<Campaign[]>;
-  appeals: Appeal[] = [];
-  filters: Object = {};
+  private campaigns: Observable<Campaign[]>;
+  private appeals: Appeal[] = [];
+  private filters: Object = {};
+  private appealSub;
+  private filterSub;
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = campaignService.getCampaigns();
-    this.appealService.getAppeals().subscribe(
-      data => { this.appeals = data; }
-    );
+    this.appealService.loadAppeals();
   }
 
   onSubmit(filters): void {
     event.preventDefault();
     this.appeals = [];
-    this.appealService.getAppeals().flatMap(data => {return data;}).filter(function(appeal: Appeal, index: Number){
+    this.filterSub = this.appealSub.flatMap(data => {console.log(data); return data;}).filter(function(appeal: Appeal, index: Number){
       let match = true;
       if (filters.campaign){
         if (appeal.info.campaign !== filters.campaign.utm){
@@ -46,18 +46,32 @@ export class FiltersComponent implements OnInit {
           }
         }
       }
+      if (filters.startDate && filters.endDate){
+        console.log(filters);
+        console.log(appeal.info.sendDate);
+        console.log(typeof appeal.info.sendDate);
+        if(appeal.info.sendDate < filters.startDate.getTime() && appeal.info.sendDate > filters.endDate.getTime()){
+          console.log('not a match');
+          match = false;
+        }
+      }
       return match;
     }).subscribe(
-      data => this.appeals.push(data)
+      data => {this.appeals.push(data);}
     );
-    /*
-    this.appealService.filterAppeals(this.filters).subscribe(
-      data => {this.appeals = data;}
-    );
-    */
   }
 
   ngOnInit() {
+    if (!this.appealSub){
+      console.log('subscribing');
+      this.appealSub = this.appealService.getAppeals();
+      this.appealSub.subscribe(
+        data => { this.appeals = data; }
+      );
+    }
+  }
+
+  ngOnDestroy(){
   }
 
 }

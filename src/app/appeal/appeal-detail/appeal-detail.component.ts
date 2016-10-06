@@ -18,8 +18,6 @@ export class AppealDetailComponent implements OnInit {
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     console.log(this.appeal);
-    this.getAppealFromRoute();
-    console.log(this.appeal);
   }
   
   getAppealFromRoute() {
@@ -29,16 +27,8 @@ export class AppealDetailComponent implements OnInit {
         if (this.qs.hasOwnProperty('appealId')) {
           this.appealService.getAppealById(this.qs.appealId).subscribe(data => {
             this.appeal = data; 
-            this.appeal.info = data.info;
-            this.appeal.content = data.content;
-            this.appeal.codes = data.codes;
-            this.appeal.signoffs = data.signoffs;
-            console.log(data);
-            this.appeal.notes = data.notes || '';
             if (data.hasOwnProperty('_id')){ 
-              this.data = true; 
               this.previewService.appeal.next(data); 
-              console.log(data); 
             }});
         }
       });
@@ -75,5 +65,6 @@ export class AppealDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAppealFromRoute();
   }
 }
