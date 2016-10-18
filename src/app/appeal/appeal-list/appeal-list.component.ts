@@ -7,7 +7,6 @@ import { Appeal } from '../../models/appeal';
 import { Campaign } from '../../models/campaign';
 
 import { AppealService } from '../../appeal.service';
-import { RestoreService } from '../../restore.service';
 
 @Component({
   selector: 'appeal-list-component',
@@ -15,23 +14,28 @@ import { RestoreService } from '../../restore.service';
   styleUrls: ['appeal-list.component.css']
 })
 export class AppealListComponent implements OnChanges {
-  constructor(private route: ActivatedRoute, private appealService: AppealService, private restoreService: RestoreService<Appeal[]>) {
+
+  private appealList: Appeal[];
+  constructor(private route: ActivatedRoute, private appealService: AppealService) {
   }
   deleteAppeal(id) {
     this.appealService.removeAppeal(id).subscribe(
-      success => { console.log(success); this.appealService.loadAppeals(); },
-      error => { console.log(error); }
+      data => { 
+        this.appealList = this.appealList.filter(function(obj){
+          return obj._id !== id;
+        })
+      }
     );
   }
   @Input()
   set appeals(appeals: Appeal[]) {
-    this.restoreService.setItem(appeals);
+    this.appealList = appeals;
   }
   get appeals(): Appeal[] {
-    return this.restoreService.getItem();
+    return this.appealList;
   }
 
   ngOnChanges(changes) {
-    this.restoreService.setItem(changes.appeals.currentValue);
+    this.appealList = changes.appeals.currentValue;
   }
 }

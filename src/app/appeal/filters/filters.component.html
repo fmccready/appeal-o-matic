@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12 col-sm-3 col-sm-offset-2">
-    <form #filtersForm="ngForm" (ngSubmit)="onSubmit(filtersForm.value)">
+    <form #filtersForm="ngForm" (ngSubmit)="onSubmit(filters)">
       <div class="form-group">
         <h4>Campaign</h4>
         <select [(ngModel)]="filters.campaign" name="campaign" class="form-control" id="campaign-select">
@@ -24,8 +24,11 @@
       
       <div class="form-group">
         <h4>Scheduled date range</h4>
+        <label for="startDate">Start Date</label>
+        <datepicker id="startDate" [(ngModel)]="filters.startDate" #startDate="ngModel" name="startDate"></datepicker>
+        <label for="endDate">End Date</label>
+        <datepicker id="endDate" [(ngModel)]="filters.endDate" #endDate="ngModel" name="endDate"></datepicker>
       </div>
-
       <div class="form-group text-center">
         <button class="btn btn-lg btn-primary">Search</button>
       </div>
