@@ -12,17 +12,20 @@ interface IAppealsOperation extends Function {
 export class AppealService {
   private _appealUrl = 'http://' + window.location.hostname + ':3000/api/v1/appeal/';
   public _appeals$: BehaviorSubject<Appeal[]> = new BehaviorSubject([]);
+  private appeals:Appeal[] = [];
   public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject({});
 
   constructor(private http: Http) {
-    this._appeals$.next([]);
+    //this._appeals$.next([]);
     this.currentAppeal$.next(new Appeal());
     this.loadAppeals();
   }
 
   loadAppeals() {
+    console.log('Making HTTP request, loading appeals...');
     this.http.get(this._appealUrl).map(this.extractData).subscribe(
       data => {
+        this.appeals = data;
         this._appeals$.next(data);
       },
       error => {
@@ -57,7 +60,8 @@ export class AppealService {
       headers: headers
     });
     
-    this.http.post(this._appealUrl, newAppeal, options).subscribe(data => console.log(data));
+    this.http.post(this._appealUrl, newAppeal, options).map(this.extractData).subscribe(data => this.appeals.push(data));
+    this._appeals$.next(this.appeals);
   }
 
   updateAppeal(appeal: Appeal) {
@@ -74,6 +78,15 @@ export class AppealService {
   }
 
   removeAppeal(id: string): Observable<Response> {
+    function findId(obj){
+      return obj._id === id;
+    }
+    let appealToDelete = this.appeals.find(findId);
+    let index = this.appeals.indexOf(appealToDelete);
+    if (index > -1){
+      this.appeals.splice(index, 1);
+    }
+    this._appeals$.next(this.appeals);
     return this.http.delete(this._appealUrl + id);
   }
 

@@ -14,7 +14,6 @@ import { Appeal } from '../../models/appeal';
 })
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal = new Appeal();
-  data = false;
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     console.log(this.appeal);
@@ -67,4 +66,5 @@ export class AppealDetailComponent implements OnInit {
   ngOnInit() {
     this.getAppealFromRoute();
   }
+
 }

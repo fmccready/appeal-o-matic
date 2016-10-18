@@ -24,7 +24,6 @@ export class NewAppealComponent implements OnInit {
   private templates: Array<Template>;
   private appealSub;
   constructor(private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService) {
-    this.appealService.loadAppeals();
     this.templates = previewService.templates;
   }
   
@@ -40,11 +39,12 @@ export class NewAppealComponent implements OnInit {
   }
   ngOnInit() {
     this.campaigns = this.campaignService.getCampaigns();
-    this.appealSub = this.appealService.getAppeals().subscribe(
-      data => {this.appeals = data; console.log(data);}
-    )
+    if (!this.appealSub){
+      this.appealSub = this.appealService.getAppeals().subscribe(
+        data => {this.appeals = data; console.log(data);}
+      );
+    }
   }
   ngOnDestroy(){
-    this.appealSub.unsubscribe();
   }
 }

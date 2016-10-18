@@ -21,7 +21,6 @@ export class FiltersComponent implements OnInit {
   private filterSub;
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
     this.campaigns = campaignService.getCampaigns();
-    this.appealService.loadAppeals();
   }
 
   onSubmit(filters): void {
@@ -47,10 +46,12 @@ export class FiltersComponent implements OnInit {
         }
       }
       if (filters.startDate && filters.endDate){
-        console.log(filters);
-        console.log(appeal.info.sendDate);
-        console.log(typeof appeal.info.sendDate);
-        if(appeal.info.sendDate < filters.startDate.getTime() && appeal.info.sendDate > filters.endDate.getTime()){
+        let sendDate = new Date(appeal.info.sendDate);
+        filters.endDate.setHours(23, 59, 59, 999);
+        console.log(filters.startDate.getTime());
+        console.log(sendDate.getTime());
+        console.log(filters.endDate.getTime());
+        if(sendDate.getTime() < filters.startDate.getTime() || sendDate.getTime() > filters.endDate.getTime()){
           console.log('not a match');
           match = false;
         }
@@ -63,15 +64,17 @@ export class FiltersComponent implements OnInit {
 
   ngOnInit() {
     if (!this.appealSub){
-      console.log('subscribing');
       this.appealSub = this.appealService.getAppeals();
       this.appealSub.subscribe(
-        data => { this.appeals = data; }
+        data => { this.appeals = data; console.log('ngOnInit'); console.log(data); }
       );
     }
   }
 
   ngOnDestroy(){
+    if (this.filterSub){
+      this.filterSub.unsubscribe();
+    }
   }
 
 }
