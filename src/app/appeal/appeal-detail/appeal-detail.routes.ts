@@ -4,6 +4,8 @@ import { StandardAppealComponent } from './appeal-templates/us-appeals/standard-
 import { HHDAppealComponent } from './appeal-templates/us-appeals/hhd-appeal/appeal-hhd.component';
 import { HHDLargeAppealComponent } from './appeal-templates/us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
 import { CANHHDAppealComponent } from './appeal-templates/can-appeals/can-hhd-appeal/can-appeal-hhd.component';
+import { CANHHDLargeAppealComponent } from './appeal-templates/can-appeals/can-hhd-appeal-large-img/can-appeal-hhd-large-img.component';
+import { CANStandardAppealComponent } from './appeal-templates/can-appeals/can-standard-appeal/can-appeal-standard.component';
 
 const appealDetailRoutes: Routes = [
     {
@@ -26,7 +28,14 @@ const appealDetailRoutes: Routes = [
         path: 'canhhdAppeal',
         component: CANHHDAppealComponent,
     },
-
+    {
+        path: 'canhhdLargeAppeal',
+        component: CANHHDLargeAppealComponent,
+    },
+    {
+        path: 'canStandardAppeal',
+        component: CANStandardAppealComponent,
+    },
 ];
 
 export const appealDetailRouting: ModuleWithProviders = RouterModule.forChild(appealDetailRoutes);

@@ -4,6 +4,8 @@ import { StandardAppealComponent } from './us-appeals/standard-appeal/standard-a
 import { HHDAppealComponent } from './us-appeals/hhd-appeal/appeal-hhd.component';
 import { HHDLargeAppealComponent } from './us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
 import { CANHHDAppealComponent } from './can-appeals/can-hhd-appeal/can-appeal-hhd.component';
+import { CANHHDLargeAppealComponent } from './can-appeals/can-hhd-appeal-large-img/can-appeal-hhd-large-img.component';
+import { CANStandardAppealComponent } from './can-appeals/can-standard-appeal/can-appeal-standard.component';
 
 import { PlainTextPipe } from '../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../remove-html.pipe';
@@ -16,6 +18,8 @@ import { RemoveHtmlPipe } from '../../../remove-html.pipe';
     HHDAppealComponent,
     HHDLargeAppealComponent,
     CANHHDAppealComponent,
+    CANHHDLargeAppealComponent,
+    CANStandardAppealComponent,
     PlainTextPipe,
     RemoveHtmlPipe
   ],

@@ -21,6 +21,14 @@ export class PreviewService {
       id:'canhhdAppeal',
       name: 'CAN High Holy Days'
     },
+    {
+      id:'canhhdLargeAppeal',
+      name: 'CAN High Holy Days - Large Image'
+    },
+    {
+      id:'canStandardAppeal',
+      name: 'CAN Standard'
+    },
   ];
   constructor() { }
 }

@@ -17,7 +17,7 @@
           <label for="appeal-ps">PS (optional)</label>
           <ckeditor id="appeal-ps" [(ngModel)]="content.ps" #ps="ngModel" name="ps"></ckeditor>
         </div>
-        <div class="form-group" [class.has-error]="!url.valid && url.touched" data-toggle="popover" data-placement="right" title="Donation Form Link" data-content="Paste the link for the desired donation form. <br><br>And do not forget to remove any extra codes from the link.">
+        <div class="form-group" [class.has-error]="!url.valid && url.touched" data-toggle="popover" data-placement="right" title="Donation Form Link" data-content="Paste the link for the desired donation form to be linked for all of the donation links outside the body and PS copy. <br><br>And do not forget to remove any source and subsource codes from the link.">
           <label for="url">Default donation form link</label>
           <input type="text" id="url" class="form-control" [(ngModel)]="content.url" #url="ngModel" name="url">
         </div>
