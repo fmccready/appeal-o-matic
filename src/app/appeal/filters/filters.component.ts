@@ -45,14 +45,21 @@ export class FiltersComponent implements OnInit {
           }
         }
       }
+      let sendDate = new Date(appeal.info.sendDate);
       if (filters.startDate && filters.endDate){
-        let sendDate = new Date(appeal.info.sendDate);
         filters.endDate.setHours(23, 59, 59, 999);
-        console.log(filters.startDate.getTime());
-        console.log(sendDate.getTime());
-        console.log(filters.endDate.getTime());
         if(sendDate.getTime() < filters.startDate.getTime() || sendDate.getTime() > filters.endDate.getTime()){
-          console.log('not a match');
+          match = false;
+        }
+      }
+      else if (filters.startDate && !filters.endDate){
+        if(sendDate.getTime() < filters.startDate.getTime()){
+          match = false;
+        }
+      }
+      else if (!filters.startDate && filters.endDate){
+        filters.endDate.setHours(23, 59, 59, 999);
+        if (sendDate.getTime() > filters.endDate.getTime()){
           match = false;
         }
       }
