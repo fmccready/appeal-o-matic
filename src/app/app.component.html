@@ -11,9 +11,9 @@
     </div>
     <div class="collapse navbar-collapse" id="main-nav">
       <ul class="nav navbar-nav">
-        <li><a href="#" [routerLink]="['filters']">Find an eAppeal</a></li>
-        <li><a href="#" [routerLink]="['new-campaign']">Make a new Campaign</a></li>
-        <li><a href="#" [routerLink]="['new-appeal']" >Make a new eAppeal</a></li>
+        <li [routerLinkActive]="['active']"><a href="#" [routerLink]="['filters']">Find an eAppeal</a></li>
+        <li [routerLinkActive]="['active']"><a href="#" [routerLink]="['new-campaign']">Make a new Campaign</a></li>
+        <li [routerLinkActive]="['active']"><a href="#" [routerLink]="['new-appeal']" >Make a new eAppeal</a></li>
       </ul>
     </div>
   </div>

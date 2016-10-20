@@ -4,3 +4,6 @@
 .panel .panel-heading {
   cursor: pointer;
 }
+#contentPanel, #copyPanel, #imagePanel {
+  padding: 0;
+}
