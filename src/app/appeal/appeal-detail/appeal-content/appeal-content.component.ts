@@ -35,7 +35,7 @@ export class AppealContentComponent implements OnInit {
 
   ngOnInit() {
     $(function () {
-      $('[data-toggle="popover"]').popover({trigger: 'hover', container: 'body', html: true});
+      $('[data-toggle="popover"]').popover({trigger: 'hover', html: true});
     });
   }
 }
