@@ -35,8 +35,10 @@
           <hr>
         </div>
         <div class="form-group" data-toggle="popover" data-placement="right" title="Send Date" data-content="Select the Date the email will send here.">
-          <label for="send-date">Send Date</label>
-          <datepicker [(ngModel)]="info.sendDate" name="sendDate"></datepicker>
+          <div class="datepicker-wrapper">
+            <label for="send-date">Send Date</label>
+            <datepicker [(ngModel)]="info.sendDate" name="sendDate"></datepicker>
+          </div>
         </div>
         <div class="form-group" data-toggle="popover" data-placement="right" title="Send Time" data-content="Select the Time the email will send here.">
           <label for="send-time">Send Time</label>

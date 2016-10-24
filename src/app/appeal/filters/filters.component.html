@@ -24,10 +24,8 @@
       
       <div class="form-group">
         <h4>Scheduled date range</h4>
-        <label for="startDate">Start Date</label>
-        <datepicker id="startDate" [(ngModel)]="filters.startDate" #startDate="ngModel" name="startDate"></datepicker>
-        <label for="endDate">End Date</label>
-        <datepicker id="endDate" [(ngModel)]="filters.endDate" #endDate="ngModel" name="endDate"></datepicker>
+        <div class="datepicker-wrapper"><label for="startDate">Start Date</label><datepicker id="startDate" [(ngModel)]="filters.startDate" #startDate="ngModel" name="startDate"></datepicker></div>
+        <div class="datepicker-wrapper"><label for="endDate">End Date</label><datepicker id="endDate" [(ngModel)]="filters.endDate" #endDate="ngModel" name="endDate"></datepicker></div>
       </div>
       <div class="form-group text-center">
         <button class="btn btn-lg btn-primary">Search</button>

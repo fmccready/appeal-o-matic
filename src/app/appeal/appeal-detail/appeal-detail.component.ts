@@ -16,7 +16,6 @@ export class AppealDetailComponent implements OnInit {
   private appeal: Appeal = new Appeal();
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
-    console.log(this.appeal);
   }
   
   getAppealFromRoute() {

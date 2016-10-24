@@ -9,6 +9,9 @@ import { CANStandardAppealComponent } from './can-appeals/can-standard-appeal/ca
 
 import { PlainTextPipe } from '../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../remove-html.pipe';
+
+import { CopyControlsComponent } from './copy-controls/copy-controls.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +24,8 @@ import { RemoveHtmlPipe } from '../../../remove-html.pipe';
     CANHHDLargeAppealComponent,
     CANStandardAppealComponent,
     PlainTextPipe,
-    RemoveHtmlPipe
+    RemoveHtmlPipe,
+    CopyControlsComponent
   ],
   schemas: [
     NO_ERRORS_SCHEMA

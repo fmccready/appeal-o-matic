@@ -32,8 +32,10 @@
         <input type="text" class="form-control" [(ngModel)]="info.subjectLine" #subjectLine="ngModel" name="subjectLine" id="subject-line" placeholder="optional">
       </div>
       <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
-        <label for="sendDate">Send date (optional)</label>
-        <datepicker [(ngModel)]="info.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datepicker>
+        <div class="datepicker-wrapper">
+          <label for="sendDate">Send date (optional)</label>
+          <datepicker [(ngModel)]="info.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datepicker>
+        </div>
       </div>
       <div class="form-group" [class.has-error]="!sendTime.valid && sendTime.touched">
         <label for="sendTime">Send time (optional)</label>

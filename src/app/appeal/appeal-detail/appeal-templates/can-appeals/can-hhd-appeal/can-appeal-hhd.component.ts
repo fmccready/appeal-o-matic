@@ -37,43 +37,6 @@ export class CANHHDAppealComponent implements OnChanges {
     this.appeal.content.image.utm = '';
   }
 
-  copyHtml(){
-    var temp = document.createElement('input');
-    var hidden = document.querySelector('#hidden');
-    hidden.appendChild(temp);
-
-    temp.value = this.htmlVersion.nativeElement.innerHTML.toString();
-    temp.value = temp.value.replace(/_ngcontent\S+"/g, '');
-    temp.value = temp.value.replace(/ng-reflect-href\S+\s/g, '');
-    temp.value = temp.value.replace(/ng-reflect-src\S+"/g, '');
-    temp.value = temp.value.replace(/ng-reflect-inner-h-t-m-l="[[:word:][:blank:]]+"/g, '');
-    temp.value = temp.value.replace(/&amp;/g, '&');
-    temp.value = temp.value.replace(/–/g, '&ndash;');
-    temp.select();
-    try {
-      let success = document.execCommand('copy');
-    } catch (err) {
-      console.log(err);
-    }
-    window.getSelection().removeAllRanges();
-  }
-
-  copyPlain(){
-    var plainTemp = document.createElement('textarea');
-    var hidden = document.querySelector('#hidden');
-    hidden.appendChild(plainTemp);
-
-    plainTemp.value = this.plainVersion.nativeElement.innerText;
-    plainTemp.value = plainTemp.value.replace(/–/g, '-');
-    plainTemp.select();
-    try {
-      let success = document.execCommand('copy');
-    } catch(err){
-      console.log(err);
-    }
-    window.getSelection().removeAllRanges();
-  }
-
   @ViewChild('htmlVersion') htmlVersion: ElementRef;
   @ViewChild('plainVersion') plainVersion: ElementRef;
   @ViewChild('appealBody') appealBody: ElementRef;
