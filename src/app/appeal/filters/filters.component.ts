@@ -72,8 +72,15 @@ export class FiltersComponent implements OnInit {
   ngOnInit() {
     if (!this.appealSub){
       this.appealSub = this.appealService.getAppeals();
-      this.appealSub.subscribe(
-        data => { this.appeals = data; console.log('ngOnInit'); console.log(data); }
+      this.appealSub.flatMap(data => {return data}).filter(function(obj, index, obs){
+        if (obj){
+          return !obj.info.scheduled;
+        }
+        else {
+          return false;
+        }
+      }).subscribe(
+        data => { this.appeals.push(data); console.log(data); }
       );
     }
   }

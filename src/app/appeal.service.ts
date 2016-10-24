@@ -115,7 +115,6 @@ export class AppealService {
 */
 
   getAppeals(): Observable<Appeal[]> {
-    console.log(this._appeals$);
     return Observable.from(this._appeals$);
   }
 
