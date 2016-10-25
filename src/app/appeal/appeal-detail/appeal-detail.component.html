@@ -1,12 +1,13 @@
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-4" id="controls">
-    <app-appeal-info [info]="appeal.info" (saved)="onInfoSaved($event)"></app-appeal-info>
-    <app-appeal-content [content]="appeal.content" (saved)="onContentSaved($event)"></app-appeal-content>
-    <app-appeal-codes [codes]="appeal.codes" (saved)="onCodesSaved($event)"></app-appeal-codes>
-    <app-appeal-signoffs [signoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)"></app-appeal-signoffs>
-    <app-appeal-notes [notes]="appeal.notes" (saved)="onNotesSaved($event)"></app-appeal-notes>
+    <app-appeal-info [info]="appeal.info" (saved)="onInfoSaved($event)" (canceled)="onInfoCanceled($event)"></app-appeal-info>
+    <app-appeal-content [content]="appeal.content" (saved)="onContentSaved($event)" (canceled)="onContentCanceled($event)"></app-appeal-content>
+    <app-appeal-codes [codes]="appeal.codes" (saved)="onCodesSaved($event)" (canceled)="onCodesCanceled($event)"></app-appeal-codes>
+    <app-appeal-signoffs [signoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)" (canceled)="onSignoffsCanceled($event)"></app-appeal-signoffs>
+    <app-appeal-notes [notes]="appeal.notes" (saved)="onNotesSaved($event)" (canceled)="onNotesCanceled($event)"></app-appeal-notes>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-8">
     <router-outlet></router-outlet>
+    <appeal-list-component [appeals]="[appeal]"></appeal-list-component>
   </div>
 </div>

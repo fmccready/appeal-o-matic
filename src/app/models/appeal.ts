@@ -13,8 +13,11 @@ export class AppealInfo {
   senderAddress: string = '';
   subjectLine: string = '';
   campaign: string = '';
+  campaignName: string = '';
   sendDate: Date = new Date();
   scheduled: boolean = false;
+  groupId: string;
+  groupName: string;
 }
 export class AppealContent {
   headline: string = '';

@@ -8,7 +8,7 @@ import { AppealInfoModule } from './appeal-info/appeal-info.module';
 import { AppealSignoffsModule } from './appeal-signoffs/appeal-signoffs.module';
 import { AppealNotesModule } from './appeal-notes/appeal-notes.module';
 import { AppealTemplateModule } from './appeal-templates/appeal-template.module';
-
+import { AppealListModule } from '../appeal-list/appeal-list.module';
 
 import { appealDetailRouting } from './appeal-detail.routes';
 
@@ -21,10 +21,11 @@ import { appealDetailRouting } from './appeal-detail.routes';
     AppealNotesModule,
     AppealTemplateModule,
     CommonModule,
-    appealDetailRouting
+    appealDetailRouting,
+    AppealListModule
   ],
   declarations: [
-    AppealDetailComponent
+    AppealDetailComponent,
   ],
 })
 export class AppealDetailModule {}

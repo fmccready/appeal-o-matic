@@ -16,21 +16,26 @@ interface JQuery {
 })
 export class AppealContentComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealContent>();
+  @Output() canceled = new EventEmitter<AppealContent>();
+  private _content: AppealContent;
   constructor(private restoreService: RestoreService<AppealContent>) {
   }
 
   @Input()
-  set content(appealContent: AppealContent){
-    this.restoreService.setItem(appealContent);
+  set content(data: AppealContent){
+    this._content = data;
+    this.restoreService.setItem(data);
   }
   get content(): AppealContent {
-    return this.restoreService.getItem();
+    return this._content;
   }
   save() {
-    this.saved.emit(this.restoreService.getItem());
+    this.restoreService.setItem(this._content);
+    this.saved.emit(this._content);
   }
   cancel() {
-    this.restoreService.restoreItem();
+    this._content = this.restoreService.restoreItem();
+    this.canceled.emit(this._content);
   }
 
   ngOnInit() {

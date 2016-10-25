@@ -11,20 +11,26 @@ import { AppealSignoff } from '../../../models/appeal';
 })
 export class AppealSignoffsComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealSignoff>();
+  @Output() canceled = new EventEmitter<AppealSignoff>();
+
+  private _signoffs: AppealSignoff;
   constructor(private restoreService: RestoreService<AppealSignoff>) { }
 
   @Input()
-  set signoffs(appeal: AppealSignoff){
-    this.restoreService.setItem(appeal);
+  set signoffs(data: AppealSignoff){
+    this._signoffs = data;
+    this.restoreService.setItem(data);
   }
   get signoffs(): AppealSignoff {
-    return this.restoreService.getItem();
+    return this._signoffs;
   }
   save() {
-    this.saved.emit(this.restoreService.getItem());
+    this.restoreService.setItem(this._signoffs);
+    this.saved.emit(this._signoffs);
   }
   cancel() {
-    this.restoreService.restoreItem();
+    this._signoffs = this.restoreService.restoreItem();
+    this.canceled.emit(this._signoffs);
   }
 
   ngOnInit() {

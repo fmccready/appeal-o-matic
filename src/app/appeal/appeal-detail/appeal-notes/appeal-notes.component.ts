@@ -10,20 +10,25 @@ import { RestoreService } from '../../../restore.service';
 })
 export class AppealNotesComponent implements OnInit {
   @Output() saved = new EventEmitter<String>();
+  @Output() canceled = new EventEmitter<String>();
+  private _notes: String;
   constructor(private restoreService: RestoreService<String>) { }
 
   @Input()
   set notes(data: String){
+    this._notes = data;
     this.restoreService.setItem(data);
   }
   get notes(): String {
-    return this.restoreService.getItem();
+    return this._notes;
   }
   save() {
-    this.saved.emit(this.restoreService.getItem());
+    this.restoreService.setItem(this._notes);
+    this.saved.emit(this._notes);
   }
   cancel() {
-    this.restoreService.restoreItem();
+    this._notes = this.restoreService.restoreItem();
+    this.canceled.emit(this._notes);
   }
 
   ngOnInit() {

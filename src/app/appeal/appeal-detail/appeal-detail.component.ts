@@ -13,9 +13,11 @@ import { Appeal } from '../../models/appeal';
   styleUrls: ['appeal-detail.component.css'],
 })
 export class AppealDetailComponent implements OnInit {
-  private appeal: Appeal = new Appeal();
+  private appeal: Appeal;
+  private relatedAppeals: Array<Appeal>;
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
+    this.appeal = new Appeal();
   }
   
   getAppealFromRoute() {
@@ -27,6 +29,7 @@ export class AppealDetailComponent implements OnInit {
             this.appeal = data; 
             if (data.hasOwnProperty('_id')){ 
               this.previewService.appeal.next(data); 
+              
             }});
         }
       });
@@ -46,19 +49,38 @@ export class AppealDetailComponent implements OnInit {
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
   }
+  onContentCanceled(data) {
+    this.appeal.content = data;
+    this.previewService.appeal.next(this.appeal);
+  }
+
   onCodesSaved(data) {
     this.appeal.codes = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
   }
+  onCodesCanceled(data){
+    this.appeal.codes = data;
+    this.previewService.appeal.next(this.appeal);
+  }
+
   onSignoffsSaved(data) {
     this.appeal.signoffs = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
   }
+  onSignoffsCanceled(data) {
+    this.appeal.signoffs = data;
+    this.previewService.appeal.next(this.appeal);
+  }
+
   onNotesSaved(data) {
     this.appeal.notes = data;
     this.appealService.updateAppeal(this.appeal);
+    this.previewService.appeal.next(this.appeal);
+  }
+  onNotesCanceled(data) {
+    this.appeal.notes = data;
     this.previewService.appeal.next(this.appeal);
   }
 

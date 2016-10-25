@@ -7,7 +7,7 @@
       <form #notesForm="ngForm" novalidate>
         <div class="form-group">
           <label for="notes">Notes/Special Instructions</label>
-          <ckeditor id="notes" [(ngModel)]="notes" name="notes"></ckeditor>
+          <ckeditor id="notes" [(ngModel)]="_notes" name="notes"></ckeditor>
         </div>
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>
       </form>

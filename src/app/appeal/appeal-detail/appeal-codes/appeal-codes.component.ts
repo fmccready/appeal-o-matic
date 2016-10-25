@@ -11,21 +11,26 @@ import { RestoreService } from '../../../restore.service';
 })
 export class AppealCodesComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealCode>();
+  @Output() canceled = new EventEmitter<AppealCode>();
+  private _codes: AppealCode;
   constructor(private restoreService: RestoreService<AppealCode>) {
   }
 
   @Input()
-  set codes(appeal: AppealCode){
-    this.restoreService.setItem(appeal);
+  set codes(appealCode: AppealCode){
+    this._codes = appealCode;
+    this.restoreService.setItem(appealCode);
   }
   get codes(): AppealCode {
-    return this.restoreService.getItem();
+    return this._codes;
   }
   save() {
-    this.saved.emit(this.restoreService.getItem());
+    this.restoreService.setItem(this._codes);
+    this.saved.emit(this._codes);
   }
   cancel() {
-    this.restoreService.restoreItem();
+    this._codes = this.restoreService.restoreItem();
+    this.canceled.emit(this._codes);
   }
 
   ngOnInit() {

@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 
 import { AppealModule } from './appeal/appeal.module';
 import { CampaignModule } from './campaign/campaign.module';
+import { AppealDetailModule } from './appeal/appeal-detail/appeal-detail.module';
 
 import { CampaignService } from './campaign.service';
 import { AppealService } from './appeal.service';
@@ -24,7 +25,8 @@ import { routing, appRoutingProviders } from './app.routes';
     FormsModule,
     routing,
     AppealModule,
-    CampaignModule
+    CampaignModule,
+    AppealDetailModule
   ],
   declarations: [
     AppComponent

@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Campaign = require('./campaign.js');
+var Group = require('./group.js');
 
 var appealSchema = new Schema({
   info: {
@@ -8,9 +10,10 @@ var appealSchema = new Schema({
     sender: {type: String, default: ''},
     senderAddress: {type: String, default: ''},
     subjectLine: {type: String, default: ''},
-    campaign: { type: String, default: ''},
+    campaign: Object,
     sendDate: {type: Date, default: new Date()},
-    scheduled: {type: Boolean, default: false}
+    scheduled: {type: Boolean, default: false},
+    group: Object
   },
   content: {
     headline: {type:String, default: ''},
@@ -38,6 +41,6 @@ var appealSchema = new Schema({
     funDev: {type: String, default: ''},
     editor: {type: String, default: ''}
   },
-  notes: { type: String, default: ''}
+  notes: {type: String, default: ''}
 });
 module.exports = mongoose.model('Appeal', appealSchema);

@@ -18,25 +18,30 @@ import { RestoreService } from '../../../restore.service';
 })
 export class AppealInfoComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealInfo>();
+  @Output() canceled = new EventEmitter<AppealInfo>();
   private campaigns: Observable<Campaign[]>;
   private templates: Array<Template>;
+  private _info: AppealInfo = new AppealInfo();
   constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService) {
     this.campaigns = campaignService.getCampaigns();
     this.templates = previewService.templates;
   }
 
   @Input()
-  set info(appealInfo: AppealInfo) {
-    this.restoreService.setItem(appealInfo);
+  set info(data: AppealInfo) {
+    this._info = data;
+    this.restoreService.setItem(data);
   }
   get info(): AppealInfo {
-    return this.restoreService.getItem();
+    return this._info;
   }
   save() {
-    this.saved.emit(this.restoreService.getItem());
+    this.restoreService.setItem(this._info);
+    this.saved.emit(this._info);
   }
   cancel() {
-    this.restoreService.restoreItem();
+    this._info = this.restoreService.restoreItem();
+    this.canceled.emit(this._info);
   }
 
   ngOnInit() {

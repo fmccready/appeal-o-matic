@@ -28,7 +28,7 @@ mongoose.connect('mongodb://127.0.0.1:27017');
 var db = mongoose.connection;
 var Campaign = require('./src/app/schemas/campaign');
 var Appeal = require('./src/app/schemas/appeal');
-var Element = require('./src/app/schemas/element');
+var Group = require('./src/app/schemas/group');
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function(){

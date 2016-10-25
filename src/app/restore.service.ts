@@ -4,9 +4,8 @@ import { Injectable } from '@angular/core';
 export class RestoreService<T> {
   originalItem: T;
   currentItem: T;
-
   setItem(item:T) {
-    this.originalItem = item;
+    this.originalItem = this.clone(item);
     this.currentItem = this.clone(item);
   }
 
@@ -15,12 +14,22 @@ export class RestoreService<T> {
   }
 
   restoreItem(): T {
-    this.currentItem = this.originalItem;
+    this.currentItem = this.clone(this.originalItem);
     return this.getItem();
   }
 
   clone(item: T): T {
-    return JSON.parse(JSON.stringify(item));
+    if (item === null || typeof item !== 'object'){
+      return item;
+    }
+    var temp = item.constructor();
+    if (temp){
+      for (var key in item){
+        temp[key] = this.clone(item[key]);
+      }
+    }
+
+    return temp;
   }
 
 }

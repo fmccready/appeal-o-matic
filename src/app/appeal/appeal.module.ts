@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AppealDetailModule } from './appeal-detail/appeal-detail.module';
 import { FiltersComponent } from './filters/filters.component';
-import { AppealListComponent } from './appeal-list/appeal-list.component';
+import { AppealListModule } from './appeal-list/appeal-list.module';
 import { NewAppealComponent } from './new-appeal/new-appeal.component';
 import { routing } from './appeal.routes';
 import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
@@ -12,20 +11,18 @@ import { PreviewService } from './../preview.service';
 
 @NgModule({
   imports: [
-    AppealDetailModule,
     routing,
     TimepickerModule,
     DatepickerModule,
-    CommonModule
+    CommonModule,
+    AppealListModule
   ],
   declarations: [
     FiltersComponent,
-    AppealListComponent,
     NewAppealComponent
   ],
   exports: [
     FiltersComponent,
-    AppealListComponent,
     NewAppealComponent
   ],
   providers: [
