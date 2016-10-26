@@ -12,11 +12,10 @@ export class AppealInfo {
   sender: string = '';
   senderAddress: string = '';
   subjectLine: string = '';
-  campaign: string = '';
-  campaignName: string = '';
+  campaign: Campaign = new Campaign();
   sendDate: Date = new Date();
   scheduled: boolean = false;
-  groupId: string;
+  group: string;
   groupName: string;
 }
 export class AppealContent {
@@ -47,8 +46,10 @@ export class AppealSignoff {
 }
 
 class Campaign {
-  name: string;
-  utm: string;
+  _id: any;
+  name: String;
+  utm: String;
+  __v: any;
 }
 class Image {
   url: string = '';

@@ -10,10 +10,16 @@ var appealSchema = new Schema({
     sender: {type: String, default: ''},
     senderAddress: {type: String, default: ''},
     subjectLine: {type: String, default: ''},
-    campaign: Object,
+    campaign: {
+      _id: {type: Schema.Types.ObjectId, ref: 'Campaign'},
+      name: String,
+      utm: String,
+      __v: Number 
+    },
     sendDate: {type: Date, default: new Date()},
     scheduled: {type: Boolean, default: false},
-    group: Object
+    group: {type: String, default: ''},
+    groupName: {type: String, default: ''}
   },
   content: {
     headline: {type:String, default: ''},

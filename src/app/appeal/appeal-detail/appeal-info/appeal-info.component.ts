@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -20,10 +20,19 @@ export class AppealInfoComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealInfo>();
   @Output() canceled = new EventEmitter<AppealInfo>();
   private campaigns: Observable<Campaign[]>;
+  private _campaigns: Campaign[];
   private templates: Array<Template>;
   private _info: AppealInfo = new AppealInfo();
   constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService) {
-    this.campaigns = campaignService.getCampaigns();
+    this.campaigns = this.campaignService.getCampaigns();
+    this.campaigns.subscribe(data => {
+      this._campaigns = data;
+      for (var i = 0; i < this._campaigns.length; i++ ){
+        if (this.info.campaign._id === this._campaigns[i]._id){
+          this.campaign.nativeElement.selectedIndex = i;
+        }
+      }
+    });
     this.templates = previewService.templates;
   }
 
@@ -36,6 +45,11 @@ export class AppealInfoComponent implements OnInit {
     return this._info;
   }
   save() {
+    for (var i = 0; i < this._campaigns.length; i++){
+      if (this.info.campaign._id === this._campaigns[i]._id){
+        this.info.campaign = this._campaigns[i];
+      }
+    }
     this.restoreService.setItem(this._info);
     this.saved.emit(this._info);
   }
@@ -43,6 +57,8 @@ export class AppealInfoComponent implements OnInit {
     this._info = this.restoreService.restoreItem();
     this.canceled.emit(this._info);
   }
+
+  @ViewChild('campaign') campaign:ElementRef;
 
   ngOnInit() {
     $(function () {

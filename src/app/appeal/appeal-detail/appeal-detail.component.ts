@@ -14,7 +14,7 @@ import { Appeal } from '../../models/appeal';
 })
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;
-  private relatedAppeals: Array<Appeal>;
+  private relatedAppeals: Observable<Appeal>;
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     this.appeal = new Appeal();
@@ -29,8 +29,18 @@ export class AppealDetailComponent implements OnInit {
             this.appeal = data; 
             if (data.hasOwnProperty('_id')){ 
               this.previewService.appeal.next(data); 
-              
-            }});
+            }
+            if (data.hasOwnProperty('group')){
+              this.relatedAppeals = this.appealService.getAppeals().flatMap(a => {return a;}).filter(function(appeal: Appeal, index: Number){
+                if (data.info.group === appeal.info.group){
+                  return true;
+                }
+                else {
+                  return false;
+                }
+              });
+            }
+          });
         }
       });
   }
@@ -44,6 +54,11 @@ export class AppealDetailComponent implements OnInit {
       this.router.navigate(['/appeal', this.appeal._id, data.template]);
     }
   }
+  onInfoCanceled(data) {
+    this.appeal.info = data;
+    this.previewService.appeal.next(this.appeal);
+  }
+
   onContentSaved(data) {
     this.appeal.content = data;
     this.appealService.updateAppeal(this.appeal);

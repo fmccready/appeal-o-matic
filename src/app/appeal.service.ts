@@ -64,6 +64,7 @@ export class AppealService {
   }
 
   updateAppeal(appeal: Appeal) {
+    console.log(appeal);
     let body = appeal;
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({

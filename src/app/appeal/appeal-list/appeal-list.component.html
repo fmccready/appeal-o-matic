@@ -3,7 +3,7 @@
   <th>Appeal name</th><th>Campaign</th><th>Send Date</th><th>Audience</th><th>Scheduled</th>
   <tr *ngFor="let appeal of appeals">
     <td>{{ appeal.info.name }}</td>
-    <td>{{ appeal.info.campaign }}</td>
+    <td>{{ appeal.info.campaign.name }}</td>
     <td>{{ appeal.info.sendDate | date }}</td>
     <td>{{ appeal.codes.audience | uppercase }}</td>
     <td><span *ngIf="appeal.info.scheduled" class="glyphicon glyphicon-ok text-success"></span><span *ngIf="!appeal.info.scheduled" class="glyphicon glyphicon-alert text-danger"></span></td>

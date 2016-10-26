@@ -1,5 +1,6 @@
 export interface Campaign {
-  _id: String;
+  _id: any;
   name: String;
   utm: String;
+  __v: any;
 }

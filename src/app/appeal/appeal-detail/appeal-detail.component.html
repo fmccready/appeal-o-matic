@@ -7,7 +7,11 @@
     <app-appeal-notes [notes]="appeal.notes" (saved)="onNotesSaved($event)" (canceled)="onNotesCanceled($event)"></app-appeal-notes>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-8">
-    <router-outlet></router-outlet>
-    <appeal-list-component [appeals]="[appeal]"></appeal-list-component>
+    <div class="col-xs-12 col-sm-12 col-md-7">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-5">
+      <appeal-list-component [appeals]="[appeal]"></appeal-list-component>
+    </div>
   </div>
 </div>

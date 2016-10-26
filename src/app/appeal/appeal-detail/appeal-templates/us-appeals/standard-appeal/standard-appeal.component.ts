@@ -53,7 +53,6 @@ export class StandardAppealComponent implements OnChanges {
 
     var self = this;
     var content = this.appeal.content;
-    console.log(content);
     if (content) {
       if (this.appeal.info.campaign) {
         this.setVersion();
