@@ -15,7 +15,7 @@ import { Settings } from '../../models/settings';
 })
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;
-  private relatedAppeals: Observable<Appeal>;
+  private relatedAppeals: Appeal[] = [];
   private settings: Settings = new Settings();
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
@@ -27,24 +27,27 @@ export class AppealDetailComponent implements OnInit {
   getAppealFromRoute() {
     this.route.params
       .subscribe(queryString => {
+        console.log('subscribed to params');
         this.qs = queryString;
         if (this.qs.hasOwnProperty('appealId')) {
+          console.warn('a subscription is being made');
           this.appealService.getAppealById(this.qs.appealId).subscribe(data => {
+            console.log(data);
             this.appeal = data; 
+            this.relatedAppeals = [];
             if (data.hasOwnProperty('_id')){ 
-              this.previewService.appeal.next(data); 
+              this.previewService.appeal.next(data);
             }
-            if (data.hasOwnProperty('group')){
-              console.log('has group...');
-              this.relatedAppeals = this.appealService.getAppeals().flatMap(a => {console.log(a);return a;}).filter(function(appeal: Appeal, index: Number){
+            if (data.info.hasOwnProperty('group')){
+              console.log('has group... subscribing to getAppeals');
+              this.appealService.getAppeals().flatMap(a => {console.log(a);return a;}).filter(function(appeal: Appeal, index: Number){
                 if (data.info.group === appeal.info.group){
-                  console.log(data);
                   return true;
                 }
                 else {
                   return false;
                 }
-              });
+              }).subscribe(data => {this.relatedAppeals.push(data);});
             }
           });
         }

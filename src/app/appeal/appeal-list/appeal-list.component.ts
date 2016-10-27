@@ -21,7 +21,7 @@ export class AppealListComponent implements OnChanges {
   }
   deleteAppeal(id) {
     this.appealService.removeAppeal(id).subscribe(
-      data => { 
+      data => {
         this.appealList = this.appealList.filter(function(obj){
           return obj._id !== id;
         })
