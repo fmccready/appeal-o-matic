@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppealDetailComponent } from './appeal-detail.component';
 
+import { DuplicateAppealComponent } from '../duplicate-appeal/duplicate-appeal.component';
+
 import { AppealContentModule } from './appeal-content/appeal-content.module';
 import { AppealCodesModule } from './appeal-codes/appeal-codes.module';
 import { AppealInfoModule } from './appeal-info/appeal-info.module';
@@ -26,6 +28,7 @@ import { appealDetailRouting } from './appeal-detail.routes';
   ],
   declarations: [
     AppealDetailComponent,
+    DuplicateAppealComponent
   ],
 })
 export class AppealDetailModule {}

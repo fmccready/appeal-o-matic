@@ -11,7 +11,10 @@
       <router-outlet></router-outlet>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-5">
-      <appeal-list-component [appeals]="[appeal]"></appeal-list-component>
+      <div class="text-right well">
+        <duplicate-appeal [appeal]="appeal"></duplicate-appeal>
+      </div>
+      <appeal-list-component [appeals]="[appeal]" [settings]="settings"></appeal-list-component>
     </div>
   </div>
 </div>

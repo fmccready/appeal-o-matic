@@ -1,12 +1,18 @@
 <h2>eAppeal List</h2>
 <table class="table table-striped">
-  <th>Appeal name</th><th>Campaign</th><th>Send Date</th><th>Audience</th><th>Scheduled</th>
+  <th *ngIf="!settings || (settings && settings.name)">Appeal name</th>
+  <th *ngIf="!settings || (settings && settings.campaign)">Campaign</th>
+  <th *ngIf="!settings || (settings && settings.sendDate)">Send Date</th>
+  <th *ngIf="!settings || (settings && settings.audience)">Audience</th>
+  <th *ngIf="!settings || (settings && settings.subsource)">Subsource</th>
+  <th *ngIf="!settings || (settings && settings.scheduled)">Scheduled</th>
   <tr *ngFor="let appeal of appeals">
-    <td>{{ appeal.info.name }}</td>
-    <td>{{ appeal.info.campaign.name }}</td>
-    <td>{{ appeal.info.sendDate | date }}</td>
-    <td>{{ appeal.codes.audience | uppercase }}</td>
-    <td><span *ngIf="appeal.info.scheduled" class="glyphicon glyphicon-ok text-success"></span><span *ngIf="!appeal.info.scheduled" class="glyphicon glyphicon-alert text-danger"></span></td>
+    <td *ngIf="!settings || (settings && settings.name)">{{ appeal.info.name }}</td>
+    <td *ngIf="!settings || (settings && settings.campaign)">{{ appeal.info.campaign.name }}</td>
+    <td *ngIf="!settings || (settings && settings.sendDate)">{{ appeal.info.sendDate | date }}</td>
+    <td *ngIf="!settings || (settings && settings.audience)">{{ appeal.codes.audience | uppercase }}</td>
+    <td *ngIf="!settings || (settings && settings.subsource)">{{ appeal.codes.s_subsrc }}</td>
+    <td *ngIf="!settings || (settings && settings.scheduled)"><span *ngIf="appeal.info.scheduled" class="glyphicon glyphicon-ok text-success"></span><span *ngIf="!appeal.info.scheduled" class="glyphicon glyphicon-alert text-danger"></span></td>
     <td><button [routerLink]="['/appeal', appeal._id, appeal.info.template]" class="btn btn-primary">Edit</button></td>
     <td><button (click)="deleteAppeal(appeal._id)" class="btn btn-danger">Delete</button></td>
   </tr>

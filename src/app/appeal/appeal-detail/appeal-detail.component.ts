@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { AppealService } from '../../appeal.service';
 import { PreviewService } from '../../preview.service';
 import { Appeal } from '../../models/appeal';
+import { Settings } from '../../models/settings';
 
 @Component({
   selector: 'app-appeal-detail',
@@ -15,9 +16,12 @@ import { Appeal } from '../../models/appeal';
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;
   private relatedAppeals: Observable<Appeal>;
+  private settings: Settings = new Settings();
   private qs: any;
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     this.appeal = new Appeal();
+    this.settings.campaign = false;
+    this.settings.sendDate = false; 
   }
   
   getAppealFromRoute() {
@@ -31,8 +35,10 @@ export class AppealDetailComponent implements OnInit {
               this.previewService.appeal.next(data); 
             }
             if (data.hasOwnProperty('group')){
-              this.relatedAppeals = this.appealService.getAppeals().flatMap(a => {return a;}).filter(function(appeal: Appeal, index: Number){
+              console.log('has group...');
+              this.relatedAppeals = this.appealService.getAppeals().flatMap(a => {console.log(a);return a;}).filter(function(appeal: Appeal, index: Number){
                 if (data.info.group === appeal.info.group){
+                  console.log(data);
                   return true;
                 }
                 else {

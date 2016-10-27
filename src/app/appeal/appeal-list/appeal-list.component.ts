@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 
 import { Appeal } from '../../models/appeal';
 import { Campaign } from '../../models/campaign';
+import { Settings } from '../../models/settings';
 
 import { AppealService } from '../../appeal.service';
 
@@ -34,6 +35,8 @@ export class AppealListComponent implements OnChanges {
   get appeals(): Appeal[] {
     return this.appealList;
   }
+
+  @Input() settings: Settings;
 
   ngOnChanges(changes) {
     this.appealList = changes.appeals.currentValue;

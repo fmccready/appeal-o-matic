@@ -90,31 +90,6 @@ export class AppealService {
     return this.http.delete(this._appealUrl + id);
   }
 
-/*
-  _makeGetRequest(url){
-    this.http.get(url).map(this.extractData).subscribe(
-      data => {
-        this._appeals$.next(data);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
-
-  filterAppeals(filters) {
-    let url = this._appealUrl;
-    if (filters.campaign) {
-      url += '?query={"info.campaign":"' + filters.campaign.utm + '"}';
-    }
-    if (filters.appealId) {
-      url = this._appealUrl + filters.appealId;
-    }
-    this._makeGetRequest(url);
-    return this._appeals$;
-  }
-*/
-
   getAppeals(): Observable<Appeal[]> {
     return Observable.from(this._appeals$);
   }
