@@ -22,6 +22,7 @@ export class AppealDetailComponent implements OnInit {
     this.appeal = new Appeal();
     this.settings.campaign = false;
     this.settings.sendDate = false; 
+    this.settings.delete = false;
   }
   
   getAppealFromRoute() {

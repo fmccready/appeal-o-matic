@@ -5,4 +5,6 @@ export class Settings {
   audience: boolean = true;
   scheduled: boolean = true;
   subsource: boolean = true;
+  edit: boolean = true;
+  delete: boolean = true;
 }
