@@ -7,4 +7,5 @@ export class Settings {
   subsource: boolean = true;
   edit: boolean = true;
   delete: boolean = true;
+  active: string;
 }

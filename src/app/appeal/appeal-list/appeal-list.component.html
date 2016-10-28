@@ -6,7 +6,7 @@
   <th *ngIf="!settings || (settings && settings.audience)">Audience</th>
   <th *ngIf="!settings || (settings && settings.subsource)">Subsource</th>
   <th *ngIf="!settings || (settings && settings.scheduled)">Scheduled</th>
-  <tr *ngFor="let appeal of appeals">
+  <tr *ngFor="let appeal of appeals" [ngClass]="settings && (settings.active === appeal._id) ? 'success' : ''">
     <td *ngIf="!settings || (settings && settings.name)">{{ appeal.info.name }}</td>
     <td *ngIf="!settings || (settings && settings.campaign)">{{ appeal.info.campaign.name }}</td>
     <td *ngIf="!settings || (settings && settings.sendDate)">{{ appeal.info.sendDate | date }}</td>

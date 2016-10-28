@@ -33,7 +33,7 @@ export class AppealDetailComponent implements OnInit {
           this.appealService.getAppealById(this.qs.appealId).subscribe(data => {
             this.appeal = data; 
             if (data.hasOwnProperty('_id')){ 
-              this.previewService.appeal.next(data); 
+              this.previewService.appeal.next(data);
             }
             if (data.hasOwnProperty('group')){
               console.log('has group...');
