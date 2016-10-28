@@ -14,7 +14,7 @@ export class AppealService {
   public _appeals$: BehaviorSubject<Appeal[]> = new BehaviorSubject([]);
   private appeals:Appeal[] = [];
   public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject({});
-
+  private currentAppealId: string;
   constructor(private http: Http) {
     //this._appeals$.next([]);
     this.currentAppeal$.next(new Appeal());
@@ -25,6 +25,11 @@ export class AppealService {
     console.log('Making HTTP request, loading appeals...');
     this.http.get(this._appealUrl).map(this.extractData).subscribe(
       data => {
+        for (let d of data ){
+          if (d._id === this.currentAppealId){
+            this.currentAppeal$.next(d);
+          }
+        }
         this.appeals = data;
         this._appeals$.next(data);
       },
@@ -34,18 +39,19 @@ export class AppealService {
     );
   }
 
-  getAppealById(appealId) {
-    this._appeals$.subscribe(
-      data => {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i]._id === appealId) {
-            this.currentAppeal$.next(data[i]);
-          }
-        }
+  setCurrentAppeal(appealId) {
+    this.currentAppealId = appealId;
+    for (let i = 0; i < this.appeals.length; i++) {
+      if (this.appeals[i]._id === appealId) {
+        console.log('id match');
+        console.log(this.appeals[i]);
+        this.currentAppeal$.next(this.appeals[i]);
       }
-    );
-
-    return this.currentAppeal$;
+    }
+  }
+  
+  getCurrentAppeal(){
+    return Observable.from(this.currentAppeal$);
   }
 
   addAppeal(appeal: Appeal) {
