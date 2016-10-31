@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription, BehaviorSubject, Subject } from 'rxjs/Rx';
 
 import { AppealService } from '../../appeal.service';
 import { PreviewService } from '../../preview.service';
@@ -15,41 +15,19 @@ import { Settings } from '../../models/settings';
 })
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;
-  private relatedAppeals: Observable<Appeal>;
   private settings: Settings = new Settings();
-  private qs: any;
+  private groupId: string;
+  private relatedAppeals: Array<Appeal> = [];
+  private _currentAppeal$: Observable<Appeal>;
+  private _appealSub: Subscription;
+  private _routeSub: Subscription;
+  private _groupSub: Subscription;
+
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     this.appeal = new Appeal();
     this.settings.campaign = false;
     this.settings.sendDate = false; 
     this.settings.delete = false;
-  }
-  
-  getAppealFromRoute() {
-    this.route.params
-      .subscribe(queryString => {
-        this.qs = queryString;
-        if (this.qs.hasOwnProperty('appealId')) {
-          this.appealService.getAppealById(this.qs.appealId).subscribe(data => {
-            this.appeal = data; 
-            if (data.hasOwnProperty('_id')){ 
-              this.previewService.appeal.next(data);
-            }
-            if (data.hasOwnProperty('group')){
-              console.log('has group...');
-              this.relatedAppeals = this.appealService.getAppeals().flatMap(a => {console.log(a);return a;}).filter(function(appeal: Appeal, index: Number){
-                if (data.info.group === appeal.info.group){
-                  console.log(data);
-                  return true;
-                }
-                else {
-                  return false;
-                }
-              });
-            }
-          });
-        }
-      });
   }
 
   onInfoSaved(data) {
@@ -105,9 +83,64 @@ export class AppealDetailComponent implements OnInit {
     this.appeal.notes = data;
     this.previewService.appeal.next(this.appeal);
   }
+  
+  setAppeal(qs) {
+    if (qs.hasOwnProperty('appealId')) {
+      this.appealService.setCurrentAppeal(qs.appealId);
+    }
+  }
 
   ngOnInit() {
-    this.getAppealFromRoute();
+    if (!this._currentAppeal$){
+      console.warn('A subscription is being made to _currentAppeal$');
+      this._currentAppeal$ = this.appealService.getCurrentAppeal();
+      this._appealSub = this._currentAppeal$.subscribe(data => {
+        this.appeal = data;
+        this.previewService.appeal.next(this.appeal);
+        this.groupId = this.appeal.info.group;
+        if (this.groupId){
+          this.groupSubscription();
+        }
+      });
+    }
+    if (!this._routeSub){
+      console.warn('A subscription is being made to route.params');
+      this._routeSub = this.route.params
+      .subscribe(queryString => {
+        this.setAppeal(queryString);
+      });
+    }
+
+  }
+  groupSubscription(){
+    if (!this._groupSub){
+      let gid = this.groupId;
+      this._groupSub = this.appealService.getAppeals().flatMap(a => {this.relatedAppeals = []; return a;}).filter(function(appeal: Appeal, index: Number){
+        if (appeal.info.group === gid){
+          return true;
+        }
+        else {
+          return false;
+        }
+      }).subscribe(
+        data => { this.relatedAppeals.push(data); console.log(data); }
+      );
+    }
+  }
+
+  ngOnDestroy(){
+    if(this._routeSub){
+      console.info('unsubscribing from _routeSub');
+      this._routeSub.unsubscribe();
+    }
+    if(this._groupSub){
+      console.info('unsubscribing from _groupSub');
+      this._groupSub.unsubscribe();
+    }
+    if(this._currentAppeal$){
+      console.info('unsubscribing from _currentAppeal$');
+      this._appealSub.unsubscribe();
+    }
   }
 
 }
