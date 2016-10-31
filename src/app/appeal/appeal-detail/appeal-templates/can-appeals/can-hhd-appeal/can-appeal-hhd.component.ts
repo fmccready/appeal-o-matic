@@ -107,7 +107,7 @@ export class CANHHDAppealComponent implements OnChanges {
   }
 
   setVersion() {
-    this.version = { src: '', utm: (this.appeal.info.campaign || '') + '-' + (this.appeal.codes.series || '1') };
+    this.version = { src: '', utm: (this.appeal.info.campaign.utm || '') + '-' + (this.appeal.codes.series || '1') };
     if (this.appeal.codes.resend > 1) {
       this.version.utm += '-rs';
     }
@@ -140,7 +140,7 @@ export class CANHHDAppealComponent implements OnChanges {
       }
       url += '&utm_medium=' + (this.appeal.codes.utm_medium || '');
       url += '&utm_source=' + (this.appeal.codes.utm_source || '');
-      url += '&utm_campaign=' + (this.appeal.info.campaign || '');
+      url += '&utm_campaign=' + (this.appeal.info.campaign.utm || '');
       url += '&autologin=true';
       url += '&utm_content=' + (this.version.utm || '') + '-' + (emailType || '') + '-' + (utmContent || '');
       return url;
@@ -228,7 +228,7 @@ export class CANHHDAppealComponent implements OnChanges {
     url += '&s_subsrc=' + (this.appeal.codes.s_subsrc || '');
     url += '&utm_medium=' + (this.appeal.codes.utm_medium || '');
     url += '&utm_source=' + (this.appeal.codes.utm_source || '');
-    url += '&utm_campaign=' + (this.appeal.info.campaign || '');
+    url += '&utm_campaign=' + (this.appeal.info.campaign.utm || '');
     url += '&autologin=true';
     return url;
   }
