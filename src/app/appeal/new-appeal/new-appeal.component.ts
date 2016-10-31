@@ -46,5 +46,8 @@ export class NewAppealComponent implements OnInit {
     }
   }
   ngOnDestroy(){
+    if(this.appealSub){
+      this.appealSub.unsubscribe();
+    }
   }
 }

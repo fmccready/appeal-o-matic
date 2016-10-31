@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AppealService } from '../../appeal.service';
 import { RestoreService } from '../../restore.service';
 import { Appeal } from '../../models/appeal';
@@ -10,7 +10,7 @@ import { Appeal } from '../../models/appeal';
 })
 export class DuplicateAppealComponent implements OnInit {
     @Input() appeal: Appeal;
-
+    @Output() groupEmitter = new EventEmitter<String>();
     constructor(private appealService:AppealService, private restoreService: RestoreService<Appeal>){
 
     }
@@ -27,6 +27,7 @@ export class DuplicateAppealComponent implements OnInit {
         appealCopy.signoffs.web = '';
         appealCopy.signoffs.funDev = '';
         this.appealService.addAppeal(appealCopy);
+        this.groupEmitter.emit(appealCopy.info.group);
     }
     ngOnInit(){
     }
