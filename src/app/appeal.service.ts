@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { BehaviorSubject, Observable } from 'rxjs/Rx';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 
 import { Appeal, AppealInfo } from './models/appeal';
 
@@ -83,7 +83,7 @@ export class AppealService {
     );
   }
 
-  removeAppeal(id: string): Observable<Response> {
+  removeAppeal(id: string) {
     function findId(obj){
       return obj._id === id;
     }
@@ -93,7 +93,11 @@ export class AppealService {
       this.appeals.splice(index, 1);
     }
     this._appeals$.next(this.appeals);
-    return this.http.delete(this._appealUrl + id);
+    this.http.delete(this._appealUrl + id)
+    .subscribe(
+      data => console.log(data), 
+      error => console.log(error)
+    );
   }
 
   getAppeals(): Observable<Appeal[]> {

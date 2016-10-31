@@ -20,13 +20,14 @@ export class AppealListComponent implements OnChanges {
   constructor(private route: ActivatedRoute, private appealService: AppealService) {
   }
   deleteAppeal(id) {
-    this.appealService.removeAppeal(id).subscribe(
+    this.appealService.removeAppeal(id);
+    /*.subscribe(
       data => {
         this.appealList = this.appealList.filter(function(obj){
           return obj._id !== id;
         })
       }
-    );
+    );*/
   }
   @Input()
   set appeals(appeals: Appeal[]) {

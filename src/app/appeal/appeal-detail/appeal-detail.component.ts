@@ -16,12 +16,13 @@ import { Settings } from '../../models/settings';
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;
   private settings: Settings = new Settings();
-  private _routeSub: Subscription;
-  private _groupSub: Subscription;
   private groupId: string;
-  private relatedAppeals: Array<Appeal>;
+  private relatedAppeals: Array<Appeal> = [];
   private _currentAppeal$: Observable<Appeal>;
   private _appealSub: Subscription;
+  private _routeSub: Subscription;
+  private _groupSub: Subscription;
+
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     this.appeal = new Appeal();
     this.settings.campaign = false;
@@ -97,6 +98,9 @@ export class AppealDetailComponent implements OnInit {
         this.appeal = data;
         this.previewService.appeal.next(this.appeal);
         this.groupId = this.appeal.info.group;
+        if (this.groupId){
+          this.groupSubscription();
+        }
       });
     }
     if (!this._routeSub){
@@ -106,17 +110,21 @@ export class AppealDetailComponent implements OnInit {
         this.setAppeal(queryString);
       });
     }
+
+  }
+  groupSubscription(){
     if (!this._groupSub){
-      console.warn('A subscription is being made to _groupSub');
       let gid = this.groupId;
-      this._groupSub = this.appealService.getAppeals().flatMap(a => {return a;}).filter(function(appeal: Appeal, index: Number){
+      this._groupSub = this.appealService.getAppeals().flatMap(a => {this.relatedAppeals = []; return a;}).filter(function(appeal: Appeal, index: Number){
         if (appeal.info.group === gid){
           return true;
         }
         else {
           return false;
         }
-      }).subscribe(data => { this.relatedAppeals.push(data); });
+      }).subscribe(
+        data => { this.relatedAppeals.push(data); console.log(data); }
+      );
     }
   }
 
