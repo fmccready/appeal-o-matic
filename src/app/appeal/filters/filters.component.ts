@@ -80,7 +80,7 @@ export class FiltersComponent implements OnInit {
           return false;
         }
       }).subscribe(
-        data => { this.appeals.push(data); }
+        data => { this.appeals.push(data); console.log(data); }
       );
     }
   }

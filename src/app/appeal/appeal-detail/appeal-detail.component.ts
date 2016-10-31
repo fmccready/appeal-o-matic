@@ -28,6 +28,7 @@ export class AppealDetailComponent implements OnInit {
     this.settings.campaign = false;
     this.settings.sendDate = false; 
     this.settings.delete = false;
+    this.settings.active = '';
   }
 
   onInfoSaved(data) {
@@ -96,6 +97,11 @@ export class AppealDetailComponent implements OnInit {
       this._currentAppeal$ = this.appealService.getCurrentAppeal();
       this._appealSub = this._currentAppeal$.subscribe(data => {
         this.appeal = data;
+        
+        if (this.appeal._id) {
+          console.log(this.appeal._id);
+          this.settings.active = this.appeal._id;
+        }
         this.previewService.appeal.next(this.appeal);
         this.groupId = this.appeal.info.group;
         if (this.groupId){

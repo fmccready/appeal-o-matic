@@ -8,7 +8,7 @@
   <th *ngIf="!settings || (settings && settings.scheduled)">Scheduled</th>
   <tr *ngFor="let appeal of appeals" [ngClass]="settings && (settings.active === appeal._id) ? 'success' : ''">
     <td *ngIf="!settings || (settings && settings.name)">{{ appeal.info.name }}</td>
-    <td *ngIf="!settings || (settings && settings.campaign)">{{ appeal.info.campaign.name }}</td>
+    <td *ngIf="!settings || (settings && settings.campaign)">{{ appeal.info.hasOwnProperty('campaign') && appeal.info.campaign.hasOwnProperty('name') ? appeal.info.campaign.name : appeal.info.campaign }}</td>
     <td *ngIf="!settings || (settings && settings.sendDate)">{{ appeal.info.sendDate | date }}</td>
     <td *ngIf="!settings || (settings && settings.audience)">{{ appeal.codes.audience | uppercase }}</td>
     <td *ngIf="!settings || (settings && settings.subsource)">{{ appeal.codes.s_subsrc }}</td>
