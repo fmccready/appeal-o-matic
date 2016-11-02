@@ -8,6 +8,9 @@ var restify = require('express-restify-mongoose');
 var router = express.Router();
 var methodOverride = require('method-override');
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 //Express Setup
 var app = express();
 app.use(bodyParser.json());
@@ -22,6 +25,22 @@ var allowCrossDomain = function(req, res, next) {
 };
 app.use(allowCrossDomain);
 
+
+// Socket.io Setup
+io.on('connection', function(socket){
+  console.log('A new client conencted');
+  socket.emit('connected', 'A successful connection has been made.');
+  socket.on('addAppeal', function(data){
+    socket.broadcast.emit('news', data);
+    console.log(data);
+  });
+  socket.on('disconnect', function(){
+    console.log('A client disconnected');
+  });
+});
+http.listen(5000, () => {
+  console.log('started on port 5000');
+});
 
 // Mongoose Connection
 mongoose.connect('mongodb://127.0.0.1:27017');

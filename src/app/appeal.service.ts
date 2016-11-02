@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 
 import { Appeal, AppealInfo } from './models/appeal';
 
+import * as io from "socket.io-client";
+
 interface IAppealsOperation extends Function {
   (appeals: Appeal[]): Appeal[];
 }
@@ -15,10 +17,21 @@ export class AppealService {
   private appeals:Appeal[] = [];
   public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject({});
   private currentAppealId: string;
+  private socket = io.connect('http://' + window.location.hostname + ':5000');
   constructor(private http: Http) {
     //this._appeals$.next([]);
     this.currentAppeal$.next(new Appeal());
     this.loadAppeals();
+    this.openSocket();
+  }
+
+  openSocket() {
+    this.socket.on('connected', function(data){
+      console.log(data);
+    });
+    this.socket.on('news', function(data){
+      console.log(data);
+    });
   }
 
   loadAppeals() {
@@ -65,7 +78,7 @@ export class AppealService {
     let options = new RequestOptions({
       headers: headers
     });
-    
+    this.socket.emit('addAppeal', 'new appeal added');
     this.http.post(this._appealUrl, newAppeal, options).map(this.extractData).subscribe(data => {this.appeals.push(data); this._appeals$.next(this.appeals);});
   }
 
