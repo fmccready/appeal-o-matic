@@ -28,11 +28,13 @@ app.use(allowCrossDomain);
 
 // Socket.io Setup
 io.on('connection', function(socket){
-  console.log('A new client conencted');
-  socket.emit('connected', 'A successful connection has been made.');
+  console.log('Client connected');
+  socket.emit('connected', 'Connected');
   socket.on('addAppeal', function(data){
-    socket.broadcast.emit('news', data);
-    console.log(data);
+    socket.broadcast.emit('addAppeal', data);
+  });
+  socket.on('removeAppeal', function(data){
+    socket.broadcast.emit('removeAppeal', data);
   });
   socket.on('disconnect', function(){
     console.log('A client disconnected');

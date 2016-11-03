@@ -19,15 +19,8 @@ export class AppealListComponent implements OnChanges {
   private appealList: Appeal[];
   constructor(private route: ActivatedRoute, private appealService: AppealService) {
   }
-  deleteAppeal(id) {
-    this.appealService.removeAppeal(id);
-    /*.subscribe(
-      data => {
-        this.appealList = this.appealList.filter(function(obj){
-          return obj._id !== id;
-        })
-      }
-    );*/
+  deleteAppeal(appeal) {
+    this.appealService.removeAppeal(appeal);
   }
   @Input()
   set appeals(appeals: Appeal[]) {

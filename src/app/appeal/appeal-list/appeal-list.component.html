@@ -14,7 +14,7 @@
     <td *ngIf="!settings || (settings && settings.subsource)">{{ appeal.codes.s_subsrc }}</td>
     <td *ngIf="!settings || (settings && settings.scheduled)"><span *ngIf="appeal.info.scheduled" class="glyphicon glyphicon-ok text-success"></span><span *ngIf="!appeal.info.scheduled" class="glyphicon glyphicon-alert text-danger"></span></td>
     <td *ngIf="!settings || (settings && settings.edit)"><button [routerLink]="['/appeal', appeal._id, appeal.info.template]" class="btn btn-primary">Edit</button></td>
-    <td *ngIf="!settings || (settings && settings.delete)"><button (click)="deleteAppeal(appeal._id)" class="btn btn-danger">Delete</button></td>
+    <td *ngIf="!settings || (settings && settings.delete)"><button (click)="deleteAppeal(appeal)" class="btn btn-danger">Delete</button></td>
   </tr>
 </table>
 <div *ngIf="errors">

@@ -25,12 +25,24 @@ export class AppealService {
     this.openSocket();
   }
 
+  socketAdd(data){
+    console.log(data);
+    this.appeals.push(data);
+    this._appeals$.next(this.appeals);
+  }
+  socketRemove(data){
+    this.softRemoveAppeal(data);
+  }
   openSocket() {
+    let self = this;
     this.socket.on('connected', function(data){
       console.log(data);
     });
-    this.socket.on('news', function(data){
-      console.log(data);
+    this.socket.on('addAppeal', function(data){
+      self.socketAdd(data);
+    });
+    this.socket.on('removeAppeal', function(data){
+      self.socketRemove(data);
     });
   }
 
@@ -78,7 +90,7 @@ export class AppealService {
     let options = new RequestOptions({
       headers: headers
     });
-    this.socket.emit('addAppeal', 'new appeal added');
+    this.socket.emit('addAppeal', appeal);
     this.http.post(this._appealUrl, newAppeal, options).map(this.extractData).subscribe(data => {this.appeals.push(data); this._appeals$.next(this.appeals);});
   }
 
@@ -95,10 +107,11 @@ export class AppealService {
       error => console.log(error)
     );
   }
-
-  removeAppeal(id: string) {
+  softRemoveAppeal(data: Appeal){
+    console.log('removing');
+    console.log(data);
     function findId(obj){
-      return obj._id === id;
+      return obj._id === data._id;
     }
     let appealToDelete = this.appeals.find(findId);
     let index = this.appeals.indexOf(appealToDelete);
@@ -106,7 +119,19 @@ export class AppealService {
       this.appeals.splice(index, 1);
     }
     this._appeals$.next(this.appeals);
-    this.http.delete(this._appealUrl + id)
+  }
+  removeAppeal(data: Appeal) {
+    function findId(obj){
+      return obj._id === data._id;
+    }
+    let appealToDelete = this.appeals.find(findId);
+    let index = this.appeals.indexOf(appealToDelete);
+    if (index > -1){
+      this.appeals.splice(index, 1);
+    }
+    this._appeals$.next(this.appeals);
+    this.socket.emit('removeAppeal', data);
+    this.http.delete(this._appealUrl + data._id)
     .subscribe(
       data => console.log(data), 
       error => console.log(error)
