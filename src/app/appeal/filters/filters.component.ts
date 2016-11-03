@@ -14,74 +14,72 @@ import { Appeal } from '../../models/appeal';
   styleUrls: ['filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  private campaigns: Observable<Campaign[]>;
+  private campaigns$: Observable<Campaign[]>;
   private appeals: Appeal[] = [];
-  private filters: Object = {};
-  private appealSub;
+  private filteredAppeals: Appeal[];
+  private filters: Object = { scheduled: 'no' };
+  private appeals$: Observable<Appeal[]>;
   private filterSub;
   constructor(private campaignService: CampaignService, private appealService: AppealService) {
-    this.campaigns = campaignService.getCampaigns();
+    this.campaigns$ = campaignService.getCampaigns();
   }
 
-  onSubmit(filters): void {
-    event.preventDefault();
-    this.appeals = [];
-    this.filterSub = this.appealSub.flatMap(data => {console.log(data); return data;}).filter(function(appeal: Appeal, index: Number){
-      let match = true;
-      if (filters.campaign){
-        if (appeal.info.campaign !== filters.campaign.utm){
-          match = false;
-        }
-      }
-      if (filters.scheduled){
-        if (filters.scheduled === 'yes'){
-          if(appeal.info.scheduled !== true){
+  filter(filters) {
+    var filterArray = [];
+    this.appeals.map(
+      data => {
+        let match = true;
+        if (filters.campaign){
+          if (data.info.campaign.utm !== filters.campaign.utm){
             match = false;
           }
         }
-        else if (filters.scheduled === 'no'){
-          if(appeal.info.scheduled !== false){
+        if (filters.scheduled){
+          if (filters.scheduled === 'yes'){
+            if(data.info.scheduled !== true){
+              match = false;
+            }
+          }
+          else if (filters.scheduled === 'no'){
+            if(data.info.scheduled !== false){
+              match = false;
+            }
+          }
+        }
+        let sendDate = new Date(data.info.sendDate);
+        if (filters.startDate && filters.endDate){
+          filters.endDate.setHours(23, 59, 59, 999);
+          if(sendDate.getTime() < filters.startDate.getTime() || sendDate.getTime() > filters.endDate.getTime()){
             match = false;
           }
         }
-      }
-      let sendDate = new Date(appeal.info.sendDate);
-      if (filters.startDate && filters.endDate){
-        filters.endDate.setHours(23, 59, 59, 999);
-        if(sendDate.getTime() < filters.startDate.getTime() || sendDate.getTime() > filters.endDate.getTime()){
-          match = false;
+        else if (filters.startDate && !filters.endDate){
+          if(sendDate.getTime() < filters.startDate.getTime()){
+            match = false;
+          }
+        }
+        else if (!filters.startDate && filters.endDate){
+          filters.endDate.setHours(23, 59, 59, 999);
+          if (sendDate.getTime() > filters.endDate.getTime()){
+            match = false;
+          }
+        }
+        if (match){
+          filterArray.push(data);
         }
       }
-      else if (filters.startDate && !filters.endDate){
-        if(sendDate.getTime() < filters.startDate.getTime()){
-          match = false;
-        }
-      }
-      else if (!filters.startDate && filters.endDate){
-        filters.endDate.setHours(23, 59, 59, 999);
-        if (sendDate.getTime() > filters.endDate.getTime()){
-          match = false;
-        }
-      }
-      return match;
-    }).subscribe(
-      data => {this.appeals.push(data);}
     );
-  }
+    this.filteredAppeals = filterArray;
+  };
 
   ngOnInit() {
-    if (!this.appealSub){
-      this.appealSub = this.appealService.getAppeals();
-      this.appealSub.flatMap(data => {return data}).filter(function(obj, index, obs){
-        if (obj){
-          return !obj.info.scheduled;
-        }
-        else {
-          return false;
-        }
-      }).subscribe(
-        data => { this.appeals.push(data); console.log(data); }
-      );
+    if (!this.appeals$){
+      this.appeals$ = this.appealService.getAppeals();
+      this.appeals$.subscribe(data => {
+        this.appeals = data;
+        
+        this.filter(this.filters);
+      });
     }
   }
 

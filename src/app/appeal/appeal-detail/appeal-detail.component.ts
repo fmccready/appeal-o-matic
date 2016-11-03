@@ -15,6 +15,7 @@ import { Settings } from '../../models/settings';
 })
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;
+  private template: string;
   private settings: Settings = new Settings();
   private groupId: string;
   private relatedAppeals: Array<Appeal> = [];
@@ -32,11 +33,10 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onInfoSaved(data) {
-    let template = this.appeal.info.template;
     this.appeal.info = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
-    if (template !== data.template){
+    if (this.template !== data.template){
       this.router.navigate(['/appeal', this.appeal._id, data.template]);
     }
   }
@@ -101,6 +101,7 @@ export class AppealDetailComponent implements OnInit {
         console.log('data from _appealSub');
         console.log(data);
         this.appeal = data;
+        this.template = data.info.template;
         this.groupId = data.info.group;
         console.log('set groupId to :' + this.groupId);
         console.log(this.appeal);
@@ -115,7 +116,6 @@ export class AppealDetailComponent implements OnInit {
     }
   }
   ngOnInit() {
-
     if (!this._routeSub){
       console.warn('A subscription is being made to route.params');
       this._routeSub = this.route.params
