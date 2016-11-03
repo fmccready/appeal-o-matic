@@ -36,6 +36,9 @@ io.on('connection', function(socket){
   socket.on('removeAppeal', function(data){
     socket.broadcast.emit('removeAppeal', data);
   });
+  socket.on('updateAppeal', function(data){
+    socket.broadcast.emit('updateAppeal', data);
+  })
   socket.on('disconnect', function(){
     console.log('A client disconnected');
   });

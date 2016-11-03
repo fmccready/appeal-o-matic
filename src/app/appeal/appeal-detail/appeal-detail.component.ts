@@ -31,14 +31,17 @@ export class AppealDetailComponent implements OnInit {
     this.settings.delete = false;
     this.settings.active = '';
   }
-
+  checkTemplate(tmpl){
+    if (this.template !== tmpl){
+      this.template = tmpl;
+      this.router.navigate(['/appeal', this.appeal._id, tmpl]);
+    }
+  }
   onInfoSaved(data) {
     this.appeal.info = data;
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
-    if (this.template !== data.template){
-      this.router.navigate(['/appeal', this.appeal._id, data.template]);
-    }
+    this.checkTemplate(data.template);
   }
   onInfoCanceled(data) {
     this.appeal.info = data;
@@ -101,7 +104,13 @@ export class AppealDetailComponent implements OnInit {
         console.log('data from _appealSub');
         console.log(data);
         this.appeal = data;
-        this.template = data.info.template;
+        if (!this.template){
+          this.template = data.info.template;
+        }
+        else {
+          this.checkTemplate(data.info.template);
+        }
+        
         this.groupId = data.info.group;
         console.log('set groupId to :' + this.groupId);
         console.log(this.appeal);

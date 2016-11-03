@@ -33,6 +33,9 @@ export class AppealService {
   socketRemove(data){
     this.softRemoveAppeal(data);
   }
+  socketUpdate(data){
+    this.softUpdateAppeal(data);
+  }
   openSocket() {
     let self = this;
     this.socket.on('connected', function(data){
@@ -43,6 +46,9 @@ export class AppealService {
     });
     this.socket.on('removeAppeal', function(data){
       self.socketRemove(data);
+    });
+    this.socket.on('updateAppeal', function(data){
+      self.socketUpdate(data);
     });
   }
 
@@ -90,36 +96,48 @@ export class AppealService {
     let options = new RequestOptions({
       headers: headers
     });
-    this.socket.emit('addAppeal', appeal);
-    this.http.post(this._appealUrl, newAppeal, options).map(this.extractData).subscribe(data => {this.appeals.push(data); this._appeals$.next(this.appeals);});
+    
+    this.http.post(this._appealUrl, newAppeal, options).map(this.extractData).subscribe(data => {this.appeals.push(data); this.socket.emit('addAppeal', data); this._appeals$.next(this.appeals);});
   }
 
   updateAppeal(appeal: Appeal) {
-    console.log(appeal);
     let body = appeal;
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
       headers: headers
     });
+    this.socket.emit('updateAppeal', appeal);
     this.http.patch(this._appealUrl + appeal._id, body, options)
     .subscribe(
       data => console.log(data),
       error => console.log(error)
     );
   }
-  softRemoveAppeal(data: Appeal){
-    console.log('removing');
+
+  softUpdateAppeal(data: Appeal){
     console.log(data);
-    function findId(obj){
-      return obj._id === data._id;
-    }
-    let appealToDelete = this.appeals.find(findId);
-    let index = this.appeals.indexOf(appealToDelete);
-    if (index > -1){
-      this.appeals.splice(index, 1);
+    let appealData = data;
+    for (let i = 0; i < this.appeals.length; i++){
+      if (this.appeals[i]._id === appealData._id){
+        this.appeals[i] = appealData;
+        if (this.currentAppealId === appealData._id){
+          this.setCurrentAppeal(appealData._id);
+        }
+      }
     }
     this._appeals$.next(this.appeals);
   }
+
+  softRemoveAppeal(data: Appeal){
+    let appealData = data;
+    for (let i = 0; i < this.appeals.length; i++){
+      if (this.appeals[i]._id == appealData._id){
+        this.appeals.splice(i, 1);
+      }
+    }
+    this._appeals$.next(this.appeals);
+  }
+
   removeAppeal(data: Appeal) {
     function findId(obj){
       return obj._id === data._id;
