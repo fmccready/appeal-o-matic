@@ -87,6 +87,12 @@ export class AppealDetailComponent implements OnInit {
     this.appeal.notes = data;
     this.previewService.appeal.next(this.appeal);
   }
+
+  onImageSaved(data){
+    console.log('data received in appeal-detail');
+    this.appealService.uploadImage(data);
+  }
+
   onAppealDuplicated(data){
     this.groupSubscription(data);
   }

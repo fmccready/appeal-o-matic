@@ -13,6 +13,7 @@ interface IAppealsOperation extends Function {
 @Injectable()
 export class AppealService {
   private _appealUrl = 'http://' + window.location.hostname + ':3000/api/v1/appeal/';
+  private _imageUrl = 'http://' + window.location.hostname + ':3000/image-upload';
   public _appeals$: BehaviorSubject<Appeal[]> = new BehaviorSubject([]);
   private appeals:Appeal[] = [];
   public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject({});
@@ -158,6 +159,17 @@ export class AppealService {
 
   getAppeals(): Observable<Appeal[]> {
     return Observable.from(this._appeals$);
+  }
+
+  uploadImage(data){
+    console.log('uploadImage called');
+    let headers = new Headers({'Content-Type': 'image/png'});
+    let options = new RequestOptions({
+      headers: headers
+    });
+    console.log(data);
+    data = data.replace(/^data:image\/png;base64,/, "");
+    this.http.post(this._imageUrl, data).subscribe();
   }
 
   private extractData(res: Response) {

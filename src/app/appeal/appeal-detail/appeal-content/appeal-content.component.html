@@ -31,6 +31,13 @@
             <div role="tabpanel" class="tab-pane fade" id="images">
               <div class="well">
                 <div class="form-group" [class.has-error]="!image.valid && image.touched" data-toggle="popover" data-placement="right" title="Image Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
+                <div>
+                  <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+                  <img *ngIf="data.image" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+                  <button *ngIf="data.image"  class="btn btn-primary" (click)="cropImage(data.image)">Crop image</button>
+                </div>
+                
+                <!--
                   <label for="imageUrl">Image URL</label>
                   <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image.url" #image="ngModel" name="imageUrl">
                   <div class="col-xs-5">
@@ -44,6 +51,7 @@
                     <label for="brightcoveId">Brightcove ID</label>
                     <input type="text" id="brightcoveId" class="form-control" [(ngModel)]="content.image.brightcoveId" #image="ngModel" name="brightcoveId">
                   </div>
+                -->
                   <label for="imageCode">Image source code</label>
                   <input type="text" id="imageCode" class="form-control" [(ngModel)]="content.image.code" #image="ngModel" name="imageCode">
                   <label for="imageUtm">Image UTM code</label>

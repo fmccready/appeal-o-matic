@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppealContentComponent } from './appeal-content.component';
 import { RestoreService } from '../../../restore.service';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { ImageCropperComponent } from 'ng2-img-cropper';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     FormsModule,
   ],
   declarations: [
-    AppealContentComponent
+    AppealContentComponent,
+    ImageCropperComponent
   ],
   providers: [
     RestoreService

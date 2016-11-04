@@ -118,6 +118,12 @@ db.once('open', function(){
   */
   // All other routes
   app.use('/lib', express.static(__dirname + '/src/lib'));
+
+  app.post('/image-upload', function(req, res){
+    fs.writeFile('dist/images/appeal-image.png', req, 'base64', function(err){
+      console.log(err);
+    });
+  });
   app.get('/*', express.static(__dirname + '/dist'));
   app.get('/', function(req, res){
     console.log(__dirname);
