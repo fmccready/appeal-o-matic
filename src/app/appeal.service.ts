@@ -113,6 +113,7 @@ export class AppealService {
       data => console.log(data),
       error => console.log(error)
     );
+    this.setCurrentAppeal(appeal._id);
   }
 
   softUpdateAppeal(data: Appeal){
