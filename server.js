@@ -7,14 +7,14 @@ var mongoose = require('mongoose');
 var restify = require('express-restify-mongoose');
 var router = express.Router();
 var methodOverride = require('method-override');
-
+var gulp = require('gulp');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 //Express Setup
 var app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -120,9 +120,13 @@ db.once('open', function(){
   app.use('/lib', express.static(__dirname + '/src/lib'));
 
   app.post('/image-upload', function(req, res){
-    fs.writeFile('dist/images/appeal-image.png', req, 'base64', function(err){
+    var base64Data = req.body.data.replace(/^data:image\/png;base64,/, "");
+    fs.writeFile(`dist/images/${req.body.id}.png`, base64Data, 'base64', function(err){
+      console.log('error');
       console.log(err);
     });
+    
+    res.send('finished');
   });
   app.get('/*', express.static(__dirname + '/dist'));
   app.get('/', function(req, res){

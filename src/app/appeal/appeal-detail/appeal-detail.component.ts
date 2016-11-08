@@ -89,8 +89,7 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onImageSaved(data){
-    console.log('data received in appeal-detail');
-    this.appealService.uploadImage(data);
+    this.appealService.uploadImage(data, this.appeal._id);
   }
 
   onAppealDuplicated(data){

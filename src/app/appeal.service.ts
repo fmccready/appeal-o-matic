@@ -161,15 +161,19 @@ export class AppealService {
     return Observable.from(this._appeals$);
   }
 
-  uploadImage(data){
+  uploadImage(data, id){
     console.log('uploadImage called');
-    let headers = new Headers({'Content-Type': 'image/png'});
+    console.log(this._imageUrl);
+      console.log(typeof data);
+    let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
       headers: headers
     });
-    console.log(data);
-    data = data.replace(/^data:image\/png;base64,/, "");
-    this.http.post(this._imageUrl, data).subscribe();
+    this.http.post(this._imageUrl, {data, id}, options).subscribe(
+      data => console.log(data),
+      err => console.log(err),
+      () => console.log('done')
+    );
   }
 
   private extractData(res: Response) {
