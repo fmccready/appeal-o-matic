@@ -89,7 +89,10 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onImageSaved(data){
+    this.appeal.content.image.url = `http://${window.location.hostname}:3000/images/${this.appeal._id}.png`;
     this.appealService.uploadImage(data, this.appeal._id);
+    this.appealService.updateAppeal(this.appeal);
+    this.previewService.appeal.next(this.appeal);
   }
 
   onAppealDuplicated(data){

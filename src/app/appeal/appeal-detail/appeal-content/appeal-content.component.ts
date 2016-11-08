@@ -28,8 +28,8 @@ export class AppealContentComponent implements OnInit {
     this.cropperSettings.height = 329;
     this.cropperSettings.croppedWidth = 313;
     this.cropperSettings.croppedHeight = 329;
-    this.cropperSettings.canvasWidth = 360;
-    this.cropperSettings.canvasHeight = 360;
+    this.cropperSettings.canvasWidth = 320;
+    this.cropperSettings.canvasHeight = 320;
 
     this.data = {};
   }
@@ -40,6 +40,9 @@ export class AppealContentComponent implements OnInit {
   @Input()
   set content(data: AppealContent){
     this._content = data;
+    if (this._content.image.url){
+      this.data.image = this._content.image.url;
+    }
     this.restoreService.setItem(data);
   }
   get content(): AppealContent {

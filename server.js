@@ -128,6 +128,8 @@ db.once('open', function(){
     
     res.send('finished');
   });
+  app.use(express.static('/images'));
+  //app.get('/images/*', express.static(__dirname + '/dist/images'));
   app.get('/*', express.static(__dirname + '/dist'));
   app.get('/', function(req, res){
     console.log(__dirname);
