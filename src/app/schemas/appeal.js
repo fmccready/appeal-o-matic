@@ -31,7 +31,10 @@ var appealSchema = new Schema({
       code: {type: String, default: ''},
       utm: {type: String, default: ''},
       merlinId: {type: String, default: ''},
-      brightcoveId: {type: String, default: ''}
+      brightcoveId: {type: String, default: ''},
+      caption: {type: String},
+      credit: {type: String},
+      creditPlacement: {type: String}
     },
   },
   codes: {

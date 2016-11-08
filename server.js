@@ -121,12 +121,15 @@ db.once('open', function(){
 
   app.post('/image-upload', function(req, res){
     var base64Data = req.body.data.replace(/^data:image\/png;base64,/, "");
+    var writeResposne;
     fs.writeFile(`dist/images/${req.body.id}.png`, base64Data, 'base64', function(err){
-      console.log('error');
-      console.log(err);
+      if (err){
+        res.send(err);
+      }
+      else {
+        res.send('finished');
+      }
     });
-    
-    res.send('finished');
   });
   app.use(express.static('/images'));
   //app.get('/images/*', express.static(__dirname + '/dist/images'));

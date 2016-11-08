@@ -22,20 +22,33 @@ export class AppealContentComponent implements OnInit {
   private _content: AppealContent;
   private data: any;
   private cropperSettings: CropperSettings;
+  private imgCanvas: HTMLCanvasElement;
+  private imageCreditColor: string = "Black";
   constructor(private restoreService: RestoreService<AppealContent>) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 313;
     this.cropperSettings.height = 329;
     this.cropperSettings.croppedWidth = 313;
     this.cropperSettings.croppedHeight = 329;
-    this.cropperSettings.canvasWidth = 320;
-    this.cropperSettings.canvasHeight = 320;
+    this.cropperSettings.canvasWidth = 360;
+    this.cropperSettings.canvasHeight = 360;
 
     this.data = {};
   }
   cropImage(data){
-    console.log('cropImage called');
-    this.croppedImage.emit(data);
+    var image = new Image();
+    image.src = data;
+    var canvas = document.createElement('canvas');
+    canvas.width = this.cropperSettings.width;
+    canvas.height = this.cropperSettings.height;
+    console.log(canvas);
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(image, 0, 0);
+    ctx.font = '10px Arial';
+    ctx.fillStyle = this.imageCreditColor;
+    ctx.fillText(this._content.image.credit, 10, 20);
+    
+    this.croppedImage.emit(canvas.toDataURL());
   }
   @Input()
   set content(data: AppealContent){
@@ -58,8 +71,11 @@ export class AppealContentComponent implements OnInit {
   }
 
   ngOnInit() {
+    var self = this;
     $(function () {
       $('[data-toggle="popover"]').popover({trigger: 'hover', html: true});
+      self.imgCanvas = $('img-cropper canvas')[0];
+      
     });
   }
 }

@@ -57,4 +57,7 @@ class Image {
   utm: string = '';
   merlinId: string = '';
   brightcoveId: string = '';
+  caption: string = '';
+  credit: string = '';
+  creditPlacement: string = '';
 }

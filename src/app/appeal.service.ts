@@ -163,18 +163,11 @@ export class AppealService {
   }
 
   uploadImage(data, id){
-    console.log('uploadImage called');
-    console.log(this._imageUrl);
-      console.log(typeof data);
     let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({
       headers: headers
     });
-    this.http.post(this._imageUrl, {data, id}, options).subscribe(
-      data => console.log(data),
-      err => console.log(err),
-      () => console.log('done')
-    );
+    return this.http.post(this._imageUrl, {data, id}, options);
   }
 
   private extractData(res: Response) {
