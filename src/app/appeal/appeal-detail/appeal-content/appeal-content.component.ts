@@ -24,6 +24,7 @@ export class AppealContentComponent implements OnInit {
   private cropperSettings: CropperSettings;
   private imgCanvas: HTMLCanvasElement;
   private imageCreditColor: string = "Black";
+  
   constructor(private restoreService: RestoreService<AppealContent>) {
     this.cropperSettings = new CropperSettings();
     this.cropperSettings.width = 313;
@@ -36,19 +37,74 @@ export class AppealContentComponent implements OnInit {
     this.data = {};
   }
   cropImage(data){
-    var image = new Image();
-    image.src = data;
-    var canvas = document.createElement('canvas');
-    canvas.width = this.cropperSettings.width;
-    canvas.height = this.cropperSettings.height;
-    console.log(canvas);
-    let ctx = canvas.getContext('2d');
-    ctx.drawImage(image, 0, 0);
-    ctx.font = '10px Arial';
-    ctx.fillStyle = this.imageCreditColor;
-    ctx.fillText(this._content.image.credit, 10, 20);
-    
-    this.croppedImage.emit(canvas.toDataURL());
+    if (this._content.image.credit){
+      let image = new Image();
+      image.src = data;
+
+      var canvas = document.createElement('canvas');
+      var pic = document.createElement('canvas');
+
+      
+      pic.width = this.cropperSettings.width;
+      pic.height = this.cropperSettings.height;
+
+      canvas.width = this.cropperSettings.width;
+      canvas.height = this.cropperSettings.height;
+      
+      let picTransform = pic.getContext('2d');
+      let canvasTransform = canvas.getContext('2d');
+
+      picTransform.drawImage(image, 0, 0);
+
+      if (this.content.image.credit){
+        picTransform.font = '10px Arial';
+        picTransform.fillStyle = this.imageCreditColor;
+        
+        switch(this.content.image.creditPlacement){
+          case 'tl':
+            picTransform.textAlign = "start";
+            picTransform.fillText(this._content.image.credit, 10, 20);
+            break;
+          case 'tr':
+            picTransform.textAlign = "end";
+            picTransform.fillText(this._content.image.credit, (this.cropperSettings.width - 10), 20);
+            break;
+          case 'bl':
+            picTransform.textAlign = "start";
+            picTransform.fillText(this._content.image.credit, 10, (this.cropperSettings.height - 10));
+            break;
+          case 'br': 
+            picTransform.textAlign = "end";
+            picTransform.fillText(this._content.image.credit, (this.cropperSettings.width - 10), (this.cropperSettings.height - 10));
+            break;
+        }
+      }
+      
+      if (this.content.image.treatment === "polaroid"){
+        let background = new Image();
+        background.src = `http://${window.location.hostname}:3000/images/polaroid-template.png`;
+
+        canvas.width = 326;
+        canvas.height = 318;
+
+        background.onload = function(){
+          canvasTransform.drawImage(background, 0, 0);  
+        }
+        
+        //canvasTransform.drawImage(pic, 12, 9);
+      }
+      else {
+        canvas.width = 313;
+        canvas.height = 329;
+        canvasTransform.drawImage(pic, 0, 0);
+      }
+
+      this.croppedImage.emit(canvas.toDataURL());
+    }
+    else {
+      this.croppedImage.emit(data);
+    }
+
   }
   @Input()
   set content(data: AppealContent){

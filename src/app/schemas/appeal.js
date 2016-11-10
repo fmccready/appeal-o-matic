@@ -34,7 +34,8 @@ var appealSchema = new Schema({
       brightcoveId: {type: String, default: ''},
       caption: {type: String},
       credit: {type: String},
-      creditPlacement: {type: String}
+      creditPlacement: {type: String},
+      treatment: {type: String}
     },
   },
   codes: {

@@ -60,4 +60,5 @@ class Image {
   caption: string = '';
   credit: string = '';
   creditPlacement: string = '';
+  treatment: string = '';
 }

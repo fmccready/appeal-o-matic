@@ -54,9 +54,6 @@
                   <label for="imageUtm">Image UTM code</label>
                   <input type="text" id="imageUtm" class="form-control" [(ngModel)]="content.image.utm" #image="ngModel" name="imageUtm">
 
-                  <label for="imageCaption">Image caption</label>
-                  <input type="text" id="imageCaption" class="form-control" [(ngModel)]="content.image.caption" #image="ngModel" name="imageCaption">
-
                   <label for="imageCredit">Image credit</label>
                   <input type="text" id="imageCredit" class="form-control" [(ngModel)]="content.image.credit" #image="ngModel" name="imageCredit">
 
@@ -70,38 +67,43 @@
                   
                   <label for="imageCreditColor">Image credit color</label>
                   <select id="imageCreditColor" class="form-control" [(ngModel)]="imageCreditColor" #image="ngModel" name="imageCreditColor">
-                    <option style="color: rgba(0,0,0,1);" value="rgba(0,0,0,1)" selected>Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.9);" value="rgba(0,0,0,0.9)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.8);" value="rgba(0,0,0,0.8)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.7);" value="rgba(0,0,0,0.7)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.6);" value="rgba(0,0,0,0.6)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.5);" value="rgba(0,0,0,0.5)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.4);" value="rgba(0,0,0,0.4)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.3);" value="rgba(0,0,0,0.3)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.2);" value="rgba(0,0,0,0.2)">Caption Color</option>
-                    <option style="color: rgba(0,0,0,0.1);" value="rgba(0,0,0,0.1)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 1); background-color: #000000;" value="rgba(255,255,255,1)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.9); background-color: #000000;" value="rgba(255,255,255,0.9)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.8); background-color: #000000;" value="rgba(255,255,255,0.8)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.7); background-color: #000000;" value="rgba(255,255,255,0.7)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.6); background-color: #000000;" value="rgba(255,255,255,0.6)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.5); background-color: #000000;" value="rgba(255,255,255,0.5)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.4); background-color: #000000;" value="rgba(255,255,255,0.4)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.3); background-color: #000000;" value="rgba(255,255,255,0.3)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.2); background-color: #000000;" value="rgba(255,255,255,0.2)">Caption Color</option>
-                    <option style="color: rgba(255,255,255, 0.1); background-color: #000000;" value="rgba(255,255,255,0.1)">Caption Color</option>
+                    <option style="color: rgba(0,0,0,1);" value="rgba(0,0,0,1)" selected>Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.9);" value="rgba(0,0,0,0.9)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.8);" value="rgba(0,0,0,0.8)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.7);" value="rgba(0,0,0,0.7)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.6);" value="rgba(0,0,0,0.6)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.5);" value="rgba(0,0,0,0.5)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.4);" value="rgba(0,0,0,0.4)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.3);" value="rgba(0,0,0,0.3)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.2);" value="rgba(0,0,0,0.2)">Photo Credit Color</option>
+                    <option style="color: rgba(0,0,0,0.1);" value="rgba(0,0,0,0.1)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 1); background-color: #000000;" value="rgba(255,255,255,1)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.9); background-color: #000000;" value="rgba(255,255,255,0.9)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.8); background-color: #000000;" value="rgba(255,255,255,0.8)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.7); background-color: #000000;" value="rgba(255,255,255,0.7)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.6); background-color: #000000;" value="rgba(255,255,255,0.6)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.5); background-color: #000000;" value="rgba(255,255,255,0.5)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.4); background-color: #000000;" value="rgba(255,255,255,0.4)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.3); background-color: #000000;" value="rgba(255,255,255,0.3)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.2); background-color: #000000;" value="rgba(255,255,255,0.2)">Photo Credit Color</option>
+                    <option style="color: rgba(255,255,255, 0.1); background-color: #000000;" value="rgba(255,255,255,0.1)">Photo Credit Color</option>
+                  </select>
+
+                  <label for="imageCaption">Image caption</label>
+                  <input type="text" id="imageCaption" class="form-control" [(ngModel)]="content.image.caption" #image="ngModel" name="imageCaption">
+
+                  <label for="imageTreatment">Image treatment</label>
+                  <select id="imageTreatment" class="form-control" [(ngModel)]="content.image.treatment" #image="ngModel" name="imageTreatment">
+                    <option value="">None</option>
+                    <option value="polaroid">Polaroid</option>
                   </select>
                 </div>
               </div>
             </div>
           </div>
 
-
         </div>
       
-
-
-
         <div class="form-group" [class.has-error]="!url.valid && url.touched" data-toggle="popover" data-placement="right" title="Donation Form Link" data-content="Paste the link for the desired donation form to be linked for all of the donation links outside the body and PS copy. <br><br>And do not forget to remove any source and subsource codes from the link.">
           <label for="url">Default donation form link</label>
           <input type="text" id="url" class="form-control" [(ngModel)]="content.url" #url="ngModel" name="url">
