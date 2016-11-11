@@ -89,14 +89,12 @@ export class AppealDetailComponent implements OnInit {
   }
 
   onImageSaved(data){
-    console.log('saving image');
-    this.appeal.content.image.url = `http://${window.location.hostname}:3000/images/${this.appeal._id}.png?${Date.now()}`;
     let image$ = this.appealService.uploadImage(data, this.appeal._id);
     image$.subscribe(
       data => {
         if (data.status === 200){
+          this.appeal.content.image.url = `http://${window.location.hostname}:3000/assets/images/${this.appeal._id}.png?${Date.now()}`;
           this.appealService.updateAppeal(this.appeal);
-          this.appeal.content.image.url = `http://${window.location.hostname}:3000/images/${this.appeal._id}.png?${Date.now()}`;
           this.previewService.appeal.next(this.appeal);
         }
         else {
@@ -105,8 +103,6 @@ export class AppealDetailComponent implements OnInit {
       },
       err => console.log(err)
     );
-    //this.appealService.updateAppeal(this.appeal);
-    //this.previewService.appeal.next(this.appeal);
   }
 
   onAppealDuplicated(data){

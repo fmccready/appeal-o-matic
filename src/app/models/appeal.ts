@@ -51,7 +51,7 @@ class Campaign {
   utm: String;
   __v: any;
 }
-class Image {
+export class Image {
   url: string = '';
   code: string = '';
   utm: string = '';
@@ -60,5 +60,6 @@ class Image {
   caption: string = '';
   credit: string = '';
   creditPlacement: string = '';
+  creditColor: string = '';
   treatment: string = '';
 }

@@ -35,6 +35,7 @@ var appealSchema = new Schema({
       caption: {type: String},
       credit: {type: String},
       creditPlacement: {type: String},
+      creditColor: {type: String},
       treatment: {type: String}
     },
   },
