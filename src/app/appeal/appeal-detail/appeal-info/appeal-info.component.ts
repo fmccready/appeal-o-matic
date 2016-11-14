@@ -33,7 +33,7 @@ export class AppealInfoComponent implements OnInit {
         }
       }
     });
-    this.templates = previewService.templates;
+    this.templates = this.info.campaign.templates;
   }
 
   @Input()

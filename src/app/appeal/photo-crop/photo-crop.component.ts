@@ -11,8 +11,16 @@ import { AppealService } from '../../appeal.service';
 })
 export class PhotoCropComponent implements OnInit {
   @Output() saved = new EventEmitter<any>();
-
-  @Input() imageMeta: ImageMeta;
+  private _imageMeta;
+  @Input()
+  set imageMeta(data: ImageMeta){
+    console.log(data);
+    this._imageMeta = data;
+    this.updateSize(data.treatment);
+  };
+  get imageMeta(){
+    return this._imageMeta;
+  }
   private cropperSettings: CropperSettings;
 
   @ViewChild('settingsModal') public settingsModal:ModalDirective;
@@ -128,19 +136,20 @@ export class PhotoCropComponent implements OnInit {
           canvasTransform.drawImage(background, 0, 0);
           canvasTransform.drawImage(pic, 12, 9);
           this.saved.emit(canvas.toDataURL());
-
+          this.cancel();
         }
-        
       }
       else {
         canvas.width = 313;
         canvas.height = 329;
         canvasTransform.drawImage(pic, 0, 0);
         this.saved.emit(canvas.toDataURL());
+        this.cancel();
       }
     }
     else {
       this.saved.emit(data);
+      this.cancel();
     }
 
   }

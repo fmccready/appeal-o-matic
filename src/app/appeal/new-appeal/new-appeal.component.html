@@ -12,11 +12,11 @@
           <option *ngFor=" let c of campaigns | async" [ngValue]="c">{{c.name}}</option>
         </select>
       </div>
-      <div class="form-group" [class.has-error]="!template.valid && template.touched">
+      <div *ngIf="info.campaign" class="form-group" [class.has-error]="!template.valid && template.touched">
         <label for="template">Template</label>
         <select class="form-control" [(ngModel)]="info.template" #template="ngModel" name="template" id="template" required>
           <option selected disabled value="">required</option>
-          <option *ngFor=" let t of templates" [ngValue]="t.id">{{t.name}}</option>
+          <option *ngFor=" let t of info.campaign.templates" [ngValue]="t.id">{{t.name}}</option>
         </select>
       </div>
       <div class="form-group" [class.has-error]="!sender.valid && sender.touched">

@@ -14,6 +14,7 @@ var appealSchema = new Schema({
       _id: {type: Schema.Types.ObjectId, ref: 'Campaign'},
       name: String,
       utm: String,
+      country: String,
       __v: Number 
     },
     sendDate: {type: Date, default: new Date()},

@@ -76,18 +76,18 @@
             <img-cropper #imageCropper id="image-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
           </div>
           <div class="col-xs-12 col-md-6">
+            <div style="height:22px;"></div>
             <img *ngIf="data.image" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-12 text-center">
             <button *ngIf="data.image" class="btn btn-primary btn-lg" (click)="cropImage(data.image)">Crop image</button>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type ="button" class="btn btn-primary" (click)="showSettingsModal()">Go back</button>
-        <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
       </div>
     </div>
   </div>
