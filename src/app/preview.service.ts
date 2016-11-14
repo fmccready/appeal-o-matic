@@ -10,6 +10,10 @@ export class PreviewService {
       name: 'Standard'
     },
     {
+      id:'fastAppeal',
+      name: 'US I58 Fast'
+    },
+    {
       id:'hhdAppeal',
       name: 'US High Holy Days'
     },
@@ -28,6 +32,10 @@ export class PreviewService {
     {
       id:'canStandardAppeal',
       name: 'CAN Standard'
+    },
+    {
+      id:'canFastAppeal',
+      name: 'CAN Fast'
     },
   ];
   constructor() { }
