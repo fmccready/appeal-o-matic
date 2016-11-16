@@ -27,19 +27,14 @@ export class AppealInfoComponent implements OnInit {
     this.campaigns = this.campaignService.getCampaigns();
     this.campaigns.subscribe(data => {
       this._campaigns = data;
-      for (var i = 0; i < this._campaigns.length; i++ ){
-        if (this.info.campaign._id === this._campaigns[i]._id){
-          this.campaign.nativeElement.selectedIndex = i;
-        }
-      }
     });
-    this.templates = this.info.campaign.templates;
   }
 
   @Input()
   set info(data: AppealInfo) {
     this._info = data;
     this.restoreService.setItem(data);
+    this.templates = this.info.campaign.templates;
   }
   get info(): AppealInfo {
     return this._info;

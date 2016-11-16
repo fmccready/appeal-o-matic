@@ -15,6 +15,7 @@ var appealSchema = new Schema({
       name: String,
       utm: String,
       country: String,
+      templates: Array,
       __v: Number 
     },
     sendDate: {type: Date, default: new Date()},
