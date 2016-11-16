@@ -51,8 +51,8 @@ export class PhotoCropComponent implements OnInit {
     this.cropperSettings.height = 329;
     this.cropperSettings.croppedWidth = 313;
     this.cropperSettings.croppedHeight = 329;
-    this.cropperSettings.canvasWidth = 360;
-    this.cropperSettings.canvasHeight = 360;
+    this.cropperSettings.canvasWidth = 500;
+    this.cropperSettings.canvasHeight = 500;
 
     this.data = {};
   }
@@ -68,11 +68,17 @@ export class PhotoCropComponent implements OnInit {
         this.cropperSettings.croppedWidth = 306;
         this.cropperSettings.croppedHeight = 238;
         break;
-      case '':
+      case 'small':
         this.cropperSettings.width = 313;
         this.cropperSettings.height = 329;
         this.cropperSettings.croppedWidth = 313;
         this.cropperSettings.croppedHeight = 329;
+        break;
+      case 'large':
+        this.cropperSettings.width = 650;
+        this.cropperSettings.height = 391;
+        this.cropperSettings.croppedWidth = 650;
+        this.cropperSettings.croppedHeight = 391;
         break;
       default:
         this.cropperSettings.width = 313;
@@ -87,8 +93,8 @@ export class PhotoCropComponent implements OnInit {
       let image = new Image();
       image.src = data;
 
-      var canvas = document.createElement('canvas');
-      var pic = document.createElement('canvas');
+      let canvas = document.createElement('canvas');
+      let pic = document.createElement('canvas');
       
       pic.width = this.cropperSettings.width;
       pic.height = this.cropperSettings.height;
@@ -126,22 +132,39 @@ export class PhotoCropComponent implements OnInit {
       }
       
       if (this.imageMeta.treatment === "polaroid"){
-        let background = new Image();
+        let background = document.createElement('img');
         background.src = `http://${window.location.hostname}:3000/assets/images/polaroid-template.png`;
         background.setAttribute('crossOrigin', 'anonymous');
         canvas.width = 326;
         canvas.height = 318;
+        let caption = document.createElement('canvas');
+        let captionTransform = caption.getContext('2d');
 
         background.onload = () => {
           canvasTransform.drawImage(background, 0, 0);
           canvasTransform.drawImage(pic, 12, 9);
+          canvasTransform.font = "22px 'Architects Daughter'";
+          canvasTransform.textAlign = "center";
+          canvasTransform.textBaseline = "middle";
+          let captionArr = this.imageMeta.caption.replace('&nbsp;', '').split('<br />');
+          if (captionArr.length > 1){
+            canvasTransform.fillText(captionArr[0], (canvas.width / 2), (canvas.height - 56));
+            canvasTransform.fillText(captionArr[1], (canvas.width / 2), (canvas.height - 30));
+          }
+          else {
+            canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height - 40));
+          }
+          
           this.saved.emit(canvas.toDataURL());
           this.cancel();
+          background = null;
+          pic = null;
+          canvas = null;
         }
       }
       else {
-        canvas.width = 313;
-        canvas.height = 329;
+        canvas.width = this.cropperSettings.croppedWidth;
+        canvas.height = this.cropperSettings.croppedHeight;
         canvasTransform.drawImage(pic, 0, 0);
         this.saved.emit(canvas.toDataURL());
         this.cancel();

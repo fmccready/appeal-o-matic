@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { AppealContent } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
-
+import { Template } from '../../../preview.service';
 
 declare var $: any;
 
@@ -33,6 +33,7 @@ export class AppealContentComponent implements OnInit {
   get content(): AppealContent {
     return this._content;
   }
+
   save() {
     this.restoreService.setItem(this._content);
     this.saved.emit(this._content);

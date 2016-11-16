@@ -18,7 +18,8 @@
             <option value="bl">Bottom left</option>
             <option value="br">Bottom right</option>
           </select>
-
+          <!-- Leave this empty span on the page, it is a silly hack to get the custom font to work on the canvas in the next step. -->
+          <span style="font-family: 'Architects Daughter'"></span>
           <label for="imageCreditColor">Image credit color</label>
           <select id="imageCreditColor" class="form-control" [(ngModel)]="imageMeta.creditColor" #image="ngModel" name="imageCreditColor">
             <option style="color: rgba(0,0,0,1);" value="rgba(0,0,0,1)" selected>Photo Credit Color</option>
@@ -42,16 +43,14 @@
             <option style="color: rgba(255,255,255, 0.2); background-color: #000000;" value="rgba(255,255,255,0.2)">Photo Credit Color</option>
             <option style="color: rgba(255,255,255, 0.1); background-color: #000000;" value="rgba(255,255,255,0.1)">Photo Credit Color</option>
           </select>
-
-          <label for="imageCaption">Image caption</label>
-          <input type="text" id="imageCaption" class="form-control" [(ngModel)]="imageMeta.caption" #image="ngModel" name="imageCaption">
-
           <label for="imageTreatment">Image treatment</label>
           <select id="imageTreatment" class="form-control" [(ngModel)]="imageMeta.treatment" #image="ngModel" name="imageTreatment" (change)="updateSize($event.target.value)">
-            <option value="">None</option>
+            <option value="small">Small</option>
+            <option value="large">Large</option>
             <option value="polaroid">Polaroid</option>
           </select>
-  
+          <label *ngIf="imageMeta.treatment === 'polaroid'" for="imageCaption">Image caption</label>
+          <ckeditor *ngIf="imageMeta.treatment === 'polaroid'" id="imageCaption" [(ngModel)]="imageMeta.caption" #image="ngModel" name="imageCaption"></ckeditor>
         </p>
       </div>
       <div class="modal-footer">
@@ -72,10 +71,10 @@
       </div>
       <div *ngIf="isCropping" class="modal-body">
         <div class="row">
-          <div class="col-xs-12 col-md-6">
-            <img-cropper #imageCropper id="image-cropper" [image]="data" [settings]="cropperSettings"></img-cropper>
+          <div class="col-xs-12 col-lg-6">
+            <img-cropper #imageCropper id="image-cropper" [image]="data" [settings]="cropperSettings" class="text-center"></img-cropper>
           </div>
-          <div class="col-xs-12 col-md-6">
+          <div class="col-xs-12 col-lg-6">
             <div style="height:22px;"></div>
             <img *ngIf="data.image" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
           </div>

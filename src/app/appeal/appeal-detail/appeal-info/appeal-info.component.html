@@ -9,7 +9,12 @@
           <label for="appeal-name">eAppeal Name</label>
           <input id="appeal-name" type="text" class="form-control" [(ngModel)]="info.name" #name="ngModel" name="name">
         </div>
-        <pre>{{info.campaign | json}}</pre>
+        <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched" data-toggle="popover" data-placement="right" title="Campaign" data-content="Select the eAppeal Campaign of the email here. <br><br>If you do not see the campaign you wish to use, you will have to create the campaign before you can create any emails for it.">
+          <label for="campaign">Campaign</label>
+          <select id="campaign" type="text" class="form-control" [ngModel]="info.campaign._id" (ngModelChange)="setCampaign($event)" #campaign name="campaign">
+            <option *ngFor="let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
+          </select>
+        </div>
         <div class="form-group" [class.has-error]="!template.valid && template.touched" data-toggle="popover" data-placement="right" title="Template" data-content="Select which eAppeal template you wish to use.">
           <label for="template">Template</label>
           <select id="template" type="text" class="form-control" [(ngModel)]="info.template" #template="ngModel" name="template">
@@ -27,12 +32,6 @@
         <div class="form-group" [class.has-error]="!subjectLine.valid && subjectLine.touched" data-toggle="popover" data-placement="right" title="Subject Line" data-content="Include the Subject Line of the email here.">
           <label for="subject-line">Subject Line</label>
           <input id="subject-line" type="text" class="form-control" [(ngModel)]="info.subjectLine" #subjectLine="ngModel" name="subjectLine">
-        </div>
-        <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched" data-toggle="popover" data-placement="right" title="Campaign" data-content="Select the eAppeal Campaign of the email here. <br><br>If you do not see the campaign you wish to use, you will have to create the campaign before you can create any emails for it.">
-          <label for="campaign">Campaign</label>
-          <select id="campaign" type="text" class="form-control" [(ngModel)]="info.campaign._id" #campaign name="campaign">
-            <option *ngFor="let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
-          </select>
         </div>
         <div class="form-group text-center" data-toggle="popover" data-placement="right" title="Send Date" data-content="Select the Date the email will send here.">
           <div class="datepicker-wrapper">
