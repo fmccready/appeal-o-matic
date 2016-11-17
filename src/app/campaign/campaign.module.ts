@@ -6,6 +6,7 @@ import { NewCampaignComponent } from './new-campaign/new-campaign.component';
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { routing } from './campaign.routes';
 import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap'
   ],
   declarations: [
     CampaignListComponent,
-    NewCampaignComponent
+    NewCampaignComponent,
+    EditCampaignComponent
   ],
 })
 export class CampaignModule {}

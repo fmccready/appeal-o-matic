@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import 'rxjs/Rx';
-import * as moment from 'moment';
-
 import { Campaign } from '../../models/campaign';
 import { CampaignService } from '../../campaign.service';
+import { PreviewService, Template } from '../../preview.service';
 
 @Component({
   selector: 'app-new-campaign',
@@ -13,16 +11,40 @@ import { CampaignService } from '../../campaign.service';
 })
 export class NewCampaignComponent implements OnInit {
   campaign = <Campaign>{};
-  startTime: Date = new Date();
+  countries = ['United States', 'Canada'];
+  templates: Array<Template>;
+  selectedTemplates: Array<Template> = [];
 
-  constructor(public campaignService:CampaignService) {
-    
+  constructor(private campaignService:CampaignService, private previewService:PreviewService) {
+    this.templates = previewService.templates;
   }
 
   createCampaign() {
-    var mins = this.startTime.getMinutes();
-    var hours = this.startTime.getHours();
+    this.campaign.templates = this.selectedTemplates;
     this.campaignService.addCampaign(this.campaign);
+  }
+
+  selectTemplate(template){
+    let index = this.findTemplate(template);
+    if (index >= 0){
+      this.selectedTemplates.splice(index, 1);
+    }
+    else {
+      this.selectedTemplates.push(template);
+    }
+  }
+
+  findTemplate(template){
+    let found = -1;
+    
+    if (this.selectedTemplates.length > 0){
+      for (let i = 0; i < this.selectedTemplates.length; i++){
+        if (this.selectedTemplates[i].id === template.id){
+          found = i;
+        }
+      }
+    }
+    return found;
   }
 
   ngOnInit() {

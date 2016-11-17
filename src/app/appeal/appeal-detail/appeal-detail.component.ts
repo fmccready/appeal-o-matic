@@ -87,6 +87,24 @@ export class AppealDetailComponent implements OnInit {
     this.appeal.notes = data;
     this.previewService.appeal.next(this.appeal);
   }
+
+  onImageSaved(data){
+    let image$ = this.appealService.uploadImage(data, this.appeal._id);
+    image$.subscribe(
+      data => {
+        if (data.status === 200){
+          this.appeal.content.image.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id}.png?${Date.now()}`;
+          this.appealService.updateAppeal(this.appeal);
+          this.previewService.appeal.next(this.appeal);
+        }
+        else {
+          console.log(data);
+        }
+      },
+      err => console.log(err)
+    );
+  }
+
   onAppealDuplicated(data){
     this.groupSubscription(data);
   }
@@ -101,8 +119,6 @@ export class AppealDetailComponent implements OnInit {
       console.warn('A subscription is being made to _currentAppeal$');
       this._currentAppeal$ = this.appealService.getCurrentAppeal();
       this._appealSub = this._currentAppeal$.subscribe(data => {
-        console.log('data from _appealSub');
-        console.log(data);
         this.appeal = data;
         if (!this.template){
           this.template = data.info.template;
@@ -112,8 +128,6 @@ export class AppealDetailComponent implements OnInit {
         }
         
         this.groupId = data.info.group;
-        console.log('set groupId to :' + this.groupId);
-        console.log(this.appeal);
         if (this.appeal._id) {
           this.settings.active = this.appeal._id;
         }
@@ -135,8 +149,6 @@ export class AppealDetailComponent implements OnInit {
     }
   }
   groupSubscription(id){
-    console.log('groupSubscription');
-    console.log(id);
     if (!this._groupSub){
       this._groupSub = this.appealService.getAppeals().flatMap(a => {this.relatedAppeals = []; return a;}).filter(function(appeal: Appeal, index: Number){
         if (appeal.info.group === id){

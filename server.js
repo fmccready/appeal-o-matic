@@ -7,14 +7,16 @@ var mongoose = require('mongoose');
 var restify = require('express-restify-mongoose');
 var router = express.Router();
 var methodOverride = require('method-override');
-
+var gulp = require('gulp');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var Client = require('ftp');
+var creds = require('./ftp-options.js');
 
 //Express Setup
 var app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({limit: '5mb'}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride());
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -118,6 +120,35 @@ db.once('open', function(){
   */
   // All other routes
   app.use('/lib', express.static(__dirname + '/src/lib'));
+
+  app.post('/image-upload', function(req, res){
+    var base64Data = req.body.data.replace(/^data:image\/png;base64,/, "");
+    var writeResposne;
+    fs.writeFile(`dist/assets/images/${req.body.id}.png`, base64Data, 'base64', function(err){
+      if (err){
+        res.send(err);
+      }
+      else {
+        
+        var c = new Client();
+        c.on('ready', function(){
+          c.put(`dist/assets/images/${req.body.id}.png`, `digital.ifcj.org/appeal-images/${req.body.id}.png`, function(err){
+            if(err) throw err;
+            c.end();
+            res.send('finished');
+            fs.unlink(`dist/assets/images/${req.body.id}.png`, (err) => {
+              if(err) throw err;
+              console.log(`deleted image ${req.body.id}.png`);
+            });
+          });
+        });
+
+        c.connect(creds.options);
+      }
+    });
+  });
+  app.use(express.static('/assets/images'));
+  //app.get('/images/*', express.static(__dirname + '/dist/images'));
   app.get('/*', express.static(__dirname + '/dist'));
   app.get('/', function(req, res){
     console.log(__dirname);

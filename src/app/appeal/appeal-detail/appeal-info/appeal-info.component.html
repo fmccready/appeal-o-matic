@@ -9,6 +9,12 @@
           <label for="appeal-name">eAppeal Name</label>
           <input id="appeal-name" type="text" class="form-control" [(ngModel)]="info.name" #name="ngModel" name="name">
         </div>
+        <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched" data-toggle="popover" data-placement="right" title="Campaign" data-content="Select the eAppeal Campaign of the email here. <br><br>If you do not see the campaign you wish to use, you will have to create the campaign before you can create any emails for it.">
+          <label for="campaign">Campaign</label>
+          <select id="campaign" type="text" class="form-control" [ngModel]="info.campaign._id" (ngModelChange)="setCampaign($event)" #campaign name="campaign">
+            <option *ngFor="let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
+          </select>
+        </div>
         <div class="form-group" [class.has-error]="!template.valid && template.touched" data-toggle="popover" data-placement="right" title="Template" data-content="Select which eAppeal template you wish to use.">
           <label for="template">Template</label>
           <select id="template" type="text" class="form-control" [(ngModel)]="info.template" #template="ngModel" name="template">
@@ -27,23 +33,19 @@
           <label for="subject-line">Subject Line</label>
           <input id="subject-line" type="text" class="form-control" [(ngModel)]="info.subjectLine" #subjectLine="ngModel" name="subjectLine">
         </div>
-        <div class="form-group" [class.has-error]="!campaign.valid && campaign.touched" data-toggle="popover" data-placement="right" title="Campaign" data-content="Select the eAppeal Campaign of the email here. <br><br>If you do not see the campaign you wish to use, you will have to create the campaign before you can create any emails for it.">
-          <label for="campaign">Campaign</label>
-          <select id="campaign" type="text" class="form-control" [(ngModel)]="info.campaign._id" #campaign name="campaign">
-            <option *ngFor="let c of campaigns | async" [ngValue]="c._id">{{c.name}}</option>
-          </select>
-        </div>
-        <div class="form-group" data-toggle="popover" data-placement="right" title="Send Date" data-content="Select the Date the email will send here.">
+        <div class="form-group text-center" data-toggle="popover" data-placement="right" title="Send Date" data-content="Select the Date the email will send here.">
           <div class="datepicker-wrapper">
             <label for="send-date">Send Date</label>
             <datepicker [(ngModel)]="info.sendDate" name="sendDate"></datepicker>
           </div>
         </div>
-        <div class="form-group" data-toggle="popover" data-placement="right" title="Send Time" data-content="Select the Time the email will send here.">
-          <label for="send-time">Send Time</label>
-          <timepicker [(ngModel)]="info.sendDate" name="sendTime"></timepicker>
+        <div class="form-group text-center" data-toggle="popover" data-placement="right" title="Send Time" data-content="Select the Time the email will send here.">
+          <div class="datepicker-wrapper">
+            <label for="send-time">Send Time</label>
+            <timepicker class="text-center" [(ngModel)]="info.sendDate" name="sendTime"></timepicker>
+          </div>
         </div>
-        <div class="form-group" [class.has-error]="!scheduled.valid && scheduled.touched" data-toggle="popover" data-placement="right" title="Scheduled" data-content="Check this box when the email is confirmed to be scheduled for send.">
+        <div class="form-group text-center" [class.has-error]="!scheduled.valid && scheduled.touched" data-toggle="popover" data-placement="right" title="Scheduled" data-content="Check this box when the email is confirmed to be scheduled for send.">
           <label for="send-date">Scheduled
             <input type="checkbox" class="form-control" [(ngModel)]="info.scheduled" #scheduled="ngModel" name="scheduled" id="scheduled">
           </label>

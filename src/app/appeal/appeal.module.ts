@@ -8,7 +8,6 @@ import { routing } from './appeal.routes';
 import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { PreviewService } from './../preview.service';
 
-
 @NgModule({
   imports: [
     routing,
@@ -19,11 +18,11 @@ import { PreviewService } from './../preview.service';
   ],
   declarations: [
     FiltersComponent,
-    NewAppealComponent
+    NewAppealComponent,
   ],
   exports: [
     FiltersComponent,
-    NewAppealComponent
+    NewAppealComponent,
   ],
   providers: [
     PreviewService

@@ -14,6 +14,8 @@ var appealSchema = new Schema({
       _id: {type: Schema.Types.ObjectId, ref: 'Campaign'},
       name: String,
       utm: String,
+      country: String,
+      templates: Array,
       __v: Number 
     },
     sendDate: {type: Date, default: new Date()},
@@ -31,7 +33,12 @@ var appealSchema = new Schema({
       code: {type: String, default: ''},
       utm: {type: String, default: ''},
       merlinId: {type: String, default: ''},
-      brightcoveId: {type: String, default: ''}
+      brightcoveId: {type: String, default: ''},
+      caption: {type: String},
+      credit: {type: String},
+      creditPlacement: {type: String},
+      creditColor: {type: String},
+      treatment: {type: String}
     },
   },
   codes: {

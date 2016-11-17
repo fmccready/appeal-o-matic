@@ -1,3 +1,5 @@
+import { Campaign } from './campaign';
+
 export class Appeal {
   _id: string;
   info: AppealInfo = new AppealInfo();
@@ -45,16 +47,15 @@ export class AppealSignoff {
   web: string;
 }
 
-class Campaign {
-  _id: any;
-  name: String;
-  utm: String;
-  __v: any;
-}
-class Image {
+export class Image {
   url: string = '';
   code: string = '';
   utm: string = '';
   merlinId: string = '';
   brightcoveId: string = '';
+  caption: string = '';
+  credit: string = '';
+  creditPlacement: string = '';
+  creditColor: string = '';
+  treatment: string = '';
 }
