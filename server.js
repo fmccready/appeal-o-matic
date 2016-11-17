@@ -10,6 +10,8 @@ var methodOverride = require('method-override');
 var gulp = require('gulp');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var Client = require('ftp');
+var creds = require('./ftp-options.js');
 
 //Express Setup
 var app = express();
@@ -127,7 +129,21 @@ db.once('open', function(){
         res.send(err);
       }
       else {
-        res.send('finished');
+        
+        var c = new Client();
+        c.on('ready', function(){
+          c.put(`dist/assets/images/${req.body.id}.png`, `digital.ifcj.org/appeal-images/${req.body.id}.png`, function(err){
+            if(err) throw err;
+            c.end();
+            res.send('finished');
+            fs.unlink(`dist/assets/images/${req.body.id}.png`, (err) => {
+              if(err) throw err;
+              console.log(`deleted image ${req.body.id}.png`);
+            });
+          });
+        });
+
+        c.connect(creds.options);
       }
     });
   });
