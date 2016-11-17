@@ -123,7 +123,7 @@ db.once('open', function(){
 
   app.post('/image-upload', function(req, res){
     var base64Data = req.body.data.replace(/^data:image\/png;base64,/, "");
-    var writeResposne;
+    
     fs.writeFile(`dist/assets/images/${req.body.id}.png`, base64Data, 'base64', function(err){
       if (err){
         res.send(err);

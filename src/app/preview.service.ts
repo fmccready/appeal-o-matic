@@ -12,7 +12,8 @@ export class PreviewService {
     },
     {
       id:'fastAppeal',
-      name: 'US I58 Fast'
+      name: 'US I58 Fast',
+      country: 'United States'
     },
     {
       id:'hhdAppeal',
@@ -41,7 +42,8 @@ export class PreviewService {
     },
     {
       id:'canFastAppeal',
-      name: 'CAN Fast'
+      name: 'CAN Fast',
+      country: 'Canada'
     },
   ];
   constructor() { }
