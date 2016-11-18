@@ -11,6 +11,11 @@ export class PreviewService {
       country: 'United States'
     },
     {
+      id:'fastAppeal',
+      name: 'US I58 Fast',
+      country: 'United States'
+    },
+    {
       id:'hhdAppeal',
       name: 'US High Holy Days',
       country: 'United States'
@@ -33,6 +38,11 @@ export class PreviewService {
     {
       id:'canStandardAppeal',
       name: 'CAN Standard',
+      country: 'Canada'
+    },
+    {
+      id:'canFastAppeal',
+      name: 'CAN Fast',
       country: 'Canada'
     },
   ];

@@ -6,6 +6,9 @@ import { HHDLargeAppealComponent } from './us-appeals/hhd-appeal-large-img/appea
 import { CANHHDAppealComponent } from './can-appeals/can-hhd-appeal/can-appeal-hhd.component';
 import { CANHHDLargeAppealComponent } from './can-appeals/can-hhd-appeal-large-img/can-appeal-hhd-large-img.component';
 import { CANStandardAppealComponent } from './can-appeals/can-standard-appeal/can-appeal-standard.component';
+import { CANFastAppealComponent } from './can-appeals/can-fast-appeal/can-appeal-fast.component';
+import { FastAppealComponent } from './us-appeals/fast-appeal/fast-appeal.component';
+
 
 import { PlainTextPipe } from '../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../remove-html.pipe';
@@ -18,11 +21,13 @@ import { CopyControlsComponent } from './copy-controls/copy-controls.component';
   ],
   declarations: [
     StandardAppealComponent,
+    FastAppealComponent,
     HHDAppealComponent,
     HHDLargeAppealComponent,
     CANHHDAppealComponent,
     CANHHDLargeAppealComponent,
     CANStandardAppealComponent,
+    CANFastAppealComponent,
     PlainTextPipe,
     RemoveHtmlPipe,
     CopyControlsComponent
