@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AppealCode } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -15,18 +16,23 @@ export class AppealCodesComponent implements OnInit {
   private _codes: AppealCode;
   constructor(private restoreService: RestoreService<AppealCode>) {
   }
-
+  private changed = false;
+  valueChanged(){
+    this.changed = true
+  }
   @Input()
   set codes(appealCode: AppealCode){
     this._codes = appealCode;
     this.restoreService.setItem(appealCode);
+    this.changed = false;
   }
   get codes(): AppealCode {
-    return this._codes;
+    return this.restoreService.getItem();
   }
   save() {
     this.restoreService.setItem(this._codes);
     this.saved.emit(this._codes);
+    this.changed = false;
   }
   cancel() {
     this._codes = this.restoreService.restoreItem();

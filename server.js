@@ -147,13 +147,34 @@ db.once('open', function(){
       }
     });
   });
-  app.use(express.static('/assets/images'));
+  app.use('/assets', express.static('dist/assets'));
   //app.get('/images/*', express.static(__dirname + '/dist/images'));
+
+  app.all('/inline.js', (req, res) => {
+    res.status(200).sendFile(__dirname + '/dist/inline.js');
+  });
+  app.all('/main.bundle.js', (req, res) => {
+    res.status(200).sendFile(__dirname + '/dist/main.bundle.js');
+  });
+  app.all('/inline.map', (req, res) => {
+    res.status(200).sendFile(__dirname + '/dist/inline.map');
+  });
+  app.all('/main.map', (req, res) => {
+    res.status(200).sendFile(__dirname + '/dist/main.map');
+  });
+
+  app.all('*', (req, res) => {
+    res.status(200).sendFile(__dirname + '/dist/index.html');
+  });
+
+  /* Original router catchall
   app.get('/*', express.static(__dirname + '/dist'));
   app.get('/', function(req, res){
     console.log(__dirname);
     res.sendFile(path.join(__dirname, '/dist/index.html'));
   });
+  */
+
   // Set listen port
   app.listen(3000, function(){
     console.log('Listening on port 3000');

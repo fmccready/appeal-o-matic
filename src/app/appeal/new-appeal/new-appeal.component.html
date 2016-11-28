@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12 col-md-4 col-md-offset-2">
+  <div class="col-xs-12 col-md-4 col-md-offset-4">
     <form #appealForm="ngForm" (ngSubmit)="appealSubmit()">
       <div class="form-group" [class.has-error]="!name.valid && name.touched">
         <label for="appeal-name">eAppeal name</label>
@@ -31,22 +31,21 @@
         <label for="subject-line">Subject line</label>
         <input type="text" class="form-control" [(ngModel)]="info.subjectLine" #subjectLine="ngModel" name="subjectLine" id="subject-line" placeholder="optional">
       </div>
-      <div class="form-group" [class.has-error]="!sendDate.valid && sendDate.touched">
+      <div class="form-group text-center" [class.has-error]="!sendDate.valid && sendDate.touched">
         <div class="datepicker-wrapper">
           <label for="sendDate">Send date (optional)</label>
           <datepicker [(ngModel)]="info.sendDate" #sendDate="ngModel" name="sendDate" id="sendDate"></datepicker>
         </div>
       </div>
-      <div class="form-group" [class.has-error]="!sendTime.valid && sendTime.touched">
-        <label for="sendTime">Send time (optional)</label>
-        <timepicker [(ngModel)]="sendTime" name="sendTime" id="sendTime"></timepicker>
+      <div class="form-group text-center" [class.has-error]="!sendTime.valid && sendTime.touched">
+        <div class="datepicker-wrapper">
+          <label for="sendTime">Send time (optional)</label>
+          <timepicker [(ngModel)]="sendTime" name="sendTime" id="sendTime"></timepicker>
+        </div>
       </div>
       <div class="form-group text-center">
         <button type="submit" class="btn btn-lg btn-primary" [class.disabled]="!appealForm.valid">Create eAppeal</button>
       </div>
     </form>
-  </div>
-  <div class="col-xs-12 col-md-6">
-    <appeal-list-component [appeals]="appeals"></appeal-list-component>
   </div>
 </div>

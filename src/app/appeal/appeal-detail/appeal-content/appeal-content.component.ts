@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angu
 import { AppealContent } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 import { Template } from '../../../preview.service';
+import * as _ from 'lodash';
 
 declare var $: any;
 
@@ -20,9 +21,20 @@ export class AppealContentComponent implements OnInit {
   @Output() canceled = new EventEmitter<AppealContent>();
   @Output() imageSaved = new EventEmitter<any>();
 
+  private changed = false;
+
   private _content: AppealContent;
 
   constructor(private restoreService: RestoreService<AppealContent>) {
+  }
+
+  checkChanged(){
+    if (_.isEqual(this.content, this._content)){
+      this.changed = false;
+    }
+    else {
+      this.changed = true
+    };
   }
 
   @Input()
@@ -31,12 +43,13 @@ export class AppealContentComponent implements OnInit {
     this.restoreService.setItem(data);
   }
   get content(): AppealContent {
-    return this._content;
+    return this.restoreService.getItem();
   }
 
   save() {
     this.restoreService.setItem(this._content);
     this.saved.emit(this._content);
+    this.checkChanged();
   }
   cancel() {
     this._content = this.restoreService.restoreItem();
@@ -47,6 +60,7 @@ export class AppealContentComponent implements OnInit {
   }
 
   ngOnInit() {
+
     var self = this;
     $(function () {
       $('[data-toggle="popover"]').popover({trigger: 'hover', html: true});

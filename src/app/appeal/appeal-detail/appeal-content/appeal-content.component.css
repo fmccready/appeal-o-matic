@@ -7,3 +7,6 @@
 #contentPanel, #copyPanel, #imagePanel {
   padding: 0;
 }
+.well.dirty{
+  background: rgb(252,248,227);
+}

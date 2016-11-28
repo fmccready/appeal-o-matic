@@ -98,7 +98,12 @@ export class AppealService {
       headers: headers
     });
     
-    this.http.post(this._appealUrl, newAppeal, options).map(this.extractData).subscribe(data => {this.appeals.push(data); this.socket.emit('addAppeal', data); this._appeals$.next(this.appeals);});
+    this.http.post(this._appealUrl, newAppeal, options).map(this.extractData).subscribe(data => {
+      this.appeals.push(data);
+      this.socket.emit('addAppeal', data);
+      this._appeals$.next(this.appeals);
+      this.setCurrentAppeal(data._id);
+    });
   }
 
   updateAppeal(appeal: Appeal) {

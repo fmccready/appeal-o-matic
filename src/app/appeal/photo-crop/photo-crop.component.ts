@@ -14,7 +14,6 @@ export class PhotoCropComponent implements OnInit {
   private _imageMeta;
   @Input()
   set imageMeta(data: ImageMeta){
-    console.log(data);
     this._imageMeta = data;
     this.updateSize(data.treatment);
   };

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable, BehaviorSubject, Subscription } from 'rxjs/Rx';
+import * as _ from 'lodash';
 
 import { Campaign } from '../../../models/campaign';
 import { CampaignService } from '../../../campaign.service';
@@ -24,8 +25,11 @@ export class AppealInfoComponent implements OnInit {
   
   private templates: Array<Template>;
   private _info: AppealInfo = new AppealInfo();
-  private currentCampaignId: BehaviorSubject<Campaign> = new BehaviorSubject(this.info.campaign._id);
+  private currentCampaignId: BehaviorSubject<Campaign> = new BehaviorSubject(this._info.campaign._id);
   private ccSubscription: Subscription;
+
+  private changed = false;
+
   constructor(private restoreService: RestoreService<AppealInfo>, private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService) {
     this.campaigns = this.campaignService.getCampaigns();
     this.campaigns.subscribe(data => {
@@ -33,12 +37,25 @@ export class AppealInfoComponent implements OnInit {
       this.ccSubscription = this.currentCampaignId.subscribe(currId => {
         for (var i = 0; i < this._campaigns.length; i++){
           if (currId === this._campaigns[i]._id){
-            this.info.campaign = Object.assign({}, this._campaigns[i]);
-            this.templates = this.info.campaign.templates;
+            this._info.campaign = Object.assign({}, this._campaigns[i]);
+            this.templates = this._info.campaign.templates;
           }
         }
       });
     });
+  }
+
+  checkChanged(){
+    if (_.isEqual(this.info, this._info)){
+      this.changed = false;
+    }
+    else {
+      this.changed = true
+      if (this.info){
+      console.log(this.info.sendDate);
+      console.log(this._info.sendDate);
+      }
+    };
   }
 
   setCampaign(val){
@@ -47,6 +64,7 @@ export class AppealInfoComponent implements OnInit {
 
   @Input()
   set info(data: AppealInfo) {
+    console.log(data.sendDate);
     for (var i = 0; i < this._campaigns.length; i++){
       if (data.campaign._id === this._campaigns[i]._id){
         data.campaign = Object.assign({}, this._campaigns[i]);
@@ -55,19 +73,21 @@ export class AppealInfoComponent implements OnInit {
     this._info = data;
     this.setCampaign(data.campaign._id);
     this.restoreService.setItem(data);
-    this.templates = this.info.campaign.templates;
+    this.templates = this._info.campaign.templates;
+    this.checkChanged();
   }
   get info(): AppealInfo {
-    return this._info;
+    return this.restoreService.getItem();
   }
   save() {
     for (var i = 0; i < this._campaigns.length; i++){
-      if (this.info.campaign._id === this._campaigns[i]._id){
-        this.info.campaign = Object.assign({}, this._campaigns[i]);
+      if (this._info.campaign._id === this._campaigns[i]._id){
+        this._info.campaign = Object.assign({}, this._campaigns[i]);
       }
     }
     this.restoreService.setItem(this._info);
     this.saved.emit(this._info);
+    this.checkChanged();
   }
   cancel() {
     this._info = this.restoreService.restoreItem();

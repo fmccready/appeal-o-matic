@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
-import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 
 import { Appeal, AppealInfo } from '../../models/appeal';
 import { Campaign } from '../../models/campaign';
@@ -23,7 +23,10 @@ export class NewAppealComponent implements OnInit {
   private appeals: Appeal[];
   private templates: Array<Template>;
   private appealSub;
-  constructor(private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService) {
+  private currentAppeal: Appeal;
+  private currentAppealSub: Subscription;
+  
+  constructor(private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService, private router: Router) {
     this.templates = previewService.templates;
   }
   
@@ -43,7 +46,22 @@ export class NewAppealComponent implements OnInit {
     this.campaigns = this.campaignService.getCampaigns();
     if (!this.appealSub){
       this.appealSub = this.appealService.getAppeals().subscribe(
-        data => {this.appeals = data; console.log(data);}
+        data => {
+          this.appeals = data;
+        }
+      );
+    }
+    if (!this.currentAppealSub){
+      this.currentAppealSub = this.appealService.getCurrentAppeal().subscribe(
+        data => {
+          if (!this.currentAppeal){
+            this.currentAppeal = data;
+          }
+          else {
+            this.currentAppeal = data;
+            this.router.navigate(['/appeal', this.currentAppeal._id, this.currentAppeal.info.template]);
+          }
+        }
       );
     }
   }

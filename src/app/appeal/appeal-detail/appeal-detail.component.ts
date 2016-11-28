@@ -158,7 +158,7 @@ export class AppealDetailComponent implements OnInit {
           return false;
         }
       }).subscribe(
-        data => { this.relatedAppeals.push(data); console.log(data); }
+        data => { this.relatedAppeals.push(data); }
       );
     }
   }
