@@ -62,7 +62,7 @@
     </head>
 
     <body style="width:100%; padding: 0px 2%; margin-left: auto; margin-right: auto;">
-        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{appeal.content.headline | removeHtml}}</span>
+        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{appeal.content.headline | removeHtml: 'space'}}</span>
         <!--[if gte mso 9]>
         <table id="tableForOutlook" width="650"><tr><td>
         <![endif]-->
@@ -94,7 +94,7 @@
                         <tr><td bgcolor="#ffffff" colspan="2" style="height: 20px;"></td></tr>
 				  </table>
 
-<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:20px; margin-bottom: 1em; margin-top:0px; font-weight:normal;"><em>Shalom</em>, [[S1:first_name:Friend]],
+<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:20px; margin-bottom: 1em; margin-top:0px; font-weight:normal;">[[?xx::x[[S1:first_name]]x::<em>Shalom</em>::<em>Shalom</em>, [[S1:first_name]]]],
 </p>
 
 <p #appealBody style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
@@ -155,6 +155,8 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
         <!--[if gte mso 9]>
         </td></tr></table>
         <![endif]-->
+        <img [src]="'https://pixel.app.returnpath.net/pixel.gif?r=056e9d86e427f2bf5e95ae94c4b00f528036802d&c=' + appeal.info.campaign.utm + '&s=[[S1:cons_id]]'" width="1" height="1" />
+		    <img [src]="'https://pixel.monitor1.returnpath.net/pixel.gif?r=056e9d86e427f2bf5e95ae94c4b00f528036802d&c=' + appeal.info.campaign.utm + '&s=[[S1:cons_id]]'" width="1" height="1" />
     </body>
 </html>
 </div>
@@ -169,7 +171,7 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
 <br>
 {{addCodes(appeal.content.url, {src:'TL1', utm:'text-link-1'}, 'plain') }}
 <br><br>
-Shalom, [[S1:first_name:Friend]],
+[[?xx::x[[S1:first_name]]x::Shalom::Shalom, [[S1:first_name]]]],
 <br><br>
 <p #plainBody></p>
 <br>
