@@ -107,9 +107,9 @@
 Rabbi Yechiel Eckstein<br />Founder and President</p>
 </template>
 <template [ngIf]="appeal.content.customSignature !== ''">
-  <p #appealCustomSignature style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
+  <p #appealCustomSignature [innerHTML]="appeal.content.customSignature" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 </template>
-<p #appealPS [innerHTML]="appeal.content.customSignature" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
+<p #appealPS style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 
  <p align="center">
  <a href="{{addCodes(appeal.content.url, {src: 'BN1', utm: 'button-link-1'}, 'html')}}"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg"/></a>
