@@ -121,12 +121,17 @@
 
 <p #appealBody style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 
+<template [ngIf]="appeal.content.customSignature === ''">
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;">
   With prayers for <em>shalom</em>, peace,<br>
-<img style="margin-top:0px; margin-bottom:0px; clear:both;" src="http://www.ifcj.ca/images/content/pagebuilder/65981.png" /></p>
+<img style="margin-top:0px; margin-bottom:0px; clear:both;" src="https://secure2.convio.net/ifcj/images/content/pagebuilder/Rabbi-Sig-Clear.png" /></p>
 
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align: left; margin-top:5px;line-height:20px; font-weight:normal;">
 Rabbi Yechiel Eckstein<br />President and Founder</p>
+</template>
+<template [ngIf]="appeal.content.customSignature !== ''">
+  <p #appealCustomSignature [innerHTML]="appeal.content.customSignature" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
+</template>
 
 <p #appealPS style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 
@@ -184,10 +189,15 @@ Rabbi Yechiel Eckstein<br />President and Founder</p>
 <br><br>
 <p #plainBody></p>
 <br>
+<template [ngIf]="appeal.content.customSignature === ''">
 With prayers for shalom, peace,
 <br><br>
-Rabbi Yechiel Eckstein
+Rabbi Yechiel Eckstein<br>
 President and Founder
+</template>
+<template [ngIf]="appeal.content.customSignature !== ''">
+  <p #appealCustomSignature [innerHTML]="appeal.content.customSignature"></p>
+</template>
 <br><br>
 <p #plainPS>
 
