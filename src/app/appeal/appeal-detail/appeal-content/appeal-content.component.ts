@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { AppealContent } from '../../../models/appeal';
+import { AppealContent, AppealCallout } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
 import { Template } from '../../../preview.service';
 import * as _ from 'lodash';
@@ -23,12 +23,14 @@ export class AppealContentComponent implements OnInit {
 
   private changed = false;
 
-  private _content: AppealContent;
+  private _content: AppealContent = new AppealContent();
 
   constructor(private restoreService: RestoreService<AppealContent>) {
   }
 
   checkChanged(){
+    console.log(this.content);
+    console.log(this._content);
     if (_.isEqual(this.content, this._content)){
       this.changed = false;
     }
@@ -40,6 +42,9 @@ export class AppealContentComponent implements OnInit {
   @Input()
   set content(data: AppealContent){
     this._content = data;
+    if (!this._content.callout){
+      this._content.callout = new AppealCallout();
+    }
     this.restoreService.setItem(data);
   }
   get content(): AppealContent {

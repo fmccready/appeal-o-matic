@@ -27,6 +27,12 @@ var appealSchema = new Schema({
     headline: {type:String, default: ''},
     url: {type: String, default: ''},
     body: {type: String, default: ''},
+    callout: {
+      headline: {type: String, default: ''},
+      url: {type: String, default: ''},
+      body: {type: String, default: ''},
+      image: {type: String, default: ''}
+    },
     customSignature: {type: String, default: ''},
     ps: {type: String, default: ''},
     image: {

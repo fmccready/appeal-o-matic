@@ -22,8 +22,23 @@
                   <label for="appeal-body">Body</label>
                   <ckeditor id="appeal-body" [(ngModel)]="_content.body" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
                 </div>
+                <template [ngIf]="_content.callout">
+                  <div class="form-group" [class.has-error]="!calloutHeadline.valid && calloutHeadline.touched" data-toggle="popover" data-placement="right" title="Callout headline" data-content="Put the headline of the callout here.">
+                    <label for="callout-headline">Callout headline</label>
+                    <input id="calloutHeadline" type="text" class="form-control" [(ngModel)]="_content.callout.headline" (change)="checkChanged()" #calloutHeadline="ngModel" name="callout-headline">
+                  </div>
+                  <div class="form-group" [class.has-error]="!calloutBody.valid && calloutBody.touched" data-toggle="popover" data-placement="right" title="Callout body" data-content="Put the body of the callout here.">
+                    <label for="callout-body">Callout body</label>
+                    <input id="calloutBody" type="text" class="form-control" [(ngModel)]="_content.callout.body" (change)="checkChanged()" #calloutBody="ngModel" name="callout-body">
+                  </div>
+                  <div class="form-group" [class.has-error]="!calloutImage.valid && calloutImage.touched" data-toggle="popover" data-placement="right" title="Callout image" data-content="Put the URL for the callout image here.">
+                    <label for="callout-image">Callout image</label>
+                    <input id="calloutImage" type="text" class="form-control" [(ngModel)]="_content.callout.image" (change)="checkChanged()" #calloutImage="ngModel" name="callout-image">
+                  </div>
+                </template>
+
                 <div class="form-group" [class.has-error]="!customSignature.valid && customSignature.touched" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
-                  <label for="appeal-signature">Custom signature (optional</label>
+                  <label for="appeal-signature">Custom signature (optional)</label>
                   <ckeditor id="appeal-signature" [(ngModel)]="_content.customSignature" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!ps.valid && ps.touched" data-toggle="popover" data-placement="right" title="PS" data-content="Paste in the PS copy here. <br><br>Include the letters 'PS'.">

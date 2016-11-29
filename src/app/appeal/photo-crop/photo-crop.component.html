@@ -49,8 +49,8 @@
             <option value="large">Large</option>
             <option value="polaroid">Polaroid</option>
           </select>
-          <label *ngIf="imageMeta.treatment === 'polaroid'" for="imageCaption">Image caption</label>
-          <ckeditor *ngIf="imageMeta.treatment === 'polaroid'" id="imageCaption" [(ngModel)]="imageMeta.caption" #image="ngModel" name="imageCaption"></ckeditor>
+          <label for="imageCaption">Image caption</label>
+          <ckeditor id="imageCaption" [(ngModel)]="imageMeta.caption" #image="ngModel" name="imageCaption"></ckeditor>
         </p>
       </div>
       <div class="modal-footer">

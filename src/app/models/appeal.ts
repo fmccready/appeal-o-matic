@@ -24,9 +24,16 @@ export class AppealContent {
   headline: string = '';
   url: string = '';
   body: string = '';
+  callout: AppealCallout = new AppealCallout();
   customSignature: string = '';
   ps: string = '';
   image: Image = new Image();
+}
+export class AppealCallout {
+  headline: string = '';
+  url: string = '';
+  body: string = '';
+  image: string = '';
 }
 export class AppealCode {
   utm_medium: string;
