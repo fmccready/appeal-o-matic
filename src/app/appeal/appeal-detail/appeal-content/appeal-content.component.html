@@ -22,8 +22,8 @@
                   <label for="appeal-body">Body</label>
                   <ckeditor id="appeal-body" [(ngModel)]="_content.body" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
                 </div>
-                <div class="form-group" [class.has-error]="!customSignature.valid && customSignature.touched" data-toggle="popover" data-placement="right" title="Body" data-content="Put a custom signature here. Leave blank for the standard signature.">
-                  <label for="appeal-signature">Signature</label>
+                <div class="form-group" [class.has-error]="!customSignature.valid && customSignature.touched" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
+                  <label for="appeal-signature">Custom signature (optional</label>
                   <ckeditor id="appeal-signature" [(ngModel)]="_content.customSignature" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!ps.valid && ps.touched" data-toggle="popover" data-placement="right" title="PS" data-content="Paste in the PS copy here. <br><br>Include the letters 'PS'.">
