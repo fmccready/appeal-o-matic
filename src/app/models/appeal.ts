@@ -24,6 +24,7 @@ export class AppealContent {
   headline: string = '';
   url: string = '';
   body: string = '';
+  customSignature: string = '';
   ps: string = '';
   image: Image = new Image();
 }
