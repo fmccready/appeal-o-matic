@@ -178,11 +178,17 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
 <br><br>
 <p #plainBody></p>
 <br>
+<template [ngIf]="appeal.content.customSignature === ''">
 With prayers for shalom, peace,
 <br><br>
-Rabbi Yechiel Eckstein
+Rabbi Yechiel Eckstein<br>
 Founder and President
+</template>
+<template [ngIf]="appeal.content.customSignature !== ''">
+  <p #appealCustomSignature [innerHTML]="appeal.content.customSignature"></p>
+</template>
 <br><br>
+
 <p #plainPS>
 
 </p>
