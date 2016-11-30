@@ -27,13 +27,15 @@ export class AppealContent {
   callout: AppealCallout = new AppealCallout();
   customSignature: string = '';
   ps: string = '';
-  image: Image = new Image();
+  image: AppealImage = new AppealImage();
 }
 export class AppealCallout {
   headline: string = '';
   url: string = '';
   body: string = '';
-  image: string = '';
+  utm: string = '';
+  code: string = '';
+  image: AppealImage = new AppealImage();
 }
 export class AppealCode {
   utm_medium: string;
@@ -55,13 +57,14 @@ export class AppealSignoff {
   web: string;
 }
 
-export class Image {
+export class AppealImage {
   url: string = '';
   code: string = '';
   utm: string = '';
   merlinId: string = '';
   brightcoveId: string = '';
   caption: string = '';
+  captionColor: string = '';
   credit: string = '';
   creditPlacement: string = '';
   creditColor: string = '';

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { ImageCropperComponent, CropperSettings, ImageCropper } from 'ng2-img-cropper';
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
-import { Image as ImageMeta, Appeal } from '../../models/appeal';
+import { AppealImage as ImageMeta, Appeal } from '../../models/appeal';
 import { AppealService } from '../../appeal.service';
 
 @Component({
@@ -87,6 +87,17 @@ export class PhotoCropComponent implements OnInit {
         this.cropperSettings.croppedWidth = 650;
         this.cropperSettings.croppedHeight = 391;
         break;
+      case 'calloutLarge':
+        this.cropperSettings.width = 650;
+        this.cropperSettings.height = 150;
+        this.cropperSettings.croppedWidth = 650;
+        this.cropperSettings.croppedHeight = 150;
+        break;
+      case 'calloutSmall':
+        this.cropperSettings.width = 313;
+        this.cropperSettings.height = 200;
+        this.cropperSettings.croppedWidth = 313;
+        this.cropperSettings.croppedHeight = 200;
       default:
         this.cropperSettings.width = 313;
         this.cropperSettings.height = 329;
@@ -156,7 +167,6 @@ export class PhotoCropComponent implements OnInit {
         let caption = document.createElement('canvas');
         let captionTransform = caption.getContext('2d');
 
-
         canvasTransform.drawImage(this.polaroidBackground, 0, 0);
         canvasTransform.drawImage(pic, 12, 9);
         canvasTransform.font = "22px 'Architects Daughter'";
@@ -175,6 +185,24 @@ export class PhotoCropComponent implements OnInit {
         this.cancel();
         
       }
+      else if (this.imageMeta.treatment === 'calloutLarge' || this.imageMeta.treatment === 'calloutSmall'){
+        canvasTransform.drawImage(pic, 0, 0);
+        canvasTransform.font = "30px 'Arial'";
+        canvasTransform.textAlign = "center";
+        canvasTransform.textBaseline = "middle";
+        let captionArr = this.imageMeta.caption.replace('&nbsp;', '').split('<br />');
+        if (captionArr.length > 1){
+          canvasTransform.fillText(captionArr[0], (canvas.width / 2), ((canvas.height / 2) - 18));
+          canvasTransform.fillText(captionArr[1], (canvas.width / 2), ((canvas.height /2) + 18));
+        }
+        else {
+          canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height / 2));
+        }
+
+        this.saved.emit(canvas.toDataURL());
+        this.cancel();
+      }
+
       else {
         canvas.width = this.cropperSettings.croppedWidth;
         canvas.height = this.cropperSettings.croppedHeight;

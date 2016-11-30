@@ -31,7 +31,9 @@ var appealSchema = new Schema({
       headline: {type: String, default: ''},
       url: {type: String, default: ''},
       body: {type: String, default: ''},
-      image: {type: String, default: ''}
+      image: {type: String, default: ''},
+      utm: {type: String, default: ''},
+      code: {type: String, default: ''}
     },
     customSignature: {type: String, default: ''},
     ps: {type: String, default: ''},
@@ -45,6 +47,7 @@ var appealSchema = new Schema({
       credit: {type: String},
       creditPlacement: {type: String},
       creditColor: {type: String},
+      captionColor: {type: String},
       treatment: {type: String}
     },
   },

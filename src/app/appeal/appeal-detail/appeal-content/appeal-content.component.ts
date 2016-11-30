@@ -20,6 +20,7 @@ export class AppealContentComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealContent>();
   @Output() canceled = new EventEmitter<AppealContent>();
   @Output() imageSaved = new EventEmitter<any>();
+  @Output() calloutSaved = new EventEmitter<any>();
 
   private changed = false;
 
@@ -29,8 +30,6 @@ export class AppealContentComponent implements OnInit {
   }
 
   checkChanged(){
-    console.log(this.content);
-    console.log(this._content);
     if (_.isEqual(this.content, this._content)){
       this.changed = false;
     }
@@ -60,12 +59,14 @@ export class AppealContentComponent implements OnInit {
     this._content = this.restoreService.restoreItem();
     this.canceled.emit(this._content);
   }
-  onSaved(data){
+  onImageSaved(data){
     this.imageSaved.emit(data);
+  }
+  onCalloutSaved(data){
+    this.calloutSaved.emit(data);
   }
 
   ngOnInit() {
-
     var self = this;
     $(function () {
       $('[data-toggle="popover"]').popover({trigger: 'hover', html: true});

@@ -9,7 +9,8 @@
         <div class="panel panel-primary" id="subPanel">
           <ul class="nav nav-pills nav-justified" role="tablist">
             <li role="presentation"><a href="#copy" aria-controls="copy" role="tab" data-toggle="tab">Copy&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
-            <li role="presentation"><a href="#images" aria-controls="images" role="tab" data-toggle="tab">Images&nbsp;&nbsp;<span class="glyphicon glyphicon-picture"></span></a></li>
+            <li role="presentation"><a href="#images" aria-controls="images" role="tab" data-toggle="tab">Image&nbsp;&nbsp;<span class="glyphicon glyphicon-picture"></span></a></li>
+            <li role="presentation"><a href="#callout" aria-controls="callout" role="tab" data-toggle="tab">Callout&nbsp;&nbsp;<span class="glyphicon glyphicon-bullhorn"></span></a></li>
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade" id="copy">
@@ -22,21 +23,6 @@
                   <label for="appeal-body">Body</label>
                   <ckeditor id="appeal-body" [(ngModel)]="_content.body" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
                 </div>
-                <template [ngIf]="_content.callout">
-                  <div class="form-group" [class.has-error]="!calloutHeadline.valid && calloutHeadline.touched" data-toggle="popover" data-placement="right" title="Callout headline" data-content="Put the headline of the callout here.">
-                    <label for="callout-headline">Callout headline</label>
-                    <input id="calloutHeadline" type="text" class="form-control" [(ngModel)]="_content.callout.headline" (change)="checkChanged()" #calloutHeadline="ngModel" name="callout-headline">
-                  </div>
-                  <div class="form-group" [class.has-error]="!calloutBody.valid && calloutBody.touched" data-toggle="popover" data-placement="right" title="Callout body" data-content="Put the body of the callout here.">
-                    <label for="callout-body">Callout body</label>
-                    <input id="calloutBody" type="text" class="form-control" [(ngModel)]="_content.callout.body" (change)="checkChanged()" #calloutBody="ngModel" name="callout-body">
-                  </div>
-                  <div class="form-group" [class.has-error]="!calloutImage.valid && calloutImage.touched" data-toggle="popover" data-placement="right" title="Callout image" data-content="Put the URL for the callout image here.">
-                    <label for="callout-image">Callout image</label>
-                    <input id="calloutImage" type="text" class="form-control" [(ngModel)]="_content.callout.image" (change)="checkChanged()" #calloutImage="ngModel" name="callout-image">
-                  </div>
-                </template>
-
                 <div class="form-group" [class.has-error]="!customSignature.valid && customSignature.touched" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
                   <label for="appeal-signature">Custom signature (optional)</label>
                   <ckeditor id="appeal-signature" [(ngModel)]="_content.customSignature" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
@@ -51,7 +37,7 @@
               <div class="well">
 
                 <div class="add-image">
-                  <photo-crop [imageMeta]="_content.image" (saved)="onSaved($event)"></photo-crop>
+                  <photo-crop [imageMeta]="_content.image" (saved)="onImageSaved($event)"></photo-crop>
                 </div>
 
                 <div class="form-group" [class.has-error]="!image.valid && image.touched" data-toggle="popover" data-placement="right" title="Image Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
@@ -73,6 +59,33 @@
                   <input type="text" id="imageCode" class="form-control" [(ngModel)]="_content.image.code" (change)="checkChanged()" #image="ngModel" name="imageCode">
                   <label for="imageUtm">Image UTM code</label>
                   <input type="text" id="imageUtm" class="form-control" [(ngModel)]="_content.image.utm" (change)="checkChanged()" #image="ngModel" name="imageUtm">           
+                </div>
+              </div>
+            </div>
+
+
+
+            <div role="tabpanel" class="tab-pane fade" id="callout">
+              <div class="well">
+                <div class="add-image">
+                  <photo-crop [imageMeta]="_content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>
+                </div>
+                <div class="form-group" [class.has-error]="!callout.valid && callout.touched" data-toggle="popover" data-placement="right" title="Callout Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
+                  <label for="calloutImageUrl">Callout image URL</label>
+                  <input type="text" id="calloutImageUrl" class="form-control" [(ngModel)]="_content.callout.image.url" (change)="checkChanged()" #callout="ngModel" name="calloutImageUrl">
+
+                  <label for="callout-headline">Callout headline</label>
+                  <ckeditor id="callout-headline" [(ngModel)]="_content.callout.headline" (change)="checkChanged()" #callout="ngModel" name="calloutHeadline"></ckeditor>
+
+                  <label for="callout-body">Callout body</label>
+                  <ckeditor id="callout-body" [(ngModel)]="_content.callout.body" (change)="checkChanged()" #callout="ngModel" name="calloutBody"></ckeditor>
+
+                  <label for="imageUrl">URL the callout will link to</label>
+                  <input type="text" id="calloutUrl" class="form-control" [(ngModel)]="_content.callout.url" (change)="checkChanged()" #callout="ngModel" name="calloutUrl">
+                  <label for="calloutCode">Callout source code</label>
+                  <input type="text" id="calloutCode" class="form-control" [(ngModel)]="_content.callout.code" (change)="checkChanged()" #callout="ngModel" name="calloutCode">
+                  <label for="calloutUtm">Callout UTM code</label>
+                  <input type="text" id="calloutUtm" class="form-control" [(ngModel)]="_content.callout.utm" (change)="checkChanged()" #callout="ngModel" name="calloutUtm">           
                 </div>
               </div>
             </div>

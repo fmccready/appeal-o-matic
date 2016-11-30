@@ -104,6 +104,22 @@ export class AppealDetailComponent implements OnInit {
       err => console.log(err)
     );
   }
+  onCalloutSaved(data){
+    let callout$ = this.appealService.uploadImage(data, this.appeal._id + 'cta');
+    callout$.subscribe(
+      data => {
+        if (data.status === 200){
+          this.appeal.content.callout.image.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id}cta.png?${Date.now()}`;
+          this.appealService.updateAppeal(this.appeal);
+          this.previewService.appeal.next(this.appeal);
+        }
+        else {
+          console.log(data);
+        }
+      },
+      err => console.log(err)
+    );
+  }
 
   onAppealDuplicated(data){
     this.groupSubscription(data);
