@@ -17,19 +17,19 @@
               <div class="well">
                 <div class="form-group" [class.has-error]="!headline.valid && headline.touched" data-toggle="popover" data-placement="right" title="Headline" data-content="Paste in the headline here.">
                   <label for="headline">Headline</label>
-                  <ckeditor id="headline" [(ngModel)]="_content.headline" (change)="checkChanged()" #headline="ngModel" name="headline"></ckeditor>
+                  <ckeditor id="headline" [(ngModel)]="_content.headline" [config]="{height: 80}" (change)="checkChanged()" #headline="ngModel" name="headline"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!body.valid && body.touched" data-toggle="popover" data-placement="right" title="Body" data-content="Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.">
                   <label for="appeal-body">Body</label>
-                  <ckeditor id="appeal-body" [(ngModel)]="_content.body" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
+                  <ckeditor id="appeal-body" [(ngModel)]="_content.body" [config]="{resize_enabled:true, resize_dir:'vertical'}" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!customSignature.valid && customSignature.touched" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
                   <label for="appeal-signature">Custom signature (optional)</label>
-                  <ckeditor id="appeal-signature" [(ngModel)]="_content.customSignature" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
+                  <ckeditor id="appeal-signature" [(ngModel)]="_content.customSignature" [config]="{height: 80}" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!ps.valid && ps.touched" data-toggle="popover" data-placement="right" title="PS" data-content="Paste in the PS copy here. <br><br>Include the letters 'PS'.">
                   <label for="appeal-ps">PS (optional)</label>
-                  <ckeditor id="appeal-ps" [(ngModel)]="_content.ps" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
+                  <ckeditor id="appeal-ps" [(ngModel)]="_content.ps" [config]="{height: 80}" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
                 </div>
               </div>
             </div>
@@ -75,10 +75,10 @@
                   <input type="text" id="calloutImageUrl" class="form-control" [(ngModel)]="_content.callout.image.url" (change)="checkChanged()" #callout="ngModel" name="calloutImageUrl">
 
                   <label for="callout-headline">Callout headline</label>
-                  <ckeditor id="callout-headline" [(ngModel)]="_content.callout.headline" (change)="checkChanged()" #callout="ngModel" name="calloutHeadline"></ckeditor>
+                  <ckeditor id="callout-headline" [(ngModel)]="_content.callout.headline" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutHeadline"></ckeditor>
 
                   <label for="callout-body">Callout body</label>
-                  <ckeditor id="callout-body" [(ngModel)]="_content.callout.body" (change)="checkChanged()" #callout="ngModel" name="calloutBody"></ckeditor>
+                  <ckeditor id="callout-body" [(ngModel)]="_content.callout.body" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutBody"></ckeditor>
 
                   <label for="imageUrl">URL the callout will link to</label>
                   <input type="text" id="calloutUrl" class="form-control" [(ngModel)]="_content.callout.url" (change)="checkChanged()" #callout="ngModel" name="calloutUrl">

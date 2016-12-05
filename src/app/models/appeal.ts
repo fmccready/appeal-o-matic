@@ -64,7 +64,9 @@ export class AppealImage {
   merlinId: string = '';
   brightcoveId: string = '';
   caption: string = '';
+  captionSize: number = 12;
   captionColor: string = '';
+  captionShadow: string = '';
   credit: string = '';
   creditPlacement: string = '';
   creditColor: string = '';

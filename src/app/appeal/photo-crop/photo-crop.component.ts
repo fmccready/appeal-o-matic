@@ -118,28 +118,21 @@ export class PhotoCropComponent implements OnInit {
   }
 
   cropImage(data){
-    
     if (this.imageMeta.credit || this.imageMeta.caption){
       let image = new Image();
       image.src = data;
       let canvas = document.createElement('canvas');
       let pic = document.createElement('canvas');
-
       pic.width = this.cropperSettings.width;
       pic.height = this.cropperSettings.height;
-
       canvas.width = this.cropperSettings.width;
       canvas.height = this.cropperSettings.height;
-      
       let picTransform = pic.getContext('2d');
       let canvasTransform = canvas.getContext('2d');
-
       picTransform.drawImage(image, 0, 0);
-
       if (this.imageMeta.credit){
         picTransform.font = '10px Arial';
         picTransform.fillStyle = this.imageMeta.creditColor;
-        
         switch(this.imageMeta.creditPlacement){
           case 'tl':
             picTransform.textAlign = "start";
@@ -159,14 +152,11 @@ export class PhotoCropComponent implements OnInit {
             break;
         }
       }
-      
       if (this.imageMeta.treatment === "polaroid"){
-
         canvas.width = 326;
         canvas.height = 318;
         let caption = document.createElement('canvas');
         let captionTransform = caption.getContext('2d');
-
         canvasTransform.drawImage(this.polaroidBackground, 0, 0);
         canvasTransform.drawImage(pic, 12, 9);
         canvasTransform.font = "22px 'Architects Daughter'";
@@ -180,10 +170,8 @@ export class PhotoCropComponent implements OnInit {
         else {
           canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height - 40));
         }
-        
         this.saved.emit(canvas.toDataURL());
         this.cancel();
-        
       }
       else if (this.imageMeta.treatment === 'calloutLarge' || this.imageMeta.treatment === 'calloutSmall'){
         canvasTransform.drawImage(pic, 0, 0);
@@ -198,11 +186,9 @@ export class PhotoCropComponent implements OnInit {
         else {
           canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height / 2));
         }
-
         this.saved.emit(canvas.toDataURL());
         this.cancel();
       }
-
       else {
         canvas.width = this.cropperSettings.croppedWidth;
         canvas.height = this.cropperSettings.croppedHeight;
@@ -215,5 +201,8 @@ export class PhotoCropComponent implements OnInit {
       this.saved.emit(data);
       this.cancel();
     }
+  }
+  saveImage(){
+
   }
 }

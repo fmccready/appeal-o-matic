@@ -25,10 +25,14 @@ export class RestoreService<T> {
     var temp = item.constructor();
     if (temp){
       for (var key in item){
-        temp[key] = this.clone(item[key]);
+        if(item[key] instanceof Date){
+          temp[key] = new Date(item[key].getTime());
+        }
+        else {
+          temp[key] = this.clone(item[key]);
+        }
       }
     }
-
     return temp;
   }
 

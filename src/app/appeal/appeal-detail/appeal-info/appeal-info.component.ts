@@ -22,7 +22,7 @@ export class AppealInfoComponent implements OnInit {
   @Output() canceled = new EventEmitter<AppealInfo>();
   private campaigns: Observable<Campaign[]>;
   private _campaigns: Campaign[];
-  
+  private sendTime: Date = new Date();
   private templates: Array<Template>;
   private _info: AppealInfo = new AppealInfo();
   private currentCampaignId: BehaviorSubject<Campaign> = new BehaviorSubject(this._info.campaign._id);
@@ -50,11 +50,7 @@ export class AppealInfoComponent implements OnInit {
       this.changed = false;
     }
     else {
-      this.changed = true
-      if (this.info){
-      console.log(this.info.sendDate);
-      console.log(this._info.sendDate);
-      }
+      this.changed = true;
     };
   }
 
@@ -64,14 +60,15 @@ export class AppealInfoComponent implements OnInit {
 
   @Input()
   set info(data: AppealInfo) {
-    console.log(data.sendDate);
+    data.sendDate = new Date(data.sendDate);
+    this.sendTime = data.sendDate;
     for (var i = 0; i < this._campaigns.length; i++){
       if (data.campaign._id === this._campaigns[i]._id){
         data.campaign = Object.assign({}, this._campaigns[i]);
       }
     }
-    this._info = data;
     this.setCampaign(data.campaign._id);
+    this._info = data;
     this.restoreService.setItem(data);
     this.templates = this._info.campaign.templates;
     this.checkChanged();
@@ -80,6 +77,8 @@ export class AppealInfoComponent implements OnInit {
     return this.restoreService.getItem();
   }
   save() {
+    this._info.sendDate.setMinutes(this.sendTime.getMinutes());
+    this._info.sendDate.setHours(this.sendTime.getHours());
     for (var i = 0; i < this._campaigns.length; i++){
       if (this._info.campaign._id === this._campaigns[i]._id){
         this._info.campaign = Object.assign({}, this._campaigns[i]);

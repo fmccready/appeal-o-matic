@@ -42,7 +42,7 @@
         <div class="form-group text-center" data-toggle="popover" data-placement="right" title="Send Time" data-content="Select the Time the email will send here.">
           <div class="datepicker-wrapper">
             <label for="send-time">Send Time</label>
-            <timepicker class="text-center" [(ngModel)]="_info.sendDate" (change)="checkChanged()" name="sendTime"></timepicker>
+            <timepicker class="text-center" [(ngModel)]="sendTime" (change)="checkChanged()" name="sendTime"></timepicker>
           </div>
         </div>
         <div class="form-group text-center" [class.has-error]="!scheduled.valid && scheduled.touched" data-toggle="popover" data-placement="right" title="Scheduled" data-content="Check this box when the email is confirmed to be scheduled for send.">
