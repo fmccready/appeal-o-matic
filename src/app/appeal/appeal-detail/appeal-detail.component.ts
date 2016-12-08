@@ -93,7 +93,7 @@ export class AppealDetailComponent implements OnInit {
     image$.subscribe(
       data => {
         if (data.status === 200){
-          this.appeal.content.image.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id}.png?${Date.now()}`;
+          this.appeal.content.image.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id}.jpg?${Date.now()}`;
           this.appealService.updateAppeal(this.appeal);
           this.previewService.appeal.next(this.appeal);
         }
@@ -109,7 +109,7 @@ export class AppealDetailComponent implements OnInit {
     callout$.subscribe(
       data => {
         if (data.status === 200){
-          this.appeal.content.callout.image.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id}cta.png?${Date.now()}`;
+          this.appeal.content.callout.image.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id}cta.jpg?${Date.now()}`;
           this.appealService.updateAppeal(this.appeal);
           this.previewService.appeal.next(this.appeal);
         }

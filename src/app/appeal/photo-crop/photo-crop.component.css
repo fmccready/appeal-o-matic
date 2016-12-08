@@ -5,3 +5,7 @@
 .modal-dialog.modal-lg {
   width:90%;
 }
+#image {
+  max-width:100%;
+  max-height:600px;
+}

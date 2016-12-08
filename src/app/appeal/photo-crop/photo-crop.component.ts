@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { ImageCropperComponent, CropperSettings, ImageCropper } from 'ng2-img-cropper';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import * as Cropper from 'cropperjs';
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { AppealImage as ImageMeta, Appeal } from '../../models/appeal';
-import { AppealService } from '../../appeal.service';
 
 @Component({
   selector: 'photo-crop',
@@ -20,11 +20,9 @@ export class PhotoCropComponent implements OnInit {
   get imageMeta(){
     return this._imageMeta;
   }
-  private cropperSettings: CropperSettings;
-
   @ViewChild('settingsModal') public settingsModal:ModalDirective;
   @ViewChild('cropModal') public cropModal:ModalDirective; 
-
+  
   private isCropping: boolean = false;
   public showSettingsModal(){
     this.isCropping = false;
@@ -40,25 +38,42 @@ export class PhotoCropComponent implements OnInit {
     this.cropModal.hide();
     this.settingsModal.hide();
     this.isCropping = false;
+    if (this.cropper){
+      this.cropper.destroy();
+    }
   }
 
   private data: any;
 
-  constructor(private appealService:AppealService) {
-    this.cropperSettings = new CropperSettings();
-    this.cropperSettings.width = 313;
-    this.cropperSettings.height = 329;
-    this.cropperSettings.croppedWidth = 313;
-    this.cropperSettings.croppedHeight = 329;
-    this.cropperSettings.canvasWidth = 500;
-    this.cropperSettings.canvasHeight = 500;
-
-    this.data = {};
+  constructor() {
   }
+
+  private cropper: Cropper;
+  private canvasData;
+
+  @ViewChild('imageFile') private imageFile;
+  @ViewChild('img') private img;
+  imageChosen(event){
+    var reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.img.nativeElement.src = reader.result;
+      this.cropper = new Cropper(this.img.nativeElement, {
+        aspectRatio: 1,
+        scalable: false,
+      });
+    }, false);
+    
+    if (this.imageFile.nativeElement.files[0]) {
+      reader.readAsDataURL(this.imageFile.nativeElement.files[0]);
+    }
+    
+    console.log(reader);
+  }
+  
   private polaroidBackground: any;
   ngOnInit() {
     let polaroid = document.createElement('img');
-    polaroid.src = `http://${window.location.hostname}:3000/assets/images/polaroid-template.png`;
+    polaroid.src = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
     polaroid.setAttribute('crossOrigin', 'anonymous');
     polaroid.onload = () => {
       this.polaroidBackground = document.createElement('img');
@@ -70,39 +85,15 @@ export class PhotoCropComponent implements OnInit {
   updateSize(val){
     switch(val){
       case 'polaroid':
-        this.cropperSettings.width = 306;
-        this.cropperSettings.height = 238;
-        this.cropperSettings.croppedWidth = 306;
-        this.cropperSettings.croppedHeight = 238;
         break;
       case 'small':
-        this.cropperSettings.width = 313;
-        this.cropperSettings.height = 329;
-        this.cropperSettings.croppedWidth = 313;
-        this.cropperSettings.croppedHeight = 329;
         break;
       case 'large':
-        this.cropperSettings.width = 650;
-        this.cropperSettings.height = 391;
-        this.cropperSettings.croppedWidth = 650;
-        this.cropperSettings.croppedHeight = 391;
         break;
       case 'calloutLarge':
-        this.cropperSettings.width = 650;
-        this.cropperSettings.height = 150;
-        this.cropperSettings.croppedWidth = 650;
-        this.cropperSettings.croppedHeight = 150;
         break;
       case 'calloutSmall':
-        this.cropperSettings.width = 313;
-        this.cropperSettings.height = 200;
-        this.cropperSettings.croppedWidth = 313;
-        this.cropperSettings.croppedHeight = 200;
       default:
-        this.cropperSettings.width = 313;
-        this.cropperSettings.height = 329;
-        this.cropperSettings.croppedWidth = 313;
-        this.cropperSettings.croppedHeight = 329;
         break;
     }
   }
@@ -113,20 +104,17 @@ export class PhotoCropComponent implements OnInit {
     canvas.height = img.height;
     var ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL('image/png');
+    var dataURL = canvas.toDataURL('image/jpg', 1.0);
     return dataURL;
   }
 
+/*
   cropImage(data){
     if (this.imageMeta.credit || this.imageMeta.caption){
       let image = new Image();
       image.src = data;
       let canvas = document.createElement('canvas');
       let pic = document.createElement('canvas');
-      pic.width = this.cropperSettings.width;
-      pic.height = this.cropperSettings.height;
-      canvas.width = this.cropperSettings.width;
-      canvas.height = this.cropperSettings.height;
       let picTransform = pic.getContext('2d');
       let canvasTransform = canvas.getContext('2d');
       picTransform.drawImage(image, 0, 0);
@@ -170,7 +158,7 @@ export class PhotoCropComponent implements OnInit {
         else {
           canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height - 40));
         }
-        this.saved.emit(canvas.toDataURL());
+        this.saved.emit(canvas.toDataURL('image/jpg', 1.0));
         this.cancel();
       }
       else if (this.imageMeta.treatment === 'calloutLarge' || this.imageMeta.treatment === 'calloutSmall'){
@@ -186,14 +174,14 @@ export class PhotoCropComponent implements OnInit {
         else {
           canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height / 2));
         }
-        this.saved.emit(canvas.toDataURL());
+        this.saved.emit(canvas.toDataURL('image/jpg', 1.0));
         this.cancel();
       }
       else {
         canvas.width = this.cropperSettings.croppedWidth;
         canvas.height = this.cropperSettings.croppedHeight;
         canvasTransform.drawImage(pic, 0, 0);
-        this.saved.emit(canvas.toDataURL());
+        this.saved.emit(canvas.toDataURL('image/jpg', 1.0));
         this.cancel();
       }
     }
@@ -202,7 +190,13 @@ export class PhotoCropComponent implements OnInit {
       this.cancel();
     }
   }
-  saveImage(){
+  */
 
+  saveImage(){
+    this.saved.emit((this.cropper.getCroppedCanvas({
+      width:326,
+      height:318
+    }).toDataURL('image/jpeg', 1)));
+    this.cancel();
   }
 }

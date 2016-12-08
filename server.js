@@ -12,6 +12,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Client = require('ftp');
 var creds = require('./ftp-options.js');
+var imagemagick = require('imagemagick');
 
 //Express Setup
 var app = express();
@@ -122,9 +123,9 @@ db.once('open', function(){
   app.use('/lib', express.static(__dirname + '/src/lib'));
 
   app.post('/image-upload', function(req, res){
-    var base64Data = req.body.data.replace(/^data:image\/png;base64,/, "");
-    
-    fs.writeFile(`dist/assets/images/${req.body.id}.png`, base64Data, 'base64', function(err){
+    var base64Data = req.body.data.replace(/^data:image\/jpeg;base64,/, "");
+    console.log(base64Data);
+    fs.writeFile(`dist/assets/images/${req.body.id}.jpg`, base64Data, 'base64', function(err){
       if (err){
         res.send(err);
       }
@@ -132,13 +133,13 @@ db.once('open', function(){
         
         var c = new Client();
         c.on('ready', function(){
-          c.put(`dist/assets/images/${req.body.id}.png`, `digital.ifcj.org/appeal-images/${req.body.id}.png`, function(err){
+          c.put(`dist/assets/images/${req.body.id}.jpg`, `digital.ifcj.org/appeal-images/${req.body.id}.jpg`, function(err){
             if(err) throw err;
             c.end();
             res.send('finished');
-            fs.unlink(`dist/assets/images/${req.body.id}.png`, (err) => {
+            fs.unlink(`dist/assets/images/${req.body.id}.jpg`, (err) => {
               if(err) throw err;
-              console.log(`deleted image ${req.body.id}.png`);
+              console.log(`deleted image ${req.body.id}.jpg`);
             });
           });
         });

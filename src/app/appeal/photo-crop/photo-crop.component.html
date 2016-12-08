@@ -73,17 +73,19 @@
       </div>
       <div *ngIf="isCropping" class="modal-body">
         <div class="row">
-          <div class="col-xs-12 col-lg-6">
-            <img-cropper #imageCropper id="image-cropper" [image]="data" [settings]="cropperSettings" class="text-center"></img-cropper>
+          <div class="col-xs-12">
+            Select image
+            <input type="file" #imageFile (change)="imageChosen($event)">
           </div>
-          <div class="col-xs-12 col-lg-6">
-            <div style="height:22px;"></div>
-            <img *ngIf="data.image" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+          <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <div>
+              <img id="image" src="" #img >
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-12 text-center">
-            <button *ngIf="data.image" class="btn btn-primary btn-lg" (click)="cropImage(data.image)">Crop image</button>
+            <button class="btn btn-primary btn-lg" (click)="saveImage()">Crop image</button>
           </div>
         </div>
       </div>

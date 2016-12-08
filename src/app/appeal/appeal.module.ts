@@ -14,7 +14,7 @@ import { PreviewService } from './../preview.service';
     TimepickerModule,
     DatepickerModule,
     CommonModule,
-    AppealListModule
+    AppealListModule,
   ],
   declarations: [
     FiltersComponent,

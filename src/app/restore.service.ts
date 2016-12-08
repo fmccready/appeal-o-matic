@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import * as _ from 'lodash';
 @Injectable()
 export class RestoreService<T> {
   originalItem: T;
@@ -13,26 +13,26 @@ export class RestoreService<T> {
     return this.currentItem;
   }
 
+  getOriginal(): T {
+    return this.originalItem;
+  }
+
+  isChanged(): boolean {
+    console.log('current');
+    console.log(this.currentItem);
+    console.log('original');
+    console.log(this.originalItem);
+    return !(_.isEqual(this.currentItem,this.originalItem));
+    //return !(_.isEqual(_.omit(this.currentItem, _.functions(this.currentItem)), _.omit(this.originalItem, _.functions(this.originalItem))));
+  }
+
   restoreItem(): T {
     this.currentItem = this.clone(this.originalItem);
     return this.getItem();
   }
 
   clone(item: T): T {
-    if (item === null || typeof item !== 'object'){
-      return item;
-    }
-    var temp = item.constructor();
-    if (temp){
-      for (var key in item){
-        if(item[key] instanceof Date){
-          temp[key] = new Date(item[key].getTime());
-        }
-        else {
-          temp[key] = this.clone(item[key]);
-        }
-      }
-    }
+    var temp = _.cloneDeep(item);
     return temp;
   }
 

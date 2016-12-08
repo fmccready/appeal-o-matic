@@ -27,7 +27,7 @@ import { routing, appRoutingProviders } from './app.routes';
     routing,
     AppealModule,
     CampaignModule,
-    AppealDetailModule
+    AppealDetailModule,
   ],
   declarations: [
     AppComponent

@@ -46,12 +46,16 @@ export class AppealInfoComponent implements OnInit {
   }
 
   checkChanged(){
+    this.changed = this.restoreService.isChanged();
+    console.log('changed: ' + this.changed);
+    /*
     if (_.isEqual(this.info, this._info)){
       this.changed = false;
     }
     else {
       this.changed = true;
     };
+    */
   }
 
   setCampaign(val){
@@ -68,8 +72,8 @@ export class AppealInfoComponent implements OnInit {
       }
     }
     this.setCampaign(data.campaign._id);
-    this._info = data;
     this.restoreService.setItem(data);
+    this._info = this.restoreService.getItem();
     this.templates = this._info.campaign.templates;
     this.checkChanged();
   }
