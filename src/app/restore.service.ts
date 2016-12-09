@@ -18,10 +18,6 @@ export class RestoreService<T> {
   }
 
   isChanged(): boolean {
-    console.log('current');
-    console.log(this.currentItem);
-    console.log('original');
-    console.log(this.originalItem);
     return !(_.isEqual(this.currentItem,this.originalItem));
     //return !(_.isEqual(_.omit(this.currentItem, _.functions(this.currentItem)), _.omit(this.originalItem, _.functions(this.originalItem))));
   }

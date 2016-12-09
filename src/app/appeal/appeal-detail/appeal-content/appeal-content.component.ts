@@ -24,7 +24,7 @@ export class AppealContentComponent implements OnInit {
 
   private changed = false;
 
-  private _content: AppealContent = new AppealContent();
+  private _content: AppealContent;
 
   constructor(private restoreService: RestoreService<AppealContent>) {
   }
@@ -38,6 +38,15 @@ export class AppealContentComponent implements OnInit {
     };
   }
 
+  private _appealId;
+  @Input()
+  set appealId(id){
+    this._appealId = id;
+    console.log(id);
+  };
+  get appealId(){
+    return this._appealId;
+  }
   @Input()
   set content(data: AppealContent){
     this._content = data;

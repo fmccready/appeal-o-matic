@@ -13,30 +13,30 @@ import * as _ from 'lodash';
 export class AppealCodesComponent implements OnInit {
   @Output() saved = new EventEmitter<AppealCode>();
   @Output() canceled = new EventEmitter<AppealCode>();
-  private _codes: AppealCode;
+  
   constructor(private restoreService: RestoreService<AppealCode>) {
   }
   private changed = false;
-  valueChanged(){
-    this.changed = true
+  checkChanged(){
+    this.changed = this.restoreService.isChanged();
   }
   @Input()
   set codes(appealCode: AppealCode){
-    this._codes = appealCode;
     this.restoreService.setItem(appealCode);
-    this.changed = false;
+    this.checkChanged();
   }
   get codes(): AppealCode {
     return this.restoreService.getItem();
   }
   save() {
-    this.restoreService.setItem(this._codes);
-    this.saved.emit(this._codes);
-    this.changed = false;
+    this.restoreService.setItem(this.codes);
+    this.saved.emit(this.codes);
+    this.checkChanged();
   }
   cancel() {
-    this._codes = this.restoreService.restoreItem();
-    this.canceled.emit(this._codes);
+    this.restoreService.restoreItem();
+    this.canceled.emit(this.codes);
+    this.checkChanged();
   }
 
   ngOnInit() {

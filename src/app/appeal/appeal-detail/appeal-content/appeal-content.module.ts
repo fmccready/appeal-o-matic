@@ -4,9 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { AppealContentComponent } from './appeal-content.component';
 import { RestoreService } from '../../../restore.service';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { PhotoCropComponent } from '../../photo-crop/photo-crop.component';
-import { ImageCropperComponent } from 'ng2-img-cropper';
-import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { PhotoCropModule } from '../../photo-crop/photo-crop.module';
 
 
 @NgModule({
@@ -14,20 +12,16 @@ import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
     CommonModule,
     CKEditorModule,
     FormsModule,
-    ModalModule
+    PhotoCropModule
   ],
   declarations: [
     AppealContentComponent,
-    PhotoCropComponent,
-    ImageCropperComponent,
   ],
   providers: [
     RestoreService
   ],
   exports: [
     AppealContentComponent,
-    PhotoCropComponent,
-    ImageCropperComponent
   ]
 })
 export class AppealContentModule {}

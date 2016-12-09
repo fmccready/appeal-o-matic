@@ -68,7 +68,7 @@
             <div role="tabpanel" class="tab-pane fade" id="callout">
               <div class="well">
                 <div class="add-image">
-                  <photo-crop [imageMeta]="_content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>
+                  <photo-crop [appealId]="appealId" [imageMeta]="_content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>
                 </div>
                 <div class="form-group" [class.has-error]="!callout.valid && callout.touched" data-toggle="popover" data-placement="right" title="Callout Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
                   <label for="calloutImageUrl">Callout image URL</label>

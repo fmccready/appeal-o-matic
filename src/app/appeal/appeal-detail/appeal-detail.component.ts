@@ -25,7 +25,6 @@ export class AppealDetailComponent implements OnInit {
   private _groupSub: Subscription;
 
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
-    this.appeal = new Appeal();
     this.settings.campaign = false;
     this.settings.sendDate = false; 
     this.settings.delete = false;
@@ -135,28 +134,34 @@ export class AppealDetailComponent implements OnInit {
       console.warn('A subscription is being made to _currentAppeal$');
       this._currentAppeal$ = this.appealService.getCurrentAppeal();
       this._appealSub = this._currentAppeal$.subscribe(data => {
-        this.appeal = data;
-        if (!this.template){
-          this.template = data.info.template;
+        if (data.info){
+          console.log(data);
+          this.appeal = data;
+          if (!this.template){
+            this.template = data.info.template;
+          }
+          else {
+            this.checkTemplate(data.info.template);
+          }
+          
+          this.groupId = data.info.group;
+          if (this.appeal._id) {
+            this.settings.active = this.appeal._id;
+          }
+          this.previewService.appeal.next(this.appeal);
+          if (this.groupId){
+            this.groupSubscription(this.groupId);
+          }
         }
-        else {
-          this.checkTemplate(data.info.template);
-        }
-        
-        this.groupId = data.info.group;
-        if (this.appeal._id) {
-          this.settings.active = this.appeal._id;
-        }
-        this.previewService.appeal.next(this.appeal);
-        if (this.groupId){
-          this.groupSubscription(this.groupId);
-        }
+
       });
     }
   }
+
   ngOnInit() {
     if (!this._routeSub){
       console.warn('A subscription is being made to route.params');
+
       this._routeSub = this.route.params
       .subscribe(queryString => {
         this.setAppeal(queryString);
@@ -164,6 +169,7 @@ export class AppealDetailComponent implements OnInit {
       });
     }
   }
+
   groupSubscription(id){
     if (!this._groupSub){
       this._groupSub = this.appealService.getAppeals().flatMap(a => {this.relatedAppeals = []; return a;}).filter(function(appeal: Appeal, index: Number){

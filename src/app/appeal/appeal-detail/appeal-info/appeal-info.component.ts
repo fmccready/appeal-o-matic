@@ -24,9 +24,6 @@ export class AppealInfoComponent implements OnInit {
   private _campaigns: Campaign[];
   private sendTime: Date = new Date();
   private templates: Array<Template>;
-  private _info: AppealInfo = new AppealInfo();
-  private currentCampaignId: BehaviorSubject<Campaign> = new BehaviorSubject(this._info.campaign._id);
-  private ccSubscription: Subscription;
 
   private changed = false;
 
@@ -34,70 +31,55 @@ export class AppealInfoComponent implements OnInit {
     this.campaigns = this.campaignService.getCampaigns();
     this.campaigns.subscribe(data => {
       this._campaigns = data;
-      this.ccSubscription = this.currentCampaignId.subscribe(currId => {
-        for (var i = 0; i < this._campaigns.length; i++){
-          if (currId === this._campaigns[i]._id){
-            this._info.campaign = Object.assign({}, this._campaigns[i]);
-            this.templates = this._info.campaign.templates;
-          }
-        }
-      });
     });
   }
 
   checkChanged(){
     this.changed = this.restoreService.isChanged();
-    console.log('changed: ' + this.changed);
-    /*
-    if (_.isEqual(this.info, this._info)){
-      this.changed = false;
-    }
-    else {
-      this.changed = true;
-    };
-    */
   }
 
+  
   setCampaign(val){
-    this.currentCampaignId.next(val);
+    for (var i = 0; i < this._campaigns.length; i++){
+      if (val === this._campaigns[i]._id){
+        this.info.campaign = Object.assign({}, this._campaigns[i]);
+        this.templates = this.info.campaign.templates;
+      }
+    }
   }
+  
 
   @Input()
   set info(data: AppealInfo) {
     data.sendDate = new Date(data.sendDate);
     this.sendTime = data.sendDate;
+    this.templates = data.campaign.templates;
     for (var i = 0; i < this._campaigns.length; i++){
       if (data.campaign._id === this._campaigns[i]._id){
         data.campaign = Object.assign({}, this._campaigns[i]);
+        this.templates = data.campaign.templates;
       }
     }
-    this.setCampaign(data.campaign._id);
     this.restoreService.setItem(data);
-    this._info = this.restoreService.getItem();
-    this.templates = this._info.campaign.templates;
     this.checkChanged();
   }
   get info(): AppealInfo {
     return this.restoreService.getItem();
   }
+
   save() {
-    this._info.sendDate.setMinutes(this.sendTime.getMinutes());
-    this._info.sendDate.setHours(this.sendTime.getHours());
-    for (var i = 0; i < this._campaigns.length; i++){
-      if (this._info.campaign._id === this._campaigns[i]._id){
-        this._info.campaign = Object.assign({}, this._campaigns[i]);
-      }
-    }
-    this.restoreService.setItem(this._info);
-    this.saved.emit(this._info);
+    this.info.sendDate.setMinutes(this.sendTime.getMinutes());
+    this.info.sendDate.setHours(this.sendTime.getHours());
+    this.setCampaign(this.info.campaign._id);
+    this.restoreService.setItem(this.info);
+    this.saved.emit(this.info);
     this.checkChanged();
   }
   cancel() {
-    this._info = this.restoreService.restoreItem();
-    this.canceled.emit(this._info);
+    this.info = this.restoreService.restoreItem();
+    this.canceled.emit(this.info);
+    this.checkChanged();
   }
-
-  @ViewChild('campaign') campaign:ElementRef;
 
   ngOnInit() {
     $(function () {

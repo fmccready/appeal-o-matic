@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { FiltersComponent } from './filters/filters.component';
 import { AppealListModule } from './appeal-list/appeal-list.module';
@@ -15,6 +16,7 @@ import { PreviewService } from './../preview.service';
     DatepickerModule,
     CommonModule,
     AppealListModule,
+    ModalModule
   ],
   declarations: [
     FiltersComponent,

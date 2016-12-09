@@ -15,13 +15,11 @@ export class AppealService {
   private _appealUrl = 'http://' + window.location.hostname + ':3000/api/v1/appeal/';
   private _imageUrl = 'http://' + window.location.hostname + ':3000/image-upload';
   public _appeals$: BehaviorSubject<Appeal[]> = new BehaviorSubject([]);
-  private appeals:Appeal[] = [];
+  private appeals:Appeal[];
   public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject({});
   private currentAppealId: string;
   private socket = io.connect('http://' + window.location.hostname + ':5000');
   constructor(private http: Http) {
-    //this._appeals$.next([]);
-    this.currentAppeal$.next(new Appeal());
     this.loadAppeals();
     this.openSocket();
   }
@@ -73,11 +71,11 @@ export class AppealService {
 
   setCurrentAppeal(appealId) {
     this.currentAppealId = appealId;
-    for (let i = 0; i < this.appeals.length; i++) {
-      if (this.appeals[i]._id === appealId) {
-        console.log('id match');
-        console.log(this.appeals[i]);
-        this.currentAppeal$.next(this.appeals[i]);
+    if (this.appeals){
+      for (let i = 0; i < this.appeals.length; i++) {
+        if (this.appeals[i]._id === appealId) {        
+          this.currentAppeal$.next(this.appeals[i]);
+        }
       }
     }
   }
@@ -166,6 +164,7 @@ export class AppealService {
   getAppeals(): Observable<Appeal[]> {
     return Observable.from(this._appeals$);
   }
+
 
   uploadImage(data, id){
     let headers = new Headers({'Content-Type': 'application/json'});

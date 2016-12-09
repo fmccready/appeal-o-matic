@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core' ;
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { AUTH_PROVIDERS } from 'angular2-jwt';
 
@@ -28,6 +29,7 @@ import { routing, appRoutingProviders } from './app.routes';
     AppealModule,
     CampaignModule,
     AppealDetailModule,
+    ModalModule
   ],
   declarations: [
     AppComponent

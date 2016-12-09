@@ -123,6 +123,27 @@ db.once('open', function(){
   app.use('/lib', express.static(__dirname + '/src/lib'));
 
   app.post('/image-upload', function(req, res){
+    var image = req.body.file;
+    var id = req.body.id;
+    console.log(req.body);
+    fs.writeFile(`dist/assets/images/${req.body.id}.jpg`, image, 'binary', function(err){
+      if (err){
+        res.send(err);
+      }
+      else {
+        var c = new Client();
+        c.on('ready', function(){
+          c.put(`dist/assets/images/${req.body.id}.jpg`, `digital.ifcj.org/appeal-images/${req.body.id}.jpg`, function(err){
+            if (err) throw err;
+            c.end();
+            res.send('finished');            
+          });
+        });
+        c.connect(creds.options);
+      }
+    })
+
+    /*
     var base64Data = req.body.data.replace(/^data:image\/jpeg;base64,/, "");
     console.log(base64Data);
     fs.writeFile(`dist/assets/images/${req.body.id}.jpg`, base64Data, 'base64', function(err){
@@ -146,7 +167,9 @@ db.once('open', function(){
 
         c.connect(creds.options);
       }
+
     });
+    */
   });
   app.use('/assets', express.static('dist/assets'));
   //app.get('/images/*', express.static(__dirname + '/dist/images'));

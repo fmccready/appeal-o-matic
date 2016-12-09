@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import * as Cropper from 'cropperjs';
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { AppealImage as ImageMeta, Appeal } from '../../models/appeal';
+import { FileUploadComponent } from '../../file-upload/file-upload.component';
 
 @Component({
   selector: 'photo-crop',
@@ -12,6 +13,7 @@ import { AppealImage as ImageMeta, Appeal } from '../../models/appeal';
 export class PhotoCropComponent implements OnInit {
   @Output() saved = new EventEmitter<any>();
   private _imageMeta;
+  @Input() appealId;
   @Input()
   set imageMeta(data: ImageMeta){
     this._imageMeta = data;
@@ -53,22 +55,17 @@ export class PhotoCropComponent implements OnInit {
 
   @ViewChild('imageFile') private imageFile;
   @ViewChild('img') private img;
-  imageChosen(event){
-    var reader = new FileReader();
-    reader.addEventListener('load', () => {
-      this.img.nativeElement.src = reader.result;
+
+  /*
       this.cropper = new Cropper(this.img.nativeElement, {
         aspectRatio: 1,
         scalable: false,
       });
-    }, false);
-    
+
     if (this.imageFile.nativeElement.files[0]) {
       reader.readAsDataURL(this.imageFile.nativeElement.files[0]);
     }
-    
-    console.log(reader);
-  }
+  */
   
   private polaroidBackground: any;
   ngOnInit() {
