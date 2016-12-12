@@ -17,19 +17,19 @@
               <div class="well">
                 <div class="form-group" [class.has-error]="!headline.valid && headline.touched" data-toggle="popover" data-placement="right" title="Headline" data-content="Paste in the headline here.">
                   <label for="headline">Headline</label>
-                  <ckeditor id="headline" [(ngModel)]="_content.headline" [config]="{height: 80}" (change)="checkChanged()" #headline="ngModel" name="headline"></ckeditor>
+                  <ckeditor id="headline" [(ngModel)]="content.headline" [config]="{height: 80}" (change)="checkChanged()" #headline="ngModel" name="headline"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!body.valid && body.touched" data-toggle="popover" data-placement="right" title="Body" data-content="Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.">
                   <label for="appeal-body">Body</label>
-                  <ckeditor id="appeal-body" [(ngModel)]="_content.body" [config]="{resize_enabled:true, resize_dir:'vertical'}" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
+                  <ckeditor id="appeal-body" [(ngModel)]="content.body" [config]="{resize_enabled:true, resize_dir:'vertical'}" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!customSignature.valid && customSignature.touched" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
                   <label for="appeal-signature">Custom signature (optional)</label>
-                  <ckeditor id="appeal-signature" [(ngModel)]="_content.customSignature" [config]="{height: 80}" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
+                  <ckeditor id="appeal-signature" [(ngModel)]="content.customSignature" [config]="{height: 80}" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
                 </div>
                 <div class="form-group" [class.has-error]="!ps.valid && ps.touched" data-toggle="popover" data-placement="right" title="PS" data-content="Paste in the PS copy here. <br><br>Include the letters 'PS'.">
                   <label for="appeal-ps">PS (optional)</label>
-                  <ckeditor id="appeal-ps" [(ngModel)]="_content.ps" [config]="{height: 80}" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
+                  <ckeditor id="appeal-ps" [(ngModel)]="content.ps" [config]="{height: 80}" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
                 </div>
               </div>
             </div>
@@ -37,28 +37,28 @@
               <div class="well">
 
                 <div class="add-image">
-                  <photo-crop [imageMeta]="_content.image" (saved)="onImageSaved($event)"></photo-crop>
+                  <photo-crop [imageMeta]="content.image" (saved)="onImageSaved($event)"></photo-crop>
                 </div>
 
                 <div class="form-group" [class.has-error]="!image.valid && image.touched" data-toggle="popover" data-placement="right" title="Image Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
 
                   <label for="imageUrl">Image URL</label>
-                  <input type="text" id="imageUrl" class="form-control" [(ngModel)]="_content.image.url" (change)="checkChanged()" #image="ngModel" name="imageUrl">
+                  <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image.url" (change)="checkChanged()" #image="ngModel" name="imageUrl">
                   <div class="col-xs-5">
                     <label for="merlinId">Merlin ID</label>
-                    <input type="text" id="merlinId" class="form-control" [(ngModel)]="_content.image.merlinId" (change)="checkChanged()" #image="ngModel" name="merlinId">
+                    <input type="text" id="merlinId" class="form-control" [(ngModel)]="content.image.merlinId" (change)="checkChanged()" #image="ngModel" name="merlinId">
                   </div>
                   <div class="col-xs-2 text-center">
                     <label><br>or</label>
                   </div>
                   <div class="col-xs-5">
                     <label for="brightcoveId">Brightcove ID</label>
-                    <input type="text" id="brightcoveId" class="form-control" [(ngModel)]="_content.image.brightcoveId" (change)="checkChanged()" #image="ngModel" name="brightcoveId">
+                    <input type="text" id="brightcoveId" class="form-control" [(ngModel)]="content.image.brightcoveId" (change)="checkChanged()" #image="ngModel" name="brightcoveId">
                   </div>
                   <label for="imageCode">Image source code</label>
-                  <input type="text" id="imageCode" class="form-control" [(ngModel)]="_content.image.code" (change)="checkChanged()" #image="ngModel" name="imageCode">
+                  <input type="text" id="imageCode" class="form-control" [(ngModel)]="content.image.code" (change)="checkChanged()" #image="ngModel" name="imageCode">
                   <label for="imageUtm">Image UTM code</label>
-                  <input type="text" id="imageUtm" class="form-control" [(ngModel)]="_content.image.utm" (change)="checkChanged()" #image="ngModel" name="imageUtm">           
+                  <input type="text" id="imageUtm" class="form-control" [(ngModel)]="content.image.utm" (change)="checkChanged()" #image="ngModel" name="imageUtm">           
                 </div>
               </div>
             </div>
@@ -68,24 +68,24 @@
             <div role="tabpanel" class="tab-pane fade" id="callout">
               <div class="well">
                 <div class="add-image">
-                  <photo-crop [appealId]="appealId" [imageMeta]="_content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>
+                  <photo-crop [appealId]="appealId" [imageMeta]="content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>
                 </div>
                 <div class="form-group" [class.has-error]="!callout.valid && callout.touched" data-toggle="popover" data-placement="right" title="Callout Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
                   <label for="calloutImageUrl">Callout image URL</label>
-                  <input type="text" id="calloutImageUrl" class="form-control" [(ngModel)]="_content.callout.image.url" (change)="checkChanged()" #callout="ngModel" name="calloutImageUrl">
+                  <input type="text" id="calloutImageUrl" class="form-control" [(ngModel)]="content.callout.image.url" (change)="checkChanged()" #callout="ngModel" name="calloutImageUrl">
 
                   <label for="callout-headline">Callout headline</label>
-                  <ckeditor id="callout-headline" [(ngModel)]="_content.callout.headline" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutHeadline"></ckeditor>
+                  <ckeditor id="callout-headline" [(ngModel)]="content.callout.headline" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutHeadline"></ckeditor>
 
                   <label for="callout-body">Callout body</label>
-                  <ckeditor id="callout-body" [(ngModel)]="_content.callout.body" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutBody"></ckeditor>
+                  <ckeditor id="callout-body" [(ngModel)]="content.callout.body" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutBody"></ckeditor>
 
                   <label for="imageUrl">URL the callout will link to</label>
-                  <input type="text" id="calloutUrl" class="form-control" [(ngModel)]="_content.callout.url" (change)="checkChanged()" #callout="ngModel" name="calloutUrl">
+                  <input type="text" id="calloutUrl" class="form-control" [(ngModel)]="content.callout.url" (change)="checkChanged()" #callout="ngModel" name="calloutUrl">
                   <label for="calloutCode">Callout source code</label>
-                  <input type="text" id="calloutCode" class="form-control" [(ngModel)]="_content.callout.code" (change)="checkChanged()" #callout="ngModel" name="calloutCode">
+                  <input type="text" id="calloutCode" class="form-control" [(ngModel)]="content.callout.code" (change)="checkChanged()" #callout="ngModel" name="calloutCode">
                   <label for="calloutUtm">Callout UTM code</label>
-                  <input type="text" id="calloutUtm" class="form-control" [(ngModel)]="_content.callout.utm" (change)="checkChanged()" #callout="ngModel" name="calloutUtm">           
+                  <input type="text" id="calloutUtm" class="form-control" [(ngModel)]="content.callout.utm" (change)="checkChanged()" #callout="ngModel" name="calloutUtm">           
                 </div>
               </div>
             </div>
@@ -95,7 +95,7 @@
       
         <div class="form-group" [class.has-error]="!url.valid && url.touched" data-toggle="popover" data-placement="right" title="Donation Form Link" data-content="Paste the link for the desired donation form to be linked for all of the donation links outside the body and PS copy. <br><br>And do not forget to remove any source and subsource codes from the link.">
           <label for="url">Default donation form link</label>
-          <input type="text" id="url" class="form-control" [(ngModel)]="_content.url" (change)="checkChanged()" #url="ngModel" name="url">
+          <input type="text" id="url" class="form-control" [(ngModel)]="content.url" (change)="checkChanged()" #url="ngModel" name="url">
         </div>
 
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>

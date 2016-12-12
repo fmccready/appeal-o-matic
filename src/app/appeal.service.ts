@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs/Rx';
 import { Appeal, AppealInfo } from './models/appeal';
 
 import * as io from "socket.io-client";
+import * as _ from "lodash";
 
 interface IAppealsOperation extends Function {
   (appeals: Appeal[]): Appeal[];
@@ -16,7 +17,8 @@ export class AppealService {
   private _imageUrl = 'http://' + window.location.hostname + ':3000/image-upload';
   public _appeals$: BehaviorSubject<Appeal[]> = new BehaviorSubject([]);
   private appeals:Appeal[];
-  public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject({});
+  public currentAppeal$: BehaviorSubject<any> = new BehaviorSubject(undefined);
+  private _currentAppeal;
   private currentAppealId: string;
   private socket = io.connect('http://' + window.location.hostname + ':5000');
   constructor(private http: Http) {
@@ -73,13 +75,19 @@ export class AppealService {
     this.currentAppealId = appealId;
     if (this.appeals){
       for (let i = 0; i < this.appeals.length; i++) {
-        if (this.appeals[i]._id === appealId) {        
+        if (this.appeals[i]._id === appealId) {
+          this._currentAppeal = _.cloneDeep(this.appeals[i]);
           this.currentAppeal$.next(this.appeals[i]);
         }
       }
     }
   }
   
+  updateCurrentAppeal(update){
+    this._currentAppeal = update;
+    this.currentAppeal$.next(this._currentAppeal);
+  }
+
   getCurrentAppeal(){
     return Observable.from(this.currentAppeal$);
   }

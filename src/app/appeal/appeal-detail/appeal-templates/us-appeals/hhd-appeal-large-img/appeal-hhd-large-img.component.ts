@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs/Rx';
 
@@ -6,9 +6,11 @@ import { AppealContent, AppealCode, Appeal } from '../../../../../models/appeal'
 import { Campaign } from '../../../../../models/campaign';
 import { CampaignService } from '../../../../../campaign.service';
 import { PreviewService } from '../../../../../preview.service';
-
+import { AppealService } from '../../../../../appeal.service';
 import { PlainTextPipe } from '../../../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../../../remove-html.pipe';
+
+import * as _ from 'lodash';
 
 declare var $: any;
 
@@ -21,88 +23,94 @@ interface JQuery {
   templateUrl: 'appeal-hhd-large-img.component.html',
   styleUrls: ['appeal-hhd-large-img.component.css']
 })
-export class HHDLargeAppealComponent implements OnChanges {
+export class HHDLargeAppealComponent {
   preview: any;
   private linkCount: any = {};
   private textLinkCount: any = {};
   private version: any = {};
-  private appeal: Appeal = new Appeal();
-  constructor(private campaignService: CampaignService, private previewService: PreviewService) {
+  private appeal: Appeal;
+  private _appealSub$;
+
+  private htmlBody;
+  private plainBody;
+  private htmlPS;
+  private plainPS;
+
+  constructor(private campaignService: CampaignService, private previewService: PreviewService, private appealService: AppealService) {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
-    this.appeal.content = new AppealContent();
-    this.appeal.codes = new AppealCode();
-    this.appeal.content.image.code = '';
-    this.appeal.content.image.url = '';
-    this.appeal.content.image.utm = '';
+    this._appealSub$ = this.appealService.currentAppeal$;
+    this._appealSub$.subscribe(data => {
+      if (data){
+        this.appeal = data;
+        this.htmlPS = document.createElement('p');
+        this.plainPS = document.createElement('p');
+        this.htmlBody = _.clone(this.appeal.content.body);
+        this.plainBody = _.clone(this.appeal.content.body);
+        this.htmlPS.innerHTML = _.clone(this.appeal.content.ps);
+        this.plainPS.innerHTML = _.clone(this.appeal.content.ps);
+        this.htmlBody = this.htmlBody.replace(/(&nbsp;)$/g, '');
+        this.plainBody = this.plainBody.replace(/(&nbsp;)$/g, '');
+        //this.htmlPS = this.htmlPS.replace(/(&nbsp;)$/g, '');
+        //this.plainPS = this.plainPS.replace(/(&nbsp;)$/g, '');
+        this.generateBody();
+      }
+    });
   }
-
 
   @ViewChild('htmlVersion') htmlVersion: ElementRef;
   @ViewChild('plainVersion') plainVersion: ElementRef;
-  @ViewChild('appealBody') appealBody: ElementRef;
-  @ViewChild('appealPS') appealPS: ElementRef;
-  @ViewChild('plainBody') plainBody: ElementRef;
-  @ViewChild('plainHeadline') plainHeadline: ElementRef;
-  @ViewChild('plainPS') plainPS: ElementRef;
+  
   generateBody() {
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.version = {};
 
     var self = this;
-    var content = this.appeal.content;
-    if (content) {
-      if (this.appeal.info.campaign) {
-        this.setVersion();
-        if (content.hasOwnProperty('body')) {
-          this.appealBody.nativeElement.innerHTML = content.body;
-          this.plainBody.nativeElement.innerHTML = content.body;
-          this.plainHeadline.nativeElement.innerHTML = content.headline;
-          $(this.appealBody.nativeElement)
-            .find('a').each(function() {
-              let url = $(this).attr('href');
-              url = self.addCodes(url, 'TL', 'html');
-              $(this).attr('href', url);
-              $(this).css({
-                'color': '#00529c',
-                'textDecoration': 'none',
-                'fontWeight': 'bold'
-              });
-            });
-          $(this.plainBody.nativeElement)
-            .find('a').each(function() {
-              let url = $(this).attr('href');
-              url = self.addCodes(url, 'TL', 'plain');
-              $(this).attr('href', url);
-            });
-          this.plainBody.nativeElement.innerHTML = new PlainTextPipe().transform(this.plainBody.nativeElement.innerHTML);
-        }
+    
+    if (this.appeal.info.campaign) {
+      this.setVersion();
+      $(this.htmlBody)
+        .find('a').each(function() {
+          let url = $(this).attr('href');
+          url = self.addCodes(url, 'TL', 'html');
+          $(this).attr('href', url);
+          $(this).css({
+            'color': '#00529c',
+            'textDecoration': 'none',
+            'fontWeight': 'bold'
+          });
+        });
+      $(this.plainBody)
+        .find('a').each(function() {
+          let url = $(this).attr('href');
+          url = self.addCodes(url, 'TL', 'plain');
+          $(this).attr('href', url);
+        });
+      this.plainBody = new PlainTextPipe().transform(this.plainBody);
 
-        if (content.hasOwnProperty('ps')) {
-          this.appealPS.nativeElement.innerHTML = content.ps;
-          this.plainPS.nativeElement.innerHTML = content.ps;
-          $(this.appealPS.nativeElement)
-            .find('a').each(function() {
-              var url = $(this).attr('href');
-              url = self.addCodes(url, 'TL', 'html');
-              $(this).attr('href', url);
-              $(this).css({
-                'color': '#00529c',
-                'textDecoration': 'none',
-                'fontWeight': 'bold'
-              });
+      if (this.appeal.content.hasOwnProperty('ps')) {
+        $(this.htmlPS)
+          .find('a').each(function() {
+            var url = $(this).attr('href');
+            url = self.addCodes(url, 'TL', 'html');
+            $(this).attr('href', url);
+            $(this).css({
+              'color': '#00529c',
+              'textDecoration': 'none',
+              'fontWeight': 'bold'
             });
-          $(this.plainPS.nativeElement)
-            .find('a').each(function() {
-              let url = $(this).attr('href');
-              url = self.addCodes(url, 'TL', 'plain');
-              $(this).attr('href', url);
-            });
-          this.plainPS.nativeElement.innerHTML = new PlainTextPipe().transform(this.plainPS.nativeElement.innerHTML);
-        }
+          });
+        $(this.plainPS)
+          .find('a').each(function() {
+            let url = $(this).attr('href');
+            url = self.addCodes(url, 'TL', 'plain');
+            $(this).attr('href', url);
+          });
+        this.plainPS = new PlainTextPipe().transform(this.plainPS.innerHTML);
       }
     }
+    
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
   }
@@ -234,20 +242,15 @@ export class HHDLargeAppealComponent implements OnChanges {
     return url;
   }
 
-  @Input()
-  set appealPreview(appeal: Appeal) {
-    this.appeal = appeal;
-    this.generateBody();
-  }
-  get appealPreview(): Appeal {
-    return this.appeal;
-  }
   ngOnInit(){
-    this.previewService.appeal.subscribe(data => {this.appeal = data;this.generateBody();});
+
+    
   }
-  ngOnChanges(changes) {
-    this.appeal = changes.appealPreview.currentValue;
-  }
+  ngOnDestory(){
+    if (this._appealSub$){
+      this._appealSub$.unsubscribe();
+    }
+  };
 
   escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");

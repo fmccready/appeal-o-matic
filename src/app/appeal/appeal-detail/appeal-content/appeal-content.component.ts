@@ -17,28 +17,22 @@ interface JQuery {
   providers: [RestoreService]
 })
 export class AppealContentComponent implements OnInit {
+  @Output() updated = new EventEmitter<AppealContent>();
   @Output() saved = new EventEmitter<AppealContent>();
   @Output() canceled = new EventEmitter<AppealContent>();
   @Output() imageSaved = new EventEmitter<any>();
   @Output() calloutSaved = new EventEmitter<any>();
 
   private changed = false;
-
-  private _content: AppealContent;
+  private _appealId;
 
   constructor(private restoreService: RestoreService<AppealContent>) {
   }
 
   checkChanged(){
-    if (_.isEqual(this.content, this._content)){
-      this.changed = false;
-    }
-    else {
-      this.changed = true
-    };
+    this.changed = this.restoreService.isChanged();
   }
 
-  private _appealId;
   @Input()
   set appealId(id){
     this._appealId = id;
@@ -49,24 +43,26 @@ export class AppealContentComponent implements OnInit {
   }
   @Input()
   set content(data: AppealContent){
-    this._content = data;
+    /*
     if (!this._content.callout){
       this._content.callout = new AppealCallout();
     }
+    */
     this.restoreService.setItem(data);
+    
   }
   get content(): AppealContent {
     return this.restoreService.getItem();
   }
 
   save() {
-    this.restoreService.setItem(this._content);
-    this.saved.emit(this._content);
+    this.restoreService.setItem(this.content);
+    this.saved.emit(this.content);
     this.checkChanged();
   }
   cancel() {
-    this._content = this.restoreService.restoreItem();
-    this.canceled.emit(this._content);
+    this.restoreService.restoreItem();
+    this.canceled.emit(this.content);
   }
   onImageSaved(data){
     this.imageSaved.emit(data);
@@ -76,7 +72,6 @@ export class AppealContentComponent implements OnInit {
   }
 
   ngOnInit() {
-    var self = this;
     $(function () {
       $('[data-toggle="popover"]').popover({trigger: 'hover', html: true});
     });

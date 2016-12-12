@@ -56,6 +56,11 @@ export class AppealDetailComponent implements OnInit {
     this.appeal.content = data;
     this.previewService.appeal.next(this.appeal);
   }
+  onContentUpdated(data){
+    console.log(data);
+    this.appeal.content = data;
+    this.appealService.updateCurrentAppeal(this.appeal);
+  }
 
   onCodesSaved(data) {
     this.appeal.codes = data;
@@ -134,8 +139,7 @@ export class AppealDetailComponent implements OnInit {
       console.warn('A subscription is being made to _currentAppeal$');
       this._currentAppeal$ = this.appealService.getCurrentAppeal();
       this._appealSub = this._currentAppeal$.subscribe(data => {
-        if (data.info){
-          console.log(data);
+        if (data){
           this.appeal = data;
           if (!this.template){
             this.template = data.info.template;
