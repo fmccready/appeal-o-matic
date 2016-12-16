@@ -15,21 +15,21 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade" id="copy">
               <div class="well">
-                <div class="form-group" [class.has-error]="!headline.valid && headline.touched" data-toggle="popover" data-placement="right" title="Headline" data-content="Paste in the headline here.">
+                <div class="form-group" data-toggle="popover" data-placement="right" title="Headline" data-content="Paste in the headline here.">
                   <label for="headline">Headline</label>
-                  <ckeditor id="headline" [(ngModel)]="content.headline" [config]="{height: 80}" (change)="checkChanged()" #headline="ngModel" name="headline"></ckeditor>
+                  <ckeditor id="headline" [(ngModel)]="content.body[0]" [config]="{height: 80}" (change)="checkChanged()" #headline="ngModel" name="headline"></ckeditor>
                 </div>
-                <div class="form-group" [class.has-error]="!body.valid && body.touched" data-toggle="popover" data-placement="right" title="Body" data-content="Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.">
+                <div class="form-group" data-toggle="popover" data-placement="right" title="Body" data-content="Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.">
                   <label for="appeal-body">Body</label>
-                  <ckeditor id="appeal-body" [(ngModel)]="content.body" [config]="{resize_enabled:true, resize_dir:'vertical'}" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
+                  <ckeditor id="appeal-body" [(ngModel)]="content.body[1]" [config]="{resize_enabled:true, resize_dir:'vertical'}" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
                 </div>
-                <div class="form-group" [class.has-error]="!customSignature.valid && customSignature.touched" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
+                <div class="form-group" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
                   <label for="appeal-signature">Custom signature (optional)</label>
-                  <ckeditor id="appeal-signature" [(ngModel)]="content.customSignature" [config]="{height: 80}" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
+                  <ckeditor id="appeal-signature" [(ngModel)]="content.body[2]" [config]="{height: 80}" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
                 </div>
-                <div class="form-group" [class.has-error]="!ps.valid && ps.touched" data-toggle="popover" data-placement="right" title="PS" data-content="Paste in the PS copy here. <br><br>Include the letters 'PS'.">
+                <div class="form-group" data-toggle="popover" data-placement="right" title="PS" data-content="Paste in the PS copy here. <br><br>Include the letters 'PS'.">
                   <label for="appeal-ps">PS (optional)</label>
-                  <ckeditor id="appeal-ps" [(ngModel)]="content.ps" [config]="{height: 80}" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
+                  <ckeditor id="appeal-ps" [(ngModel)]="content.body[3]" [config]="{height: 80}" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
                 </div>
               </div>
             </div>
@@ -37,13 +37,16 @@
               <div class="well">
 
                 <div class="add-image">
-                  <photo-crop [imageMeta]="content.image" (saved)="onImageSaved($event)"></photo-crop>
+                  <photo-crop [imageMeta]="content.image[0]" (saved)="onImageSaved($event)"></photo-crop>
                 </div>
 
                 <div class="form-group" [class.has-error]="!image.valid && image.touched" data-toggle="popover" data-placement="right" title="Image Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
 
                   <label for="imageUrl">Image URL</label>
-                  <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image.url" (change)="checkChanged()" #image="ngModel" name="imageUrl">
+                  <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image[0].url" (change)="checkChanged()" #image="ngModel" name="imageUrl">
+                  <label for="imageLink">Image Link</label>
+                  <input type="text" id="imageLink" class="form-control" [(ngModel)]="content.image[0].link" (change)="checkChanged()" #image="ngModel" name="imageLink">
+
                   <div class="col-xs-5">
                     <label for="merlinId">Merlin ID</label>
                     <input type="text" id="merlinId" class="form-control" [(ngModel)]="content.image.merlinId" (change)="checkChanged()" #image="ngModel" name="merlinId">

@@ -8,42 +8,58 @@ export class PreviewService {
     {
       id:'standardAppeal',
       name: 'Standard',
-      country: 'United States'
+      country: 'United States',
+      text:2,
+      image:1
     },
     {
       id:'fastAppeal',
       name: 'US I58 Fast',
-      country: 'United States'
+      country: 'United States',
+      text:2,
+      image:1
     },
     {
       id:'hhdAppeal',
       name: 'US High Holy Days',
-      country: 'United States'
+      country: 'United States',
+      text:2,
+      image:1
     },
     {
       id:'hhdLargeAppeal',
       name: 'US High Holy Days - Large Image',
-      country: 'United States'
+      country: 'United States',
+      text:2,
+      image:1
     },
     {
       id:'canhhdAppeal',
       name: 'CAN High Holy Days',
-      country: 'Canada'
+      country: 'Canada',
+      text:2,
+      image:1
     },
     {
       id:'canhhdLargeAppeal',
       name: 'CAN High Holy Days - Large Image',
-      country: 'Canada'
+      country: 'Canada',
+      text:2,
+      image:1
     },
     {
       id:'canStandardAppeal',
       name: 'CAN Standard',
-      country: 'Canada'
+      country: 'Canada',
+      text:2,
+      image:1
     },
     {
       id:'canFastAppeal',
       name: 'CAN Fast',
-      country: 'Canada'
+      country: 'Canada',
+      text:2,
+      image:1
     },
   ];
   constructor() { }
@@ -52,4 +68,6 @@ export interface Template {
   id: string;
   name: string;
   country: string;
+  text: number;
+  image: number;
 }

@@ -56,11 +56,22 @@ export class AppealService {
   loadAppeals() {
     console.log('Making HTTP request, loading appeals...');
     this.http.get(this._appealUrl).map(this.extractData).subscribe(
+      
       data => {
+        let temp = new Appeal();
+        
         for (let d of data ){
+          console.log(Array.isArray(d.content.body));
+          if (!Array.isArray(d.content.body)){
+            d.content.body = [d.content.body];
+          }
+          if (!d.content.hasOwnProperty('callout')){
+            d.content.callout = temp.content.callout;
+          }
           if (d._id === this.currentAppealId){
             this.currentAppeal$.next(d);
           }
+          
         }
         this.appeals = data;
         this._appeals$.next(data);

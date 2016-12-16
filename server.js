@@ -31,7 +31,6 @@ app.use(allowCrossDomain);
 
 // Socket.io Setup
 io.on('connection', function(socket){
-  console.log('Client connected');
   socket.emit('connected', 'Connected');
   socket.on('addAppeal', function(data){
     socket.broadcast.emit('addAppeal', data);
@@ -43,7 +42,6 @@ io.on('connection', function(socket){
     socket.broadcast.emit('updateAppeal', data);
   })
   socket.on('disconnect', function(){
-    console.log('A client disconnected');
   });
 });
 http.listen(5000, () => {

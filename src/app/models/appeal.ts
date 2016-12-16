@@ -21,12 +21,10 @@ export class AppealInfo {
   groupName: string;
 }
 export class AppealContent {
-  headline: string = '';
   url: string = '';
-  body: string = '';
+  body: Array<string> = [''];
   callout: AppealCallout = new AppealCallout();
   customSignature: string = '';
-  ps: string = '';
   image: AppealImage = new AppealImage();
 }
 export class AppealCallout {
@@ -60,6 +58,7 @@ export class AppealSignoff {
 export class AppealImage {
   url: string = '';
   code: string = '';
+  link: string = '';
   utm: string = '';
   merlinId: string = '';
   brightcoveId: string = '';

@@ -5,6 +5,7 @@ var Group = require('./group.js');
 
 var imageSchema = new Schema({
       url: {type: String, default: ''},
+      link: {type: String, default: ''},
       code: {type: String, default: ''},
       utm: {type: String, default: ''},
       merlinId: {type: String, default: ''},
@@ -17,6 +18,15 @@ var imageSchema = new Schema({
       creditPlacement: {type: String, default: ''},
       creditColor: {type: String, default: ''},
       treatment: {type: String, default: ''}
+});
+
+var calloutSchema = new Schema({
+    headline: {type: String, default: ''},
+    url: {type: String, default: ''},
+    body: {type: String, default: ''},
+    image: imageSchema,
+    utm: {type: String, default: ''},
+    code: {type: String, default: ''}
 });
 
 var appealSchema = new Schema({
@@ -40,20 +50,11 @@ var appealSchema = new Schema({
     groupName: {type: String, default: ''}
   },
   content: {
-    headline: {type:String, default: ''},
     url: {type: String, default: ''},
-    body: {type: String, default: ''},
-    callout: {
-      headline: {type: String, default: ''},
-      url: {type: String, default: ''},
-      body: {type: String, default: ''},
-      image: imageSchema,
-      utm: {type: String, default: ''},
-      code: {type: String, default: ''}
-    },
+    body: [{type: String, default: ''}],
+    callout: calloutSchema,
     customSignature: {type: String, default: ''},
-    ps: {type: String, default: ''},
-    image: imageSchema,
+    image: [imageSchema],
   },
   codes: {
     utm_medium: {type:String , default: 'email'},
