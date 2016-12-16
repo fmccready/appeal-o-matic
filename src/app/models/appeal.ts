@@ -25,7 +25,7 @@ export class AppealContent {
   body: Array<string> = [''];
   callout: AppealCallout = new AppealCallout();
   customSignature: string = '';
-  image: AppealImage = new AppealImage();
+  image: Array<AppealImage> = [new AppealImage()];
 }
 export class AppealCallout {
   headline: string = '';

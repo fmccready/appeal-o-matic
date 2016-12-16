@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription, BehaviorSubject, Subject } from 'rxjs/Rx';
 
 import { AppealService } from '../../appeal.service';
-import { PreviewService } from '../../preview.service';
+import { PreviewService, Template } from '../../preview.service';
 import { Appeal } from '../../models/appeal';
 import { Settings } from '../../models/settings';
 
@@ -23,6 +23,7 @@ export class AppealDetailComponent implements OnInit {
   private _appealSub: Subscription;
   private _routeSub: Subscription;
   private _groupSub: Subscription;
+  private options: any;
 
   constructor(private appealService: AppealService, private route: ActivatedRoute, private router: Router, private previewService: PreviewService) {
     this.settings.campaign = false;
@@ -33,6 +34,7 @@ export class AppealDetailComponent implements OnInit {
   checkTemplate(tmpl){
     if (this.template !== tmpl){
       this.template = tmpl;
+      this.options = this.previewService.findTemplate(this.template);
       this.router.navigate(['/appeal', this.appeal._id, tmpl]);
     }
   }
@@ -59,7 +61,7 @@ export class AppealDetailComponent implements OnInit {
   onContentUpdated(data){
     console.log(data);
     this.appeal.content = data;
-    this.appealService.updateCurrentAppeal(this.appeal);
+    //this.appealService.updateCurrentAppeal(this.appeal);
   }
 
   onCodesSaved(data) {
@@ -97,7 +99,9 @@ export class AppealDetailComponent implements OnInit {
     image$.subscribe(
       data => {
         if (data.status === 200){
-          this.appeal.content.image.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id}.jpg?${Date.now()}`;
+          this.appeal.content.image.map(function(img, index){
+            return img.url = `http://digital.ifcj.org/appeal-images/${this.appeal._id + index}.jpg?${Date.now()}`;
+          });
           this.appealService.updateAppeal(this.appeal);
           this.previewService.appeal.next(this.appeal);
         }
@@ -143,6 +147,10 @@ export class AppealDetailComponent implements OnInit {
           this.appeal = data;
           if (!this.template){
             this.template = data.info.template;
+            console.log('this happened!!!!!!!!!!!!!!!!');
+            console.log(this.template);
+            this.options = this.previewService.findTemplate(this.template);
+            console.log(this.options);
           }
           else {
             this.checkTemplate(data.info.template);
@@ -157,7 +165,6 @@ export class AppealDetailComponent implements OnInit {
             this.groupSubscription(this.groupId);
           }
         }
-
       });
     }
   }

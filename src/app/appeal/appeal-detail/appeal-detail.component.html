@@ -1,7 +1,16 @@
 <div class="row">
   <div *ngIf="appeal?.info" class="col-xs-12 col-sm-6 col-md-3" id="controls">
     <app-appeal-info [info]="appeal.info" (saved)="onInfoSaved($event)" (canceled)="onInfoCanceled($event)"></app-appeal-info>
-    <app-appeal-content [appealId]="appeal._id" [content]="appeal.content" (updated)="onContentUpdated($event)" (imageSaved)="onImageSaved($event)" (calloutSaved)="onCalloutSaved($event)" (saved)="onContentSaved($event)" (canceled)="onContentCanceled($event)"></app-appeal-content>
+    <app-appeal-content 
+      [appealId]="appeal._id" 
+      [options]="options" 
+      [content]="appeal.content" 
+      (updated)="onContentUpdated($event)" 
+      (imageSaved)="onImageSaved($event)" 
+      (calloutSaved)="onCalloutSaved($event)" 
+      (saved)="onContentSaved($event)" 
+      (canceled)="onContentCanceled($event)">
+    </app-appeal-content>
     <app-appeal-codes [codes]="appeal.codes" (saved)="onCodesSaved($event)" (canceled)="onCodesCanceled($event)"></app-appeal-codes>
     <app-appeal-signoffs [signoffs]="appeal.signoffs" (saved)="onSignoffsSaved($event)" (canceled)="onSignoffsCanceled($event)"></app-appeal-signoffs>
     <app-appeal-notes [notes]="appeal.notes" (saved)="onNotesSaved($event)" (canceled)="onNotesCanceled($event)"></app-appeal-notes>

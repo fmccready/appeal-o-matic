@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { AppealContent, AppealCallout } from '../../../models/appeal';
 import { RestoreService } from '../../../restore.service';
+import { PreviewService } from '../../../preview.service';
 import { Template } from '../../../preview.service';
 import * as _ from 'lodash';
 
@@ -26,11 +27,12 @@ export class AppealContentComponent implements OnInit {
   private changed = false;
   private _appealId;
 
-  constructor(private restoreService: RestoreService<AppealContent>) {
+  constructor(private restoreService: RestoreService<AppealContent>, private previewService: PreviewService) {
   }
 
   checkChanged(){
     this.changed = this.restoreService.isChanged();
+    //this.updated.emit(this.content);
   }
 
   @Input()
@@ -53,6 +55,16 @@ export class AppealContentComponent implements OnInit {
   }
   get content(): AppealContent {
     return this.restoreService.getItem();
+  }
+
+  private _options;
+  @Input()
+  set options(data){
+    this._options = data;
+    console.log(this._options);
+  }
+  get options(){
+    return this._options;
   }
 
   save() {

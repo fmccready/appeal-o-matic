@@ -14,11 +14,14 @@
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade" id="copy">
-              <div class="well">
-                <div class="form-group" data-toggle="popover" data-placement="right" title="Headline" data-content="Paste in the headline here.">
-                  <label for="headline">Headline</label>
-                  <ckeditor id="headline" [(ngModel)]="content.body[0]" [config]="{height: 80}" (change)="checkChanged()" #headline="ngModel" name="headline"></ckeditor>
-                </div>
+              <div class="well" *ngIf="options">
+                <template ngFor let-body [ngForOf]="options.body" let-i="index">
+                  <div class="form-group" data-toggle="popover" data-placement="right" title="Headline" data-content="body.tooltip">
+                    <label for="headline">{{body.title}}</label>
+                    <ckeditor id="headline" [(ngModel)]="content.body[i]" [config]="body.config" (change)="checkChanged()" name="headline"></ckeditor>
+                  </div>
+                </template>
+<!--
                 <div class="form-group" data-toggle="popover" data-placement="right" title="Body" data-content="Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.">
                   <label for="appeal-body">Body</label>
                   <ckeditor id="appeal-body" [(ngModel)]="content.body[1]" [config]="{resize_enabled:true, resize_dir:'vertical'}" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
@@ -31,6 +34,7 @@
                   <label for="appeal-ps">PS (optional)</label>
                   <ckeditor id="appeal-ps" [(ngModel)]="content.body[3]" [config]="{height: 80}" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
                 </div>
+-->                
               </div>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="images">

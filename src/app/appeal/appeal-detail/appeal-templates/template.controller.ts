@@ -46,7 +46,8 @@ public generateBody(appeal) {
         });
         console.log(plain);
         plain.map((p) => {
-            p = new PlainTextPipe().transform(p.innerHTML);
+          console.log(p);
+            p = new PlainTextPipe().transform(p);
         });
       
 
