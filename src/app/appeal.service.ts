@@ -61,7 +61,6 @@ export class AppealService {
         let temp = new Appeal();
         
         for (let d of data ){
-          console.log(Array.isArray(d.content.body));
           if (!Array.isArray(d.content.body)){
             d.content.body = [d.content.body];
           }

@@ -147,10 +147,7 @@ export class AppealDetailComponent implements OnInit {
           this.appeal = data;
           if (!this.template){
             this.template = data.info.template;
-            console.log('this happened!!!!!!!!!!!!!!!!');
-            console.log(this.template);
             this.options = this.previewService.findTemplate(this.template);
-            console.log(this.options);
           }
           else {
             this.checkTemplate(data.info.template);

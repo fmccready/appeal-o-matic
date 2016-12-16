@@ -5,11 +5,9 @@ import { BehaviorSubject } from 'rxjs/Rx';
 export class PreviewService {
   public appeal: BehaviorSubject<Appeal> = new BehaviorSubject(new Appeal());
   public findTemplate(id:string){
-    console.log('something called findTemplate()');
     let opts;
     this.templates.map(function(t){
       if (t.id === id){
-        console.log(t.options);
         opts = t.options;
       }
     });
@@ -21,12 +19,37 @@ export class PreviewService {
       name: 'Standard',
       country: 'United States',
       options: {
-        body: [{
-          title: 'headline',
-          tooltip: 'Paste in the headline here.',
-          config: {height:80}
-        }],
-        image:1
+        body: [
+          {
+            title: 'Headline',
+            tooltip: 'Paste in the headline here.',
+            config: {height:80}
+          },
+          {
+            title: 'Body',
+            tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
+            config: {height:80}
+          },
+          {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80}
+          }
+        ],
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          },
+                    {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
     {
@@ -34,12 +57,33 @@ export class PreviewService {
       name: 'US I58 Fast',
       country: 'United States',
       options: {
-        body: [{
-          title: 'headline',
-          tooltip: 'Paste in the headline here.',
-          config: {height:80}
-        }],
-        image:1
+        body: [
+          {
+            title: 'Headline',
+            tooltip: 'Paste in the headline here.',
+            config: {height:80}
+          },
+          {
+            title: 'Body',
+            tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
+            config: {height:80}
+          },
+          {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80}
+          }
+        ],
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
     {
@@ -52,7 +96,12 @@ export class PreviewService {
           tooltip: 'Paste in the headline here.',
           config: {height:80}
         }],
-        image:1
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
     {
@@ -81,7 +130,12 @@ export class PreviewService {
             config: {height:80}
           }
         ],
-        image:1
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
     {
@@ -89,12 +143,33 @@ export class PreviewService {
       name: 'CAN High Holy Days',
       country: 'Canada',
       options:{
-        body: [{
-          title: 'headline',
-          tooltip: 'Paste in the headline here.',
-          config: {height:80}
-        }],
-        image:1
+        body: [
+          {
+            title: 'Headline',
+            tooltip: 'Paste in the headline here.',
+            config: {height:80}
+          },
+          {
+            title: 'Body',
+            tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
+            config: {height:80}
+          },
+          {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80}
+          }
+        ],
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
     {
@@ -102,12 +177,33 @@ export class PreviewService {
       name: 'CAN High Holy Days - Large Image',
       country: 'Canada',
       options: {
-        body: [{
-          title: 'headline',
-          tooltip: 'Paste in the headline here.',
-          config: {height:80}
-        }],
-        image:1
+        body: [
+          {
+            title: 'Headline',
+            tooltip: 'Paste in the headline here.',
+            config: {height:80}
+          },
+          {
+            title: 'Body',
+            tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
+            config: {height:80}
+          },
+          {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80}
+          }
+        ],
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
     {
@@ -115,12 +211,33 @@ export class PreviewService {
       name: 'CAN Standard',
       country: 'Canada',
       options: {
-        body: [{
-          title: 'headline',
-          tooltip: 'Paste in the headline here.',
-          config: {height:80}
-        }],
-        image:1
+        body: [
+          {
+            title: 'Headline',
+            tooltip: 'Paste in the headline here.',
+            config: {height:80}
+          },
+          {
+            title: 'Body',
+            tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
+            config: {height:80}
+          },
+          {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80}
+          }
+        ],
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
     {
@@ -128,12 +245,33 @@ export class PreviewService {
       name: 'CAN Fast',
       country: 'Canada',
       options: {
-        body: [{
-          title: 'headline',
-          tooltip: 'Paste in the headline here.',
-          config: {height:80}
-        }],
-        image:1
+        body: [
+          {
+            title: 'Headline',
+            tooltip: 'Paste in the headline here.',
+            config: {height:80}
+          },
+          {
+            title: 'Body',
+            tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
+            config: {height:80}
+          },
+          {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80}
+          }
+        ],
+        image: [
+          {
+            title: 'Main image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
+          }
+        ]
       }
     },
   ];
@@ -149,6 +287,11 @@ export interface Template {
       tooltip: string,
       config?: any
     }];
-    image: number;
+    image: [
+      {
+        title: string,
+        tooltip: string,
+      }
+    ]
   }
 }

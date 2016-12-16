@@ -21,56 +21,43 @@
                     <ckeditor id="headline" [(ngModel)]="content.body[i]" [config]="body.config" (change)="checkChanged()" name="headline"></ckeditor>
                   </div>
                 </template>
-<!--
-                <div class="form-group" data-toggle="popover" data-placement="right" title="Body" data-content="Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.">
-                  <label for="appeal-body">Body</label>
-                  <ckeditor id="appeal-body" [(ngModel)]="content.body[1]" [config]="{resize_enabled:true, resize_dir:'vertical'}" (change)="checkChanged()" #body="ngModel" name="body"></ckeditor>
-                </div>
-                <div class="form-group" data-toggle="popover" data-placement="right" title="Custom signature" data-content="Put a custom signature here. Leave blank for the standard signature.">
-                  <label for="appeal-signature">Custom signature (optional)</label>
-                  <ckeditor id="appeal-signature" [(ngModel)]="content.body[2]" [config]="{height: 80}" (change)="checkChanged()" #customSignature="ngModel" name="customSignature"></ckeditor>
-                </div>
-                <div class="form-group" data-toggle="popover" data-placement="right" title="PS" data-content="Paste in the PS copy here. <br><br>Include the letters 'PS'.">
-                  <label for="appeal-ps">PS (optional)</label>
-                  <ckeditor id="appeal-ps" [(ngModel)]="content.body[3]" [config]="{height: 80}" (change)="checkChanged()" #ps="ngModel" name="ps"></ckeditor>
-                </div>
--->                
               </div>
             </div>
+
             <div role="tabpanel" class="tab-pane fade" id="images">
-              <div class="well">
-
-                <div class="add-image">
-                  <photo-crop [imageMeta]="content.image[0]" (saved)="onImageSaved($event)"></photo-crop>
-                </div>
-
-                <div class="form-group" [class.has-error]="!image.valid && image.touched" data-toggle="popover" data-placement="right" title="Image Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
-
-                  <label for="imageUrl">Image URL</label>
-                  <input type="text" id="imageUrl" class="form-control" [(ngModel)]="content.image[0].url" (change)="checkChanged()" #image="ngModel" name="imageUrl">
-                  <label for="imageLink">Image Link</label>
-                  <input type="text" id="imageLink" class="form-control" [(ngModel)]="content.image[0].link" (change)="checkChanged()" #image="ngModel" name="imageLink">
-
-                  <div class="col-xs-5">
-                    <label for="merlinId">Merlin ID</label>
-                    <input type="text" id="merlinId" class="form-control" [(ngModel)]="content.image.merlinId" (change)="checkChanged()" #image="ngModel" name="merlinId">
+              <div class="well" *ngIf="options">
+                <template ngFor let-img [ngForOf]="options.image" let-i="index">
+                  <h3 class="text-center">{{img.title}}</h3>
+                  <div class="add-image">
+                    <photo-crop [imageMeta]="content.image[i]" (saved)="onImageSaved($event)"></photo-crop>
                   </div>
-                  <div class="col-xs-2 text-center">
-                    <label><br>or</label>
+                  <div class="form-group" data-toggle="popover" data-placement="right" title="Image Info" data-content="img.tooltip">
+                    <label [attr.for]="'imageUrl-' + i">Image URL</label>
+                    <input type="text" [attr.id]="'imageUrl-' + i" class="form-control" [(ngModel)]="content.image[i].url" (change)="checkChanged()" #image="ngModel" [name]="'imageUrl-' + i">
+                    <label [attr.for]="'imageLink-' + i">Image Link</label>
+                    <input type="text" [attr.id]="'imageLink-' + i" class="form-control" [(ngModel)]="content.image[i].link" (change)="checkChanged()" #image="ngModel" [name]="'imageLink-' + i">
+                    <div class="col-xs-5">
+                      <label [attr.for]="'merlinId-' + i">Merlin ID</label>
+                      <input type="text" [attr.id]="'merlinId-' + i" class="form-control" [(ngModel)]="content.image[i].merlinId" (change)="checkChanged()" #image="ngModel" [name]="'merlinId-' + i">
+                    </div>
+                    <div class="col-xs-2 text-center">
+                      <label><br>or</label>
+                    </div>
+                    <div class="col-xs-5">
+                      <label [attr.for]="'brightcoveId-' + i">Brightcove ID</label>
+                      <input type="text" [attr.id]="'brightcoveId-' + i" class="form-control" [(ngModel)]="content.image[i].brightcoveId" (change)="checkChanged()" #image="ngModel" [name]="'brightcoveId' + i">
+                    </div>
+                    <label [attr.for]="'imageCode-' + i">Image source code</label>
+                    <input type="text" [attr.id]="'imageCode-' + i" class="form-control" [(ngModel)]="content.image[i].code" (change)="checkChanged()" #image="ngModel" [name]="'imageCode-' + i">
+                    <label [attr.for]="'imageUtm-' + i">Image UTM code</label>
+                    <input type="text" [attr.id]="'imageUtm-' + i" class="form-control" [(ngModel)]="content.image[i].utm" (change)="checkChanged()" #image="ngModel" [name]="'imageUtm-' + i">           
                   </div>
-                  <div class="col-xs-5">
-                    <label for="brightcoveId">Brightcove ID</label>
-                    <input type="text" id="brightcoveId" class="form-control" [(ngModel)]="content.image.brightcoveId" (change)="checkChanged()" #image="ngModel" name="brightcoveId">
-                  </div>
-                  <label for="imageCode">Image source code</label>
-                  <input type="text" id="imageCode" class="form-control" [(ngModel)]="content.image.code" (change)="checkChanged()" #image="ngModel" name="imageCode">
-                  <label for="imageUtm">Image UTM code</label>
-                  <input type="text" id="imageUtm" class="form-control" [(ngModel)]="content.image.utm" (change)="checkChanged()" #image="ngModel" name="imageUtm">           
-                </div>
+                  <template [ngIf]="options.image.length > 1">
+                    <hr>
+                  </template>
+                </template>
               </div>
             </div>
-
-
 
             <div role="tabpanel" class="tab-pane fade" id="callout">
               <div class="well">

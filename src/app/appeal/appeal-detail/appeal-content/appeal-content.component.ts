@@ -38,7 +38,6 @@ export class AppealContentComponent implements OnInit {
   @Input()
   set appealId(id){
     this._appealId = id;
-    console.log(id);
   };
   get appealId(){
     return this._appealId;
@@ -61,7 +60,6 @@ export class AppealContentComponent implements OnInit {
   @Input()
   set options(data){
     this._options = data;
-    console.log(this._options);
   }
   get options(){
     return this._options;

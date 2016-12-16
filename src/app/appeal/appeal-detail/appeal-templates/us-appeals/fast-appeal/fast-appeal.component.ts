@@ -1,14 +1,15 @@
-import { Component, OnChanges, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 
 import { Observable, Subject } from 'rxjs/Rx';
 
 import { AppealContent, AppealCode, Appeal } from '../../../../../models/appeal';
 import { Campaign } from '../../../../../models/campaign';
 import { CampaignService } from '../../../../../campaign.service';
-import { PreviewService } from '../../../../../preview.service';
-
+import { AppealService } from '../../../../../appeal.service';
 import { PlainTextPipe } from '../../../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../../../remove-html.pipe';
+
+import { TemplateCodes } from '../../template.controller';
 
 declare var $: any;
 
@@ -21,7 +22,7 @@ interface JQuery {
   templateUrl: 'fast-appeal.component.html',
   styleUrls: ['fast-appeal.component.css']
 })
-export class FastAppealComponent implements OnChanges {
+export class FastAppealComponent {
   preview: any;
   private version: any = {};
   private appeal: Appeal;

@@ -72,15 +72,15 @@
                 <td>
                 <table cellpadding="0" cellspacing="0" border="0" width="650">
                 <tr><td width="100%">
-                <center><a href="{{addUtmOnly('http://www.ifcj.org/site/MessageViewer', 'vib', 'html')}}" style="font-family: Arial, Helvetica, sans-serif; font-size: .75em; color: #464646;">View in Browser</a><br /></center>
+                <center><a href="{{template.addUtmOnly('http://www.ifcj.org/site/MessageViewer', 'vib', 'html')}}" style="font-family: Arial, Helvetica, sans-serif; font-size: .75em; color: #464646;">View in Browser</a><br /></center>
 
-                <a href="{{addCodes('http://www.ifcj.org/', {src: 'EA', utm: 'logo'}, 'html')}}"><img align="left" src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-header-logo-062116.jpg" id="top-logo" style="border: 0px; float:left;" /></a>
+                <a href="{{template.addCodes('http://www.ifcj.org/', {src: 'EA', utm: 'logo'}, 'html')}}"><img align="left" src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-header-logo-062116.jpg" id="top-logo" style="border: 0px; float:left;" /></a>
                 <br />
-                <a href="{{addCodes(appeal.content.url, {src: 'HL1', utm: 'top-donate-now-button'}, 'html')}}"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg" align="right" style="float: right;" /></a><br /><br />
+                <a href="{{template.addCodes(appeal.content.url, {src: 'HL1', utm: 'top-donate-now-button'}, 'html')}}"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg" align="right" style="float: right;" /></a><br /><br />
 	            </td>
             </tr>
 			<tr><td bgcolor="#adcd74" style="height: 5px; padding: 0px; margin: 0px;"></td></tr>
-            <tr><td align="center" bgcolor="#00529c" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="{{addCodes(appeal.content.url, {src: 'TL1', utm: 'text-link-1'}, 'html')}}"><span [innerHTML]="body.html[0]" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #ffffff; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
+            <tr><td align="center" bgcolor="#00529c" style="padding: 5px 0px 5px 0px; margin: 0px;"><a style="text-decoration:none;" href="{{template.addCodes(appeal.content.url, {src: 'TL1', utm: 'text-link-1'}, 'html')}}"><span [innerHTML]="body.html[0]" style="font-family: Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif; font-size: 40px; color: #ffffff; text-transform: uppercase; font-weight:600; text-decoration:none; line-height:40px;"></span>
             </a>
   </td></tr></table>
 
@@ -89,7 +89,7 @@
                 <td style="padding: 20px 0px 0px 0px; margin:0;">
                     <table align="right" cellpadding="0" cellspacing="0" style="margin: 0px; width:330px">
 					  <tr>
-						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="{{addCodes(appeal.content.url, {src: appeal.content.image[0].code, utm: appeal.content.image[0].utm}, 'html')}}"><img [src]="appeal.content.image[0].url" alt="Donate Now"></a></td>
+						<td align="right" width="350px" style="margin:0px; padding: 0px;"><a href="{{template.addCodes(appeal.content.url, {src: appeal.content.image[0].code, utm: appeal.content.image[0].utm}, 'html')}}"><img [src]="appeal.content.image[0].url" alt="Donate Now"></a></td>
 					  </tr>
 
                         <tr><td bgcolor="#ffffff" colspan="2" style="height: 20px;"></td></tr>
@@ -113,7 +113,7 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
 <p [innerHTML]="body.html[3]" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 
  <p align="center">
- <a href="{{addCodes(appeal.content.url, {src: 'BN1', utm: 'button-link-1'}, 'html')}}"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg"/></a>
+ <a href="{{template.addCodes(appeal.content.url, {src: 'BN1', utm: 'button-link-1'}, 'html')}}"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/ea-patw-top-donate.jpg"/></a>
                 </p>
               </td>
             </tr>
@@ -126,9 +126,9 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
                 <td style="color: #00529c;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif; padding-top: 20px;">
                     <center>
                         <p>
-                          <a href="{{addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'html')}}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Donate&nbsp;Now</a> |
-                          <a href="{{addCodes('http://www.ifcj.org/who-we-are/about-ifcj.html', {src: 'FT2', utm: 'footer-text-about'}, 'html') }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">About&nbsp;<i>The&nbsp;Fellowship</i></a> |
-                          <a href="{{addCodes('http://www.ifcj.org/who-we-are/contact-us.html', {src: 'FT3', utm: 'footer-text-contact'}, 'html') }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Contact&nbsp;Us</a> |
+                          <a href="{{template.addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'html')}}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Donate&nbsp;Now</a> |
+                          <a href="{{template.addCodes('http://www.ifcj.org/who-we-are/about-ifcj.html', {src: 'FT2', utm: 'footer-text-about'}, 'html') }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">About&nbsp;<i>The&nbsp;Fellowship</i></a> |
+                          <a href="{{template.addCodes('http://www.ifcj.org/who-we-are/contact-us.html', {src: 'FT3', utm: 'footer-text-contact'}, 'html') }}" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Contact&nbsp;Us</a> |
                             <a href="http://fellowship.ifcj.org/site/TellAFriend" style="color: #00529c;text-decoration: none;font-family: 'Times New Roman', Cambria, 'Hoefler Text', 'Liberation Serif', Times, serif;font-size: 1.5em;">Tell&nbsp;a&nbsp;Friend</a><br /><br /></p>
                             <a href="https://www.facebook.com/FellowshipFan"><img src="http://www.ifcj.org/ifcj-11/images/2013-newsletter/fb-page-lg.png" id="social-icons-footer" style="border: 0px;" /></a>
 
@@ -144,7 +144,7 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
                             <a href="https://sealinfo.thawte.com/thawtesplash?form_file=fdf/thawtesplash.fdf&dn=SECURE.IFCJ.ORG&lang=en"><img src="https://secure2.convio.net/ifcj/images/content/pagebuilder/email-thawte.png" id="social-icons-footer" style="border: 0px;"></a>
                             <p id="footer-sm-text" style="color: #464646; font-size: 1em; font-family: Arial, Helvetica, sans-serif;">30 North LaSalle Street, Suite 4300, Chicago, IL 60602-2584<br />
 
-                            800-486-8844 | <a href="{{addUtmOnly('http://www.ifcj.org/site/CO', 'unsubscribe', 'html') }}" style="color: #00529c; text-decoration: none;">Unsubscribe</a> | <a href="{{addUtmOnly('http://www.ifcj.org/privacy-policy.html', 'privacy-policy', 'html') }}" style="color: #00529c; text-decoration: none;">Privacy Policy</a><br /><br />
+                            800-486-8844 | <a href="{{template.addUtmOnly('http://www.ifcj.org/site/CO', 'unsubscribe', 'html') }}" style="color: #00529c; text-decoration: none;">Unsubscribe</a> | <a href="{{template.addUtmOnly('http://www.ifcj.org/privacy-policy.html', 'privacy-policy', 'html') }}" style="color: #00529c; text-decoration: none;">Privacy Policy</a><br /><br />
                             <em><em>The Fellowship</em></em> is a 501(c)(3) tax-exempt, non-profit organization<br />
                             &copy; [[S9:pattern:yyyy]] International Fellowship of Christians and Jews&trade;<br><br>
                             [[S51:reus_email_disclaimer]]
@@ -173,9 +173,9 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
 <div id="plainText" class="col-xs-12 col-md-8">
 <div #plainVersion>
   <template [ngIf]="appeal">
-<p body.plain[0]></p>
+<p [innerHtml]="body.plain[0]"></p>
 <br>
-{{addCodes(appeal.content.url, {src:'TL1', utm:'text-link-1'}, 'plain') }}
+{{template.addCodes(appeal.content.url, {src:'TL1', utm:'text-link-1'}, 'plain') }}
 <br><br>
 [[?xx::x[[S1:first_name]]x::Shalom::Shalom, [[S1:first_name]]]],
 <br><br>
@@ -197,13 +197,13 @@ Founder and President
 </p>
 <br><br><br>
 Donate Now<br>
-{{addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'plain') }}
+{{template.addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'plain') }}
 <br><br>
 About The Fellowship<br>
-{{addCodes('http://www.ifcj.org/who-we-are/about-ifcj.html', {src: 'FT2', utm: 'footer-text-about'}, 'plain') }}
+{{template.addCodes('http://www.ifcj.org/who-we-are/about-ifcj.html', {src: 'FT2', utm: 'footer-text-about'}, 'plain') }}
 <br><br>
 Contact Us<br>
-{{addCodes('http://www.ifcj.org/who-we-are/contact-us.html', {src: 'FT3', utm: 'footer-text-contact'}, 'plain') }}
+{{template.addCodes('http://www.ifcj.org/who-we-are/contact-us.html', {src: 'FT3', utm: 'footer-text-contact'}, 'plain') }}
 <br><br>
 Tell a Friend<br>
 http://fellowship.ifcj.org/site/TellAFriend<br>
@@ -225,10 +225,10 @@ https://smarticon.geotrust.com/smarticonprofile?Referer=https://secure2.convio.n
 800-486-8844<br>
 <br>
 Unsubscribe<br>
-{{addUtmOnly('http://www.ifcj.org/site/CO', 'unsubscribe', 'plain') }}
+{{template.addUtmOnly('http://www.ifcj.org/site/CO', 'unsubscribe', 'plain') }}
 <br><br>
 Privacy Policy<br>
-{{addUtmOnly('http://www.ifcj.org/privacy-policy.html', 'privacy-policy', 'plain') }}
+{{template.addUtmOnly('http://www.ifcj.org/privacy-policy.html', 'privacy-policy', 'plain') }}
 <br><br>
 The Fellowship is a 501(c)(3) tax-exempt, non-profit organization
 <br><br>

@@ -22,10 +22,8 @@ public generateBody(appeal) {
     let html = _.clone(appeal.content.body);
     let plain = _.clone(appeal.content.body);
     var self = this;
-
     
     if (appeal.info.campaign) {
-
       this.setVersion();
       $('this.html')
         .find('a').each(function() {
@@ -44,41 +42,13 @@ public generateBody(appeal) {
           url = self.addCodes(url, 'TL', 'plain');
           $(this).attr('href', url);
         });
-        console.log(plain);
         plain.map((p) => {
-          console.log(p);
             p = new PlainTextPipe().transform(p);
         });
-      
-
-
-/*
-      if (appeal.content.hasOwnProperty('ps')) {
-        $('this.htmlPS')
-          .find('a').each(function() {
-            var url = $(this).attr('href');
-            url = self.addCodes(url, 'TL', 'html');
-            $(this).attr('href', url);
-            $(this).css({
-              'color': '#00529c',
-              'textDecoration': 'none',
-              'fontWeight': 'bold'
-            });
-          });
-        $('this.plainPS')
-          .find('a').each(function() {
-            let url = $(this).attr('href');
-            url = self.addCodes(url, 'TL', 'plain');
-            $(this).attr('href', url);
-          });
-        plainPS = new PlainTextPipe().transform(plainPS.innerHTML);
-      }
-      */
     }
     
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
     this.textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
-    console.log({html, plain});
     return {html, plain};
   }
 

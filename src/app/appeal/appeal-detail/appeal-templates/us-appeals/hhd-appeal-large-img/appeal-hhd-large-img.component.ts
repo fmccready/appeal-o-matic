@@ -31,7 +31,6 @@ export class HHDLargeAppealComponent {
       if (data){
         this.appeal = data;
         this.body = this.template.generateBody(this.appeal);
-        console.log(this.body);
       }
     });
   }
