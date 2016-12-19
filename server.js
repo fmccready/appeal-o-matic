@@ -123,7 +123,7 @@ db.once('open', function(){
   app.post('/image-upload', function(req, res){
     var image = req.body.file;
     var id = req.body.id;
-    console.log(req.body);
+    console.log(req);
     fs.writeFile(`dist/assets/images/${req.body.id}.jpg`, image, 'binary', function(err){
       if (err){
         res.send(err);

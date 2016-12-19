@@ -62,6 +62,9 @@ export class AppealInfoComponent implements OnInit {
     }
     this.restoreService.setItem(data);
     this.checkChanged();
+    $(function () {
+      $('[data-toggle="popover"]').popover({trigger: 'hover', container: 'app-root', html: true});
+    });
   }
   get info(): AppealInfo {
     return this.restoreService.getItem();

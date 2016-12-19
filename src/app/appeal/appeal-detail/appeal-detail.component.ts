@@ -5,7 +5,7 @@ import { Observable, Subscription, BehaviorSubject, Subject } from 'rxjs/Rx';
 
 import { AppealService } from '../../appeal.service';
 import { PreviewService, Template } from '../../preview.service';
-import { Appeal } from '../../models/appeal';
+import { Appeal, AppealImage } from '../../models/appeal';
 import { Settings } from '../../models/settings';
 
 @Component({
@@ -34,8 +34,11 @@ export class AppealDetailComponent implements OnInit {
   checkTemplate(tmpl){
     if (this.template !== tmpl){
       this.template = tmpl;
-      this.options = this.previewService.findTemplate(this.template);
+      this.setOptions();
       this.router.navigate(['/appeal', this.appeal._id, tmpl]);
+    }
+    else {
+      this.setOptions();
     }
   }
   onInfoSaved(data) {
@@ -145,9 +148,12 @@ export class AppealDetailComponent implements OnInit {
       this._appealSub = this._currentAppeal$.subscribe(data => {
         if (data){
           this.appeal = data;
+          if (!Array.isArray(this.appeal.content.image)){
+            this.appeal.content.image = [this.appeal.content.image];
+          }
           if (!this.template){
             this.template = data.info.template;
-            this.options = this.previewService.findTemplate(this.template);
+            this.setOptions();
           }
           else {
             this.checkTemplate(data.info.template);
@@ -163,6 +169,17 @@ export class AppealDetailComponent implements OnInit {
           }
         }
       });
+    }
+  }
+
+  setOptions(){
+    this.options = this.previewService.findTemplate(this.template);
+    if(this.options.image.length > this.appeal.content.image.length) {
+      for (let i = 0; i < this.options.image.length; i++){
+        if(!this.appeal.content.image[i]){
+          this.appeal.content.image.push(new AppealImage());
+        }
+      }
     }
   }
 

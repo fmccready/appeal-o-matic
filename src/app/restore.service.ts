@@ -28,8 +28,7 @@ export class RestoreService<T> {
   }
 
   clone(item: T): T {
-    var temp = _.cloneDeep(item);
+    let temp = _.cloneDeep(item);
     return temp;
   }
-
 }

@@ -14,11 +14,11 @@
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade" id="copy">
-              <div class="well" *ngIf="options">
-                <template ngFor let-body [ngForOf]="options.body" let-i="index">
-                  <div class="form-group" data-toggle="popover" data-placement="right" title="Headline" data-content="body.tooltip">
-                    <label for="headline">{{body.title}}</label>
-                    <ckeditor id="headline" [(ngModel)]="content.body[i]" [config]="body.config" (change)="checkChanged()" name="headline"></ckeditor>
+              <div class="well" *ngIf="options && content">
+                <template ngFor let-body [ngForOf]="options.body" let-index="index">
+                  <div class="form-group" data-toggle="popover" data-placement="right" [attr.data-content]="body.tooltip">
+                    <label [attr.for]="'field-' + index">{{body.title}}</label>
+                    <ckeditor [attr.id]="'field-' + index" [(ngModel)]="content.body[index]" [config]="body.config" (change)="checkChanged()" [name]="'field-' + index"></ckeditor>
                   </div>
                 </template>
               </div>
@@ -29,9 +29,9 @@
                 <template ngFor let-img [ngForOf]="options.image" let-i="index">
                   <h3 class="text-center">{{img.title}}</h3>
                   <div class="add-image">
-                    <photo-crop [imageMeta]="content.image[i]" (saved)="onImageSaved($event)"></photo-crop>
+                    <photo-crop [imageMeta]="content.image[i]" [appealId]="appealId + i" (saved)="onImageSaved($event)"></photo-crop>
                   </div>
-                  <div class="form-group" data-toggle="popover" data-placement="right" title="Image Info" data-content="img.tooltip">
+                  <div class="form-group" data-toggle="popover" data-placement="right" title="Image Info" [attr.data-content]="img.tooltip">
                     <label [attr.for]="'imageUrl-' + i">Image URL</label>
                     <input type="text" [attr.id]="'imageUrl-' + i" class="form-control" [(ngModel)]="content.image[i].url" (change)="checkChanged()" #image="ngModel" [name]="'imageUrl-' + i">
                     <label [attr.for]="'imageLink-' + i">Image Link</label>
