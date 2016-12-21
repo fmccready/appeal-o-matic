@@ -29,7 +29,7 @@
                 <template ngFor let-img [ngForOf]="options.image" let-i="index">
                   <h3 class="text-center">{{img.title}}</h3>
                   <div class="add-image">
-                    <photo-crop [imageMeta]="content.image[i]" [appealId]="appealId + i" (saved)="onImageSaved($event)"></photo-crop>
+                    <photo-crop [imageMeta]="content.image[i]" [suffix]="'img-' + i" (saved)="onImageSaved($event)"></photo-crop>
                   </div>
                   <div class="form-group" data-toggle="popover" data-placement="right" title="Image Info" [attr.data-content]="img.tooltip">
                     <label [attr.for]="'imageUrl-' + i">Image URL</label>
@@ -62,7 +62,7 @@
             <div role="tabpanel" class="tab-pane fade" id="callout">
               <div class="well">
                 <div class="add-image">
-                  <photo-crop [appealId]="appealId" [imageMeta]="content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>
+                  <photo-crop [suffix]="callout" [imageMeta]="content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>
                 </div>
                 <div class="form-group" [class.has-error]="!callout.valid && callout.touched" data-toggle="popover" data-placement="right" title="Callout Info" data-content="Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add 'PH1' for an image or 'VID1' for a video. <br><br>In image UTM code add 'photo-link-1' for an image or 'video-link-1' for a video.">
                   <label for="calloutImageUrl">Callout image URL</label>

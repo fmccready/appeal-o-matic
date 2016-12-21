@@ -2,7 +2,6 @@
   <div *ngIf="appeal?.info" class="col-xs-12 col-sm-6 col-md-3" id="controls">
     <app-appeal-info [info]="appeal.info" (saved)="onInfoSaved($event)" (canceled)="onInfoCanceled($event)"></app-appeal-info>
     <app-appeal-content 
-      [appealId]="appeal._id" 
       [options]="options" 
       [content]="appeal.content" 
       (updated)="onContentUpdated($event)" 

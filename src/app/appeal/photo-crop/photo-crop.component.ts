@@ -4,6 +4,8 @@ import * as Cropper from 'cropperjs';
 import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 import { AppealImage as ImageMeta, Appeal } from '../../models/appeal';
 import { FileUploadComponent } from '../../file-upload/file-upload.component';
+import { AppealService } from '../../appeal.service';
+
 
 @Component({
   selector: 'photo-crop',
@@ -13,13 +15,13 @@ import { FileUploadComponent } from '../../file-upload/file-upload.component';
 export class PhotoCropComponent implements OnInit {
   @Output() saved = new EventEmitter<any>();
   private _imageMeta;
-  @Input() appealId;
   @Input()
   set imageMeta(data: ImageMeta){
     this._imageMeta = data;
     if (data){
       this.updateSize(data.treatment);
     }
+    console.log(this._imageMeta);
   };
   get imageMeta(){
     return this._imageMeta;
@@ -46,10 +48,38 @@ export class PhotoCropComponent implements OnInit {
       this.cropper.destroy();
     }
   }
+  private aspectRatio: number;
+  createCropper(fileName){
+    let aspectRatio = this.aspectRatio;
+    this.img.nativeElement.src = `http://${window.location.hostname}:3000/assets/images/` + fileName;
+    this.cropper = new Cropper(this.img.nativeElement, {
+      aspectRatio: this.aspectRatio,
+      crop: function(e) {
+        console.log(e.detail.x);
+        console.log(e.detail.y);
+        console.log(e.detail.width);
+        console.log(e.detail.height);
+        console.log(e.detail.rotate);
+        console.log(e.detail.scaleX);
+        console.log(e.detail.scaleY);
+      }
+    });
+  }
 
   private data: any;
-
-  constructor() {
+  private appealId;
+  private _suffix;
+  @Input()
+  set suffix(num){
+    this._suffix = num;
+  }
+  get suffix(){
+    return this._suffix;
+  }
+  constructor(private appealService: AppealService) {
+    this.appealService.getCurrentAppeal().subscribe(
+      data => this.appealId = data._id
+    );
   }
 
   private cropper: Cropper;
@@ -57,17 +87,6 @@ export class PhotoCropComponent implements OnInit {
 
   @ViewChild('imageFile') private imageFile;
   @ViewChild('img') private img;
-
-  /*
-      this.cropper = new Cropper(this.img.nativeElement, {
-        aspectRatio: 1,
-        scalable: false,
-      });
-
-    if (this.imageFile.nativeElement.files[0]) {
-      reader.readAsDataURL(this.imageFile.nativeElement.files[0]);
-    }
-  */
   
   private polaroidBackground: any;
   ngOnInit() {
@@ -78,21 +97,26 @@ export class PhotoCropComponent implements OnInit {
       this.polaroidBackground = document.createElement('img');
       this.polaroidBackground.src = this.getBase64Image(polaroid);
     }
-
   }
 
   updateSize(val){
     switch(val){
       case 'polaroid':
+        this.aspectRatio = 306/238;
         break;
       case 'small':
+        this.aspectRatio = 313/329;
         break;
       case 'large':
+        this.aspectRatio = 650/391;
         break;
       case 'calloutLarge':
+        this.aspectRatio = 650/150;
         break;
       case 'calloutSmall':
+        this.aspectRatio = 313/200;
       default:
+        this.aspectRatio = 313/329;
         break;
     }
   }
@@ -106,7 +130,11 @@ export class PhotoCropComponent implements OnInit {
     var dataURL = canvas.toDataURL('image/jpg', 1.0);
     return dataURL;
   }
-
+  saveImage(){
+    
+    //this.saved.emit();
+    //this.cancel();
+  }
 /*
   cropImage(data){
     if (this.imageMeta.credit || this.imageMeta.caption){
@@ -191,11 +219,5 @@ export class PhotoCropComponent implements OnInit {
   }
   */
 
-  saveImage(){
-    this.saved.emit((this.cropper.getCroppedCanvas({
-      width:326,
-      height:318
-    }).toDataURL('image/jpeg', 1)));
-    this.cancel();
-  }
+
 }

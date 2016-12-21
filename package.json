@@ -83,6 +83,7 @@
     "karma-chrome-launcher": "0.2.3",
     "karma-jasmine": "0.3.8",
     "karma-remap-istanbul": "^0.2.1",
+    "multer": "^1.2.1",
     "nodemon": "^1.10.0",
     "protractor": "3.3.0",
     "socket.io": "^1.5.1",

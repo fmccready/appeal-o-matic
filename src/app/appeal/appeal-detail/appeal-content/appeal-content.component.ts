@@ -36,13 +36,6 @@ export class AppealContentComponent implements OnInit {
   }
 
   @Input()
-  set appealId(id){
-    this._appealId = id;
-  };
-  get appealId(){
-    return this._appealId;
-  }
-  @Input()
   set content(data: AppealContent){
     /*
     if (!this._content.callout){

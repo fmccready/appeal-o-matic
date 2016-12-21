@@ -1,51 +1,65 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
+
 @Component({
   selector: 'file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
-  private _name: string;
+  private _fileName: string;
   private _imageUrl = 'http://' + window.location.hostname + ':3000/image-upload';
+  private loading = false;
+  private _suffix = '';
+
+  @Input()
+  set suffix(s){
+    this._suffix = s;
+  }
+  get suffix(){
+    return this._suffix;
+  }
+
+  @Input() 
+  set fileName(name){
+    this._fileName = name;
+  }
+  get fileName(){
+    return this._fileName;
+  }
+
+  @Output() onLoaded = new EventEmitter<any>();
 
   constructor(private http: Http) { }
   
   ngOnInit() {
   }
 
-
-  @Input() 
-  set fileName(name){
-    this._name = name;
-    console.log(name);
-  }
-  get fileName(){
-    return this._name;
-  }
-
-  @Output() uploaded = new EventEmitter<any>();
-
   fileChosen(input){
+    this.loading = true;
     var file = input.target.files[0];
-    let headers = new Headers({'Content-Type': 'image/jpg'});
+    let formData = new FormData();
+    let extension = file.name.match(/\.(jpg|png|gif|bmp|svg)$/);
+    let fileName = this._fileName + this._suffix + extension[0];
+    formData.append('image', file, fileName);
+    let headers = new Headers({
+      'Accept': 'application/json'
+    });
     let options = new RequestOptions({ headers: headers });
-    var data = {
-      file: file,
-      name: this._name
-    }
-    console.log(data);
-    let test = this.http.post(this._imageUrl, data, options);
-    test.subscribe(
-      data => console.log(data)
-    );
+    this.http.post(this._imageUrl, formData, options)
+      .subscribe(
+        data => {console.log(data); this.loading = false; this.onLoaded.emit(fileName)},
+        error => {console.log(error); this.loading = false;}
+      );
   }
+
   private extractData(res: Response) {
     let body = res.json();
     console.log(body.data);
     return body.data || { };
   }
+
   private handleError (error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {

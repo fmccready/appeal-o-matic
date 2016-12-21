@@ -43,7 +43,7 @@ public generateBody(appeal) {
           $(this).attr('href', url);
         });
         plain.map((p) => {
-            p = new PlainTextPipe().transform(p);
+          p = new PlainTextPipe().transform(p);
         });
     }
     

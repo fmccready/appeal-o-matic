@@ -13,19 +13,34 @@ var io = require('socket.io')(http);
 var Client = require('ftp');
 var creds = require('./ftp-options.js');
 var imagemagick = require('imagemagick');
+var multer = require('multer');
+
+var storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, __dirname + '/dist/assets/images')
+  },
+  filename: function(req, file, cb){
+    cb(null, file.originalname)
+  }
+});
+var upload = multer({ 
+  storage: storage
+});
 
 //Express Setup
 var app = express();
-app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 app.use(methodOverride());
 var allowCrossDomain = function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-
+    res.header('Access-Control-Allow-Headers', 'Content-type, X-Requested-With');
+    res.header('Access-Control-Allow-Credentials', true);
     next();
 };
+
 app.use(allowCrossDomain);
 
 
@@ -119,19 +134,30 @@ db.once('open', function(){
   */
   // All other routes
   app.use('/lib', express.static(__dirname + '/src/lib'));
+  app.all('/', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
+    res.header('Access-Control-Allow-Headers', 'Content-type, X-Requested-With');
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+  });
+  app.post('/image-upload', upload.single('image'), function(req, res){
+    console.log(req.body);
+    console.log(req.file);
 
-  app.post('/image-upload', function(req, res){
-    var image = req.body.file;
-    var id = req.body.id;
-    console.log(req);
-    fs.writeFile(`dist/assets/images/${req.body.id}.jpg`, image, 'binary', function(err){
+    var image = req.file;
+    var name = req.body.name;
+    res.send('Image uploaded!');
+  });
+    /*
+    fs.writeFile(`dist/assets/images/${req.body.name}.jpg`, image, 'binary', function(err){
       if (err){
         res.send(err);
       }
       else {
         var c = new Client();
         c.on('ready', function(){
-          c.put(`dist/assets/images/${req.body.id}.jpg`, `digital.ifcj.org/appeal-images/${req.body.id}.jpg`, function(err){
+          c.put(`dist/assets/images/${req.body.name}.jpg`, `digital.ifcj.org/appeal-images/${req.body.name}.jpg`, function(err){
             if (err) throw err;
             c.end();
             res.send('finished');            
@@ -140,7 +166,7 @@ db.once('open', function(){
         c.connect(creds.options);
       }
     })
-
+    */
     /*
     var base64Data = req.body.data.replace(/^data:image\/jpeg;base64,/, "");
     console.log(base64Data);
@@ -168,7 +194,7 @@ db.once('open', function(){
 
     });
     */
-  });
+  
   app.use('/assets', express.static('dist/assets'));
   //app.get('/images/*', express.static(__dirname + '/dist/images'));
 
@@ -201,7 +227,10 @@ db.once('open', function(){
   app.listen(3000, function(){
     console.log('Listening on port 3000');
   });
-
+  app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+  })
 });
 
 module.exports = app;
