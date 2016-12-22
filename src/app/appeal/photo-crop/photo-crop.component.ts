@@ -13,6 +13,11 @@ interface ImageChanges {
     width: number;
     height: number;
   }
+  caption?: string;
+  credit?: string;
+  creditPlacement?: string;
+  creditColor?: string;
+  imageTreatment?: string;
   filename: string;
 }
 
@@ -30,13 +35,15 @@ export class PhotoCropComponent implements OnInit {
   private polaroidBackground: any;
   private cropper: Cropper;
   private imageChanges: ImageChanges = {
+    filename: undefined,
     crop: {
       x: undefined,
       y: undefined,
       width: undefined,
       height: undefined,
     },
-    filename: undefined
+
+    
   };
   private cropUrl = 'http://' + window.location.hostname + ':3000/crop-image';
   @Input()
