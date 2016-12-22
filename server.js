@@ -12,7 +12,9 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Client = require('ftp');
 var creds = require('./ftp-options.js');
-var imagemagick = require('imagemagick');
+var im = require('imagemagick');
+
+
 var multer = require('multer');
 
 var storage = multer.diskStorage({
@@ -141,6 +143,7 @@ db.once('open', function(){
     res.header('Access-Control-Allow-Credentials', true);
     next();
   });
+
   app.post('/image-upload', upload.single('image'), function(req, res){
     console.log(req.body);
     console.log(req.file);
@@ -148,6 +151,23 @@ db.once('open', function(){
     var image = req.file;
     var name = req.body.name;
     res.send('Image uploaded!');
+  });
+
+  app.post('/crop-image', function(req, res){
+    console.log(req.body);
+    let polaroid = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
+    var imgChanges = req.body;
+    let file = __dirname + '\\dist\\assets\\images\\' + imgChanges.filename;
+    let cropString = `${imgChanges.crop.width}x${imgChanges.crop.height}+${imgChanges.crop.x}+${imgChanges.crop.y}`;
+    // im convert takes an array of parameters and a callback function as arguments
+    // the array is [file you are editing, the function, that functions arguments, the outputfile]
+    im.convert([file, '-crop', cropString, file], function(err, stdout){
+      if (err) throw err;
+      console.log('crop successful');
+    });
+    //im.convert([file, '-composite', ])
+
+    res.send('finished');
   });
     /*
     fs.writeFile(`dist/assets/images/${req.body.name}.jpg`, image, 'binary', function(err){

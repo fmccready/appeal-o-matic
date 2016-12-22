@@ -6,6 +6,15 @@ import { AppealImage as ImageMeta, Appeal } from '../../models/appeal';
 import { FileUploadComponent } from '../../file-upload/file-upload.component';
 import { AppealService } from '../../appeal.service';
 
+interface ImageChanges {
+  crop: {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }
+  filename: string;
+}
 
 @Component({
   selector: 'photo-crop',
@@ -14,61 +23,22 @@ import { AppealService } from '../../appeal.service';
 })
 export class PhotoCropComponent implements OnInit {
   @Output() saved = new EventEmitter<any>();
-  private _imageMeta;
-  @Input()
-  set imageMeta(data: ImageMeta){
-    this._imageMeta = data;
-    if (data){
-      this.updateSize(data.treatment);
-    }
-    console.log(this._imageMeta);
-  };
-  get imageMeta(){
-    return this._imageMeta;
-  }
-  @ViewChild('settingsModal') public settingsModal:ModalDirective;
-  @ViewChild('cropModal') public cropModal:ModalDirective; 
-  
-  private isCropping: boolean = false;
-  public showSettingsModal(){
-    this.isCropping = false;
-    this.cropModal.hide();
-    this.settingsModal.show();
-  }
-  private showCropModal(){
-    this.settingsModal.hide();
-    this.isCropping = true;
-    this.cropModal.show();
-  }
-  public cancel(){
-    this.cropModal.hide();
-    this.settingsModal.hide();
-    this.isCropping = false;
-    if (this.cropper){
-      this.cropper.destroy();
-    }
-  }
+  private _imageMeta: ImageMeta;
+  private appealId: string;
+  private _suffix: string;
   private aspectRatio: number;
-  createCropper(fileName){
-    let aspectRatio = this.aspectRatio;
-    this.img.nativeElement.src = `http://${window.location.hostname}:3000/assets/images/` + fileName;
-    this.cropper = new Cropper(this.img.nativeElement, {
-      aspectRatio: this.aspectRatio,
-      crop: function(e) {
-        console.log(e.detail.x);
-        console.log(e.detail.y);
-        console.log(e.detail.width);
-        console.log(e.detail.height);
-        console.log(e.detail.rotate);
-        console.log(e.detail.scaleX);
-        console.log(e.detail.scaleY);
-      }
-    });
-  }
-
-  private data: any;
-  private appealId;
-  private _suffix;
+  private polaroidBackground: any;
+  private cropper: Cropper;
+  private imageChanges: ImageChanges = {
+    crop: {
+      x: undefined,
+      y: undefined,
+      width: undefined,
+      height: undefined,
+    },
+    filename: undefined
+  };
+  private cropUrl = 'http://' + window.location.hostname + ':3000/crop-image';
   @Input()
   set suffix(num){
     this._suffix = num;
@@ -76,29 +46,71 @@ export class PhotoCropComponent implements OnInit {
   get suffix(){
     return this._suffix;
   }
-  constructor(private appealService: AppealService) {
+
+  @Input()
+  set imageMeta(data: ImageMeta){
+    this._imageMeta = data;
+    if (data){
+      this.updateSize(data.treatment);
+    }
+  };
+  get imageMeta(){
+    return this._imageMeta;
+  }
+
+  @ViewChild('img') private img;
+  @ViewChild('settingsModal') public settingsModal:ModalDirective;
+  @ViewChild('cropModal') public cropModal:ModalDirective; 
+
+  constructor(private appealService: AppealService, private http: Http) {
     this.appealService.getCurrentAppeal().subscribe(
       data => this.appealId = data._id
     );
   }
 
-  private cropper: Cropper;
-  private canvasData;
-
-  @ViewChild('imageFile') private imageFile;
-  @ViewChild('img') private img;
-  
-  private polaroidBackground: any;
   ngOnInit() {
-    let polaroid = document.createElement('img');
-    polaroid.src = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
-    polaroid.setAttribute('crossOrigin', 'anonymous');
-    polaroid.onload = () => {
-      this.polaroidBackground = document.createElement('img');
-      this.polaroidBackground.src = this.getBase64Image(polaroid);
+
+  }
+
+  /* Modal Functions */
+
+  public showSettingsModal(){
+    this.cropModal.hide();
+    this.settingsModal.show();
+  }
+  private showCropModal(){
+    this.settingsModal.hide();
+    this.cropModal.show();
+  }
+  public cancel(){
+    this.cropModal.hide();
+    this.settingsModal.hide();
+    if (this.cropper){
+      this.cropper.destroy();
     }
   }
 
+  /* Called from template when image is uploaded */
+  createCropper(fileName){
+    if (this.cropper){
+      this.cropper.destroy();
+    }
+    let aspectRatio = this.aspectRatio;
+    this.img.nativeElement.src = `http://${window.location.hostname}:3000/assets/images/` + fileName;
+    this.imageChanges.filename = fileName;
+    this.cropper = new Cropper(this.img.nativeElement, {
+      aspectRatio: this.aspectRatio,
+      minContainerHeight: 600,
+      crop: (e) => {
+        this.imageChanges.crop.x = e.detail.x;
+        this.imageChanges.crop.y = e.detail.y;
+        this.imageChanges.crop.width = e.detail.width;
+        this.imageChanges.crop.height = e.detail.height;
+      }
+    });
+  }
+
+  /* Updates the aspect ratio of the cropper */
   updateSize(val){
     switch(val){
       case 'polaroid':
@@ -121,20 +133,23 @@ export class PhotoCropComponent implements OnInit {
     }
   }
 
-  getBase64Image(img){
-    var canvas = document.createElement('canvas');
-    canvas.width = img.width;
-    canvas.height = img.height;
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL('image/jpg', 1.0);
-    return dataURL;
-  }
   saveImage(){
-    
+    this.saved.emit(this.imageChanges.filename);
     //this.saved.emit();
     //this.cancel();
   }
+
+  cropImage(data, id){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({
+      headers: headers
+    });
+    return this.http.post(this.cropUrl, this.imageChanges, options).subscribe(
+      data => console.log(data),
+      err => console.log(err)
+    );
+  }
+
 /*
   cropImage(data){
     if (this.imageMeta.credit || this.imageMeta.caption){
@@ -221,3 +236,4 @@ export class PhotoCropComponent implements OnInit {
 
 
 }
+

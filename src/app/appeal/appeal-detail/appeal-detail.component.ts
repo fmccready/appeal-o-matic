@@ -97,7 +97,9 @@ export class AppealDetailComponent implements OnInit {
     this.previewService.appeal.next(this.appeal);
   }
 
+
   onImageSaved(data){
+    /*
     let image$ = this.appealService.uploadImage(data, this.appeal._id);
     image$.subscribe(
       data => {
@@ -114,8 +116,10 @@ export class AppealDetailComponent implements OnInit {
       },
       err => console.log(err)
     );
+    */
   }
   onCalloutSaved(data){
+    /*
     let callout$ = this.appealService.uploadImage(data, this.appeal._id + 'cta');
     callout$.subscribe(
       data => {
@@ -130,6 +134,7 @@ export class AppealDetailComponent implements OnInit {
       },
       err => console.log(err)
     );
+    */
   }
 
   onAppealDuplicated(data){
