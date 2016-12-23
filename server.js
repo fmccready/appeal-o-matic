@@ -13,7 +13,7 @@ var io = require('socket.io')(http);
 var Client = require('ftp');
 var creds = require('./ftp-options.js');
 var im = require('imagemagick');
-
+var gm = require('gm').subClass({imageMagick: true});
 
 var multer = require('multer');
 
@@ -154,18 +154,46 @@ db.once('open', function(){
   });
 
   app.post('/crop-image', function(req, res){
+    console.log('test');
     console.log(req.body);
-    let polaroid = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
+    //let polaroid = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
     var imgChanges = req.body;
     let file = __dirname + '\\dist\\assets\\images\\' + imgChanges.filename;
-    let cropString = `${imgChanges.crop.width}x${imgChanges.crop.height}+${imgChanges.crop.x}+${imgChanges.crop.y}`;
+    //let cropString = `${imgChanges.crop.width}x${imgChanges.crop.height}+${imgChanges.crop.x}+${imgChanges.crop.y}`;
     // im convert takes an array of parameters and a callback function as arguments
     // the array is [file you are editing, the function, that functions arguments, the outputfile]
+    gm(file)
+    .crop(imgChanges.crop.width, imgChanges.crop.height, imgChanges.crop.x, imgChanges.crop.y)
+    .resize(313, 329)
+    .write(file, (err) => {
+      if (err){
+        console.log(err);
+      }
+      else {
+        gm(file)
+        .fontSize(10)
+        .fill('#0000ff')
+        .drawText(10, 20, imgChanges.credit)
+        .write(file, function(err){
+          if(err){
+            console.log(err)
+          }
+          else{
+            console.log('finished!');
+          }
+        });
+      }
+    });
+
+
+    /*
     im.convert([file, '-crop', cropString, file], function(err, stdout){
       if (err) throw err;
       console.log('crop successful');
     });
-    //im.convert([file, '-composite', ])
+    */
+    //let textString = `-fill ${imgChanges.creditColor} -font Arial -pointsize 10 label:${imgChanges.credit}`;
+    //im.convert(['temp.jpg', '-font', textString,'temp.jpg']);
 
     res.send('finished');
   });

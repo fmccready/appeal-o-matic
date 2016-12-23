@@ -35,15 +35,17 @@ export class PhotoCropComponent implements OnInit {
   private polaroidBackground: any;
   private cropper: Cropper;
   private imageChanges: ImageChanges = {
-    filename: undefined,
+    caption: undefined,
+    credit: undefined,
+    creditColor: undefined,
+    creditPlacement: undefined,
     crop: {
       x: undefined,
       y: undefined,
       width: undefined,
       height: undefined,
     },
-
-    
+    filename: undefined,
   };
   private cropUrl = 'http://' + window.location.hostname + ':3000/crop-image';
   @Input()
@@ -60,6 +62,10 @@ export class PhotoCropComponent implements OnInit {
     if (data){
       this.updateSize(data.treatment);
     }
+    this.imageChanges.credit = data.credit;
+    this.imageChanges.creditPlacement = data.creditPlacement;
+    this.imageChanges.creditColor = data.creditColor;
+    
   };
   get imageMeta(){
     return this._imageMeta;
