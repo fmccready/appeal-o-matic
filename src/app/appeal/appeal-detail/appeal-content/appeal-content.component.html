@@ -29,7 +29,7 @@
                 <template ngFor let-img [ngForOf]="options.image" let-i="index">
                   <h3 class="text-center">{{img.title}}</h3>
                   <div class="add-image">
-                    <photo-crop [imageMeta]="content.image[i]" [suffix]="'img-' + i" (saved)="onImageSaved($event)"></photo-crop>
+                    <photo-crop [imageMeta]="content.image[i]" [suffix]="'img-' + i" (saved)="onImageSaved($event, i)"></photo-crop>
                   </div>
                   <div class="form-group" data-toggle="popover" data-placement="right" title="Image Info" [attr.data-content]="img.tooltip">
                     <label [attr.for]="'imageUrl-' + i">Image URL</label>

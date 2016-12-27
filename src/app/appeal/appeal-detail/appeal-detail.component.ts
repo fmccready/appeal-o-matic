@@ -54,6 +54,8 @@ export class AppealDetailComponent implements OnInit {
 
   onContentSaved(data) {
     this.appeal.content = data;
+    console.log('updating Appeal');
+    console.log(this.appeal);
     this.appealService.updateAppeal(this.appeal);
     this.previewService.appeal.next(this.appeal);
   }

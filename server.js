@@ -145,41 +145,52 @@ db.once('open', function(){
   });
 
   app.post('/image-upload', upload.single('image'), function(req, res){
-    console.log(req.body);
-    console.log(req.file);
-
     var image = req.file;
     var name = req.body.name;
     res.send('Image uploaded!');
   });
 
   app.post('/crop-image', function(req, res){
-    console.log('test');
-    console.log(req.body);
     //let polaroid = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
     var imgChanges = req.body;
-    let file = __dirname + '\\dist\\assets\\images\\' + imgChanges.filename;
+    let file = __dirname + '\\dist\\assets\\images\\' + imgChanges.fileName;
+    let fileEdit = __dirname + '\\dist\\assets\\images\\final-' + imgChanges.fileName;
     //let cropString = `${imgChanges.crop.width}x${imgChanges.crop.height}+${imgChanges.crop.x}+${imgChanges.crop.y}`;
     // im convert takes an array of parameters and a callback function as arguments
     // the array is [file you are editing, the function, that functions arguments, the outputfile]
     gm(file)
     .crop(imgChanges.crop.width, imgChanges.crop.height, imgChanges.crop.x, imgChanges.crop.y)
-    .resize(313, 329)
-    .write(file, (err) => {
+    .resize(imgChanges.width, imgChanges.height)
+    .write(fileEdit, (err) => {
       if (err){
         console.log(err);
+        res.send(err);
       }
       else {
-        gm(file)
+        gm(fileEdit)
         .fontSize(10)
         .fill('#0000ff')
         .drawText(10, 20, imgChanges.credit)
-        .write(file, function(err){
+        .write(fileEdit, function(err){
           if(err){
-            console.log(err)
+            console.log(err);
+            res.send(err);
           }
           else{
-            console.log('finished!');
+            var c = new Client();
+            c.on('ready', function(){
+              c.put(`dist/assets/images/final-${imgChanges.fileName}`, `digital.ifcj.org/appeal-images/final-${imgChanges.fileName}`, function(err){
+                if (err){
+                  res.send(err);
+                  console.log(err);
+                }
+                c.end();
+              });
+            });
+            c.connect(creds.options);
+            c.on('close', function(){
+              res.send('final-' + imgChanges.fileName);
+            });
           }
         });
       }
@@ -194,8 +205,6 @@ db.once('open', function(){
     */
     //let textString = `-fill ${imgChanges.creditColor} -font Arial -pointsize 10 label:${imgChanges.credit}`;
     //im.convert(['temp.jpg', '-font', textString,'temp.jpg']);
-
-    res.send('finished');
   });
     /*
     fs.writeFile(`dist/assets/images/${req.body.name}.jpg`, image, 'binary', function(err){

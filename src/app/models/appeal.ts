@@ -56,6 +56,7 @@ export class AppealSignoff {
 }
 
 export class AppealImage {
+  original: string = '';
   url: string = '';
   code: string = '';
   link: string = '';

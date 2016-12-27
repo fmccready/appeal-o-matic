@@ -130,10 +130,9 @@ export class AppealService {
     this.socket.emit('updateAppeal', appeal);
     this.http.patch(this._appealUrl + appeal._id, body, options)
     .subscribe(
-      data => console.log(data),
+      data => {console.log(data); this.setCurrentAppeal(appeal._id);},
       error => console.log(error)
     );
-    this.setCurrentAppeal(appeal._id);
   }
 
   softUpdateAppeal(data: Appeal){

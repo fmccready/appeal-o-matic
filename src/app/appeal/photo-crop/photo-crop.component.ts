@@ -18,7 +18,9 @@ interface ImageChanges {
   creditPlacement?: string;
   creditColor?: string;
   imageTreatment?: string;
-  filename: string;
+  height?: number;
+  width?: number;
+  fileName: string;
 }
 
 @Component({
@@ -31,7 +33,6 @@ export class PhotoCropComponent implements OnInit {
   private _imageMeta: ImageMeta;
   private appealId: string;
   private _suffix: string;
-  private aspectRatio: number;
   private polaroidBackground: any;
   private cropper: Cropper;
   private imageChanges: ImageChanges = {
@@ -45,7 +46,9 @@ export class PhotoCropComponent implements OnInit {
       width: undefined,
       height: undefined,
     },
-    filename: undefined,
+    height: undefined,
+    width: undefined,
+    fileName: undefined,
   };
   private cropUrl = 'http://' + window.location.hostname + ':3000/crop-image';
   @Input()
@@ -95,6 +98,14 @@ export class PhotoCropComponent implements OnInit {
     this.settingsModal.hide();
     this.cropModal.show();
   }
+
+  private checkOriginal(){
+    console.log(this.cropModal);
+    if (this._imageMeta.original){
+      this.createCropper(this._imageMeta.original);
+    }
+  }
+
   public cancel(){
     this.cropModal.hide();
     this.settingsModal.hide();
@@ -108,18 +119,18 @@ export class PhotoCropComponent implements OnInit {
     if (this.cropper){
       this.cropper.destroy();
     }
-    let aspectRatio = this.aspectRatio;
-    this.img.nativeElement.src = `http://${window.location.hostname}:3000/assets/images/` + fileName;
-    this.imageChanges.filename = fileName;
+    
+    this.img.nativeElement.src = `http://${window.location.hostname}:3000/assets/images/` + fileName + '?' + Date.now();
+    this.imageChanges.fileName = fileName;
     this.cropper = new Cropper(this.img.nativeElement, {
-      aspectRatio: this.aspectRatio,
-      minContainerHeight: 600,
+      aspectRatio: this.aspectRatio(this.imageChanges.width, this.imageChanges.height),
       crop: (e) => {
         this.imageChanges.crop.x = e.detail.x;
         this.imageChanges.crop.y = e.detail.y;
         this.imageChanges.crop.width = e.detail.width;
         this.imageChanges.crop.height = e.detail.height;
-      }
+      },
+      viewMode: 1
     });
   }
 
@@ -127,29 +138,39 @@ export class PhotoCropComponent implements OnInit {
   updateSize(val){
     switch(val){
       case 'polaroid':
-        this.aspectRatio = 306/238;
+        this.imageChanges.width = 306;
+        this.imageChanges.height = 238;
         break;
       case 'small':
-        this.aspectRatio = 313/329;
+        this.imageChanges.width = 313;
+        this.imageChanges.height = 329;
         break;
       case 'large':
-        this.aspectRatio = 650/391;
+        this.imageChanges.width = 650;
+        this.imageChanges.height = 391;
         break;
       case 'calloutLarge':
-        this.aspectRatio = 650/150;
+        this.imageChanges.width = 650;
+        this.imageChanges.height = 150;
+
         break;
       case 'calloutSmall':
-        this.aspectRatio = 313/200;
+        this.imageChanges.width = 313;
+        this.imageChanges.height = 200;
       default:
-        this.aspectRatio = 313/329;
+        this.imageChanges.width = 313;
+        this.imageChanges.height = 329;
         break;
     }
   }
 
-  saveImage(){
-    this.saved.emit(this.imageChanges.filename);
-    //this.saved.emit();
-    //this.cancel();
+  aspectRatio(x, y){
+    return x/y;
+  }
+
+  saveImage(data){
+    this.saved.emit(data);
+    this.cancel();
   }
 
   cropImage(data, id){
@@ -158,7 +179,7 @@ export class PhotoCropComponent implements OnInit {
       headers: headers
     });
     return this.http.post(this.cropUrl, this.imageChanges, options).subscribe(
-      data => console.log(data),
+      data => {console.log('image Saved'); this.saveImage({original: this.imageChanges.fileName, edited: data['_body']})},
       err => console.log(err)
     );
   }

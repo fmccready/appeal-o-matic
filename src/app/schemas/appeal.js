@@ -4,29 +4,30 @@ var Campaign = require('./campaign.js');
 var Group = require('./group.js');
 
 var imageSchema = new Schema({
-      url: {type: String, default: ''},
-      link: {type: String, default: ''},
-      code: {type: String, default: ''},
-      utm: {type: String, default: ''},
-      merlinId: {type: String, default: ''},
-      brightcoveId: {type: String, default: ''},
-      caption: {type: String, default: ''},
-      captionSize: {type: Number, default: 22},
-      captionColor:{type: String, default: ''},
-      captionShadow:{type: String, default: ''},
-      credit: {type: String, default: ''},
-      creditPlacement: {type: String, default: ''},
-      creditColor: {type: String, default: ''},
-      treatment: {type: String, default: ''}
+  original: {type: String, default: ''},
+  url: {type: String, default: ''},
+  link: {type: String, default: ''},
+  code: {type: String, default: ''},
+  utm: {type: String, default: ''},
+  merlinId: {type: String, default: ''},
+  brightcoveId: {type: String, default: ''},
+  caption: {type: String, default: ''},
+  captionSize: {type: Number, default: 22},
+  captionColor:{type: String, default: ''},
+  captionShadow:{type: String, default: ''},
+  credit: {type: String, default: ''},
+  creditPlacement: {type: String, default: ''},
+  creditColor: {type: String, default: ''},
+  treatment: {type: String, default: ''}
 });
 
 var calloutSchema = new Schema({
-    headline: {type: String, default: ''},
-    url: {type: String, default: ''},
-    body: {type: String, default: ''},
-    image: imageSchema,
-    utm: {type: String, default: ''},
-    code: {type: String, default: ''}
+  headline: {type: String, default: ''},
+  url: {type: String, default: ''},
+  body: {type: String, default: ''},
+  image: imageSchema,
+  utm: {type: String, default: ''},
+  code: {type: String, default: ''}
 });
 
 var appealSchema = new Schema({

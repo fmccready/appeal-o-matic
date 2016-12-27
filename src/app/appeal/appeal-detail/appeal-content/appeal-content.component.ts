@@ -23,7 +23,6 @@ export class AppealContentComponent implements OnInit {
   @Output() canceled = new EventEmitter<AppealContent>();
   @Output() imageSaved = new EventEmitter<any>();
   @Output() calloutSaved = new EventEmitter<any>();
-
   private changed = false;
   private _appealId;
 
@@ -66,8 +65,11 @@ export class AppealContentComponent implements OnInit {
     this.restoreService.restoreItem();
     this.canceled.emit(this.content);
   }
-  onImageSaved(data){
-    this.imageSaved.emit(data);
+  onImageSaved(data, i){
+    console.log('setting content');
+    this.content.image[i].url = `http://digital.ifcj.org/appeal-images/${data.edited}?${Date.now()}`;
+    this.content.image[i].original = data.original;
+    this.save();
   }
   onCalloutSaved(data){
     this.calloutSaved.emit(data);
