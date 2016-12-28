@@ -1,5 +1,5 @@
 <button class="btn btn-primary add-image" (click)="showSettingsModal()">Add an image</button>
-<div bsModal #settingsModal="bs-modal"  class="modal fade" tabindex="-1" role="dialog">
+<div bsModal #settingsModal="bs-modal" [config]="{backdrop: 'static'}" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -22,7 +22,7 @@
           <span style="font-family: 'Architects Daughter'"></span>
           <label for="imageCreditColor">Image credit color</label>
           <select id="imageCreditColor" class="form-control" [(ngModel)]="imageMeta.creditColor" #image="ngModel" name="imageCreditColor">
-            <option style="color: rgba(0,0,0,1);" value="rgba(0,0,0,1)" selected>Photo Credit Color</option>
+            <option style="color: rgba(0,0,0,1.0);" value="rgba(0,0,0,1.0)" selected>Photo Credit Color</option>
             <option style="color: rgba(0,0,0,0.9);" value="rgba(0,0,0,0.9)">Photo Credit Color</option>
             <option style="color: rgba(0,0,0,0.8);" value="rgba(0,0,0,0.8)">Photo Credit Color</option>
             <option style="color: rgba(0,0,0,0.7);" value="rgba(0,0,0,0.7)">Photo Credit Color</option>
@@ -32,7 +32,7 @@
             <option style="color: rgba(0,0,0,0.3);" value="rgba(0,0,0,0.3)">Photo Credit Color</option>
             <option style="color: rgba(0,0,0,0.2);" value="rgba(0,0,0,0.2)">Photo Credit Color</option>
             <option style="color: rgba(0,0,0,0.1);" value="rgba(0,0,0,0.1)">Photo Credit Color</option>
-            <option style="color: rgba(255,255,255, 1); background-color: #000000;" value="rgba(255,255,255,1)">Photo Credit Color</option>
+            <option style="color: rgba(255,255,255, 1.0); background-color: #000000;" value="rgba(255,255,255,1.0)">Photo Credit Color</option>
             <option style="color: rgba(255,255,255, 0.9); background-color: #000000;" value="rgba(255,255,255,0.9)">Photo Credit Color</option>
             <option style="color: rgba(255,255,255, 0.8); background-color: #000000;" value="rgba(255,255,255,0.8)">Photo Credit Color</option>
             <option style="color: rgba(255,255,255, 0.7); background-color: #000000;" value="rgba(255,255,255,0.7)">Photo Credit Color</option>
@@ -63,8 +63,7 @@
   </div>
 </div>
 
-
-<div bsModal #cropModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" (onShown)="checkOriginal()">
+<div bsModal #cropModal="bs-modal" [config]="{backdrop: 'static'}" class="modal fade" tabindex="-1" role="dialog" (onShown)="checkOriginal()">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">

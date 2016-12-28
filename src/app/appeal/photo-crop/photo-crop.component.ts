@@ -13,11 +13,7 @@ interface ImageChanges {
     width: number;
     height: number;
   }
-  caption?: string;
-  credit?: string;
-  creditPlacement?: string;
-  creditColor?: string;
-  imageTreatment?: string;
+  imageMeta?: ImageMeta;
   height?: number;
   width?: number;
   fileName: string;
@@ -36,10 +32,7 @@ export class PhotoCropComponent implements OnInit {
   private polaroidBackground: any;
   private cropper: Cropper;
   private imageChanges: ImageChanges = {
-    caption: undefined,
-    credit: undefined,
-    creditColor: undefined,
-    creditPlacement: undefined,
+    imageMeta: this._imageMeta,
     crop: {
       x: undefined,
       y: undefined,
@@ -61,15 +54,13 @@ export class PhotoCropComponent implements OnInit {
 
   @Input()
   set imageMeta(data: ImageMeta){
+    console.log(data);
     this._imageMeta = data;
     if (data){
       this.updateSize(data.treatment);
     }
-    this.imageChanges.credit = data.credit;
-    this.imageChanges.creditPlacement = data.creditPlacement;
-    this.imageChanges.creditColor = data.creditColor;
-    
-  };
+    this.imageChanges.imageMeta = this._imageMeta;
+  }
   get imageMeta(){
     return this._imageMeta;
   }
@@ -85,7 +76,7 @@ export class PhotoCropComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    
   }
 
   /* Modal Functions */
@@ -99,10 +90,16 @@ export class PhotoCropComponent implements OnInit {
     this.cropModal.show();
   }
 
+  private c = false;
   private checkOriginal(){
-    console.log(this.cropModal);
-    if (this._imageMeta.original){
-      this.createCropper(this._imageMeta.original);
+    if (!this.c){
+      if (this._imageMeta.original){
+        this.c = true;
+        this.createCropper(this._imageMeta.original);
+      }
+    }
+    else {
+      this.c = false;
     }
   }
 
@@ -119,9 +116,10 @@ export class PhotoCropComponent implements OnInit {
     if (this.cropper){
       this.cropper.destroy();
     }
-    
     this.img.nativeElement.src = `http://${window.location.hostname}:3000/assets/images/` + fileName + '?' + Date.now();
     this.imageChanges.fileName = fileName;
+
+    console.log('making new cropper');
     this.cropper = new Cropper(this.img.nativeElement, {
       aspectRatio: this.aspectRatio(this.imageChanges.width, this.imageChanges.height),
       crop: (e) => {
@@ -152,7 +150,6 @@ export class PhotoCropComponent implements OnInit {
       case 'calloutLarge':
         this.imageChanges.width = 650;
         this.imageChanges.height = 150;
-
         break;
       case 'calloutSmall':
         this.imageChanges.width = 313;

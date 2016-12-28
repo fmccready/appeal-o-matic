@@ -152,15 +152,43 @@ db.once('open', function(){
 
   app.post('/crop-image', function(req, res){
     //let polaroid = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
-    var imgChanges = req.body;
-    let file = __dirname + '\\dist\\assets\\images\\' + imgChanges.fileName;
-    let fileEdit = __dirname + '\\dist\\assets\\images\\final-' + imgChanges.fileName;
-    //let cropString = `${imgChanges.crop.width}x${imgChanges.crop.height}+${imgChanges.crop.x}+${imgChanges.crop.y}`;
+    var imageChanges = req.body;
+    let file = __dirname + '\\dist\\assets\\images\\' + imageChanges.fileName;
+    let fileEdit = __dirname + '\\dist\\assets\\images\\final-' + imageChanges.fileName;
+    let polaroid = __dirname + '\\dist\\assets\\images\\polaroid-template.png';
+    let placement = {x: undefined, y: undefined, g: undefined};
+    //let cropString = `${imageChanges.crop.width}x${imageChanges.crop.height}+${imageChanges.crop.x}+${imageChanges.crop.y}`;
     // im convert takes an array of parameters and a callback function as arguments
     // the array is [file you are editing, the function, that functions arguments, the outputfile]
+    if (imageChanges.imageMeta.creditPlacement === 'tl'){
+      placement.x = 10;
+      placement.y = 10;
+      placement.g = 'NorthWest';
+    }
+    else if (imageChanges.imageMeta.creditPlacement === 'tr'){
+      placement.x = 10;
+      placement.y = 10;
+      placement.g = 'NorthEast';
+    }
+    else if (imageChanges.imageMeta.creditPlacement === 'bl'){
+      placement.x = 10;
+      placement.y = 10;
+      placement.g = 'SouthWest';
+    }
+    else if (imageChanges.imageMeta.creditPlacement === 'br'){
+      placement.x = 10;
+      placement.y = 10;
+      placement.g = 'SouthEast';
+    }
+    else {
+      placement.x = 10;
+      placement.y = 10;
+      placement.g = 'NorthWest';
+    }
+
     gm(file)
-    .crop(imgChanges.crop.width, imgChanges.crop.height, imgChanges.crop.x, imgChanges.crop.y)
-    .resize(imgChanges.width, imgChanges.height)
+    .crop(imageChanges.crop.width, imageChanges.crop.height, imageChanges.crop.x, imageChanges.crop.y)
+    .resize(imageChanges.width, imageChanges.height)
     .write(fileEdit, (err) => {
       if (err){
         console.log(err);
@@ -169,33 +197,59 @@ db.once('open', function(){
       else {
         gm(fileEdit)
         .fontSize(10)
-        .fill('#0000ff')
-        .drawText(10, 20, imgChanges.credit)
-        .write(fileEdit, function(err){
-          if(err){
-            console.log(err);
-            res.send(err);
+        .fill(imageChanges.imageMeta.creditColor)
+        .drawText(placement.x, placement.y, imageChanges.imageMeta.credit, placement.g)
+        .write(fileEdit, (err2) => {
+          if(err2){
+            console.log(err2);
+            res.send(err2);
           }
-          else{
-            var c = new Client();
-            c.on('ready', function(){
-              c.put(`dist/assets/images/final-${imgChanges.fileName}`, `digital.ifcj.org/appeal-images/final-${imgChanges.fileName}`, function(err){
-                if (err){
-                  res.send(err);
-                  console.log(err);
-                }
-                c.end();
-              });
-            });
-            c.connect(creds.options);
-            c.on('close', function(){
-              res.send('final-' + imgChanges.fileName);
-            });
+          else {
+            if (imageChanges.imageMeta.treatment === 'polaroid'){
+              console.log('adding polaroid');
+              gm(polaroid)
+                .composite(fileEdit)
+                .geometry('+12+9')
+                .write(fileEdit, (err4) => {
+                  gm(fileEdit)
+                    .drawText(161, 272, imageChanges.imageMeta.caption, 'Center')
+                    .write(fileEdit, (err5) => {
+                      console.log(fileEdit);
+                      if (err){
+                        console.log(err);
+                      }
+                      else{
+                        writeFile(imageChanges.fileName);
+                      }
+                    });
+
+
+                });
+            }
+            else {
+              writeFile(imageChanges.fileName);
+            }
           }
         });
       }
     });
 
+    function writeFile(fileName){
+      var c = new Client();
+      c.on('ready', function(){
+        c.put(`dist/assets/images/final-${fileName}`, `digital.ifcj.org/appeal-images/final-${fileName}`, function(err3){
+          if (err3){
+            res.send(err3);
+            console.log(err3);
+          }
+          c.end();
+        });
+      });
+      c.connect(creds.options);
+      c.on('close', function(){
+        res.send('final-' + fileName);
+      });    
+    }
 
     /*
     im.convert([file, '-crop', cropString, file], function(err, stdout){
@@ -203,7 +257,7 @@ db.once('open', function(){
       console.log('crop successful');
     });
     */
-    //let textString = `-fill ${imgChanges.creditColor} -font Arial -pointsize 10 label:${imgChanges.credit}`;
+    //let textString = `-fill ${imageChanges.creditColor} -font Arial -pointsize 10 label:${imageChanges.credit}`;
     //im.convert(['temp.jpg', '-font', textString,'temp.jpg']);
   });
     /*
