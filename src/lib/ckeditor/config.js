@@ -32,5 +32,6 @@ CKEDITOR.editorConfig = function( config ) {
 	config.autoParagraph = false;
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';
-	config.extraPlugins = 'resize';
+	config.extraPlugins = 'resize,justify';
+	config.extraAllowedContent = 'center';
 };

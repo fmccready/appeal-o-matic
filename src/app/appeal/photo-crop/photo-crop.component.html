@@ -10,7 +10,6 @@
         <p>
           <label for="imageCredit">Image credit</label>
           <input type="text" id="imageCredit" class="form-control" [(ngModel)]="imageMeta.credit" #image="ngModel" name="imageCredit">
-
           <label for="imageCreditPlacement">Image credit placement</label>
           <select id="imageCreditPlacement" class="form-control" [(ngModel)]="imageMeta.creditPlacement" #image="ngModel" name="imageCreditPlacement">
             <option value="tl">Top left</option>
@@ -51,8 +50,16 @@
             <option value="calloutSmall">calloutSmall</option>
             <option value="calloutLarge">calloutLarge</option>
           </select>
+          <label for="imageButton">Image button</label>
+          <select id="imageButton" class="form-control" [(ngModel)]="imageMeta.button" #image="ngModel" name="imageButton">
+            <option value="">None</option>
+            <option value="play">Play button</option>
+            <option value="audio">Audio button</option>
+          </select>
           <label for="imageCaption">Image caption</label>
-          <ckeditor id="imageCaption" [(ngModel)]="imageMeta.caption" #image="ngModel" name="imageCaption"></ckeditor>
+          <textarea class="form-control" id="imageCaption" [(ngModel)]="imageMeta.caption" #image="ngModel" name="imageCaption"></textarea>
+          <label for="imageCaption">Image caption size</label>
+          <input type="number" class="form-control" id="imageCaptionSize" [(ngModel)]="imageMeta.captionSize" #image="ngModel" name="imageCaptionSize">
         </p>
       </div>
       <div class="modal-footer">

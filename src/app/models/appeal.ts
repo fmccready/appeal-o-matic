@@ -63,8 +63,9 @@ export class AppealImage {
   utm: string = '';
   merlinId: string = '';
   brightcoveId: string = '';
+  button: string = '';
   caption: string = '';
-  captionSize: number = 12;
+  captionSize: number = 16;
   captionColor: string = '';
   captionShadow: string = '';
   credit: string = '';

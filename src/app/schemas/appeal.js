@@ -11,6 +11,7 @@ var imageSchema = new Schema({
   utm: {type: String, default: ''},
   merlinId: {type: String, default: ''},
   brightcoveId: {type: String, default: ''},
+  button: {type: String, default: ''},
   caption: {type: String, default: ''},
   captionSize: {type: Number, default: 22},
   captionColor:{type: String, default: ''},

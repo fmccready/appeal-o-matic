@@ -153,9 +153,11 @@ db.once('open', function(){
   app.post('/crop-image', function(req, res){
     //let polaroid = `http://${window.location.hostname}:3000/assets/images/polaroid-template.jpg`;
     var imageChanges = req.body;
-    let file = __dirname + '\\dist\\assets\\images\\' + imageChanges.fileName;
-    let fileEdit = __dirname + '\\dist\\assets\\images\\final-' + imageChanges.fileName;
+    let originalFile = __dirname + '\\dist\\assets\\images\\' + imageChanges.fileName;
+    let editedFile = __dirname + '\\dist\\assets\\images\\final-' + imageChanges.fileName;
     let polaroid = __dirname + '\\dist\\assets\\images\\polaroid-template.png';
+    let playButton = __dirname + '\\dist\\assets\\images\\play.png';
+    let audioButton = __dirname + '\\dist\\assets\\images\\audio.png';
     let placement = {x: undefined, y: undefined, g: undefined};
     //let cropString = `${imageChanges.crop.width}x${imageChanges.crop.height}+${imageChanges.crop.x}+${imageChanges.crop.y}`;
     // im convert takes an array of parameters and a callback function as arguments
@@ -186,45 +188,30 @@ db.once('open', function(){
       placement.g = 'NorthWest';
     }
 
-    gm(file)
+    gm(originalFile)
     .crop(imageChanges.crop.width, imageChanges.crop.height, imageChanges.crop.x, imageChanges.crop.y)
     .resize(imageChanges.width, imageChanges.height)
-    .write(fileEdit, (err) => {
+    .write(editedFile, (err) => {
       if (err){
         console.log(err);
         res.send(err);
       }
       else {
-        gm(fileEdit)
+        gm(editedFile)
         .fontSize(10)
         .fill(imageChanges.imageMeta.creditColor)
         .drawText(placement.x, placement.y, imageChanges.imageMeta.credit, placement.g)
-        .write(fileEdit, (err2) => {
+        .write(editedFile, (err2) => {
           if(err2){
             console.log(err2);
             res.send(err2);
           }
           else {
-            if (imageChanges.imageMeta.treatment === 'polaroid'){
-              console.log('adding polaroid');
-              gm(polaroid)
-                .composite(fileEdit)
-                .geometry('+12+9')
-                .write(fileEdit, (err4) => {
-                  gm(fileEdit)
-                    .drawText(161, 272, imageChanges.imageMeta.caption, 'Center')
-                    .write(fileEdit, (err5) => {
-                      console.log(fileEdit);
-                      if (err){
-                        console.log(err);
-                      }
-                      else{
-                        writeFile(imageChanges.fileName);
-                      }
-                    });
-
-
-                });
+            if(imageChanges.imageMeta.button === 'play'){
+              drawPlayButton(editedFile);
+            }
+            else if(imageChanges.imageMeta.button === 'audio'){
+              drawAudioButton(editedFile);
             }
             else {
               writeFile(imageChanges.fileName);
@@ -234,13 +221,72 @@ db.once('open', function(){
       }
     });
 
+    function drawPlayButton(fileName){
+      return gm(fileName)
+        .composite(playButton)
+        .gravity('Center')
+        .write(editedFile, (err) => {
+          if (err){
+            console.log(err);
+          }
+          if (imageChanges.imageMeta.treatment === 'polaroid'){
+            drawPolaroid(editedFile);
+          }
+          else {
+            writeFile(imageChanges.fileName);
+          }
+        });
+    }
+
+    function drawAudioButton(fileName){
+      gm(fileName)
+        .composite(audioButton)
+        .gravity('Center')
+        .write(editedFile, (err) => {
+          if (err){
+            console.log(err);
+          }
+          if (imageChanges.imageMeta.treatment === 'polaroid'){
+            drawPolaroid(editedFile);
+          }
+          else {
+            writeFile(imageChanges.fileName);
+          }
+        });
+    }
+
+    function drawPolaroid(fileName){
+      gm(polaroid)
+        .composite(editedFile)
+        .geometry('+12+9')
+        .write(editedFile, (err) => {
+          if (err){
+            console.log(err);
+          }
+          else {
+            gm(editedFile)
+              .font('fonts/ArchitectsDaughter.ttf')
+              .fontSize(imageChanges.imageMeta.captionSize)
+              .drawText(0, 117, imageChanges.imageMeta.caption, 'Center')
+              .write(editedFile, (err2) => {
+                if (err2){
+                  console.log(err2);
+                }
+                else{
+                  writeFile(imageChanges.fileName);
+                }
+              });          
+          }
+      });    
+    }
+
     function writeFile(fileName){
       var c = new Client();
       c.on('ready', function(){
-        c.put(`dist/assets/images/final-${fileName}`, `digital.ifcj.org/appeal-images/final-${fileName}`, function(err3){
-          if (err3){
-            res.send(err3);
-            console.log(err3);
+        c.put(`dist/assets/images/final-${fileName}`, `digital.ifcj.org/appeal-images/final-${fileName}`, function(err){
+          if (err){
+            res.send(err);
+            console.log(err);
           }
           c.end();
         });

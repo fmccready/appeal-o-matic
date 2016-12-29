@@ -69,10 +69,10 @@
                   <input type="text" id="calloutImageUrl" class="form-control" [(ngModel)]="content.callout.image.url" (change)="checkChanged()" #callout="ngModel" name="calloutImageUrl">
 
                   <label for="callout-headline">Callout headline</label>
-                  <ckeditor id="callout-headline" [(ngModel)]="content.callout.headline" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutHeadline"></ckeditor>
+                  <ckeditor id="callout-headline" [(ngModel)]="content.callout.headline" [config]="{height: 80, disableNativeSpellChecker: false}" (change)="checkChanged()" #callout="ngModel" name="calloutHeadline"></ckeditor>
 
                   <label for="callout-body">Callout body</label>
-                  <ckeditor id="callout-body" [(ngModel)]="content.callout.body" [config]="{height: 80}" (change)="checkChanged()" #callout="ngModel" name="calloutBody"></ckeditor>
+                  <ckeditor id="callout-body" [(ngModel)]="content.callout.body" [config]="{height: 80, disableNativeSpellChecker: false}" (change)="checkChanged()" #callout="ngModel" name="calloutBody"></ckeditor>
 
                   <label for="imageUrl">URL the callout will link to</label>
                   <input type="text" id="calloutUrl" class="form-control" [(ngModel)]="content.callout.url" (change)="checkChanged()" #callout="ngModel" name="calloutUrl">

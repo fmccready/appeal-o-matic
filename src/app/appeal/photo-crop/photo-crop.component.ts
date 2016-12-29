@@ -29,7 +29,6 @@ export class PhotoCropComponent implements OnInit {
   private _imageMeta: ImageMeta;
   private appealId: string;
   private _suffix: string;
-  private polaroidBackground: any;
   private cropper: Cropper;
   private imageChanges: ImageChanges = {
     imageMeta: this._imageMeta,

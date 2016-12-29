@@ -23,21 +23,22 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           }
         ],
         image: [
@@ -57,21 +58,22 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           }
         ],
         image: [
@@ -87,11 +89,28 @@ export class PreviewService {
       name: 'US High Holy Days',
       country: 'United States',
       options: {
-        body: [{
-          title: 'headline',
-          tooltip: 'Paste in the headline here.',
-          config: {height:80}
-        }],
+        body: [
+          {
+            title: 'headline',
+            tooltip: 'Paste in the headline here.',
+            config: {height:80, disableNativeSpellChecker:false}
+          },
+          {
+            title: 'Body',
+            tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
+            config: {height:80, disableNativeSpellChecker:false}
+          },
+          {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80, disableNativeSpellChecker:false}
+          }
+        ],
         image: [
           {
             title: 'Main image',
@@ -109,21 +128,22 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           }
         ],
         image: [
@@ -143,21 +163,22 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           }
         ],
         image: [
@@ -177,21 +198,22 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           }
         ],
         image: [
@@ -211,21 +233,22 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           }
         ],
         image: [
@@ -245,21 +268,22 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
-            config: {height:80}
+            config: {height:80, disableNativeSpellChecker:false}
           }
         ],
         image: [
