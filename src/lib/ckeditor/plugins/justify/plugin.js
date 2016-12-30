@@ -49,12 +49,6 @@
 				case 'center':
 					this.cssClassName = classes[ 1 ];
 					break;
-				case 'right':
-					this.cssClassName = classes[ 2 ];
-					break;
-				case 'justify':
-					this.cssClassName = classes[ 3 ];
-					break;
 			}
 
 			this.cssClassRegex = new RegExp( '(?:^|\\s+)(?:' + classes.join( '|' ) + ')(?=$|\\s)' );
@@ -106,11 +100,6 @@
 						node.removeClass( classes[ 0 ] );
 						node.addClass( classes[ 2 ] );
 					}
-					// The right align class.
-					else if ( node.hasClass( classes[ 2 ] ) ) {
-						node.removeClass( classes[ 2 ] );
-						node.addClass( classes[ 0 ] );
-					}
 				}
 
 				// Always switch CSS margins.
@@ -133,9 +122,8 @@
 			if ( !selection )
 				return;
 
-			var bookmarks = selection.createBookmarks(),
-				ranges = selection.getRanges();
-
+			//var bookmarks = selection.createBookmarks();
+			var ranges = selection.getRanges();
 			var cssClassName = this.cssClassName,
 				iterator, block;
 
@@ -149,31 +137,29 @@
 				while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' ) ) ) {
 					if ( block.isReadOnly() )
 						continue;
-
+					block.$.innerHTML.replace(/(<center>|<\/center>)/g, '');
+					if (block.$.tagName === 'CENTER'){
+						block.$.outerHTML = block.$.innerHTML;
+					}
+					block.$.removeAttribute('align');
+					block.$.removeAttribute('style');
 					block.removeAttribute( 'align' );
 					block.removeStyle( 'text-align' );
 
-					// Remove any of the alignment classes from the className.
-					var className = cssClassName && ( block.$.className = CKEDITOR.tools.ltrim( block.$.className.replace( this.cssClassRegex, '' ) ) );
-
-					var apply = ( this.state == CKEDITOR.TRISTATE_OFF ) && ( !useComputedState || ( getAlignment( block, true ) != this.value ) );
-
-					if ( cssClassName ) {
-						// Append the desired class name.
-						if ( apply )
-							block.addClass( cssClassName );
-						else if ( !className )
-							block.removeAttribute( 'class' );
-					} else if ( apply ) {
-						block.setStyle( 'text-align', this.value );
+					console.log(block);
+					if (this.value === 'center'){
+						block.$.setAttribute('align', 'center');
+						block.setStyle('text-align', 'center');
+					}
+					else {
+						block.removeStyle('text-align');
 					}
 				}
-
 			}
 
 			editor.focus();
 			editor.forceNextSelectionCheck();
-			selection.selectBookmarks( bookmarks );
+			//selection.selectBookmarks( bookmarks );
 		},
 
 		refresh: function( editor, path ) {
@@ -187,21 +173,17 @@
 		// jscs:disable maximumLineLength
 		lang: 'af,ar,bg,bn,bs,ca,cs,cy,da,de,de-ch,el,en,en-au,en-ca,en-gb,eo,es,et,eu,fa,fi,fo,fr,fr-ca,gl,gu,he,hi,hr,hu,id,is,it,ja,ka,km,ko,ku,lt,lv,mk,mn,ms,nb,nl,no,oc,pl,pt,pt-br,ro,ru,si,sk,sl,sq,sr,sr-latn,sv,th,tr,tt,ug,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
 		// jscs:enable maximumLineLength
-		icons: 'justifyblock,justifycenter,justifyleft,justifyright', // %REMOVE_LINE_CORE%
+		icons: 'justifycenter,justifyleft', // %REMOVE_LINE_CORE%
 		hidpi: true, // %REMOVE_LINE_CORE%
 		init: function( editor ) {
 			if ( editor.blockless )
 				return;
 
 			var left = new justifyCommand( editor, 'justifyleft', 'left' ),
-				center = new justifyCommand( editor, 'justifycenter', 'center' ),
-				right = new justifyCommand( editor, 'justifyright', 'right' ),
-				justify = new justifyCommand( editor, 'justifyblock', 'justify' );
+				center = new justifyCommand( editor, 'justifycenter', 'center' );
 
 			editor.addCommand( 'justifyleft', left );
 			editor.addCommand( 'justifycenter', center );
-			editor.addCommand( 'justifyright', right );
-			editor.addCommand( 'justifyblock', justify );
 
 			if ( editor.ui.addButton ) {
 				editor.ui.addButton( 'JustifyLeft', {
@@ -213,16 +195,6 @@
 					label: editor.lang.justify.center,
 					command: 'justifycenter',
 					toolbar: 'align,20'
-				} );
-				editor.ui.addButton( 'JustifyRight', {
-					label: editor.lang.justify.right,
-					command: 'justifyright',
-					toolbar: 'align,30'
-				} );
-				editor.ui.addButton( 'JustifyBlock', {
-					label: editor.lang.justify.block,
-					command: 'justifyblock',
-					toolbar: 'align,40'
 				} );
 			}
 

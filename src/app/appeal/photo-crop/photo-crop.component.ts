@@ -53,7 +53,6 @@ export class PhotoCropComponent implements OnInit {
 
   @Input()
   set imageMeta(data: ImageMeta){
-    console.log(data);
     this._imageMeta = data;
     if (data){
       this.updateSize(data.treatment);
@@ -179,91 +178,5 @@ export class PhotoCropComponent implements OnInit {
       err => console.log(err)
     );
   }
-
-/*
-  cropImage(data){
-    if (this.imageMeta.credit || this.imageMeta.caption){
-      let image = new Image();
-      image.src = data;
-      let canvas = document.createElement('canvas');
-      let pic = document.createElement('canvas');
-      let picTransform = pic.getContext('2d');
-      let canvasTransform = canvas.getContext('2d');
-      picTransform.drawImage(image, 0, 0);
-      if (this.imageMeta.credit){
-        picTransform.font = '10px Arial';
-        picTransform.fillStyle = this.imageMeta.creditColor;
-        switch(this.imageMeta.creditPlacement){
-          case 'tl':
-            picTransform.textAlign = "start";
-            picTransform.fillText(this.imageMeta.credit, 10, 20);
-            break;
-          case 'tr':
-            picTransform.textAlign = "end";
-            picTransform.fillText(this.imageMeta.credit, (this.cropperSettings.width - 10), 20);
-            break;
-          case 'bl':
-            picTransform.textAlign = "start";
-            picTransform.fillText(this.imageMeta.credit, 10, (this.cropperSettings.height - 10));
-            break;
-          case 'br': 
-            picTransform.textAlign = "end";
-            picTransform.fillText(this.imageMeta.credit, (this.cropperSettings.width - 10), (this.cropperSettings.height - 10));
-            break;
-        }
-      }
-      if (this.imageMeta.treatment === "polaroid"){
-        canvas.width = 326;
-        canvas.height = 318;
-        let caption = document.createElement('canvas');
-        let captionTransform = caption.getContext('2d');
-        canvasTransform.drawImage(this.polaroidBackground, 0, 0);
-        canvasTransform.drawImage(pic, 12, 9);
-        canvasTransform.font = "22px 'Architects Daughter'";
-        canvasTransform.textAlign = "center";
-        canvasTransform.textBaseline = "middle";
-        let captionArr = this.imageMeta.caption.replace('&nbsp;', '').split('<br />');
-        if (captionArr.length > 1){
-          canvasTransform.fillText(captionArr[0], (canvas.width / 2), (canvas.height - 54));
-          canvasTransform.fillText(captionArr[1], (canvas.width / 2), (canvas.height - 30));
-        }
-        else {
-          canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height - 40));
-        }
-        this.saved.emit(canvas.toDataURL('image/jpg', 1.0));
-        this.cancel();
-      }
-      else if (this.imageMeta.treatment === 'calloutLarge' || this.imageMeta.treatment === 'calloutSmall'){
-        canvasTransform.drawImage(pic, 0, 0);
-        canvasTransform.font = "30px 'Arial'";
-        canvasTransform.textAlign = "center";
-        canvasTransform.textBaseline = "middle";
-        let captionArr = this.imageMeta.caption.replace('&nbsp;', '').split('<br />');
-        if (captionArr.length > 1){
-          canvasTransform.fillText(captionArr[0], (canvas.width / 2), ((canvas.height / 2) - 18));
-          canvasTransform.fillText(captionArr[1], (canvas.width / 2), ((canvas.height /2) + 18));
-        }
-        else {
-          canvasTransform.fillText(this.imageMeta.caption, (canvas.width / 2), (canvas.height / 2));
-        }
-        this.saved.emit(canvas.toDataURL('image/jpg', 1.0));
-        this.cancel();
-      }
-      else {
-        canvas.width = this.cropperSettings.croppedWidth;
-        canvas.height = this.cropperSettings.croppedHeight;
-        canvasTransform.drawImage(pic, 0, 0);
-        this.saved.emit(canvas.toDataURL('image/jpg', 1.0));
-        this.cancel();
-      }
-    }
-    else {
-      this.saved.emit(data);
-      this.cancel();
-    }
-  }
-  */
-
-
 }
 
