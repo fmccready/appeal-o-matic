@@ -19,13 +19,35 @@ private textLinkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 
 public generateBody(appeal) {
     this.appeal = appeal;
     let version = {};
-    let html = _.clone(appeal.content.body);
-    let plain = _.clone(appeal.content.body);
+    let html = _.clone(this.appeal.content.body);
+    let plain = _.clone(this.appeal.content.body);
     var self = this;
-    
-    if (appeal.info.campaign) {
+
+    if (this.appeal.info.campaign) {
       this.setVersion();
-      $('this.html')
+
+      html.forEach(function(h, i){
+        h = h.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
+          let linkWithCodes = self.addCodes(g1, 'TL', 'html');
+          return `<a href="${linkWithCodes}">`;
+        });
+        html[i] = h;
+      });
+
+      plain.forEach(function(p, i){
+        p = p.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
+          let linkWithCodes = self.addCodes(g1, 'TL', 'plain');
+          return `<a href="${linkWithCodes}">`;
+        });
+        plain[i] = p;
+      });
+
+      plain = plain.map((p) => {
+        return p = new PlainTextPipe().transform(p);
+      });
+
+      /*
+      $(html)
         .find('a').each(function() {
           let url = $(this).attr('href');
           url = self.addCodes(url, 'TL', 'html');
@@ -36,15 +58,14 @@ public generateBody(appeal) {
             'fontWeight': 'bold'
           });
         });
-      $('this.plain')
+      
+      $(plain)
         .find('a').each(function() {
           let url = $(this).attr('href');
           url = self.addCodes(url, 'TL', 'plain');
           $(this).attr('href', url);
         });
-        plain.map((p) => {
-          p = new PlainTextPipe().transform(p);
-        });
+        */
     }
     
     this.linkCount = { buttonLink: 1, footerLink: 1, textLink: 2, photoLink: 1, videoLink: 1, audioLink: 1, headerLink: 1 };
