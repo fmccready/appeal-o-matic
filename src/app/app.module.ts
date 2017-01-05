@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core' ;
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
-import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { ModalModule, DatepickerModule, TimepickerModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './app.component';
 
@@ -14,8 +13,6 @@ import { AppealDetailModule } from './appeal/appeal-detail/appeal-detail.module'
 
 import { CampaignService } from './campaign.service';
 import { AppealService } from './appeal.service';
-
-import { Auth } from './auth.service';
 
 import { routing, appRoutingProviders } from './app.routes';
 
@@ -29,7 +26,9 @@ import { routing, appRoutingProviders } from './app.routes';
     AppealModule,
     CampaignModule,
     AppealDetailModule,
-    ModalModule
+    ModalModule,
+    DatepickerModule,
+    TimepickerModule
   ],
   declarations: [
     AppComponent
@@ -38,9 +37,7 @@ import { routing, appRoutingProviders } from './app.routes';
     appRoutingProviders,
     CampaignService,
     AppealService,
-    Auth,
-    AUTH_PROVIDERS
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule{}
+export class AppModule{ }

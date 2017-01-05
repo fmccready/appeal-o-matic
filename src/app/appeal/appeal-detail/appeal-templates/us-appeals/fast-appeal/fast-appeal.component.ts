@@ -19,8 +19,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-fast-appeal',
-  templateUrl: 'fast-appeal.component.html',
-  styleUrls: ['fast-appeal.component.css']
+  templateUrl: './fast-appeal.component.html',
+  styleUrls: ['./fast-appeal.component.css']
 })
 export class FastAppealComponent {
   preview: any;

@@ -6,7 +6,7 @@ import { CKEditorModule } from 'ng2-ckeditor';
 
 import { PhotoCropComponent } from './photo-crop.component';
 import { FileUploadComponent } from '../../file-upload/file-upload.component';
-import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { ModalModule } from 'ng2-bootstrap';
 
 @NgModule({
   imports : [

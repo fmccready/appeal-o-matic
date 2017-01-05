@@ -19,8 +19,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-can-fast-appeal',
-  templateUrl: 'can-appeal-fast.component.html',
-  styleUrls: ['can-appeal-fast.component.css']
+  templateUrl: './can-appeal-fast.component.html',
+  styleUrls: ['./can-appeal-fast.component.css']
 })
 export class CANFastAppealComponent {
   preview: any;

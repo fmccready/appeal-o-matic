@@ -19,8 +19,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-hhd-appeal',
-  templateUrl: 'appeal-hhd.component.html',
-  styleUrls: ['appeal-hhd.component.css']
+  templateUrl: './appeal-hhd.component.html',
+  styleUrls: ['./appeal-hhd.component.css']
 })
 export class HHDAppealComponent {
   preview: any;

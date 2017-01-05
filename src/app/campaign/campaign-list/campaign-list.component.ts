@@ -8,8 +8,8 @@ import { CampaignService } from '../../campaign.service';
 
 @Component({
   selector: 'campaign-list-component',
-  templateUrl: 'campaign-list.component.html',
-  styleUrls: ['campaign-list.component.css'],
+  templateUrl: './campaign-list.component.html',
+  styleUrls: ['./campaign-list.component.css'],
 })
 export class CampaignListComponent implements OnInit {
   campaigns: Campaign[];

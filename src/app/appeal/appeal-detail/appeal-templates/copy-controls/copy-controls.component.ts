@@ -4,8 +4,8 @@ import { Observable, Subject } from 'rxjs/Rx';
 
 @Component({
   selector: 'copy-controls',
-  templateUrl: 'copy-controls.component.html',
-  styleUrls: ['copy-controls.component.css']
+  templateUrl: './copy-controls.component.html',
+  styleUrls: ['./copy-controls.component.css']
 })
 export class CopyControlsComponent {
   @Input() htmlVersion;

@@ -6,8 +6,8 @@ import { AppealSignoff } from '../../../models/appeal';
 
 @Component({
   selector: 'app-appeal-signoffs',
-  templateUrl: 'appeal-signoffs.component.html',
-  styleUrls: ['appeal-signoffs.component.css'],
+  templateUrl: './appeal-signoffs.component.html',
+  styleUrls: ['./appeal-signoffs.component.css'],
   providers: [RestoreService]
 })
 export class AppealSignoffsComponent implements OnInit {

@@ -12,8 +12,8 @@ import { PreviewService, Template } from '../../preview.service';
 
 @Component({
   selector: 'app-new-appeal',
-  templateUrl: 'new-appeal.component.html',
-  styleUrls: ['new-appeal.component.css'],
+  templateUrl: './new-appeal.component.html',
+  styleUrls: ['./new-appeal.component.css'],
 })
 export class NewAppealComponent implements OnInit {
   private campaigns: Observable<Campaign[]>;

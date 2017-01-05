@@ -13,8 +13,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-appeal-content',
-  templateUrl: 'appeal-content.component.html',
-  styleUrls: ['appeal-content.component.css'],
+  templateUrl: './appeal-content.component.html',
+  styleUrls: ['./appeal-content.component.css'],
   providers: [RestoreService]
 })
 export class AppealContentComponent implements OnInit {

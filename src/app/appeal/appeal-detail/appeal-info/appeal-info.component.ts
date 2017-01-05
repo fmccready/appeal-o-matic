@@ -13,8 +13,8 @@ import { RestoreService } from '../../../restore.service';
 
 @Component({
   selector: 'app-appeal-info',
-  templateUrl: 'appeal-info.component.html',
-  styleUrls: ['appeal-info.component.css'],
+  templateUrl: './appeal-info.component.html',
+  styleUrls: ['./appeal-info.component.css'],
   providers: [RestoreService]
 })
 export class AppealInfoComponent implements OnInit {

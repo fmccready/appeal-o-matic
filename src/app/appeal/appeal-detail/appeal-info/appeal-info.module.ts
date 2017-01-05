@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppealInfoComponent } from './appeal-info.component';
 import { RestoreService } from '../../../restore.service';
-import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap';
 
 @NgModule({
   imports: [

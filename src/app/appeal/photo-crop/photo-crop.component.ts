@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import * as Cropper from 'cropperjs';
-import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
+import { ModalDirective } from 'ng2-bootstrap';
 import { AppealImage as ImageMeta, Appeal } from '../../models/appeal';
 import { FileUploadComponent } from '../../file-upload/file-upload.component';
 import { AppealService } from '../../appeal.service';

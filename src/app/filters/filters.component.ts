@@ -10,8 +10,8 @@ import { Appeal } from '../../models/appeal';
 
 @Component({
   selector: 'app-filters',
-  templateUrl: 'filters.component.html',
-  styleUrls: ['filters.component.css']
+  templateUrl: './filters.component.html',
+  styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
   private campaigns$: Observable<Campaign[]>;

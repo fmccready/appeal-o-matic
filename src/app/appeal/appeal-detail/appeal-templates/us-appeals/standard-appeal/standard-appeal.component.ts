@@ -19,8 +19,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-standard-appeal',
-  templateUrl: 'standard-appeal.component.html',
-  styleUrls: ['standard-appeal.component.css']
+  templateUrl: './standard-appeal.component.html',
+  styleUrls: ['./standard-appeal.component.css']
 })
 export class StandardAppealComponent {
   preview: any;

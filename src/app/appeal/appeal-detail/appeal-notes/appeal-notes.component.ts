@@ -5,8 +5,8 @@ import { RestoreService } from '../../../restore.service';
 
 @Component({
   selector: 'app-appeal-notes',
-  templateUrl: 'appeal-notes.component.html',
-  styleUrls: ['appeal-notes.component.css'],
+  templateUrl: './appeal-notes.component.html',
+  styleUrls: ['./appeal-notes.component.css'],
   providers: [RestoreService]
 })
 export class AppealNotesComponent implements OnInit {

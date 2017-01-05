@@ -19,8 +19,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-can-hhd-appeal',
-  templateUrl: 'can-appeal-hhd.component.html',
-  styleUrls: ['can-appeal-hhd.component.css']
+  templateUrl: './can-appeal-hhd.component.html',
+  styleUrls: ['./can-appeal-hhd.component.css']
 })
 export class CANHHDAppealComponent {
   preview: any;

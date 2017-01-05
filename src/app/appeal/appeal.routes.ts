@@ -1,14 +1,15 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import {FiltersComponent} from './filters/filters.component';
 import {NewAppealComponent} from './new-appeal/new-appeal.component';
 import {AppealDetailComponent} from './appeal-detail/appeal-detail.component';
+import {appealDetailRoutes} from './appeal-detail/appeal-detail.routes';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'filters', pathMatch: 'full' },
-  { path: 'filters', component: FiltersComponent },
+  { path: '', redirectTo: 'new-appeal', pathMatch: 'full' },
   { path: 'new-appeal', component: NewAppealComponent },
-  { path: 'appeal/:appealId', component: AppealDetailComponent }
+  { path: 'appeal/:appealId', component: AppealDetailComponent,
+    children: appealDetailRoutes
+  }
 ];
 
-export const routing = RouterModule.forChild(routes);
+export const appealRouting = RouterModule.forChild(routes);

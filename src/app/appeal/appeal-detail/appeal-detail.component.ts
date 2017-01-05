@@ -10,8 +10,8 @@ import { Settings } from '../../models/settings';
 
 @Component({
   selector: 'app-appeal-detail',
-  templateUrl: 'appeal-detail.component.html',
-  styleUrls: ['appeal-detail.component.css'],
+  templateUrl: './appeal-detail.component.html',
+  styleUrls: ['./appeal-detail.component.css'],
 })
 export class AppealDetailComponent implements OnInit {
   private appeal: Appeal;

@@ -5,8 +5,8 @@ import { Appeal } from '../../models/appeal';
 
 @Component({
     selector: 'duplicate-appeal',
-    templateUrl: 'duplicate-appeal.component.html',
-    styleUrls: ['duplicate-appeal.component.css']
+    templateUrl: './duplicate-appeal.component.html',
+    styleUrls: ['./duplicate-appeal.component.css']
 })
 export class DuplicateAppealComponent implements OnInit {
     @Input() appeal: Appeal;

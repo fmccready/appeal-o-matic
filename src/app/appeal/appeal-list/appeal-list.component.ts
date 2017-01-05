@@ -11,8 +11,8 @@ import { AppealService } from '../../appeal.service';
 
 @Component({
   selector: 'appeal-list-component',
-  templateUrl: 'appeal-list.component.html',
-  styleUrls: ['appeal-list.component.css']
+  templateUrl: './appeal-list.component.html',
+  styleUrls: ['./appeal-list.component.css']
 })
 export class AppealListComponent implements OnChanges {
 

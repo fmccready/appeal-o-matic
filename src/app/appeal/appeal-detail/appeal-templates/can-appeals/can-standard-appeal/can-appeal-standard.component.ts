@@ -19,8 +19,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-can-standard-appeal',
-  templateUrl: 'can-appeal-standard.component.html',
-  styleUrls: ['can-appeal-standard.component.css']
+  templateUrl: './can-appeal-standard.component.html',
+  styleUrls: ['./can-appeal-standard.component.css']
 })
 export class CANStandardAppealComponent {
   preview: any;

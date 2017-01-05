@@ -19,8 +19,8 @@ interface JQuery {
 
 @Component({
   selector: 'app-can-hhd-large-img-appeal',
-  templateUrl: 'can-appeal-hhd-large-img.component.html',
-  styleUrls: ['can-appeal-hhd-large-img.component.css']
+  templateUrl: './can-appeal-hhd-large-img.component.html',
+  styleUrls: ['./can-appeal-hhd-large-img.component.css']
 })
 export class CANHHDLargeAppealComponent {
   preview: any;

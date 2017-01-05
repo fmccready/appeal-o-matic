@@ -10,7 +10,7 @@ import { CANStandardAppealComponent } from './appeal-templates/can-appeals/can-s
 import { CANFastAppealComponent } from './appeal-templates/can-appeals/can-fast-appeal/can-appeal-fast.component';
 
 
-const appealDetailRoutes: Routes = [
+export const appealDetailRoutes: Routes = [
     {
         path: 'undefined',
         component: StandardAppealComponent,

@@ -1,33 +1,33 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
-
-import { FiltersComponent } from './filters/filters.component';
+import { FormsModule } from '@angular/forms';
+import { DatepickerModule, TimepickerModule, DatepickerConfig, TimepickerConfig } from 'ng2-bootstrap';
 import { AppealListModule } from './appeal-list/appeal-list.module';
 import { NewAppealComponent } from './new-appeal/new-appeal.component';
-import { routing } from './appeal.routes';
-import { TimepickerModule, DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { appealRouting } from './appeal.routes';
+import { appealDetailRouting } from './appeal-detail/appeal-detail.routes';
 import { PreviewService } from './../preview.service';
 
 @NgModule({
   imports: [
-    routing,
-    TimepickerModule,
-    DatepickerModule,
+    appealRouting,
+    appealDetailRouting,
     CommonModule,
     AppealListModule,
-    ModalModule
+    FormsModule,
+    DatepickerModule,
+    TimepickerModule
   ],
   declarations: [
-    FiltersComponent,
     NewAppealComponent,
   ],
   exports: [
-    FiltersComponent,
     NewAppealComponent,
   ],
   providers: [
-    PreviewService
+    PreviewService,
+    DatepickerConfig,
+    TimepickerConfig
   ],
 
 })

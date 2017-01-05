@@ -6,8 +6,8 @@ import * as _ from 'lodash';
 
 @Component({
   selector: 'app-appeal-codes',
-  templateUrl: 'appeal-codes.component.html',
-  styleUrls: ['appeal-codes.component.css'],
+  templateUrl: './appeal-codes.component.html',
+  styleUrls: ['./appeal-codes.component.css'],
   providers: [RestoreService]
 })
 export class AppealCodesComponent implements OnInit {
