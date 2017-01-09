@@ -31,34 +31,23 @@ export class HHDLargeAppealComponent {
       if (data){
         this.appeal = data;
         this.body = this.template.generateBody(this.appeal);
-        var self = this;
+        
         this.body.html.forEach((item, index) => {
-          let element = $('<div>' + item + '</div>');
-          let a = element.find('a');
-          for (let i=0; i < a.length; i++){
-            this.anchors.push($(a[i]).prop('href'));
-          }
+          item = item.replace(/<a\s/g, '<a style="color:red" ');
+          this.body.html[index] = item;
         });
-        this.anchors.forEach(function(item, index){
-
-          
-          $('a', 'app-hhd-large-img-appeal').css({
-            'color': '#00529c',
-            'textDecoration': 'none',
-            'fontWeight': 'bold'
-          });
-        });
-
       }
     });
   }
 
+  
   @ViewChild('htmlVersion') htmlVersion: ElementRef;
   @ViewChild('plainVersion') plainVersion: ElementRef;
-  
+  @ViewChild('htmLBody') htmlBody: ElementRef;
+  @ViewChild('htmlPS') htmlPS: ElementRef;
+
   ngAfterViewInit(){
     console.log('after view init');
-    //$(this.htmlVersion.nativeElement);
   }
 
   ngOnInit(){

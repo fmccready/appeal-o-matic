@@ -2,6 +2,7 @@
   <div class="panel-heading text-center" data-toggle="collapse" data-parent="#controls" data-target="#contentPanel">
     <h2 class="panel-title">eAppeal Content&nbsp;&nbsp;<span class="glyphicon glyphicon-file"></span></h2>
   </div>
+  <pre>{{ content.body | json }}</pre>
   <div class="panel-body collapse" id="contentPanel">
     <div class="well" [ngClass]="{dirty: changed}">
       <form #contentForm="ngForm" novalidate>

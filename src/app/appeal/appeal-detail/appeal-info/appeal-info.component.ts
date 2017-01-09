@@ -22,7 +22,8 @@ export class AppealInfoComponent implements OnInit {
   @Output() canceled = new EventEmitter<AppealInfo>();
   private campaigns: Observable<Campaign[]>;
   private _campaigns: Campaign[];
-  private sendTime: Date = new Date();
+  private sendTime: Date;
+  
   private templates: Array<Template>;
 
   private changed = false;
@@ -35,9 +36,10 @@ export class AppealInfoComponent implements OnInit {
   }
 
   checkChanged(){
+    this.info.sendDate.setMinutes(this.sendTime.getMinutes());
+    this.info.sendDate.setHours(this.sendTime.getHours());
     this.changed = this.restoreService.isChanged();
   }
-
   
   setCampaign(val){
     for (var i = 0; i < this._campaigns.length; i++){
@@ -48,7 +50,6 @@ export class AppealInfoComponent implements OnInit {
     }
   }
   
-
   @Input()
   set info(data: AppealInfo) {
     data.sendDate = new Date(data.sendDate);

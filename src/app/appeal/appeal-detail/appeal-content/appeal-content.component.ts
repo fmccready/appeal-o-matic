@@ -66,7 +66,6 @@ export class AppealContentComponent implements OnInit {
     this.canceled.emit(this.content);
   }
   onImageSaved(data, i){
-    console.log('setting content');
     this.content.image[i].url = `http://digital.ifcj.org/appeal-images/${data.edited}?${Date.now()}`;
     this.content.image[i].original = data.original;
     this.save();

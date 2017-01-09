@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Subject, Observable } from 'rxjs/Rx';
 
-import { Campaign } from '../../models/campaign';
-import { CampaignService } from '../../campaign.service';
-import { AppealService } from '../../appeal.service';
+import { Campaign } from '../models/campaign';
+import { CampaignService } from '../campaign.service';
+import { AppealService } from '../appeal.service';
 
-import { Appeal } from '../../models/appeal';
+import { Appeal } from '../models/appeal';
 
 @Component({
   selector: 'app-filters',

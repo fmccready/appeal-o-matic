@@ -12,8 +12,9 @@
 		useComputedState = useComputedState === undefined || useComputedState;
 
 		var align;
-		if ( useComputedState )
+		if ( useComputedState ){
 			align = element.getComputedStyle( 'text-align' );
+		}
 		else {
 			while ( !element.hasAttribute || !( element.hasAttribute( 'align' ) || element.getStyle( 'text-align' ) ) ) {
 				var parent = element.getParent();
@@ -21,14 +22,13 @@
 					break;
 				element = parent;
 			}
-			align = element.getStyle( 'text-align' ) || element.getAttribute( 'align' ) || '';
+			align = element.getAttribute( 'align' ) || '';
 		}
 
 		// Sometimes computed values doesn't tell.
-		align && ( align = align.replace( /(?:-(?:moz|webkit)-)?(?:start|auto)/i, '' ) );
+		//align && ( align = align.replace( /(?:-(?:moz|webkit)-)?(?:start|auto)/i, '' ) );
 
-		!align && useComputedState && ( align = element.getComputedStyle( 'direction' ) == 'rtl' ? 'right' : 'left' );
-
+		//!align && useComputedState && ( align = element.getComputedStyle( 'direction' ) == 'rtl' ? 'right' : 'left' );
 		return align;
 	}
 
@@ -38,30 +38,13 @@
 		this.value = value;
 		this.context = 'p';
 
-		var classes = editor.config.justifyClasses,
-			blockTag = editor.config.enterMode == CKEDITOR.ENTER_P ? 'p' : 'div';
-
-		if ( classes ) {
-			switch ( value ) {
-				case 'left':
-					this.cssClassName = classes[ 0 ];
-					break;
-				case 'center':
-					this.cssClassName = classes[ 1 ];
-					break;
-			}
-
-			this.cssClassRegex = new RegExp( '(?:^|\\s+)(?:' + classes.join( '|' ) + ')(?=$|\\s)' );
-			this.requiredContent = blockTag + '(' + this.cssClassName + ')';
-		}
-		else {
-			this.requiredContent = blockTag + '{text-align}';
-		}
+		var blockTag = editor.config.enterMode == CKEDITOR.ENTER_P ? 'p' : 'div';
 
 		this.allowedContent = {
 			'caption div h1 h2 h3 h4 h5 h6 p pre td th li': {
 				// Do not add elements, but only text-align style if element is validated by other rule.
-				propertiesOnly: true,
+				propertiesOnly: false,
+				attributes: 'align',
 				styles: this.cssClassName ? null : 'text-align',
 				classes: this.cssClassName || null
 			}
@@ -69,13 +52,15 @@
 
 		// In enter mode BR we need to allow here for div, because when non other
 		// feature allows div justify is the only plugin that uses it.
-		if ( editor.config.enterMode == CKEDITOR.ENTER_BR )
+		if ( editor.config.enterMode == CKEDITOR.ENTER_BR ){
 			this.allowedContent.div = true;
+		}
+			
 	}
 
 	function onDirChanged( e ) {
+		console.log('onDirChanged');
 		var editor = e.editor;
-
 		var range = editor.createRange();
 		range.setStartBefore( e.data.node );
 		range.setEndAfter( e.data.node );
@@ -106,10 +91,17 @@
 				var style = 'text-align';
 				var align = node.getStyle( style );
 
-				if ( align == 'left' )
+				if ( align == 'left' ){
+					console.log('LEFTLEFTLEFT!!!');
 					node.setStyle( style, 'right' );
+					console.log(node);
+				}
 				else if ( align == 'right' )
+				{
+					console.log('RIGHTRIGHTRIGHT!!!');
 					node.setStyle( style, 'left' );
+				}
+					
 			}
 		}
 	}
@@ -137,22 +129,11 @@
 				while ( ( block = iterator.getNextParagraph( enterMode == CKEDITOR.ENTER_P ? 'p' : 'div' ) ) ) {
 					if ( block.isReadOnly() )
 						continue;
-					block.$.innerHTML.replace(/(<center>|<\/center>)/g, '');
-					if (block.$.tagName === 'CENTER'){
-						block.$.outerHTML = block.$.innerHTML;
-					}
-					block.$.removeAttribute('align');
-					block.$.removeAttribute('style');
-					block.removeAttribute( 'align' );
-					block.removeStyle( 'text-align' );
-
-					console.log(block);
 					if (this.value === 'center'){
 						block.$.setAttribute('align', 'center');
-						block.setStyle('text-align', 'center');
 					}
 					else {
-						block.removeStyle('text-align');
+						block.$.removeAttribute('align');
 					}
 				}
 			}
@@ -163,8 +144,8 @@
 		},
 
 		refresh: function( editor, path ) {
+			console.log('refresh');
 			var firstBlock = path.block || path.blockLimit;
-
 			this.setState( firstBlock.getName() != 'body' && getAlignment( firstBlock, this.editor.config.useComputedState ) == this.value ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF );
 		}
 	};

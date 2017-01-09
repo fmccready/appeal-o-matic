@@ -1,7 +1,7 @@
 <div class="well pull-right">
   <copy-controls [htmlVersion]="htmlVersion" [plainVersion]="plainVersion"></copy-controls>
 </div>
-
+<pre>{{ body | json }}</pre>
 <div #htmlVersion>
   <template [ngIf]="appeal">
 <!doctype html>

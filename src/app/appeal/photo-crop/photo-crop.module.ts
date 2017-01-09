@@ -7,14 +7,16 @@ import { CKEditorModule } from 'ng2-ckeditor';
 import { PhotoCropComponent } from './photo-crop.component';
 import { FileUploadComponent } from '../../file-upload/file-upload.component';
 import { ModalModule } from 'ng2-bootstrap';
+import { ComponentLoaderFactory } from 'ng2-bootstrap/component-loader';
+import { PositioningService } from 'ng2-bootstrap/positioning/positioning.service';
 
 @NgModule({
   imports : [
     CommonModule,
-    ModalModule,
     FormsModule,
+    HttpModule,
+    ModalModule,
     CKEditorModule,
-    HttpModule
   ],
   declarations: [
     PhotoCropComponent,
@@ -22,6 +24,10 @@ import { ModalModule } from 'ng2-bootstrap';
   ],
   exports: [
     PhotoCropComponent,
+  ],
+  providers: [
+    ComponentLoaderFactory,
+    PositioningService
   ]
 })
 export class PhotoCropModule {}
