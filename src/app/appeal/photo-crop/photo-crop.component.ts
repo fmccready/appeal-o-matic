@@ -117,7 +117,6 @@ export class PhotoCropComponent implements OnInit {
     this.img.nativeElement.src = `http://${window.location.hostname}:3000/assets/images/` + fileName + '?' + Date.now();
     this.imageChanges.fileName = fileName;
 
-    console.log('making new cropper');
     this.cropper = new Cropper(this.img.nativeElement, {
       aspectRatio: this.aspectRatio(this.imageChanges.width, this.imageChanges.height),
       crop: (e) => {

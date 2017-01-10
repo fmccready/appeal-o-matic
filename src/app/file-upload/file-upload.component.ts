@@ -40,18 +40,20 @@ export class FileUploadComponent implements OnInit {
     this.loading = true;
     var file = input.target.files[0];
     let formData = new FormData();
-    let extension = file.name.match(/\.(jpg|png|gif|bmp|svg)$/);
-    let fileName = this._fileName + this._suffix + extension[0];
-    formData.append('image', file, fileName);
-    let headers = new Headers({
-      'Accept': 'application/json'
-    });
-    let options = new RequestOptions({ headers: headers });
-    this.http.post(this._imageUrl, formData, options)
-      .subscribe(
-        data => {console.log(data); this.loading = false; this.onLoaded.emit(fileName)},
-        error => {console.log(error); this.loading = false;}
-      );
+    if (file){
+      let extension = file.name.match(/\.(jpg|png|gif|bmp|svg)$/);
+      let fileName = this._fileName + this._suffix + extension[0];
+      formData.append('image', file, fileName);
+      let headers = new Headers({
+        'Accept': 'application/json'
+      });
+      let options = new RequestOptions({ headers: headers });
+      this.http.post(this._imageUrl, formData, options)
+        .subscribe(
+          data => {console.log(data); this.loading = false; this.onLoaded.emit(fileName)},
+          error => {console.log(error); this.loading = false;}
+        );
+    }
   }
 
   private extractData(res: Response) {

@@ -214,7 +214,12 @@ db.once('open', function(){
               drawAudioButton(editedFile);
             }
             else {
-              writeFile(imageChanges.fileName);
+              if(imageChanges.imageMeta.treatment === 'polaroid'){
+                drawPolaroid(editedFile);
+              }
+              else {
+                writeFile(imageChanges.fileName);
+              }
             }
           }
         });

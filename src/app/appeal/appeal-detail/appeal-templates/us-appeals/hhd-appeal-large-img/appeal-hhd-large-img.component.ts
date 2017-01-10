@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs/Rx';
 
 import { AppealContent, AppealCode, Appeal } from '../../../../../models/appeal';
@@ -25,7 +25,7 @@ export class HHDLargeAppealComponent {
   private body;
   private template = new TemplateCodes();
   private anchors = [];
-  constructor(private campaignService: CampaignService, private appealService: AppealService) {
+  constructor(private campaignService: CampaignService, private appealService: AppealService, private sanitizer: DomSanitizer) {
     this._appealSub$ = this.appealService.currentAppeal$;
     this._appealSub$.subscribe(data => {
       if (data){
@@ -33,18 +33,16 @@ export class HHDLargeAppealComponent {
         this.body = this.template.generateBody(this.appeal);
         
         this.body.html.forEach((item, index) => {
-          item = item.replace(/<a\s/g, '<a style="color:red" ');
-          this.body.html[index] = item;
+          item = item.replace(/<a\s/g, '<a style="color:#00529c; text-decoration:none; font-weight:bold;" ');
+          this.body.html[index] = sanitizer.bypassSecurityTrustHtml(item);
         });
       }
+
     });
   }
 
-  
   @ViewChild('htmlVersion') htmlVersion: ElementRef;
   @ViewChild('plainVersion') plainVersion: ElementRef;
-  @ViewChild('htmLBody') htmlBody: ElementRef;
-  @ViewChild('htmlPS') htmlPS: ElementRef;
 
   ngAfterViewInit(){
     console.log('after view init');
