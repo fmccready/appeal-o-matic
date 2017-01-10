@@ -59,7 +59,6 @@
 	}
 
 	function onDirChanged( e ) {
-		console.log('onDirChanged');
 		var editor = e.editor;
 		var range = editor.createRange();
 		range.setStartBefore( e.data.node );
@@ -92,13 +91,10 @@
 				var align = node.getStyle( style );
 
 				if ( align == 'left' ){
-					console.log('LEFTLEFTLEFT!!!');
 					node.setStyle( style, 'right' );
-					console.log(node);
 				}
 				else if ( align == 'right' )
 				{
-					console.log('RIGHTRIGHTRIGHT!!!');
 					node.setStyle( style, 'left' );
 				}
 					
@@ -144,7 +140,6 @@
 		},
 
 		refresh: function( editor, path ) {
-			console.log('refresh');
 			var firstBlock = path.block || path.blockLimit;
 			this.setState( firstBlock.getName() != 'body' && getAlignment( firstBlock, this.editor.config.useComputedState ) == this.value ? CKEDITOR.TRISTATE_ON : CKEDITOR.TRISTATE_OFF );
 		}

@@ -61,7 +61,7 @@ export class AppealService {
         
         for (let d of data ){
           if (!Array.isArray(d.content.body)){
-            d.content.body = [d.content.body];
+            d.content.body = [d.content.headline, d.content.body, d.content.customSignature, d.content.ps];
           }
           if (!d.content.hasOwnProperty('callout')){
             d.content.callout = temp.content.callout;
