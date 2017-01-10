@@ -1,5 +1,5 @@
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { Observable, Subject } from 'rxjs/Rx';
 
 import { AppealContent, AppealCode, Appeal } from '../../../../../models/appeal';
@@ -10,12 +10,6 @@ import { PlainTextPipe } from '../../../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../../../remove-html.pipe';
 
 import { TemplateCodes } from '../../template.controller';
-
-declare var $: any;
-
-interface JQuery {
-  chosen(options?: any): JQuery;
-}
 
 @Component({
   selector: 'app-can-hhd-large-img-appeal',
@@ -30,31 +24,29 @@ export class CANHHDLargeAppealComponent {
   private body;
   private template = new TemplateCodes();
 
-  constructor(private campaignService: CampaignService, private appealService: AppealService) {
+  constructor(private campaignService: CampaignService, private appealService: AppealService, private sanitizer: DomSanitizer) {
     this._appealSub$ = this.appealService.currentAppeal$;
     this._appealSub$.subscribe(data => {
       if (data){
         this.appeal = data;
         this.body = this.template.generateBody(this.appeal);
-        console.log(this.body);
+        
+        this.body.html.forEach((item, index) => {
+          item = item.replace(/<a\s/g, '<a style="color:#00529c; text-decoration:none; font-weight:bold;" ');
+          this.body.html[index] = sanitizer.bypassSecurityTrustHtml(item);
+        });
       }
     });
   }
 
   @ViewChild('htmlVersion') htmlVersion: ElementRef;
   @ViewChild('plainVersion') plainVersion: ElementRef;
-  
-
 
   ngOnInit(){
-
-    
   }
   ngOnDestory(){
     if (this._appealSub$){
       this._appealSub$.unsubscribe();
     }
   };
-
-
 }

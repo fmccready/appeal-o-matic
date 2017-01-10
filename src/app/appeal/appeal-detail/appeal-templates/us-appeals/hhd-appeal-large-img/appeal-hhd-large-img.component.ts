@@ -11,7 +11,6 @@ import { RemoveHtmlPipe } from '../../../../../remove-html.pipe';
 
 import { TemplateCodes } from '../../template.controller';
 
-
 @Component({
   selector: 'app-hhd-large-img-appeal',
   templateUrl: './appeal-hhd-large-img.component.html',
@@ -24,7 +23,7 @@ export class HHDLargeAppealComponent {
   private _appealSub$;
   private body;
   private template = new TemplateCodes();
-  private anchors = [];
+  
   constructor(private campaignService: CampaignService, private appealService: AppealService, private sanitizer: DomSanitizer) {
     this._appealSub$ = this.appealService.currentAppeal$;
     this._appealSub$.subscribe(data => {
@@ -37,16 +36,11 @@ export class HHDLargeAppealComponent {
           this.body.html[index] = sanitizer.bypassSecurityTrustHtml(item);
         });
       }
-
     });
   }
 
   @ViewChild('htmlVersion') htmlVersion: ElementRef;
   @ViewChild('plainVersion') plainVersion: ElementRef;
-
-  ngAfterViewInit(){
-    console.log('after view init');
-  }
 
   ngOnInit(){
   }
@@ -55,6 +49,4 @@ export class HHDLargeAppealComponent {
       this._appealSub$.unsubscribe();
     }
   };
-
-
 }
