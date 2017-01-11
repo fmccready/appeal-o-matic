@@ -21,7 +21,7 @@ export class CopyControlsComponent {
     temp.value = temp.value.replace(/_ngcontent\S+"/g, '');
     temp.value = temp.value.replace(/ng-reflect-href\S+\s/g, '');
     temp.value = temp.value.replace(/ng-reflect-src\S+"/g, '');
-    temp.value = temp.value.replace(/ng-reflect-inner-h-t-m-l="[[:word:][:blank:]]+"/g, '');
+    temp.value = temp.value.replace(/ng-reflect-inner-h-t-m-l=".[^"]+"/g, '');
     temp.value = temp.value.replace(/&amp;/g, '&');
     temp.value = temp.value.replace(/–/g, '&ndash;');
     temp.select();
