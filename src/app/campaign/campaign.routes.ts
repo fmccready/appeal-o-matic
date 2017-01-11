@@ -5,7 +5,6 @@ import { EditCampaignComponent } from './edit-campaign/edit-campaign.component';
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'new-campaign', pathMatch: 'full' },
   { path: 'new-campaign', component: NewCampaignComponent },
   { path: 'campaign/:campaignId', component: EditCampaignComponent },
 ];
