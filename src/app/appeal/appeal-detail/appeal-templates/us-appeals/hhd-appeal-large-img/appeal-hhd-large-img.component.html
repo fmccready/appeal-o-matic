@@ -113,7 +113,6 @@
 Rabbi Yechiel Eckstein<br />Founder and President</p>
 </template>
 <template [ngIf]="body.html[2].changingThisBreaksApplicationSecurity !== 'Rabbi' && body.html[2].changingThisBreaksApplicationSecurity !== ''">
-  <pre>{{body.html[2] | json}}</pre>
   <p [innerHTML]="body.html[2]" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 </template>
 
@@ -190,13 +189,13 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
 <br><br>
 <p [innerHTML]="body.plain[1]"></p>
 <br>
-<template [ngIf]="body.plain[2] === ''">
+<template [ngIf]="body.plain[2].changingThisBreaksApplicationSecurity === 'Rabbi' || body.plain[2].changingThisBreaksApplicationSecurity === '' || !body.plain[2]">
 With prayers for shalom, peace,
 <br><br>
 Rabbi Yechiel Eckstein<br>
 Founder and President
 </template>
-<template [ngIf]="body.plain[2] !== ''">
+<template [ngIf]="body.plain[2].changingThisBreaksApplicationSecurity !== 'Rabbi' && body.plain[2].changingThisBreaksApplicationSecurity !== ''">
   <p [innerHTML]="body.plain[2]"></p>
 </template>
 <br><br>

@@ -1,7 +1,6 @@
 <div class="well pull-right">
   <copy-controls [htmlVersion]="htmlVersion" [plainVersion]="plainVersion"></copy-controls>
 </div>
-<pre>{{ body | json }}</pre>
 <div #htmlVersion>
   <template [ngIf]="appeal">
 <!doctype html>
@@ -62,7 +61,7 @@
     </head>
 
     <body style="width:100%; padding: 0px 2%; margin-left: auto; margin-right: auto;">
-        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{body.html[0] | removeHtml: 'space'}}</span>
+        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{body.plain[0]?.changingThisBreaksApplicationSecurity | removeHtml: 'space'}}</span>
         <!--[if gte mso 9]>
         <table id="tableForOutlook" width="650"><tr><td>
         <![endif]-->
@@ -113,7 +112,7 @@
 
 <p [innerHTML]="body.html[1]" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 
-<template [ngIf]="body.html[2].changingThisBreaksApplicationSecurity === ''">
+<template [ngIf]="body.html[2].changingThisBreaksApplicationSecurity === 'Rabbi' || body.html[2].changingThisBreaksApplicationSecurity === '' || !body.html[2]">
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;">
   With prayers for <em>shalom</em>, peace,<br>
 <img style="margin-top:0px; margin-bottom:0px; clear:both;" src="https://secure2.convio.net/ifcj/images/content/pagebuilder/Rabbi-Sig-Clear.png" /></p>
@@ -121,7 +120,7 @@
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align: left; margin-top:5px;line-height:20px; font-weight:normal;">
 Rabbi Yechiel Eckstein<br />President and Founder</p>
 </template>
-<template [ngIf]="body.html[2] !== ''">
+<template [ngIf]="body.html[2].changingThisBreaksApplicationSecurity !== 'Rabbi' && body.html[2].changingThisBreaksApplicationSecurity !== ''">
   <p [innerHTML]="body.html[2]" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
 </template>
 
@@ -185,13 +184,13 @@ Rabbi Yechiel Eckstein<br />President and Founder</p>
 <br><br>
 <p [innerHtml]="body.plain[1]"></p>
 <br>
-<template [ngIf]="body.plain[2] === ''">
+<template [ngIf]="body.plain[2].changingThisBreaksApplicationSecurity === 'Rabbi' || body.plain[2].changingThisBreaksApplicationSecurity === '' || !body.plain[2]">
 With prayers for shalom, peace,
 <br><br>
 Rabbi Yechiel Eckstein<br>
 President and Founder
 </template>
-<template [ngIf]="body.plain[2] !== ''">
+<template [ngIf]="body.plain[2].changingThisBreaksApplicationSecurity !== 'Rabbi' && body.plain[2].changingThisBreaksApplicationSecurity !== ''">
   <p [innerHTML]="body.plain[2]"></p>
 </template>
 <br><br>

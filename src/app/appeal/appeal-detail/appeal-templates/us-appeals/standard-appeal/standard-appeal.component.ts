@@ -35,6 +35,9 @@ export class StandardAppealComponent {
           item = item.replace(/<a\s/g, '<a style="color:#00529c; text-decoration:none; font-weight:bold;" ');
           this.body.html[index] = sanitizer.bypassSecurityTrustHtml(item);
         });
+        this.body.plain.forEach((item, index) => {
+          this.body.plain[index] = sanitizer.bypassSecurityTrustHtml(item);
+        });
       }
     });
   }
