@@ -133,7 +133,22 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  this.applyStyle({element: 'p', styles:{
+                    "font-family": "Arial, Helvetica, sans-serif",
+                    "font-size": "16px",
+                    "color": "#505050",
+                    "text-align":"left",
+                    "line-height":"21px",
+                    "margin-bottom": "1em",
+                    "font-weight":"normal"
+                  }});
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',

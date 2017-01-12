@@ -62,7 +62,7 @@
     </head>
 
     <body style="width:100%; padding: 0px 2%; margin-left: auto; margin-right: auto;">
-        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{body.plain[0] | removeHtml: 'space'}}</span>
+        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{body.plain[0]?.changingThisBreaksApplicationSecurity | removeHtml: 'space'}}</span>
         <!--[if gte mso 9]>
         <table id="tableForOutlook" width="650"><tr><td>
         <![endif]-->
@@ -102,9 +102,9 @@
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:20px; margin-bottom: 1em; margin-top:0px; font-weight:normal;">[[?xx::x[[S1:first_name]]x::<em>Shalom</em>::<em>Shalom</em>, [[S1:first_name]]]],
 </p>
 
-<p [innerHTML]="body.html[1]" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
+<div [innerHTML]="body.html[1]"></div>
 
-<template [ngIf]="body.html[2] === ''">
+<template [ngIf]="body.html[2]?.changingThisBreaksApplicationSecurity === ''">
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;">
   With prayers for <em>shalom</em>, peace,<br>
 <img style="margin-top:0px; margin-bottom:0px; clear:both;" src="https://secure2.convio.net/ifcj/images/content/pagebuilder/Rabbi-Sig-Clear.png" /></p>
@@ -187,7 +187,7 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
 <br><br>
 [[?xx::x[[S1:first_name]]x::Shalom::Shalom, [[S1:first_name]]]],
 <br><br>
-<p [innerHTML]="body.plain[1]"></p>
+<p [innerHTML]="body.plain[1]?.changingThisBreaksApplicationSecurity"></p>
 <br>
 <template [ngIf]="body.plain[2] === ''">
 With prayers for shalom, peace,

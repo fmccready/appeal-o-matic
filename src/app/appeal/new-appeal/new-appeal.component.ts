@@ -23,7 +23,7 @@ export class NewAppealComponent implements OnInit {
   private appeals: Appeal[];
   private templates: Array<Template>;
   private appealSub;
-  private currentAppeal: Appeal;
+  private currentAppeal;
   private currentAppealSub: Subscription;
   
   constructor(private campaignService: CampaignService, private appealService: AppealService, private previewService: PreviewService, private router: Router) {
@@ -55,9 +55,11 @@ export class NewAppealComponent implements OnInit {
       this.currentAppealSub = this.appealService.getCurrentAppeal().subscribe(
         data => {
           if (!this.currentAppeal){
-            this.currentAppeal = data;
+            this.currentAppeal = 'setup';
           }
           else {
+            console.log('else');
+            console.log(data);
             this.currentAppeal = data;
             this.router.navigate(['/appeal', this.currentAppeal._id, this.currentAppeal.info.template]);
           }
@@ -68,6 +70,9 @@ export class NewAppealComponent implements OnInit {
   ngOnDestroy(){
     if(this.appealSub){
       this.appealSub.unsubscribe();
+    }
+    if(this.currentAppealSub){
+      this.currentAppealSub.unsubscribe();
     }
   }
 }

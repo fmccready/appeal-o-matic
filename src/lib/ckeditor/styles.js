@@ -30,7 +30,15 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Preformatted Text',element: 'pre' },
 	{ name: 'Address',			element: 'address' },
 	*/
-
+	{ name: 'Default Style', element: 'p', styles: {
+		"font-family": "Arial, Helvetica, sans-serif",
+		"font-size": "16px",
+		"color": "#505050",
+		"text-align":"left",
+		"line-height":"21px",
+		"margin-bottom": "1em",
+		"font-weight":"normal"
+	}},
 	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
 	{
