@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StandardAppealComponent } from './us-appeals/standard-appeal/standard-appeal.component';
 import { HHDAppealComponent } from './us-appeals/hhd-appeal/appeal-hhd.component';
 import { HHDLargeAppealComponent } from './us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
+import { MobileFriendlyAppealComponent } from './us-appeals/mobile-friendly/mobile-friendly.component';
 import { CANHHDAppealComponent } from './can-appeals/can-hhd-appeal/can-appeal-hhd.component';
 import { CANHHDLargeAppealComponent } from './can-appeals/can-hhd-appeal-large-img/can-appeal-hhd-large-img.component';
 import { CANStandardAppealComponent } from './can-appeals/can-standard-appeal/can-appeal-standard.component';
@@ -24,6 +25,7 @@ import { CopyControlsComponent } from './copy-controls/copy-controls.component';
     FastAppealComponent,
     HHDAppealComponent,
     HHDLargeAppealComponent,
+    MobileFriendlyAppealComponent,
     CANHHDAppealComponent,
     CANHHDLargeAppealComponent,
     CANStandardAppealComponent,

@@ -4,6 +4,7 @@ import { StandardAppealComponent } from './appeal-templates/us-appeals/standard-
 import { FastAppealComponent } from './appeal-templates/us-appeals/fast-appeal/fast-appeal.component';
 import { HHDAppealComponent } from './appeal-templates/us-appeals/hhd-appeal/appeal-hhd.component';
 import { HHDLargeAppealComponent } from './appeal-templates/us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
+import { MobileFriendlyAppealComponent } from './appeal-templates/us-appeals/mobile-friendly/mobile-friendly.component';
 import { CANHHDAppealComponent } from './appeal-templates/can-appeals/can-hhd-appeal/can-appeal-hhd.component';
 import { CANHHDLargeAppealComponent } from './appeal-templates/can-appeals/can-hhd-appeal-large-img/can-appeal-hhd-large-img.component';
 import { CANStandardAppealComponent } from './appeal-templates/can-appeals/can-standard-appeal/can-appeal-standard.component';
@@ -30,6 +31,10 @@ export const appealDetailRoutes: Routes = [
     {
         path: 'hhdLargeAppeal',
         component: HHDLargeAppealComponent,
+    },
+    {
+        path: 'mobileFriendlyAppeal',
+        component: MobileFriendlyAppealComponent,
     },
     {
         path: 'canhhdAppeal',
