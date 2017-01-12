@@ -9,7 +9,7 @@ import { CANStandardAppealComponent } from './can-appeals/can-standard-appeal/ca
 import { CANFastAppealComponent } from './can-appeals/can-fast-appeal/can-appeal-fast.component';
 import { FastAppealComponent } from './us-appeals/fast-appeal/fast-appeal.component';
 
-
+import { SafePipe } from '../../../safe.pipe';
 import { PlainTextPipe } from '../../../plain-text.pipe';
 import { RemoveHtmlPipe } from '../../../remove-html.pipe';
 
@@ -28,6 +28,7 @@ import { CopyControlsComponent } from './copy-controls/copy-controls.component';
     CANHHDLargeAppealComponent,
     CANStandardAppealComponent,
     CANFastAppealComponent,
+    SafePipe,
     PlainTextPipe,
     RemoveHtmlPipe,
     CopyControlsComponent

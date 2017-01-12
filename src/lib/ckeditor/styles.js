@@ -30,7 +30,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Preformatted Text',element: 'pre' },
 	{ name: 'Address',			element: 'address' },
 	*/
-	{ name: 'Default Style', element: 'p', styles: {
+	{ name: 'Default', element: 'p', styles: {
 		"font-family": "Arial, Helvetica, sans-serif",
 		"font-size": "16px",
 		"color": "#505050",
@@ -39,7 +39,7 @@ CKEDITOR.stylesSet.add( 'default', [
 		"margin-bottom": "1em",
 		"font-weight":"normal"
 	}},
-	{ name: 'Italic Title',		element: 'h2', styles: { 'font-style': 'italic' } },
+	{ name: 'Title',		element: 'h2', styles: { 'font-style': 'italic', 'color':'#505050', 'text-align':'center' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
 	{
 		name: 'Special Container',
@@ -53,67 +53,12 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	/* Inline Styles */
 
-	// These are core styles available as toolbar buttons. You may opt enabling
-	// some of them in the Styles combo, removing them from the toolbar.
-	// (This requires the "stylescombo" plugin)
-	/*
-	{ name: 'Strong',			element: 'strong', overrides: 'b' },
-	{ name: 'Emphasis',			element: 'em'	, overrides: 'i' },
+	{ name: 'Bold',			element: 'b' },
+	{ name: 'Emphasis',			element: 'i' },
 	{ name: 'Underline',		element: 'u' },
 	{ name: 'Strikethrough',	element: 'strike' },
 	{ name: 'Subscript',		element: 'sub' },
 	{ name: 'Superscript',		element: 'sup' },
-	*/
-
-	{ name: 'Marker',			element: 'span', attributes: { 'class': 'marker' } },
-
-	{ name: 'Big',				element: 'big' },
-	{ name: 'Small',			element: 'small' },
-	{ name: 'Typewriter',		element: 'tt' },
-
-	{ name: 'Computer Code',	element: 'code' },
-	{ name: 'Keyboard Phrase',	element: 'kbd' },
-	{ name: 'Sample Text',		element: 'samp' },
-	{ name: 'Variable',			element: 'var' },
-
-	{ name: 'Deleted Text',		element: 'del' },
-	{ name: 'Inserted Text',	element: 'ins' },
-
-	{ name: 'Cited Work',		element: 'cite' },
-	{ name: 'Inline Quotation',	element: 'q' },
-
-	{ name: 'Language: RTL',	element: 'span', attributes: { 'dir': 'rtl' } },
-	{ name: 'Language: LTR',	element: 'span', attributes: { 'dir': 'ltr' } },
-
-	/* Object Styles */
-
-	{
-		name: 'Styled image (left)',
-		element: 'img',
-		attributes: { 'class': 'left' }
-	},
-
-	{
-		name: 'Styled image (right)',
-		element: 'img',
-		attributes: { 'class': 'right' }
-	},
-
-	{
-		name: 'Compact table',
-		element: 'table',
-		attributes: {
-			cellpadding: '5',
-			cellspacing: '0',
-			border: '1',
-			bordercolor: '#ccc'
-		},
-		styles: {
-			'border-collapse': 'collapse'
-		}
-	},
-
-	{ name: 'Borderless Table',		element: 'table',	styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
-	{ name: 'Square Bulleted List',	element: 'ul',		styles: { 'list-style-type': 'square' } }
+	
 ] );
 

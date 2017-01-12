@@ -27,21 +27,14 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// The default plugins included in the basic setup define some buttons that
 	// are not needed in a basic editor. They are removed here.
-	config.removeButtons = 'Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript';
+	config.removeButtons = 'Bold,Italic,Underline,About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript';
 	config.enterMode = CKEDITOR.ENTER_P;
 	config.autoParagraph = false;
-	config.format_p = {element:'p', styles:{
-		"font-family": "Arial, Helvetica, sans-serif",
-		"font-size": "16px",
-		"color": "#505050",
-		"text-align":"left",
-		"line-height":"21px",
-		"margin-bottom": "1em",
-		"font-weight":"normal"
-	}};
+	config.format_body = {element: 'body', styles:{'color': 'red'}};
 	config.format_tags = "p";
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';
-	config.extraPlugins = 'resize,justify,format,richcombo,floatpanel,listblock,panel';
+	config.extraPlugins = 'resize,justify,stylescombo,richcombo,floatpanel,listblock,panel,indent,indentlist';
 	config.extraAllowedContent = 'center';
 };
+

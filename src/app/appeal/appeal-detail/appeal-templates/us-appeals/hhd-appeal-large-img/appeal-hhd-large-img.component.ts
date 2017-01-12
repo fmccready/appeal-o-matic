@@ -36,10 +36,8 @@ export class HHDLargeAppealComponent {
           this.body.html[index] = sanitizer.bypassSecurityTrustHtml(item);
         });
         this.body.plain.forEach((item, index) => {
-          console.log(item);
           this.body.plain[index] = sanitizer.bypassSecurityTrustHtml(item);
         });
-        console.log(this.body);
       }
     });
   }

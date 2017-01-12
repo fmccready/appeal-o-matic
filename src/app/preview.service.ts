@@ -23,7 +23,12 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',
@@ -58,7 +63,12 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',
@@ -93,7 +103,12 @@ export class PreviewService {
           {
             title: 'headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',
@@ -128,27 +143,17 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.',
-            config: {
-              disableNativeSpellChecker:false,
-              on: {
-                instanceReady: function(){
-                  this.applyStyle({element: 'p', styles:{
-                    "font-family": "Arial, Helvetica, sans-serif",
-                    "font-size": "16px",
-                    "color": "#505050",
-                    "text-align":"left",
-                    "line-height":"21px",
-                    "margin-bottom": "1em",
-                    "font-weight":"normal"
-                  }});
-                }
-              }
-            }
+            config: {disableNativeSpellChecker:false}
           },
           {
             title: 'Custom Signature',
@@ -178,7 +183,12 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',
@@ -213,7 +223,12 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',
@@ -248,7 +263,12 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',
@@ -283,7 +303,12 @@ export class PreviewService {
           {
             title: 'Headline',
             tooltip: 'Paste in the headline here.',
-            config: {height:80, disableNativeSpellChecker:false}
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript'
+            }
           },
           {
             title: 'Body',

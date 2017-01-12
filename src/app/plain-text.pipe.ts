@@ -7,12 +7,11 @@ export class PlainTextPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     if (value) {
-      console.log(value);
-      let pArr = value.split(/(<[p\s]{1,}>)/g);
+      let pArr = value.split(/<\/p>/g);
       pArr = pArr.map((p) => {
         let urls = p.match(/(?:href=")+([^\'\"]+)/g);
         if (urls) {
-          //p = p.concat('<br>');
+          p = p.concat('<br>');
           for (let i = 0; i < urls.length; i++) {
             if (i === urls.length - 1) {
               urls[i] = urls[i].replace('href="', '');

@@ -41,7 +41,6 @@ public generateBody(appeal) {
         });
         plain[i] = p;
       });
-
       plain = plain.map((p) => {
         return p = new PlainTextPipe().transform(p);
       });
