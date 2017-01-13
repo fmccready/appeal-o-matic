@@ -69,6 +69,14 @@ export class FiltersComponent implements OnInit {
         }
       }
     );
+    console.log(filterArray);
+    filterArray.sort(function (a, b) {
+      if (a.info.sendDate < b.info.sendDate) {
+        return -1;
+      } else {
+        return 1;
+      }
+    })
     this.filteredAppeals = filterArray;
   };
 
