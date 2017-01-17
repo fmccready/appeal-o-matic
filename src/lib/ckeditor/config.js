@@ -27,7 +27,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// The default plugins included in the basic setup define some buttons that
 	// are not needed in a basic editor. They are removed here.
-	config.removeButtons = 'Bold,Italic,Underline,About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript';
+	config.removeButtons = 'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript';
 	config.enterMode = CKEDITOR.ENTER_P;
 	config.autoParagraph = false;
 	config.format_body = {element: 'body', styles:{'color': 'red'}};
