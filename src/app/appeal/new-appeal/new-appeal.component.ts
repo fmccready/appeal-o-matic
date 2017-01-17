@@ -41,7 +41,7 @@ export class NewAppealComponent implements OnInit {
     this.appealService.addAppeal(this.appeal);
   }
   ngOnInit() {
-    this.sendTime.setHours(6);
+    this.sendTime.setHours(7);
     this.sendTime.setMinutes(0);
     this.campaigns = this.campaignService.getCampaigns();
     if (!this.appealSub){
