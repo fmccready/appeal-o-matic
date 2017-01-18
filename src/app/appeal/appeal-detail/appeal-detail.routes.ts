@@ -29,6 +29,10 @@ export const appealDetailRoutes: Routes = [
         component: HHDAppealComponent,
     },
     {
+        path: 'standardLargeAppeal',
+        component: HHDLargeAppealComponent,
+    },
+    {
         path: 'hhdLargeAppeal',
         component: HHDLargeAppealComponent,
     },
