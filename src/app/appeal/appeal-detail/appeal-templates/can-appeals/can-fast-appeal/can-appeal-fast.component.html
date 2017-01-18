@@ -184,7 +184,7 @@ Rabbi Yechiel Eckstein<br />President and Founder</p>
 <div id="plainText" class="col-xs-12 col-md-8">
 <div #plainVersion>
   <template [ngIf]="appeal">
-<p [innerHtml]="body.plain[0]"></p>
+{{body.plain[0]?.changingThisBreaksApplicationSecurity | removeHtml: 'space'}}
 <br><br>
 {{template.addCodes(appeal.content.url, {src:'TL1', utm:'text-link-1'}, 'plain') }}
 <br><br>
