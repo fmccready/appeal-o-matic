@@ -41,7 +41,7 @@ export class FileUploadComponent implements OnInit {
     var file = input.target.files[0];
     let formData = new FormData();
     if (file){
-      let extension = file.name.match(/\.(jpg|png|gif|bmp|svg)$/);
+      let extension = file.name.toLowerCase().match(/\.(jpg|png|gif|bmp|svg)$/);
       let fileName = this._fileName + this._suffix + extension[0];
       formData.append('image', file, fileName);
       let headers = new Headers({
