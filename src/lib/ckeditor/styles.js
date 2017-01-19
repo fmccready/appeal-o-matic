@@ -61,4 +61,3 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Superscript',		element: 'sup' },
 	
 ] );
-

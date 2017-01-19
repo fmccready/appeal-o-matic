@@ -98,7 +98,7 @@
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:20px; margin-bottom: 1em; margin-top:0px; font-weight:normal;">[[?xx::x[[S1:first_name]]x::<em>Shalom</em>::<em>Shalom</em>, [[S1:first_name]]]],
 </p>
 
-<p [innerHTML]="body.html[1]" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>
+<div [innerHTML]="body.html[1]"></div>
 
 <template [ngIf]="body.html[2]?.changingThisBreaksApplicationSecurity === 'Rabbi' || body.html[2]?.changingThisBreaksApplicationSecurity === '' || !body.html[2]">
 <p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;">
