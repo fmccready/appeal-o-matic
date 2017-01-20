@@ -30,7 +30,6 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removeButtons = 'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript';
 	config.enterMode = CKEDITOR.ENTER_P;
 	config.autoParagraph = false;
-	config.format_body = {element: 'body', styles:{'color': 'red'}};
 	config.format_tags = "p";
 	// Dialog windows are also simplified.
 	config.removeDialogTabs = 'link:advanced';

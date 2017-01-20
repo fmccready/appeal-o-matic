@@ -35,7 +35,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -76,7 +86,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -117,7 +137,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -158,7 +188,18 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            },
+
           },
           {
             title: 'Custom Signature',
@@ -199,7 +240,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -240,7 +291,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -281,7 +342,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -322,7 +393,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -363,7 +444,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
@@ -404,7 +495,17 @@ export class PreviewService {
           {
             title: 'Body',
             tooltip: 'Paste in the body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
-            config: {disableNativeSpellChecker:false}
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            }
           },
           {
             title: 'Custom Signature',
