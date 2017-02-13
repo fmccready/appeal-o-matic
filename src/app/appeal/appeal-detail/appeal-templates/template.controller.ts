@@ -25,32 +25,29 @@ public generateBody(appeal) {
 
     if (this.appeal.info.campaign) {
       this.setVersion();
-
+      console.log(html);
       html.forEach(function(h, i){
-        if (h){
-          h = h.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
-            let linkWithCodes = self.addCodes(g1, 'TL', 'html');
-            return `<a href="${linkWithCodes}">`;
-          });
-          html[i] = h;        
-        }
-        else {
+
+        console.log(h);
+        if (h === undefined || h === null) {
           h = '';
         }
-
+        h = h.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
+          let linkWithCodes = self.addCodes(g1, 'TL', 'html');
+          return `<a href="${linkWithCodes}">`;
+        });
+        html[i] = h;
       });
 
       plain.forEach(function(p, i){
-        if (p){
-          p = p.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
-            let linkWithCodes = self.addCodes(g1, 'TL', 'plain');
-            return `<a href="${linkWithCodes}">`;
-          });
-          plain[i] = p;        
-        }
-        else {
+        if (p === undefined || p === null) {
           p = '';
         }
+        p = p.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
+          let linkWithCodes = self.addCodes(g1, 'TL', 'plain');
+          return `<a href="${linkWithCodes}">`;
+        });
+        plain[i] = p;
       });
       plain = plain.map((p) => {
         return p = new PlainTextPipe().transform(p);
