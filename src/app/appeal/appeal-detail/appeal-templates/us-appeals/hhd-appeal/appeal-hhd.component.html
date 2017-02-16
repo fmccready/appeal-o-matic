@@ -62,7 +62,7 @@
     </head>
 
     <body style="width:100%; padding: 0px 2%; margin-left: auto; margin-right: auto;">
-        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{body.plain[0]?.changingThisBreaksApplicationSecurity | removeHtml: 'space'}}</span>
+        <span style="display: none !important; visibility: hidden; opacity: 0; color: #ffffff; height: 0; width: 0;">{{body.plain[0]?.changingThisBreaksApplicationSecurity | removeHtml: 'space':'rsquo'}}</span>
         <!--[if gte mso 9]>
         <table id="tableForOutlook" width="650"><tr><td>
         <![endif]-->
@@ -174,7 +174,7 @@ Rabbi Yechiel Eckstein<br />Founder and President</p>
 <div id="plainText" class="col-xs-12 col-md-8">
 <div #plainVersion>
   <template [ngIf]="appeal">
-{{body.plain[0]?.changingThisBreaksApplicationSecurity | removeHtml: 'space'}}
+{{body.plain[0]?.changingThisBreaksApplicationSecurity | removeHtml: 'space':'rsquo'}}
 <br><br>
 {{template.addCodes(appeal.content.url, {src:'TL1', utm:'text-link-1'}, 'plain') }}
 <br><br>

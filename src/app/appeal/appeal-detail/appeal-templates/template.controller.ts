@@ -25,10 +25,8 @@ public generateBody(appeal) {
 
     if (this.appeal.info.campaign) {
       this.setVersion();
-      console.log(html);
       html.forEach(function(h, i){
 
-        console.log(h);
         if (h === undefined || h === null) {
           h = '';
         }

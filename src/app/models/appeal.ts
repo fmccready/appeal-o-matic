@@ -4,8 +4,8 @@ export class Appeal {
   _id: string;
   info: AppealInfo = new AppealInfo();
   codes: AppealCode = new AppealCode();
-  signoffs: AppealSignoff = new AppealSignoff;
-  content: AppealContent = new AppealContent;
+  signoffs: AppealSignoff = new AppealSignoff();
+  content: AppealContent = new AppealContent();
   notes: string = '';
 }
 export class AppealInfo {

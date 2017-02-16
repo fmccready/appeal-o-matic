@@ -10,7 +10,7 @@
           <ul class="nav nav-pills nav-justified" role="tablist">
             <li role="presentation"><a href="#copy" aria-controls="copy" role="tab" data-toggle="tab">Copy&nbsp;&nbsp;<span class="glyphicon glyphicon-pencil"></span></a></li>
             <li role="presentation"><a href="#images" aria-controls="images" role="tab" data-toggle="tab">Image&nbsp;&nbsp;<span class="glyphicon glyphicon-picture"></span></a></li>
-            <li role="presentation"><a href="#callout" aria-controls="callout" role="tab" data-toggle="tab">Callout&nbsp;&nbsp;<span class="glyphicon glyphicon-bullhorn"></span></a></li>
+            <li *ngIf="callout" role="presentation"><a href="#callout" aria-controls="callout" role="tab" data-toggle="tab">Callout&nbsp;&nbsp;<span class="glyphicon glyphicon-bullhorn"></span></a></li>
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade" id="copy">
@@ -59,7 +59,7 @@
               </div>
             </div>
 
-            <div role="tabpanel" class="tab-pane fade" id="callout">
+            <div *ngIf="callout" role="tabpanel" class="tab-pane fade" id="callout">
               <div class="well">
                 <div class="add-image">
                   <photo-crop [suffix]="callout" [imageMeta]="content.callout.image" (saved)="onCalloutSaved($event)"></photo-crop>

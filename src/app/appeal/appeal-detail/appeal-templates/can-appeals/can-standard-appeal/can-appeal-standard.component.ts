@@ -28,6 +28,7 @@ export class CANStandardAppealComponent {
     this._appealSub$ = this.appealService.currentAppeal$;
     this._appealSub$.subscribe(data => {
       if (data){
+        console.log(data);
         this.appeal = data;
         this.body = this.template.generateBody(this.appeal);
 
