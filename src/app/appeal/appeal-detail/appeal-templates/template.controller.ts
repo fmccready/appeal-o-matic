@@ -27,6 +27,7 @@ public generateBody(appeal) {
       this.setVersion();
       console.log(html);
       html.forEach(function(h, i){
+
         console.log(h);
         if (h === undefined || h === null) {
           h = '';
