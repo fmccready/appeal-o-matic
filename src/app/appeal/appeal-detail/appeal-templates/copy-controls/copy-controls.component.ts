@@ -10,12 +10,17 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class CopyControlsComponent {
   @Input() htmlVersion;
   @Input() plainVersion;
-  
+  @Input() htmlStyle;
   copyHtml(){
     
     var temp = document.createElement('input');
     var hidden = document.querySelector('#hidden');
     hidden.appendChild(temp);
+    if (this.htmlStyle){
+      var style = document.createElement('style');
+      style.innerHTML = this.htmlStyle;
+      this.htmlVersion.getElementsByTagName('head')[0].appendChild(style);
+    }
 
     temp.value = this.htmlVersion.innerHTML.toString();
     temp.value = temp.value.replace(/_ngcontent\S+"/g, '');
@@ -35,6 +40,9 @@ export class CopyControlsComponent {
     window.getSelection().removeAllRanges();
     while (hidden.hasChildNodes()) {
       hidden.removeChild(hidden.lastChild);
+    }
+    if (this.htmlStyle){
+      this.htmlVersion.getElementsByTagName('head')[0].removeChild(style);
     }
   }
 

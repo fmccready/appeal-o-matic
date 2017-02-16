@@ -45,7 +45,7 @@ export class CANStandardAppealComponent {
 
   @ViewChild('htmlVersion') htmlVersion: ElementRef;
   @ViewChild('plainVersion') plainVersion: ElementRef;
-
+  
   ngOnInit(){
   }
   ngOnDestory(){
