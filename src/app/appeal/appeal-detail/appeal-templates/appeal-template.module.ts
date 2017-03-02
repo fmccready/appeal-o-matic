@@ -9,6 +9,7 @@ import { CANHHDLargeAppealComponent } from './can-appeals/can-hhd-appeal-large-i
 import { CANStandardAppealComponent } from './can-appeals/can-standard-appeal/can-appeal-standard.component';
 import { CANFastAppealComponent } from './can-appeals/can-fast-appeal/can-appeal-fast.component';
 import { FastAppealComponent } from './us-appeals/fast-appeal/fast-appeal.component';
+import { StoreEmailComponent } from './us-appeals/store-email/store-email.component';
 
 import { SafePipe } from '../../../safe.pipe';
 import { PlainTextPipe } from '../../../plain-text.pipe';
@@ -26,6 +27,7 @@ import { CopyControlsComponent } from './copy-controls/copy-controls.component';
     HHDAppealComponent,
     HHDLargeAppealComponent,
     MobileFriendlyAppealComponent,
+    StoreEmailComponent,
     CANHHDAppealComponent,
     CANHHDLargeAppealComponent,
     CANStandardAppealComponent,
