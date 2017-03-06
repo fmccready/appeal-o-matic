@@ -39,6 +39,15 @@ CKEDITOR.stylesSet.add( 'default', [
 		"margin-bottom": "1em",
 		"font-weight":"normal"
 	}},
+	{ name: 'PassoverCopy', element: 'p', styles: {
+		"font-family": "'Trebuchet MS',sans-serif",
+		"font-size": "16px",
+		"color": "#6d6e70",
+		"text-align":"left",
+		"line-height":"1.3",
+		"margin-bottom": "10px",
+		"font-weight":"normal"
+    }},
 	{ name: 'Title',		element: 'h2', styles: { 'font-style': 'italic', 'color':'#505050', 'text-align':'center' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
 	{

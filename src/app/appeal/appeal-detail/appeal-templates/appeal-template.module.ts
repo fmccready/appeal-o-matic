@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { StandardAppealComponent } from './us-appeals/standard-appeal/standard-appeal.component';
 import { HHDAppealComponent } from './us-appeals/hhd-appeal/appeal-hhd.component';
 import { HHDLargeAppealComponent } from './us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
+import { PassoverLargeAppealComponent } from './us-appeals/passover-appeal-large-img/appeal-passover-large-img.component';
 import { MobileFriendlyAppealComponent } from './us-appeals/mobile-friendly/mobile-friendly.component';
 import { CANHHDAppealComponent } from './can-appeals/can-hhd-appeal/can-appeal-hhd.component';
 import { CANHHDLargeAppealComponent } from './can-appeals/can-hhd-appeal-large-img/can-appeal-hhd-large-img.component';
+import { CANPassoverLargeAppealComponent } from './can-appeals/can-passover-appeal-large-img/can-appeal-passover-large-img.component';
 import { CANStandardAppealComponent } from './can-appeals/can-standard-appeal/can-appeal-standard.component';
 import { CANFastAppealComponent } from './can-appeals/can-fast-appeal/can-appeal-fast.component';
 import { FastAppealComponent } from './us-appeals/fast-appeal/fast-appeal.component';
@@ -26,10 +28,12 @@ import { CopyControlsComponent } from './copy-controls/copy-controls.component';
     FastAppealComponent,
     HHDAppealComponent,
     HHDLargeAppealComponent,
+    PassoverLargeAppealComponent,
     MobileFriendlyAppealComponent,
     StoreEmailComponent,
     CANHHDAppealComponent,
     CANHHDLargeAppealComponent,
+    CANPassoverLargeAppealComponent,
     CANStandardAppealComponent,
     CANFastAppealComponent,
     SafePipe,
