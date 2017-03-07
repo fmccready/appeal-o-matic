@@ -1,5 +1,5 @@
 <div class="well pull-right">
-  <copy-controls [htmlVersion]="htmlVersion" [plainVersion]="plainVersion"></copy-controls>
+  <copy-controls [htmlVersion]="htmlVersion" [htmlStyle]="htmlStyle" [plainVersion]="plainVersion"></copy-controls>
 </div>
 <div #htmlVersion>
   <template [ngIf]="appeal">
@@ -7,50 +7,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <style>
-			a link:{
-			  color: #00529c;
-			  text-decoration: none;
-			}
-			a:visited:{
-			  color: #505050;
-			  text-decoration: none;
-			}
-			a:hover:{
-			  color: #00529c;
-			  text-decoration: none;
-			}
-			a:active:{
-			  color: #00529c;
-			  text-decoration: none;
-			}
-			#read-more-top-btn {
-			  width: 50%; max-width: 325px;float: left;display:table-cell;
-			}
-			#read-more-btn {
-			  width: 20%; max-width: 200px;float: left;display:table-cell;
-			}
-			#share-btns {
-			  float: right; width: 22%; min-width: 80px;text-align:right;display: table-cell;
-			}
-			#story-photo {
-			  margin-right: 20px;
-			}
-
-			#add-space {
-			  display: none;
-			}
-
-			li{
-			  font-family: Arial, Helvetica, sans-serif;
-			  font-size: 14px;
-			}
-
-			ul{
-			  font-family: Arial, Helvetica, sans-serif;
-			  font-size: 14px;
-        }
-        </style>
         <!--[if gte mso 9]>
         <style>
         #add-space {
