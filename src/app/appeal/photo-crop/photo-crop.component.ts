@@ -144,6 +144,14 @@ export class PhotoCropComponent implements OnInit {
         this.imageChanges.width = 650;
         this.imageChanges.height = 391;
         break;
+       case 'promoHeader':
+        this.imageChanges.width = 580;
+        this.imageChanges.height = 300;
+        break;
+      case 'promo':
+        this.imageChanges.width = 326;
+        this.imageChanges.height = 198;
+        break;   
       case 'calloutLarge':
         this.imageChanges.width = 650;
         this.imageChanges.height = 150;

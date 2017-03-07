@@ -46,6 +46,8 @@
           <select id="imageTreatment" class="form-control" [(ngModel)]="imageMeta.treatment" #image="ngModel" name="imageTreatment" (change)="updateSize($event.target.value)">
             <option value="small">Small</option>
             <option value="large">Large</option>
+            <option value="promoHeader">Promo Email Large Header</option>
+            <option value="promo">Promo Image</option>
             <option value="polaroid">Polaroid</option>
             <option value="calloutSmall">calloutSmall</option>
             <option value="calloutLarge">calloutLarge</option>

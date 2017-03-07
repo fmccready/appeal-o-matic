@@ -315,6 +315,11 @@ export class PreviewService {
             },
           },
           {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80, disableNativeSpellChecker:false}
+          },
+          {
             title: 'Promo Headline',
             tooltip: 'Paste in the promotional headline here.',
             config: {
@@ -343,11 +348,6 @@ export class PreviewService {
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80, disableNativeSpellChecker:false}
-          },
-          {
-            title: 'PS',
-            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
             config: {height:80, disableNativeSpellChecker:false}
           }
         ],
@@ -611,6 +611,11 @@ export class PreviewService {
             },
           },
           {
+            title: 'PS',
+            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80, disableNativeSpellChecker:false}
+          },
+          {
             title: 'Promo Headline',
             tooltip: 'Paste in the promotional headline here.',
             config: {
@@ -639,11 +644,6 @@ export class PreviewService {
           {
             title: 'Custom Signature',
             tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80, disableNativeSpellChecker:false}
-          },
-          {
-            title: 'PS',
-            tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
             config: {height:80, disableNativeSpellChecker:false}
           }
         ],
