@@ -82,7 +82,7 @@ CKEDITOR.stylesSet.add( 'default', [
 			"font-weight": 400,
 			"line-height": 1.3,
 			"margin": '0 0 10px 9',
-			"text-align": 'left',
+			"text-align": 'center',
 			"word-wrap": 'normal'
 		}
 	},
