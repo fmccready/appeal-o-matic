@@ -4,6 +4,8 @@ import { StandardAppealComponent } from './appeal-templates/us-appeals/standard-
 import { FastAppealComponent } from './appeal-templates/us-appeals/fast-appeal/fast-appeal.component';
 import { HHDAppealComponent } from './appeal-templates/us-appeals/hhd-appeal/appeal-hhd.component';
 import { PassoverLargeAppealComponent } from './appeal-templates/us-appeals/passover-appeal-large-img/appeal-passover-large-img.component';
+import { EmergencyResponseComponent } from './appeal-templates/us-appeals/emergency-response/emergency-response.component';
+import { PrayerAlertComponent } from './appeal-templates/us-appeals/prayer-alert/prayer-alert.component';
 import { HHDLargeAppealComponent } from './appeal-templates/us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
 import { StoreEmailComponent } from './appeal-templates/us-appeals/store-email/store-email.component';
 import { MobileFriendlyAppealComponent } from './appeal-templates/us-appeals/mobile-friendly/mobile-friendly.component';
@@ -42,6 +44,14 @@ export const appealDetailRoutes: Routes = [
     {
         path: 'passoverLargeAppeal',
         component: PassoverLargeAppealComponent,
+    },
+    {
+        path: 'emergencyResponseAppeal',
+        component: EmergencyResponseComponent,
+    },
+    {
+        path: 'prayerAlertAppeal',
+        component: PrayerAlertComponent,
     },
     {
         path: 'storeEmail',

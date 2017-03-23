@@ -48,9 +48,17 @@
                       <input type="text" [attr.id]="'brightcoveId-' + i" class="form-control" [(ngModel)]="content.image[i].brightcoveId" (change)="checkChanged()" #image="ngModel" [name]="'brightcoveId' + i">
                     </div>
                     <label [attr.for]="'imageCode-' + i">Image source code</label>
-                    <input type="text" [attr.id]="'imageCode-' + i" class="form-control" [(ngModel)]="content.image[i].code" (change)="checkChanged()" #image="ngModel" [name]="'imageCode-' + i">
+                    <input type="text" [attr.id]="'imageCode-' + i" class="form-control" [(ngModel)]="content.image[i].code" (change)="checkChanged()" #image="ngModel" [name]="'imageCode-' + i" list="sourceCodes">
+                    <datalist id="sourceCodes">
+                      <option value="PH1">
+                      <option value="VID1">
+                    </datalist>
                     <label [attr.for]="'imageUtm-' + i">Image UTM code</label>
-                    <input type="text" [attr.id]="'imageUtm-' + i" class="form-control" [(ngModel)]="content.image[i].utm" (change)="checkChanged()" #image="ngModel" [name]="'imageUtm-' + i">           
+                    <input type="text" [attr.id]="'imageUtm-' + i" class="form-control" [(ngModel)]="content.image[i].utm" (change)="checkChanged()" #image="ngModel" [name]="'imageUtm-' + i" list="utmCodes">
+                    <datalist id="utmCodes">
+                      <option value="photo-link-1">
+                      <option value="video-link-1">
+                    </datalist>
                   </div>
                   <template [ngIf]="options.image.length > 1">
                     <hr>
@@ -90,6 +98,21 @@
         <div class="form-group" [class.has-error]="!url.valid && url.touched" data-toggle="popover" data-placement="right" title="Donation Form Link" data-content="Paste the link for the desired donation form to be linked for all of the donation links outside the body and PS copy. <br><br>And do not forget to remove any source and subsource codes from the link.">
           <label for="url">Default donation form link</label>
           <input type="text" id="url" class="form-control" [(ngModel)]="content.url" (change)="checkChanged()" #url="ngModel" name="url">
+        </div>
+
+        <div class="form-group" data-toggle="popover" data-placement="right" title="Donate Button Selection" data-content="Select the desired text for the donate buttons.">
+          <label for="donate-button">Donate Button Selection</label>
+          <select [(ngModel)]="content.donateButton" list="donate" (change)="checkChanged()" #donateButton="ngModel" id="donateButton" class="form-control" name="donateButton">
+            <option selected="selected">Donate Now</option>
+            <option>Give Now</option>
+            <option>Help Now</option>
+          </select>
+          <!--<input type="text" [(ngModel)]="content.donateButton" list="donate" (change)="checkChanged()" #donateButton="ngModel" id="donateButton" class="form-control" name="donateButton" value="Donate Now">
+          <datalist id="donate">
+            <option value="Donate Now">
+            <option value="Give Now">
+            <option value="Help Now">
+          </datalist>-->
         </div>
 
         <button (click)="save()" class="btn btn-success">Save</button><button (click)="cancel()" class="btn btn-danger pull-right">Cancel</button>

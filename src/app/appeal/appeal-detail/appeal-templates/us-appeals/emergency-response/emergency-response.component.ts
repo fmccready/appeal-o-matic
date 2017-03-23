@@ -12,11 +12,11 @@ import { RemoveHtmlPipe } from '../../../../../remove-html.pipe';
 import { TemplateCodes } from '../../template.controller';
 
 @Component({
-  selector: 'passover-large-img-appeal',
-  templateUrl: './appeal-passover-large-img.component.html',
-  styleUrls: ['./appeal-passover-large-img.component.css']
+  selector: 'emergency-response',
+  templateUrl: './emergency-response.component.html',
+  styleUrls: ['./emergency-response.component.css']
 })
-export class PassoverLargeAppealComponent {
+export class EmergencyResponseComponent {
   preview: any;
   private version: any = {};
   private appeal: Appeal;
@@ -32,7 +32,7 @@ export class PassoverLargeAppealComponent {
         this.body = this.template.generateBody(this.appeal);
         
         this.body.html.forEach((item, index) => {
-          item = item.replace(/<a\s/g, '<a style="color:#00529c; text-decoration:none; font-weight:bold;" ');
+          item = item.replace(/<a\s/g, '<a style="color:#a61d26; text-decoration:none; font-weight:bold;" ');
           this.body.html[index] = sanitizer.bypassSecurityTrustHtml(item);
         });
         this.body.plain.forEach((item, index) => {

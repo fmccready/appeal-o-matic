@@ -1,5 +1,5 @@
 <div class="well pull-right">
-  <copy-controls [htmlVersion]="htmlVersion" [plainVersion]="plainVersion"></copy-controls>
+  <copy-controls [htmlVersion]="htmlVersion" [htmlStyle]="htmlStyle" [plainVersion]="plainVersion"></copy-controls>
 </div>
 
 <div #htmlVersion>
@@ -8,52 +8,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <style>
-			a link:{
-			  color: #00529c;
-			  text-decoration: none;
-			}
-			a:visited:{
-			  color: #505050;
-			  text-decoration: none;
-			}
-			a:hover:{
-			  color: #00529c;
-			  text-decoration: none;
-			}
-			a:active:{
-			  color: #00529c;
-			  text-decoration: none;
-			}
-			#read-more-top-btn {
-			  width: 50%; max-width: 325px;float: left;display:table-cell;
-			}
-			#read-more-btn {
-			  width: 20%; max-width: 200px;float: left;display:table-cell;
-			}
-			#share-btns {
-			  float: right; width: 22%; min-width: 80px;text-align:right;display: table-cell;
-			}
-			#story-photo {
-			  margin-right: 20px;
-			}
-
-			#add-space {
-			  display: none;
-			}
-
-			li{
-			  font-family: Arial, Helvetica, sans-serif;
-			  font-size: 14px;
-			}
-
-			ul{
-			  font-family: Arial, Helvetica, sans-serif;
-			  font-size: 14px;
-        }
-
-        @media only screen{html{min-height:100%;background:#f3f3f3}}@media only screen and (max-width:596px){.small-float-center{margin:0 auto!important;float:none!important;text-align:center!important}}@media only screen and (max-width:596px){table.body img{width:auto;height:auto}table.body center{min-width:0!important}table.body .container{width:95%!important}table.body .columns{height:auto!important;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;padding-left:16px!important;padding-right:16px!important}table.body .columns .columns{padding-left:0!important;padding-right:0!important}table.body .collapse .columns{padding-left:0!important;padding-right:0!important}th.small-6{display:inline-block!important;width:50%!important}th.small-12{display:inline-block!important;width:100%!important}.columns th.small-12{display:block!important;width:100%!important}table.menu{width:100%!important}table.menu td,table.menu th{width:auto!important;display:inline-block!important}table.menu.small-vertical td,table.menu.small-vertical th,table.menu.vertical td,table.menu.vertical th{display:block!important}table.menu[align=center]{width:auto!important}}
-        </style>
         <!--[if gte mso 9]>
         <style>
         #add-space {
@@ -154,8 +108,7 @@
                                                         <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                                             <tbody><tr style="padding:0;text-align:left;vertical-align:top">
                                                                 <th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
-                                                                    <h1 class="text-center" style="Margin:0;Margin-bottom:5px;color:#00529c;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-size:60px;font-weight:400;line-height:55px;margin:0;margin-bottom:5px;margin-top:5px;padding:0;text-align:center;word-wrap:normal">
-                                                                        <a href="{{template.addCodes(appeal.content.url, {src: 'TL1', utm: 'text-link-1'}, 'html')}}"><span [innerHTML]="body?.html[0]"></span></a>
+                                                                    <h1 class="text-center" style="Margin:0;Margin-bottom:5px;color:#00529c;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-size:60px;font-weight:400;line-height:55px;margin:0;margin-bottom:5px;margin-top:5px;padding:0;text-align:center;word-wrap:normal"><a href="{{template.addCodes(appeal.content.url, {src: 'TL1', utm: 'text-link-1'}, 'html')}}" style="Margin:0;Margin-bottom:5px;color:#00529c;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-size:60px;font-weight:400;line-height:55px;margin:0;margin-bottom:5px;margin-top:5px;padding:0;text-align:left;text-decoration:none"><span [innerHTML]="body?.html[0]"></span></a>
                                                                     </h1>
                                                                 </th>
                                                                 <th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
@@ -207,6 +160,8 @@
                                                                     <h3 style="Margin:0;Margin-bottom:10px;color:#00529c;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-size:28px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;margin-top:0;padding:0;text-align:left;word-wrap:normal">
                                                                         <span [innerHTML]="body?.html[1]"></span>
                                                                     </h3>
+                                                                                                                                        <p style="color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:normal;line-height:1.3;margin-bottom:10px;text-align:left;">[[?xx::x[[S1:first_name]]x::<em>Shalom</em>::<em>Shalom</em>, [[S1:first_name]]]],</p>
+
                                                                     <div [innerHTML]="body.html[2]"></div>
                                                                 </th>
                                                             </tr>
@@ -222,7 +177,7 @@
                                                         <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                                             <tbody><tr style="padding:0;text-align:left;vertical-align:top">
                                                                 <th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
-                                                                        <template [ngIf]="body.html[5]?.changingThisBreaksApplicationSecurity === 'Rabbi' || body.html[5]?.changingThisBreaksApplicationSecurity === '' || !body.html[5]">
+                                                                        <template [ngIf]="body.html[6]?.changingThisBreaksApplicationSecurity === 'Rabbi' || body.html[6]?.changingThisBreaksApplicationSecurity === '' || !body.html[6]">
                                                                           <p style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left">
                                                                             With prayers for <em>shalom</em>, peace,<br>
                                                                           <img src="http://digital.ifcj.org/site-assets/email-assets/Rabbi-Sig-Clear.png" style="-ms-interpolation-mode:bicubic;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></p>
@@ -230,8 +185,16 @@
                                                                           <p style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left">
                                                                           Rabbi Yechiel Eckstein<br />President and Founder</p>
                                                                           </template>
-                                                                          <template [ngIf]="body.html[5]?.changingThisBreaksApplicationSecurity !== 'Rabbi' && body.html[5]?.changingThisBreaksApplicationSecurity !== ''">
-                                                                            <p [innerHTML]="body.html[5]" style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left"></p>
+                                                                          <template [ngIf]="body.html[6]?.changingThisBreaksApplicationSecurity === 'Yael'">
+                                                                          <p style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left">
+                                                                            With blessings from the Holy Land,<br>
+                                                                          <img src="http://digital.ifcj.org/site-assets/email-assets/12-day-yael-signature.jpg" style="-ms-interpolation-mode:bicubic;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></p>
+
+                                                                          <p style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left">
+                                                                          Yael Eckstein<br />Senior Vice President</p>
+                                                                          </template>
+                                                                          <template [ngIf]="body.html[6]?.changingThisBreaksApplicationSecurity !== 'Rabbi' && body.html[6]?.changingThisBreaksApplicationSecurity !== 'Yael' && body.html[6]?.changingThisBreaksApplicationSecurity !== ''">
+                                                                            <p [innerHTML]="body.html[6]" style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left"></p>
                                                                           </template>
                                                                 </th>
                                                             </tr>
@@ -274,7 +237,7 @@
                                                         <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%">
                                                             <tr style="padding:0;text-align:left;vertical-align:top">
                                                                 <th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
-                                                                    <p style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left"><span [innerHTML]="body.html[6]"></span></p>
+                                                                    <p style="Margin:0;Margin-bottom:10px;color:#6d6e70;font-family:'Trebuchet MS',sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left"><span [innerHTML]="body.html[3]"></span></p>
                                                                 </th>
                                                                 <th class="expander" style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;padding:0!important;text-align:left;visibility:hidden;width:0">
                                                                 </th>
@@ -285,7 +248,7 @@
                                             </tbody>
                                         </table>                                                                                                                    
                         
-
+                                    <template [ngIf]="body.html[4]?.changingThisBreaksApplicationSecurity !== ''">
                                         <hr>
                                             <table class="row collapse bottom-callout" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%">
                                                 <tbody>
@@ -304,9 +267,9 @@
                                                                 <tbody><tr style="padding:0;text-align:left;vertical-align:top">
                                                                     <th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
                                                                         <h3 style="Margin:0;Margin-bottom:10px;color:#00529c;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-size:28px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;margin-top:0;padding:0;text-align:left;word-wrap:normal">
-                                                                           <a href="{{template.addCodes(appeal.content.url, {src: 'TL4', utm: 'text-link-4'}, 'html')}}"><span [innerHTML]="body?.html[3]"></span></a>
+                                                                           <a href="{{template.addCodes(appeal.content.url, {src: 'TL4', utm: 'text-link-4'}, 'html')}}"><span [innerHTML]="body?.html[4]"></span></a>
                                                                         </h3>
-                                                                       <div [innerHTML]="body.html[4]"></div>
+                                                                       <div [innerHTML]="body.html[5]"></div>
                                                                     </th>
                                                                 </tr>
                                                             </tbody></table>
@@ -316,7 +279,7 @@
                                             </table>
                                             
                                             <hr>
-                                        
+                                    </template>
                                     </td>
                                 </tr>
                             </tbody>
@@ -340,7 +303,7 @@
                                                         <tbody>
                                                             <tr style="padding:0;text-align:left;vertical-align:top">
                                                                 <center data-parsed="" style="min-width:580px;width:100%">
-                                                                    <a href="{{template.addUtmOnly('http://www.ifcj.ca/site/MessageViewer', 'vib', 'html')}}" align="center" class="float-center" href="#" style="Margin:0;color:#2199e8;font-family:Helvetica,Arial,sans-serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:center;text-decoration:none; color: #ffffff;">
+                                                                    <a href="{{template.addUtmOnly('http://www.ifcj.ca/site/MessageViewer', 'vib', 'html')}}" align="center" class="float-center" style="Margin:0;color:#2199e8;font-family:Helvetica,Arial,sans-serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:center;text-decoration:none; color: #ffffff;">
                                                                         View in Browser
                                                                     </a>
                                                                     <table align="center" class="menu small-vertical float-center" style="Margin:0 auto;border-collapse:collapse;border-spacing:0;float:none;margin:0 auto;padding:0;text-align:center;vertical-align:top;width:auto!important">
@@ -349,7 +312,7 @@
                                                                                 <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top">
                                                                                     <tr style="padding:0;text-align:left;vertical-align:top">
                                                                                         <th class="menu-item float-center" style="Margin:0 auto;color:#0a0a0a;float:none;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0 auto;padding:10px;padding-right:10px;text-align:center">
-                                                                                            <a href="{{template.addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'html')}}" style="Margin:0;color:#fff;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
+                                                                                            <a href="{{template.addCodes(appeal.content.url, {src: 'FT1', utm: 'footer-text-donate'}, 'html')}}" style="Margin:0;color:#fbef98;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
                                                                                                 Donate Now
                                                                                             </a>
                                                                                         </th>
@@ -429,17 +392,17 @@
                                                                                             </a>
                                                                                         </th>
                                                                                         <th class="menu-item float-center" style="Margin:0 auto;color:#0a0a0a;float:none;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0 auto;padding:10px;padding-right:10px;text-align:center">
-                                                                                            <a href="{{template.addUtmOnly('http://www.ifcj.org/site/CO', 'unsubscribe', 'html') }}" style="Margin:0;color:#fff;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
+                                                                                            <a href="{{template.addUtmOnly('http://www.ifcj.ca/site/CO', 'unsubscribe', 'html') }}" style="Margin:0;color:#fff;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
                                                                                                 Unsubscribe
                                                                                             </a>
                                                                                         </th>
                                                                                         <th class="menu-item float-center" style="Margin:0 auto;color:#0a0a0a;float:none;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0 auto;padding:10px;padding-right:10px;text-align:center">
-                                                                                           <a href="{{template.addUtmOnly('http://www.ifcj.org/privacy-policy.html', 'privacy-policy', 'html') }}" style="Margin:0;color:#fff;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
+                                                                                           <a href="{{template.addUtmOnly('http://www.ifcj.ca/site/PageNavigator/ca/about/ca_privacy_policy', 'privacy-policy', 'html') }}" style="Margin:0;color:#fff;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
                                                                                                 Privacy Policy
                                                                                             </a>
                                                                                         </th>
                                                                                          <th class="menu-item float-center" style="Margin:0 auto;color:#0a0a0a;float:none;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0 auto;padding:10px;padding-right:10px;text-align:center">
-                                                                                           <a href="{{template.addUtmOnly('https://secure2.convio.net/ifcj2/site/ConsProfileUser', 'privacy-policy', 'html') }}" style="Margin:0;color:#fff;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
+                                                                                           <a href="{{template.addUtmOnly('http://www.ifcj.ca/site/ConsProfileUser', 'manage-profile', 'html') }}" style="Margin:0;color:#fff;font-family:Georgia,Constantia,Lucida Bright,DejaVu Serif,serif;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left;text-decoration:none">
                                                                                                 Update Profile
                                                                                             </a>
                                                                                         </th>
@@ -499,14 +462,20 @@
 <br><br>
 <p [innerHTML]="body.plain[1]"></p>
 <br>
-<template [ngIf]="body.plain[2]?.changingThisBreaksApplicationSecurity === 'Rabbi' || body.plain[2]?.changingThisBreaksApplicationSecurity === '' || !body.plain[2]">
+<template [ngIf]="body.plain[6]?.changingThisBreaksApplicationSecurity === 'Rabbi' || body.plain[6]?.changingThisBreaksApplicationSecurity === '' || !body.plain[6]">
 With prayers for shalom, peace,
 <br><br>
 Rabbi Yechiel Eckstein<br>
 Founder and President
 </template>
-<template [ngIf]="body.plain[2]?.changingThisBreaksApplicationSecurity !== 'Rabbi' && body.plain[2]?.changingThisBreaksApplicationSecurity !== ''">
-  <p [innerHTML]="body.plain[2]"></p>
+<template [ngIf]="body.plain[6]?.changingThisBreaksApplicationSecurity === 'Yael'">
+With blessings from the Holy Land,
+<br><br>
+Yael Eckstein<br>
+Senior Vice President
+</template>
+<template [ngIf]="body.plain[6]?.changingThisBreaksApplicationSecurity !== 'Rabbi' && body.plain[6]?.changingThisBreaksApplicationSecurity !== '' && body.plain[6]?.changingThisBreaksApplicationSecurity !== ''">
+  <p [innerHTML]="body.plain[6]"></p>
 </template>
 <br><br>
 <p [innerHTML]="body.plain[3]">

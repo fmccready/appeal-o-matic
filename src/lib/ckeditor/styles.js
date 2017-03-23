@@ -48,6 +48,18 @@ CKEDITOR.stylesSet.add( 'default', [
 		"margin-bottom": "10px",
 		"font-weight":"normal"
     }},
+	{ name: 'CalloutCopy', element: 'p', styles: {
+		"font-family": "Verdana,sans-serif",
+		"font-size": "21px",
+		"color": "#a61d26 !important",
+		"text-align":"left",
+		"line-height":"1.3",
+		"margin-bottom": "10px",
+		"font-weight":"bold",
+		"padding": "10px",
+    	"border-top": "1px solid #505050",
+		"border-bottom": "1px solid #505050"	
+    }},
 	{ name: 'Title',		element: 'h2', styles: { 'font-style': 'italic', 'color':'#505050', 'text-align':'center' } },
 	{ name: 'Subtitle',			element: 'h3', styles: { 'color': '#aaa', 'font-style': 'italic' } },
 	{
@@ -56,7 +68,22 @@ CKEDITOR.stylesSet.add( 'default', [
 		styles: {
 			padding: '5px 10px',
 			background: '#eee',
-			border: '1px solid #ccc'
+			border: '1px solid #ccc',
+		}
+	},
+	{
+		name: 'Subhead',
+		element: 'p',
+		styles: {
+			"padding": '0',
+			"color": '#00529c',
+			"font-family": 'Georgia, Constantia, Lucida Bright, DejaVu Serif, serif',
+			"font-size": '28px',
+			"font-weight": 400,
+			"line-height": 1.3,
+			"margin": '0 0 10px 9',
+			"text-align": 'left',
+			"word-wrap": 'normal'
 		}
 	},
 

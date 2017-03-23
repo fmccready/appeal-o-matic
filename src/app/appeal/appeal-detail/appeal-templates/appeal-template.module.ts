@@ -4,6 +4,8 @@ import { StandardAppealComponent } from './us-appeals/standard-appeal/standard-a
 import { HHDAppealComponent } from './us-appeals/hhd-appeal/appeal-hhd.component';
 import { HHDLargeAppealComponent } from './us-appeals/hhd-appeal-large-img/appeal-hhd-large-img.component';
 import { PassoverLargeAppealComponent } from './us-appeals/passover-appeal-large-img/appeal-passover-large-img.component';
+import { EmergencyResponseComponent } from './us-appeals/emergency-response/emergency-response.component';
+import { PrayerAlertComponent } from './us-appeals/prayer-alert/prayer-alert.component';
 import { MobileFriendlyAppealComponent } from './us-appeals/mobile-friendly/mobile-friendly.component';
 import { CANHHDAppealComponent } from './can-appeals/can-hhd-appeal/can-appeal-hhd.component';
 import { CANHHDLargeAppealComponent } from './can-appeals/can-hhd-appeal-large-img/can-appeal-hhd-large-img.component';
@@ -29,6 +31,8 @@ import { CopyControlsComponent } from './copy-controls/copy-controls.component';
     HHDAppealComponent,
     HHDLargeAppealComponent,
     PassoverLargeAppealComponent,
+    EmergencyResponseComponent,
+    PrayerAlertComponent,
     MobileFriendlyAppealComponent,
     StoreEmailComponent,
     CANHHDAppealComponent,
