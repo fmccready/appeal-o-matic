@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import { Campaign } from '../../models/campaign';
 import { CampaignService } from '../../campaign.service';
 
+import { AlphaOrderPipe } from '../../alpha-order.pipe';
+
 @Component({
   selector: 'campaign-list-component',
   templateUrl: './campaign-list.component.html',
@@ -17,7 +19,7 @@ export class CampaignListComponent implements OnInit {
 
   }
 
-  getCampaigns(){
+  getCampaigns(){  
     this.campaignService.getCampaigns().subscribe(
       data => { this.campaigns = data },
       error => { console.log(error) }

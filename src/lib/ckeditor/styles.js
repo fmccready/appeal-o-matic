@@ -30,7 +30,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Preformatted Text',element: 'pre' },
 	{ name: 'Address',			element: 'address' },
 	*/
-	{ name: 'Default', element: 'p', styles: {
+	{ name: 'Def. Copy', element: 'p', styles: {
 		"font-family": "Arial, Helvetica, sans-serif",
 		"font-size": "16px",
 		"color": "#505050",
@@ -38,6 +38,25 @@ CKEDITOR.stylesSet.add( 'default', [
 		"line-height":"21px",
 		"margin-bottom": "1em",
 		"font-weight":"normal"
+	}},
+	
+	{ name: 'Def. h1', element: 'h1', styles: {
+		"font-family": "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;",
+		"font-size": "48px",
+		"color": "#00529c",
+		"line-height":"40px",
+		"font-weight":"600",
+		"text-decoration":"none",
+		"text-transform":"uppercase",
+		"text-align":"center"
+	}},
+	{ name: 'Def. h3', element: 'h3', styles: {
+		"font-family": "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif;",
+		"font-size": "28px",
+		"color": "#00529c",
+		"line-height":"36px",
+		"font-weight":"bold",
+		"text-decoration":"none",
 	}},
 	{ name: 'PassoverCopy', element: 'p', styles: {
 		"font-family": "'Trebuchet MS',sans-serif",

@@ -27,7 +27,18 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
+              enterMode: 2
+            }
+          },
+          {
+            title: 'Sub Headline (Optional)',
+            tooltip: 'Paste in the sub headline here.',
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -45,16 +56,42 @@ export class PreviewService {
                   }
                 }
               }
-            }
-          },
-          {
-            title: 'Custom Signature',
-            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
-            config: {height:80, disableNativeSpellChecker:false}
+            },
           },
           {
             title: 'PS',
             tooltip: 'Paste in the PS copy here. <br><br>Include the letters \'PS\'.',
+            config: {height:80, disableNativeSpellChecker:false}
+          },
+          {
+            title: 'Promo Headline',
+            tooltip: 'Paste in the promotional headline here.',
+            config: {
+              height:80, 
+              disableNativeSpellChecker:false, 
+              //removePlugins:'stylescombo',
+              removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
+              enterMode: 2
+            }
+          },
+          {
+            title: 'Promo Body',
+            tooltip: 'Paste in the promotional body copy here. <br><br>Only include the copy below the salutation and above the signature. <br><br>Double-click on the existing links to add the donation form URL.<br><br>Use this code to use a firstname, ministry partner can be changed as needed:<br><strong>[[S1:first_name:Ministry partner]]</strong>',
+            config: {
+              disableNativeSpellChecker:false,
+              on: {
+                instanceReady: function(){
+                  if (this._.data === ''){
+                    var tpl = new window['CKEDITOR']['template']('<p style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; color: #505050; text-align:left; line-height:21px; margin-bottom: 1em; font-weight:normal;"></p>');
+                    this.setData(tpl.output());
+                  }
+                }
+              }
+            },
+          },
+          {
+            title: 'Custom Signature',
+            tooltip: 'Put a custom signature here. Leave blank for the standard signature.',
             config: {height:80, disableNativeSpellChecker:false}
           }
         ],
@@ -63,6 +100,10 @@ export class PreviewService {
             title: 'Main image',
             tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH1\' for an image or \'VID1\' for a video. <br><br>In image UTM code add \'photo-link-1\' for an image or \'video-link-1\' for a video.'
           },
+          {
+            title: 'Promo image',
+            tooltip: 'Paste in the full image address from the Image Library in the Image URL. <br><br>Then add the Merlin or Brightcove ID for the image or video. <br><br>In Image source code add \'PH2\' for an image or \'VID2\' for a video. <br><br>In image UTM code add \'photo-link-2\' for an image or \'video-link-2\' for a video.'
+          }
         ]
       }
     },
@@ -78,7 +119,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -283,7 +324,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -294,7 +335,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -325,7 +366,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -375,7 +416,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -386,7 +427,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -417,7 +458,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -467,7 +508,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }
@@ -569,7 +610,7 @@ export class PreviewService {
             config: {
               height:80, 
               disableNativeSpellChecker:false, 
-              removePlugins:'stylescombo',
+              //removePlugins:'stylescombo',
               removeButtons:'About,Indent,Outdent,Cut,Copy,Paste,Undo,Redo,Anchor,Strike,Subscript,Superscript',
               enterMode: 2
             }

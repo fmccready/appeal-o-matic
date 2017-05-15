@@ -32,7 +32,14 @@ public generateBody(appeal) {
         }
         h = h.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
           let linkWithCodes = self.addCodes(g1, 'TL', 'html');
-          return `<a href="${linkWithCodes}">`;
+          let linkNoCodes = g1;
+          if (g1 === 'http://fellowship.ifcj.org/site/TellAFriend') {
+            return `<a href="${linkNoCodes}">`;
+          } else if (g1 === 'mailto:') {
+            return `<a href="${linkNoCodes}">`
+          } else {
+            return `<a href="${linkWithCodes}">`;
+          }
         });
         html[i] = h;
       });
@@ -43,8 +50,12 @@ public generateBody(appeal) {
         }
         p = p.replace(/<a[\s]{1,}href="(.[^"]{1,})">/g, function(url, g1){
           let linkWithCodes = self.addCodes(g1, 'TL', 'plain');
-          return `<a href="${linkWithCodes}">`;
-        });
+          let linkNoCodes = g1;
+          if (g1 === 'http://fellowship.ifcj.org/site/TellAFriend') {
+            return `<a href="${linkNoCodes}">`;
+          } else {
+            return `<a href="${linkWithCodes}">`;
+          }        });
         plain[i] = p;
       });
       plain = plain.map((p) => {
